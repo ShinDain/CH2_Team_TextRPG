@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.37203.1 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CH2_Team_TextRPG", "CH2_Team_TextRPG\CH2_Team_TextRPG.vcxproj", "{95186B08-A4C7-4865-AD49-27EF5319724A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{95186B08-A4C7-4865-AD49-27EF5319724A}.Debug|x64.ActiveCfg = Debug|x64
+		{95186B08-A4C7-4865-AD49-27EF5319724A}.Debug|x64.Build.0 = Debug|x64
+		{95186B08-A4C7-4865-AD49-27EF5319724A}.Debug|x86.ActiveCfg = Debug|Win32
+		{95186B08-A4C7-4865-AD49-27EF5319724A}.Debug|x86.Build.0 = Debug|Win32
+		{95186B08-A4C7-4865-AD49-27EF5319724A}.Release|x64.ActiveCfg = Release|x64
+		{95186B08-A4C7-4865-AD49-27EF5319724A}.Release|x64.Build.0 = Release|x64
+		{95186B08-A4C7-4865-AD49-27EF5319724A}.Release|x86.ActiveCfg = Release|Win32
+		{95186B08-A4C7-4865-AD49-27EF5319724A}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F7157462-C100-424A-8934-631BAD9B2F04}
+	EndGlobalSection
+EndGlobal
