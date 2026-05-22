@@ -3,6 +3,7 @@
 #include "Map/MapManager.h"
 #include "Manager/LogManager.h"
 
+class InputManager;
 class GameInstance
 {
 private:
@@ -24,6 +25,8 @@ public:
 
     MapManager& GetMapManager();
     LogManager& GetLogManager();
+    
+    InputManager* GetInputManager() const { return GameInputManager; }
 
 private:
     bool InitializeManager();
@@ -33,4 +36,6 @@ protected:
 
     MapManager Map;
     LogManager Log;
+    
+    InputManager* GameInputManager;  
 };
