@@ -141,6 +141,7 @@
     <ClCompile Include="Core\Transition.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Core\GameInstance.cpp" />
+    <ClCompile Include="Manager\InputManager.cpp" />
     <ClCompile Include="Manager\ObjectManager.cpp" />
     <ClCompile Include="Manager\StateManager.cpp" />
     <ClCompile Include="pch.cpp">
@@ -159,6 +160,7 @@
     <ClInclude Include="Core\State.h" />
     <ClInclude Include="Core\Transition.h" />
     <ClInclude Include="Enum\EState.h" />
+    <ClInclude Include="Manager\InputManager.h" />
     <ClInclude Include="Manager\ObjectManager.h" />
     <ClInclude Include="Manager\StateManager.h" />
     <ClInclude Include="pch.h" />
