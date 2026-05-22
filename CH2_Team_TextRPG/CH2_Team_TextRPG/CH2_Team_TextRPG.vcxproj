@@ -134,18 +134,35 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Core\Component.cpp" />
+    <ClCompile Include="Core\Condition.cpp" />
+    <ClCompile Include="Core\Object.cpp" />
+    <ClCompile Include="Core\State.cpp" />
+    <ClCompile Include="Core\Transition.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Core\GameInstance.cpp" />
+    <ClCompile Include="Manager\ObjectManager.cpp" />
+    <ClCompile Include="Manager\StateManager.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="State\State_Start.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Core\Component.h" />
+    <ClInclude Include="Core\Condition.h" />
     <ClInclude Include="Core\GameInstance.h" />
+    <ClInclude Include="Core\Object.h" />
+    <ClInclude Include="Core\State.h" />
+    <ClInclude Include="Core\Transition.h" />
+    <ClInclude Include="Enum\EState.h" />
+    <ClInclude Include="Manager\ObjectManager.h" />
+    <ClInclude Include="Manager\StateManager.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="State\State_Start.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -16,6 +16,11 @@ public:
 	void RunLoop();
 	void ShutDown();
 
+	void Quit();
+
+private:
+	bool InitializeManager();
+
 protected:
 	bool IsRunning;
 };

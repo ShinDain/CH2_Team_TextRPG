@@ -1,5 +1,9 @@
 #include "pch.h"
 #include "GameInstance.h"
+#include "Manager/ObjectManager.h"
+#include "Manager/StateManager.h"
+
+using namespace std;
 
 GameInstance::GameInstance()
 {
@@ -19,27 +23,33 @@ GameInstance& GameInstance::GetInstance()
 
 bool GameInstance::Initialize()
 {
-	IsRunning = true;
+	bool Result = true;
+	Result = InitializeManager();
 
-	return true;
+	IsRunning = true;
+	return Result;
 }
 
 void GameInstance::RunLoop()
 {
 	while (IsRunning)
 	{
-		cout << "Press Input (Exit = 0) : ";
-
-		int input = -1;
-		cin >> input;
-
-		if (input == 0)
-		{
-			IsRunning = false;
-		}
+		StateManager::GetInstance().Process();
 	}
 }
 
 void GameInstance::ShutDown()
 {
+}
+
+void GameInstance::Quit()
+{
+	IsRunning = false;
+}
+
+bool GameInstance::InitializeManager()
+{
+	StateManager::GetInstance().Initialize();
+
+	return true;
 }
