@@ -1,0 +1,14 @@
+﻿#pragma once
+
+const std::string INIT_FILE_PATH = "../Script/ScriptList.json";
+
+const std::string DATA_CATEGORY_ITEM = "Item";
+
+class DataLoader
+{
+	friend class GameInstance;
+
+private:
+	static bool LoadInitialGameData();
+};
+
