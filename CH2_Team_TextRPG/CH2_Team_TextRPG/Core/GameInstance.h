@@ -1,7 +1,8 @@
 #pragma once
 
 #include "../Map/MapManager.h"
-#include "../Log/LogManager.h"
+#include "../Log_/LogManager.h"
+#include "Log_/LogManager.h"
 
 class GameInstance
 {

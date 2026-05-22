@@ -139,6 +139,8 @@
     <ClCompile Include="Core\Object.cpp" />
     <ClCompile Include="Core\State.cpp" />
     <ClCompile Include="Core\Transition.cpp" />
+    <ClCompile Include="Core\GameProgress.cpp" />
+    <ClCompile Include="Log_\LogManager.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Core\GameInstance.cpp" />
     <ClCompile Include="Manager\InputManager.cpp" />
@@ -163,6 +165,9 @@
     <ClInclude Include="Manager\InputManager.h" />
     <ClInclude Include="Manager\ObjectManager.h" />
     <ClInclude Include="Manager\StateManager.h" />
+    <ClInclude Include="Core\GameProgress.h" />
+    <ClInclude Include="Log_\LogManager.h" />
+    <ClInclude Include="Map\MapManager.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="State\State_Start.h" />
   </ItemGroup>
