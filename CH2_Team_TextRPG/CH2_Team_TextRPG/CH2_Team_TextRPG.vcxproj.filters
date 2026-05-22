@@ -17,6 +17,21 @@
     <Filter Include="Source Files\Enum">
       <UniqueIdentifier>{185ac5d6-8062-4a1c-a43e-06bfa730c997}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Data">
+      <UniqueIdentifier>{99e7f1eb-137d-4292-a74f-3d1022ae6b54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Common">
+      <UniqueIdentifier>{9ab5a859-8eb8-431f-ac6c-5f7ede08d5be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Data\Table">
+      <UniqueIdentifier>{062f9394-d871-4282-b6b6-485d662a2e42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\UI">
+      <UniqueIdentifier>{8bd787c6-aab6-48bd-a7f3-35dc64418a63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Map">
+      <UniqueIdentifier>{f9822b46-0d57-4d55-a649-f8a97c99238a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -52,6 +67,42 @@
     <ClCompile Include="Core\Condition.cpp">
       <Filter>Source Files\Core</Filter>
     </ClCompile>
+    <ClCompile Include="Data\JsonDataParser.cpp">
+      <Filter>Source Files\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\StringHelper.cpp">
+      <Filter>Source Files\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Data\Table\DataTable.cpp">
+      <Filter>Source Files\Data\Table</Filter>
+    </ClCompile>
+    <ClCompile Include="Data\Table\ItemDataTable.cpp">
+      <Filter>Source Files\Data\Table</Filter>
+    </ClCompile>
+    <ClCompile Include="Data\Table\ScriptPathTable.cpp">
+      <Filter>Source Files\Data\Table</Filter>
+    </ClCompile>
+    <ClCompile Include="Data\DataLoader.cpp">
+      <Filter>Source Files\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Map\MapManager.cpp">
+      <Filter>Source Files\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\GameScreen.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\ConsoleRenderer.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\GameProgress.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\InputManager.cpp">
+      <Filter>Source Files\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\LogManager.cpp">
+      <Filter>Source Files\Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -86,6 +137,42 @@
     </ClInclude>
     <ClInclude Include="Enum\EState.h">
       <Filter>Source Files\Enum</Filter>
+    </ClInclude>
+    <ClInclude Include="Data\JsonDataParser.h">
+      <Filter>Source Files\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\StringHelper.h">
+      <Filter>Source Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Data\Table\DataTable.h">
+      <Filter>Source Files\Data\Table</Filter>
+    </ClInclude>
+    <ClInclude Include="Data\Table\ItemDataTable.h">
+      <Filter>Source Files\Data\Table</Filter>
+    </ClInclude>
+    <ClInclude Include="Data\Table\ScriptPathTable.h">
+      <Filter>Source Files\Data\Table</Filter>
+    </ClInclude>
+    <ClInclude Include="Data\DataLoader.h">
+      <Filter>Source Files\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\MapManager.h">
+      <Filter>Source Files\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\GameScreen.h">
+      <Filter>Source Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\ConsoleRenderer.h">
+      <Filter>Source Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\GameProgress.h">
+      <Filter>Source Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\InputManager.h">
+      <Filter>Source Files\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\LogManager.h">
+      <Filter>Source Files\Manager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

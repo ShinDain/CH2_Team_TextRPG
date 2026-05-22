@@ -1,23 +1,28 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "GameInstance.h"
 #include "Manager/ObjectManager.h"
+#include "Manager/InputManager.h"
 #include "Manager/StateManager.h"
+#include "Data/DataLoader.h"
+
 
 using namespace std;
 
-GameInstance::GameInstance()
+GameInstance::GameInstance() :
+	GameInputManager(nullptr)
 {
 	IsRunning = false;
 }
 
 GameInstance::~GameInstance()
 {
+	delete GameInputManager;
+	GameInputManager = nullptr;
 }
 
 GameInstance& GameInstance::GetInstance()
 {
 	static GameInstance Instance;
-
 	return Instance;
 }
 
@@ -25,6 +30,7 @@ bool GameInstance::Initialize()
 {
 	bool Result = true;
 	Result = InitializeManager();
+	Result = InitializeDataTable();
 
 	IsRunning = true;
 	return Result;
@@ -66,6 +72,16 @@ bool GameInstance::InitializeManager()
 	Log.AddLog("던전 지도가 생성되었습니다.");
 
 	StateManager::GetInstance().Initialize();
+	
+	GameInputManager = new InputManager();
+	
+	
+	return true;
+}
+
+bool GameInstance::InitializeDataTable()
+{
+	DataLoader::LoadInitialGameData();
 
 	return true;
 }
