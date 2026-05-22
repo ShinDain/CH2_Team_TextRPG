@@ -1,0 +1,58 @@
+[
+    {
+      "id": 1001,
+      "name": "초보자의 낡은 철검",
+      "category": "Weapon",
+      "grade": "Common",
+      "price": 150,
+      "is_tradable": true,
+      "effects": {
+        "atk_bonus": 15,
+        "crit_chance": 0.0,
+        "hp_recovery": 0
+      },
+      "required_jobs": ["Warrior", "Paladin"]
+    },
+    {
+      "id": 1002,
+      "name": "영혼을 가르는 자",
+      "category": "Weapon",
+      "grade": "Legendary",
+      "price": 75000,
+      "is_tradable": false,
+      "effects": {
+        "atk_bonus": 320,
+        "crit_chance": 0.15,
+        "hp_recovery": 0
+      },
+      "required_jobs": ["Assassin"]
+    },
+    {
+      "id": 2001,
+      "name": "하급 체력 포션",
+      "category": "Consumable",
+      "grade": "Common",
+      "price": 20,
+      "is_tradable": true,
+      "effects": {
+        "atk_bonus": 0,
+        "crit_chance": 0.0,
+        "hp_recovery": 50
+      },
+      "required_jobs": ["Warrior", "Paladin", "Assassin", "Mage"]
+    },
+    {
+      "id": 3001,
+      "name": "귀환 주문서",
+      "category": "Etc",
+      "grade": "Common",
+      "price": 100,
+      "is_tradable": true,
+      "effects": {
+        "atk_bonus": 0,
+        "crit_chance": 0.0,
+        "hp_recovery": 0
+      },
+      "required_jobs": []
+    }
+]

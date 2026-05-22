@@ -1,4 +1,6 @@
-#pragma once
+﻿#pragma once
+
+const std::string INIT_FILE_PATH = "../Script/ScriptList.json";
 
 class GameInstance
 {
@@ -20,6 +22,7 @@ public:
 
 private:
 	bool InitializeManager();
+	bool InitializeDataTable();
 
 protected:
 	bool IsRunning;

@@ -1,7 +1,9 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "GameInstance.h"
 #include "Manager/ObjectManager.h"
 #include "Manager/StateManager.h"
+#include "Data/Table/ItemDataTable.h"
+#include "Data/Table/ScriptPathTable.h"
 
 using namespace std;
 
@@ -25,6 +27,7 @@ bool GameInstance::Initialize()
 {
 	bool Result = true;
 	Result = InitializeManager();
+	Result = InitializeDataTable();
 
 	IsRunning = true;
 	return Result;
@@ -50,6 +53,19 @@ void GameInstance::Quit()
 bool GameInstance::InitializeManager()
 {
 	StateManager::GetInstance().Initialize();
+
+	return true;
+}
+
+bool GameInstance::InitializeDataTable()
+{
+	if (!ScriptPathTable::GetInstance().Load(INIT_FILE_PATH))
+		return false;
+
+	for (const string& path : ScriptPathTable::GetInstance().GetFilePaths("Item"))
+	{
+		ItemDataTable::GetInstance().Load(path);
+	}
 
 	return true;
 }

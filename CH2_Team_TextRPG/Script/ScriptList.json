@@ -1,0 +1,16 @@
+{
+    "filepaths" : [
+        {
+            "category" : "Item",
+            "name" : [
+                "ItemData.json"
+            ]
+        },
+        {
+            "category" : "Data",
+            "name" : [
+                "TestData.json"
+            ]
+        }
+    ]
+}
