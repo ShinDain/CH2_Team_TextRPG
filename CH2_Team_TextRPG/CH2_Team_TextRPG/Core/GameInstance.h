@@ -1,7 +1,5 @@
 ﻿#pragma once
 
-const std::string INIT_FILE_PATH = "../Script/ScriptList.json";
-
 class GameInstance
 {
 private:

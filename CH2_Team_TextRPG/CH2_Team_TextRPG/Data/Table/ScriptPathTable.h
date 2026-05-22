@@ -1,8 +1,15 @@
 ﻿#pragma once
 #include "DataTable.h"
 
+const std::string SCRIPT_FILE_PATH_PREFIX = "../Script/";
+
 class ScriptPathTable final : public BaseDataTable
 {
+private:
+	static constexpr const char* KEY_FILEPATHS = "Filepaths";
+	static constexpr const char* KEY_CATEGORY = "Category";
+	static constexpr const char* KEY_NAME = "Name";
+
 private:
 	ScriptPathTable();
 public:

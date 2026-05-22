@@ -2,8 +2,8 @@
 #include "GameInstance.h"
 #include "Manager/ObjectManager.h"
 #include "Manager/StateManager.h"
-#include "Data/Table/ItemDataTable.h"
-#include "Data/Table/ScriptPathTable.h"
+#include "Data/DataLoader.h"
+
 
 using namespace std;
 
@@ -59,13 +59,7 @@ bool GameInstance::InitializeManager()
 
 bool GameInstance::InitializeDataTable()
 {
-	if (!ScriptPathTable::GetInstance().Load(INIT_FILE_PATH))
-		return false;
-
-	for (const string& path : ScriptPathTable::GetInstance().GetFilePaths("Item"))
-	{
-		ItemDataTable::GetInstance().Load(path);
-	}
+	DataLoader::LoadInitialGameData();
 
 	return true;
 }

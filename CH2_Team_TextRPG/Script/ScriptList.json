@@ -1,14 +1,14 @@
 {
-    "filepaths" : [
+    "Filepaths" : [
         {
-            "category" : "Item",
-            "name" : [
+            "Category" : "Item",
+            "Name" : [
                 "ItemData.json"
             ]
         },
         {
-            "category" : "Data",
-            "name" : [
+            "Category" : "Data",
+            "Name" : [
                 "TestData.json"
             ]
         }

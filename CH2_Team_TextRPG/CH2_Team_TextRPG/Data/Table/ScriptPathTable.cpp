@@ -17,15 +17,15 @@ ScriptPathTable& ScriptPathTable::GetInstance()
 
 void ScriptPathTable::ParseData(const json& InData)
 {
-	for (const json& data : InData["filepaths"])
+	for (const json& data : InData[KEY_FILEPATHS])
 	{
-		std::string category = data["category"];
+		std::string category = data[KEY_CATEGORY];
 		PathMap.emplace(category, std::vector<std::string>());
 
 		std::string filePath;
-		for (const json& name : data["name"])
+		for (const json& name : data[KEY_NAME])
 		{
-			filePath = "../Script/" + category;
+			filePath = SCRIPT_FILE_PATH_PREFIX + category;
 			filePath += "/";
 			filePath += name;
 

@@ -76,6 +76,9 @@
     <ClCompile Include="Data\Table\ScriptPathTable.cpp">
       <Filter>Source Files\Data\Table</Filter>
     </ClCompile>
+    <ClCompile Include="Data\DataLoader.cpp">
+      <Filter>Source Files\Data</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -125,6 +128,9 @@
     </ClInclude>
     <ClInclude Include="Data\Table\ScriptPathTable.h">
       <Filter>Source Files\Data\Table</Filter>
+    </ClInclude>
+    <ClInclude Include="Data\DataLoader.h">
+      <Filter>Source Files\Data</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

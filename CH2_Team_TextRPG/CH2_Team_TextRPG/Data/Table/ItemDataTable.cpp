@@ -1,13 +1,6 @@
 ﻿#include "pch.h"
 #include "ItemDataTable.h"
 
-ItemData::ItemData(const json& Data)
-{
-	Name = Data["name"];
-	Price = Data["price"];
-	Id = Data["id"];
-}
-
 ItemDataTable::~ItemDataTable()
 {
 	for (auto& data : ItemDatas)
@@ -27,12 +20,19 @@ ItemDataTable& ItemDataTable::GetInstance()
 
 const ItemData* ItemDataTable::FindItemDataByName(const std::string& name) const
 {
-	//if(NameMap)
+	if (NameMap.find(name) != NameMap.end())
+	{
+		return NameMap.at(name);
+	}
 	return nullptr;
 }
 
 const ItemData* ItemDataTable::FindItemDataByIndex(uint32_t Index) const
 {
+	if (IndexMap.find(Index) != IndexMap.end())
+	{
+		return IndexMap.at(Index);
+	}
 	return nullptr;
 }
 
@@ -40,7 +40,8 @@ void ItemDataTable::ParseData(const json& InData)
 {
 	for (const json& data : InData)
 	{
-		ItemData* newData = new ItemData(data);
+		ItemData* newData = new ItemData();
+		*newData = data;
 		if (newData)
 		{
 			ItemDatas.emplace_back(newData);
