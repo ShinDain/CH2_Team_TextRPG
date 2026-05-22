@@ -9,4 +9,6 @@
 
 #include "Core/GameInstance.h"
 
+#define GInput (*GameInstance::GetInstance().GetInputManager())
+
 #endif //PCH_H

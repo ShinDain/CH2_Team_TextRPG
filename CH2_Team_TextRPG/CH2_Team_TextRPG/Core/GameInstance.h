@@ -1,28 +1,42 @@
 ﻿#pragma once
 
+#include "Map/MapManager.h"
+#include "Manager/LogManager.h"
+
+class InputManager;
 class GameInstance
 {
 private:
-	GameInstance();
-	GameInstance(const GameInstance& rhs) = delete;
-	GameInstance& operator=(const GameInstance& rhs) = delete;
+    GameInstance();
+    GameInstance(const GameInstance& rhs) = delete;
+    GameInstance& operator=(const GameInstance& rhs) = delete;
+
 public:
-	virtual ~GameInstance();
+    virtual ~GameInstance();
 
-	static GameInstance& GetInstance();
+    static GameInstance& GetInstance();
 
-	bool Initialize();
+    bool Initialize();
 
-	void RunLoop();
-	void ShutDown();
+    void RunLoop();
+    void ShutDown();
 
-	void Quit();
+    void Quit();
+
+    MapManager& GetMapManager();
+    LogManager& GetLogManager();
+    
+    InputManager* GetInputManager() const { return GameInputManager; }
 
 private:
 	bool InitializeManager();
 	bool InitializeDataTable();
 
 protected:
-	bool IsRunning;
-};
+    bool IsRunning;
 
+    MapManager Map;
+    LogManager Log;
+    
+    InputManager* GameInputManager;  
+};
