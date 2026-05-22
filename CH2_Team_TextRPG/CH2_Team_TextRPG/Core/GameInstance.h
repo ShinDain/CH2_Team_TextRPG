@@ -1,22 +1,36 @@
 #pragma once
 
+#include "Map/MapManager.h"
+#include "Manager/LogManager.h"
+
 class GameInstance
 {
 private:
-	GameInstance();
-	GameInstance(const GameInstance& rhs) = delete;
-	GameInstance& operator=(const GameInstance& rhs) = delete;
+    GameInstance();
+    GameInstance(const GameInstance& rhs) = delete;
+    GameInstance& operator=(const GameInstance& rhs) = delete;
+
 public:
-	virtual ~GameInstance();
+    virtual ~GameInstance();
 
-	static GameInstance& GetInstance();
+    static GameInstance& GetInstance();
 
-	bool Initialize();
+    bool Initialize();
 
-	void RunLoop();
-	void ShutDown();
+    void RunLoop();
+    void ShutDown();
+
+    void Quit();
+
+    MapManager& GetMapManager();
+    LogManager& GetLogManager();
+
+private:
+    bool InitializeManager();
 
 protected:
-	bool IsRunning;
-};
+    bool IsRunning;
 
+    MapManager Map;
+    LogManager Log;
+};
