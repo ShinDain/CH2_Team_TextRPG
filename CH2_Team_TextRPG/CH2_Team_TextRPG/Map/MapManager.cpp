@@ -7,20 +7,6 @@ void MapManager::GenerateFixedMap()
 {
     Nodes.clear();
 
-    /*
-        Fixed Map Structure
-
-              [Boss: 6]
-               /     \
-          [Rest:4]  [Elite:5]
-             |          |
-          [Shop:2]  [Monster:3]
-              \      /
-             [Event:1]
-                |
-             [Start:0]
-    */
-
     MapNode Start;
     Start.Id = 0;
     Start.Type = ENodeType::Start;

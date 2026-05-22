@@ -40,6 +40,7 @@ void GameInstance::RunLoop()
 
 void GameInstance::ShutDown()
 {
+	Log.AddLog("게임이 종료되었습니다.");
 }
 
 void GameInstance::Quit()
@@ -47,8 +48,23 @@ void GameInstance::Quit()
 	IsRunning = false;
 }
 
+MapManager& GameInstance::GetMapManager()
+{
+	return Map;
+}
+
+LogManager& GameInstance::GetLogManager()
+{
+	return Log;
+}
+
 bool GameInstance::InitializeManager()
 {
+	Map.GenerateFixedMap();
+
+	Log.AddLog("게임을 시작했습니다.");
+	Log.AddLog("던전 지도가 생성되었습니다.");
+
 	StateManager::GetInstance().Initialize();
 
 	return true;

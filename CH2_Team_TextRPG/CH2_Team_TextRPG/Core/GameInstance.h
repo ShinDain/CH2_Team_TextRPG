@@ -20,10 +20,13 @@ public:
     void RunLoop();
     void ShutDown();
 
-	void Quit();
+    void Quit();
+
+    MapManager& GetMapManager();
+    LogManager& GetLogManager();
 
 private:
-	bool InitializeManager();
+    bool InitializeManager();
 
 protected:
     bool IsRunning;
