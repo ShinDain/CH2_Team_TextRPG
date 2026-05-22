@@ -1,7 +1,7 @@
 ﻿#pragma once
 
-#include "../Map/MapManager.h"
-#include "../Log/LogManager.h"
+#include "Map/MapManager.h"
+#include "Manager/LogManager.h"
 
 class GameScreen
 {
