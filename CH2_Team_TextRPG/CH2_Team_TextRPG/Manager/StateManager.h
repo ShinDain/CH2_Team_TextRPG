@@ -14,12 +14,12 @@ public:
 	bool Initialize();
 	void Process();
 
-	bool ChangeState(EState nextState);
+	bool ChangeState(EState InNextState);
 private:
 	bool InitializeStates();
 
 	template<typename T>
-	void AddState(EState id);
+	void AddState(EState InState);
 private:
 	BaseState* CurrentState;
 	std::map<EState, BaseState*> States;
@@ -29,13 +29,13 @@ public:
 };
 
 template<typename T>
-inline void StateManager::AddState(EState id)
+inline void StateManager::AddState(EState InState)
 {
 	T* menuState = new T();
 
 	if (menuState)
 	{
-		States.emplace(id, menuState);
+		States.emplace(InState, menuState);
 	}
 
 	return;

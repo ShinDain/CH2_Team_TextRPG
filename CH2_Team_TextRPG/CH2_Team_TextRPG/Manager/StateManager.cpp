@@ -38,13 +38,13 @@ void StateManager::Process()
 	CurrentState->CheckTransition();
 }
 
-bool StateManager::ChangeState(EState nextState)
+bool StateManager::ChangeState(EState InNextState)
 {
-	if (States.find(nextState) != States.end())
+	if (States.find(InNextState) != States.end())
 	{
 		if (CurrentState)
 			CurrentState->Exit();
-		CurrentState = States[nextState];
+		CurrentState = States[InNextState];
 		CurrentState->Enter();
 
 		return true;

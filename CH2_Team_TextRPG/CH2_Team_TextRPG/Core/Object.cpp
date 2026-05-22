@@ -9,3 +9,8 @@ Object::Object(const std::string& InName)
 	:Name(InName)
 {
 }
+
+bool Object::Initialize()
+{
+	return true;
+}

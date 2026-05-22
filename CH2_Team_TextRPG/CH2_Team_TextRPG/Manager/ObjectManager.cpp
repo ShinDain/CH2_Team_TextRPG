@@ -9,9 +9,10 @@ ObjectManager& ObjectManager::GetInstance()
 
 ObjectManager::~ObjectManager()
 {
-	for (Object* object : Objects)
+	for (auto& pair : Objects)
 	{
-		delete object;
+		delete pair.second;
+		pair.second = nullptr;
 	}
 
 	Objects.clear();

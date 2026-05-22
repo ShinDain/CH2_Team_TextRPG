@@ -5,7 +5,7 @@ class Component : public Object
 {
 public:
 	Component() = delete;
-	Component(Object* Owner, std::string InName);
+	Component(Object* InOwner, std::string InName);
 	virtual ~Component();
 
 	virtual void Initialize() = 0;
