@@ -139,7 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Character.cpp" />
+    <ClCompile Include="Character\Character.cpp" />
     <ClCompile Include="Common\StringHelper.cpp" />
     <ClCompile Include="Core\Component.cpp" />
     <ClCompile Include="Core\Condition.cpp" />
@@ -242,20 +242,20 @@
     <ClCompile Include="Manager\ObjectManager.cpp" />
     <ClCompile Include="Manager\StateManager.cpp" />
     <ClCompile Include="Map\MapManager.cpp" />
-    <ClCompile Include="Monster.cpp" />
+    <ClCompile Include="Character\Monster\Monster.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Slime.cpp" />
+    <ClCompile Include="Character\Monster\Slime.cpp" />
     <ClCompile Include="State\State_Start.cpp" />
     <ClCompile Include="UI\ConsoleRenderer.cpp" />
     <ClCompile Include="UI\GameScreen.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Character.h" />
+    <ClInclude Include="Character\Character.h" />
     <ClInclude Include="Common\StringHelper.h" />
     <ClInclude Include="Core\Component.h" />
     <ClInclude Include="Core\Condition.h" />
@@ -275,10 +275,9 @@
     <ClInclude Include="Manager\StateManager.h" />
     <ClInclude Include="Core\GameProgress.h" />
     <ClInclude Include="Map\MapManager.h" />
-    <ClInclude Include="Monster.h" />
+    <ClInclude Include="Character\Monster\Monster.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="Slime.h" />
+    <ClInclude Include="Character\Monster\Slime.h" />
     <ClInclude Include="State\State_Start.h" />
     <ClInclude Include="UI\ConsoleRenderer.h" />
     <ClInclude Include="UI\GameScreen.h" />

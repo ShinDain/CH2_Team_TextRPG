@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include "pch.h"
-#include "Character.h"
+#include "Character/Character.h"
 //데미지어블,유닛스텟 인터페이스
 
 class Player;
@@ -72,39 +72,39 @@ struct MonsterSetData
     }
 };
 
-class Monster : public Character, public IUnitStat, public IDamageable
-{
-public:
-    Monster() = delete;
-    Monster(MonsterSetData&& Desc);
-    virtual ~Monster();
-
-    virtual void Attack(Player* player);
-
-    // IDamageable
-    void TakeDamage(int damage) override;
-    void Reset() override;
-    void Die() override;
-    void RestoreHP(int Amount) override;
-    void RestoreMP(int Amount) override;
-    void AttackUp(int Amount) override;
-    void DefenceUp(int Amount) override;
-
-    // IUnitStat
-    std::string GetName() const override;
-    int GetHP() const override;
-    int GetMP() const override;
-    int GetAttack() const override;
-    int GetDefence() const override;
-    int GetExp() const override;
-
-    std::string GetDropItemName() const;
-    int GetDropItemPrice() const;
-    EItemAbility GetItemAbility() const;
-
-    bool Initialize() override;
-
-protected:
-    MonsterSetData MonsterData;
-    MonsterSetData OriginalData;
-};
+//class Monster : public Character, public IUnitStat, public IDamageable
+//{
+//public:
+//    Monster() = delete;
+//    Monster(MonsterSetData&& Desc);
+//    virtual ~Monster();
+//
+//    virtual void Attack(Player* player);
+//
+//    // IDamageable
+//    void TakeDamage(int damage) override;
+//    void Reset() override;
+//    void Die() override;
+//    void RestoreHP(int Amount) override;
+//    void RestoreMP(int Amount) override;
+//    void AttackUp(int Amount) override;
+//    void DefenceUp(int Amount) override;
+//
+//    // IUnitStat
+//    std::string GetName() const override;
+//    int GetHP() const override;
+//    int GetMP() const override;
+//    int GetAttack() const override;
+//    int GetDefence() const override;
+//    int GetExp() const override;
+//
+//    std::string GetDropItemName() const;
+//    int GetDropItemPrice() const;
+//    EItemAbility GetItemAbility() const;
+//
+//    bool Initialize() override;
+//
+//protected:
+//    MonsterSetData MonsterData;
+//    MonsterSetData OriginalData;
+//};
