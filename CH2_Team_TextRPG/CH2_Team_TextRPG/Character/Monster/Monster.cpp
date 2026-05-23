@@ -1,6 +1,47 @@
 ﻿#include "pch.h"
-//#include "Monster.h"
-//
+#include "Monster.h"
+#include "Data/Character/Stat.h"
+
+Monster::Monster()
+{
+}
+
+Monster::~Monster()
+{
+}
+
+bool Monster::Initialize()
+{
+	// Not Implement.
+	return false;
+}
+
+void Monster::TakeDamage(const DamageContext& Context)
+{
+	// Not Implement.
+}
+
+bool Monster::IsDead() const
+{
+	// Not Implement.
+	return false;
+}
+
+int Monster::GetStat(EStatType Type) const
+{
+	// Not Implement.
+	return 0;
+}
+
+
+
+
+
+
+
+
+
+
 //Monster::Monster(MonsterSetData&& Desc)
 //	: MonsterData(std::move(Desc)),
 //	OriginalData(MonsterData)

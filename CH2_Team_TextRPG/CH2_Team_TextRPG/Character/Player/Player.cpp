@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Player.h"
+#include "Data/Character/Stat.h"
 
 Player::Player()
 {

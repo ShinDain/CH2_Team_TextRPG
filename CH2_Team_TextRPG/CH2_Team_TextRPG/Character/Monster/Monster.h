@@ -1,6 +1,10 @@
 ﻿#pragma once
 #include "pch.h"
 #include "Character/Character.h"
+#include "Character/Interface/Damageable.h"
+#include "Character/Interface/UnitStat.h"
+
+
 //데미지어블,유닛스텟 인터페이스
 
 class Player;
@@ -71,6 +75,18 @@ struct MonsterSetData
         return *this;
     }
 };
+class Monster : public Character, public IUnitStat, public IDamageable
+{
+public:
+    Monster();
+    ~Monster() override;
+
+    bool Initialize() override;
+    void TakeDamage(const DamageContext& Context) override;
+    bool IsDead() const override;
+    int GetStat(EStatType Type) const override;
+};
+
 
 //class Monster : public Character, public IUnitStat, public IDamageable
 //{

@@ -319,6 +319,7 @@
     </ClCompile>
     <ClCompile Include="Manager\ObjectManager.cpp" />
     <ClCompile Include="Manager\StateManager.cpp" />
+    <ClCompile Include="Manager\TurnManager.cpp" />
     <ClCompile Include="Map\MapManager.cpp" />
     <ClCompile Include="Character\Monster\Monster.cpp" />
     <ClCompile Include="pch.cpp">
@@ -328,6 +329,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Character\Monster\Slime.cpp" />
+    <ClCompile Include="State\State_Battle.cpp" />
     <ClCompile Include="State\State_Start.cpp" />
     <ClCompile Include="UI\ConsoleRenderer.cpp" />
     <ClCompile Include="UI\GameScreen.cpp" />
@@ -360,10 +362,12 @@
     <ClInclude Include="Manager\ObjectManager.h" />
     <ClInclude Include="Manager\StateManager.h" />
     <ClInclude Include="Core\GameProgress.h" />
+    <ClInclude Include="Manager\TurnManager.h" />
     <ClInclude Include="Map\MapManager.h" />
     <ClInclude Include="Character\Monster\Monster.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Character\Monster\Slime.h" />
+    <ClInclude Include="State\State_Battle.h" />
     <ClInclude Include="State\State_Start.h" />
     <ClInclude Include="UI\ConsoleRenderer.h" />
     <ClInclude Include="UI\GameScreen.h" />
