@@ -11,5 +11,5 @@ Character::~Character()
 
 bool Character::Initialize()
 {
-	return Object::Initialize();
+	return false;
 }

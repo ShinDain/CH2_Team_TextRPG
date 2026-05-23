@@ -7,6 +7,7 @@ class JsonDataParser
 {
 public:
 	static bool Load(const std::string& FilePath, json& OutJsonData);
-
+	
+	static void Save(const std::string& FilePath, const json& InJsonData);
 };
 

@@ -7,7 +7,6 @@ public:
 	Component() = delete;
 	Component(Object* InOwner, std::string InName);
 	virtual ~Component();
-
 	virtual void Initialize() = 0;
 
 protected:

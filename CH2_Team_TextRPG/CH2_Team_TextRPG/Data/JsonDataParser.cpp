@@ -18,3 +18,10 @@ bool JsonDataParser::Load(const std::string& FilePath, json& OutJsonData)
 
 	return true;
 }
+
+void JsonDataParser::Save(const std::string& FilePath, const json& InJsonData)
+{
+	std::ofstream File(FilePath);
+	File << InJsonData.dump(4); 
+}
+
