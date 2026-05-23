@@ -7,5 +7,5 @@ class Character : public Object
 public:
 	Character();
 	virtual ~Character();
-	virtual bool Initialize() = 0;
+	bool Initialize() override;
 };

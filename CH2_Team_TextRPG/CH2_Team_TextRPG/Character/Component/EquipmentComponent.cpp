@@ -12,7 +12,8 @@ EquipmentComponent::~EquipmentComponent()
 	
 }
 
-void EquipmentComponent::Initialize()
+bool EquipmentComponent::Initialize()
 {
 	// Not Implement.
+	return false;
 }

@@ -9,6 +9,8 @@ public:
 	Object(const std::string& InName);
 
 	const std::string& GetName() const { return Name; }
+	
+	virtual bool Initialize() = 0;
 
 	void AddComponent(Component* InComp);
 	void RemoveComponent(Component* InComp);

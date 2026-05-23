@@ -11,7 +11,8 @@ StatComponent::~StatComponent()
 	
 }
 
-void StatComponent::Initialize()
+bool StatComponent::Initialize()
 {
 	// Not Implement.
+	return false;
 }

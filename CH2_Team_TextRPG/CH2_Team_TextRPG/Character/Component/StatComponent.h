@@ -7,5 +7,5 @@ public:
 	StatComponent(Object* InOwner);
 	~StatComponent() override;
 	
-	void Initialize() override;
+	bool Initialize() override;
 };

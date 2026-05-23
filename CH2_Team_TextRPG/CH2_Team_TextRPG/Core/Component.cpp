@@ -11,3 +11,8 @@ Component::~Component()
 {
 	if (Owner) Owner->RemoveComponent(this);
 }
+
+bool Component::Initialize()
+{
+	return false;
+}

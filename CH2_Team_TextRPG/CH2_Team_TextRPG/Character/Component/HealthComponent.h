@@ -7,5 +7,5 @@ public:
 	HealthComponent(Object* InOwner, const class StatComponent* InStat);
 	~HealthComponent() override;
 	
-	void Initialize() override;
+	bool Initialize() override;
 };

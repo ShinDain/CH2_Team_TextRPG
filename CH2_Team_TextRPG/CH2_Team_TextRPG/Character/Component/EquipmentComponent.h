@@ -7,5 +7,5 @@ public:
 	EquipmentComponent(Object* InOwner);
 	~EquipmentComponent() override;
 	
-	void Initialize() override;
+	bool Initialize() override;
 };

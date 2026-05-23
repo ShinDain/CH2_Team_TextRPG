@@ -10,7 +10,8 @@ HealthComponent::~HealthComponent()
 {
 }
 
-void HealthComponent::Initialize()
+bool HealthComponent::Initialize()
 {
 	// Not Implement.
+	return false;
 }
