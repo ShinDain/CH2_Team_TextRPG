@@ -1,12 +1,10 @@
 ﻿#include "pch.h"
 #include "Core/GameInstance.h"
-
-#include <windows.h>
+#include "UI/ConsoleRenderer.h"
 
 int main()
 {
-	SetConsoleOutputCP(CP_UTF8);
-	SetConsoleCP(CP_UTF8);
+	ConsoleRenderer::WaitForConsoleReady();
 
 	GameInstance& Instance = GameInstance::GetInstance();
 

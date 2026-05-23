@@ -9,6 +9,7 @@ void GameScreen::DrawMainScreen(const MapManager& Map, const LogManager& Log)
 	DrawCharacterPanel();
 	DrawInventoryPanel();
 	DrawMapPanel(Map);
+	DrawNavigationPanel(Map);
 	DrawLogPanel(Log);
 	DrawInputPanel();
 }
@@ -26,7 +27,7 @@ void GameScreen::DrawCharacterPanel()
 
 void GameScreen::DrawInventoryPanel()
 {
-	ConsoleRenderer::DrawBox(0, 11, 30, 12);
+	ConsoleRenderer::DrawBox(0, 11, 30, 23);
 	ConsoleRenderer::DrawString(2, 12, "인벤토리");
 	ConsoleRenderer::DrawString(2, 14, "포션 x2");
 	ConsoleRenderer::DrawString(2, 15, "철검");
@@ -35,7 +36,7 @@ void GameScreen::DrawInventoryPanel()
 
 void GameScreen::DrawMapPanel(const MapManager& Map)
 {
-	ConsoleRenderer::DrawBox(30, 0, 88, 23);
+	ConsoleRenderer::DrawBox(30, 0, 180, 34);
 	ConsoleRenderer::DrawString(32, 1, "던전 지도");
 
 	std::vector<std::string> MapLines =
@@ -51,21 +52,27 @@ void GameScreen::DrawMapPanel(const MapManager& Map)
 		"                       [Start:0]"
 	};
 
-	ConsoleRenderer::DrawLines(42, 4, MapLines);
+	ConsoleRenderer::DrawLines(98, 12, MapLines);
+}
+
+void GameScreen::DrawNavigationPanel(const MapManager& Map)
+{
+	ConsoleRenderer::DrawBox(0, 34, 210, 6);
+	ConsoleRenderer::DrawString(2, 35, "탐험 정보");
 
 	const MapNode* CurrentNode = Map.GetCurrentNode();
 
 	if (CurrentNode != nullptr)
 	{
-		ConsoleRenderer::DrawString(34, 15, "현재 위치");
-		ConsoleRenderer::DrawString(34, 16, "번호 : " + std::to_string(CurrentNode->Id));
-		ConsoleRenderer::DrawString(34, 17, "종류 : " + MapManager::NodeTypeToString(CurrentNode->Type));
-		ConsoleRenderer::DrawString(34, 18, "층   : " + std::to_string(CurrentNode->Floor));
+		ConsoleRenderer::DrawString(4, 36, "현재 위치");
+		ConsoleRenderer::DrawString(4, 37, "번호 : " + std::to_string(CurrentNode->Id));
+		ConsoleRenderer::DrawString(20, 37, "종류 : " + MapManager::NodeTypeToString(CurrentNode->Type));
+		ConsoleRenderer::DrawString(40, 37, "층 : " + std::to_string(CurrentNode->Floor));
 	}
 
 	std::vector<int> MovableNodeIds = Map.GetMovableNodeIds();
 
-	ConsoleRenderer::DrawString(65, 15, "이동 가능 노드");
+	ConsoleRenderer::DrawString(95, 36, "이동 가능 노드");
 
 	for (int i = 0; i < static_cast<int>(MovableNodeIds.size()); i++)
 	{
@@ -78,23 +85,23 @@ void GameScreen::DrawMapPanel(const MapManager& Map)
 
 		std::string Text = std::to_string(i + 1) + ". " +
 			MapManager::NodeTypeToString(Node->Type) +
-				" [노드 번호: " + std::to_string(Node->Id) + "]";
+			" [노드 번호: " + std::to_string(Node->Id) + "]";
 
-		ConsoleRenderer::DrawString(65, 16 + i, Text);
+		ConsoleRenderer::DrawString(95, 37 + i, Text);
 	}
 }
 
 void GameScreen::DrawLogPanel(const LogManager& Log)
 {
-	ConsoleRenderer::DrawBox(0, 23, 118, 7);
-	ConsoleRenderer::DrawString(2, 24, "로그");
+	ConsoleRenderer::DrawBox(0, 40, 210, 10);
+	ConsoleRenderer::DrawString(2, 41, "로그");
 
-	ConsoleRenderer::DrawString(2, 26, "> 게임을 시작했습니다.");
-	ConsoleRenderer::DrawString(2, 27, "> 던전 지도가 생성되었습니다.");
-	ConsoleRenderer::DrawString(2, 28, "> 이동할 노드를 선택하세요.");
+	ConsoleRenderer::DrawString(2, 43, "> 게임을 시작했습니다.");
+	ConsoleRenderer::DrawString(2, 44, "> 던전 지도가 생성되었습니다.");
+	ConsoleRenderer::DrawString(2, 45, "> 이동할 노드를 선택하세요.");
 }
 
 void GameScreen::DrawInputPanel()
 {
-	ConsoleRenderer::DrawString(2, 31, "이동할 노드 번호 입력 >> ");
+	ConsoleRenderer::DrawString(2, 48, "이동할 노드 번호 입력 >> ");
 }

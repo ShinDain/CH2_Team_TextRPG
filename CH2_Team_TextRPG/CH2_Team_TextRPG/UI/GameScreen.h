@@ -12,6 +12,7 @@ private:
     static void DrawCharacterPanel();
     static void DrawInventoryPanel();
     static void DrawMapPanel(const MapManager& Map);
+    static void DrawNavigationPanel(const MapManager& Map);
     static void DrawLogPanel(const LogManager& Log);
     static void DrawInputPanel();
 };

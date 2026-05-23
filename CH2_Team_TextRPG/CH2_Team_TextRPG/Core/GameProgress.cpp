@@ -16,6 +16,7 @@ void GameProgress::HandleNodeSelection(MapManager& Map, LogManager& Log)
 	}
 
 	int Input = 0;
+	ConsoleRenderer::SetCursorPosition(28, 48);
 	std::cin >> Input;
 
 	if (Input < 1 || Input > static_cast<int>(MovableNodeIds.size()))
