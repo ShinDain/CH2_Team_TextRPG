@@ -130,6 +130,12 @@
     <ClCompile Include="State\State_Battle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Item\Item.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect\Effect.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -214,5 +220,7 @@
     <ClInclude Include="Character\Monster\Slime.h" />
     <ClInclude Include="Manager\TurnManager.h" />
     <ClInclude Include="State\State_Battle.h" />
+    <ClInclude Include="Item\Item.h" />
+    <ClInclude Include="Effect\Effect.h" />
   </ItemGroup>
 </Project>

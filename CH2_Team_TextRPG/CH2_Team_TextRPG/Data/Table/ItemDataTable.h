@@ -6,6 +6,7 @@ struct ItemData
 	std::string Name;
 	int Price;
 	uint32_t Id;
+	std::vector<std::string> EffectTags;
 };
 
 NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(ItemData, Name, Price, Id);

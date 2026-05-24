@@ -230,6 +230,8 @@
     <ClCompile Include="Data\Table\DataTable.cpp" />
     <ClCompile Include="Data\Table\ItemDataTable.cpp" />
     <ClCompile Include="Data\Table\ScriptPathTable.cpp" />
+    <ClCompile Include="Effect\Effect.cpp" />
+    <ClCompile Include="Item\Item.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Core\GameInstance.cpp" />
     <ClCompile Include="Manager\InputManager.cpp" />
@@ -346,6 +348,8 @@
     <ClInclude Include="Core\Component.h" />
     <ClInclude Include="Core\Condition.h" />
     <ClInclude Include="Core\GameInstance.h" />
+    <ClInclude Include="Effect\Effect.h" />
+    <ClInclude Include="Item\Item.h" />
     <ClInclude Include="Core\Object.h" />
     <ClInclude Include="Core\State.h" />
     <ClInclude Include="Core\Transition.h" />
