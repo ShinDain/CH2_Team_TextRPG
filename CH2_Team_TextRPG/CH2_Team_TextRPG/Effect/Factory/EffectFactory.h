@@ -1,14 +1,14 @@
 ﻿#pragma once
-#include <functional>
 #include "Manager/InputManager.h"
 #include "Manager/LogManager.h"
+#include "Data/Table/ItemDataTable.h"
 
-class IEffect;
+class Effect;
 
 class EffectFactory
 {
 public:
-	typedef IEffect* (*CreateFunc)(int);
+	typedef Effect* (*CreateFunc)(int);
 
 	static std::unordered_map<std::string, CreateFunc>& GetRegistry() 
 	{
@@ -22,14 +22,28 @@ public:
 		return true;
 	}
 
-	static IEffect* CreateEffect(const std::string& Tag, int Value)
+	static Effect* CreateEffect(const ItemEffectData& InEffectData)
+	{
+		std::string Tag = InEffectData.Tag;
+		int Value = InEffectData.Value;
+
+		return CreateEffect_Implement(Tag, Value);
+	}
+
+	static Effect* CreateEffect(const std::string& Tag, int Value)
+	{
+		return CreateEffect_Implement(Tag, Value);
+	}
+
+private: 
+	static Effect* CreateEffect_Implement(const std::string& Tag, int Value)
 	{
 		auto& registry = GetRegistry();
 		auto it = registry.find(Tag);
 
 		if (it != registry.end())
 		{
-			IEffect* newEffect = it->second(Value);
+			Effect* newEffect = it->second(Value);
 			return it->second(Value);
 		}
 

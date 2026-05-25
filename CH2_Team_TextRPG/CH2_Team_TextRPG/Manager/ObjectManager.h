@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "Core/Object.h"
 
 class ObjectManager
@@ -45,4 +45,16 @@ inline T* ObjectManager::FindObject(const std::string& Name)
 	}
 
 	return result;
+}
+
+template<typename T, typename... Args>
+inline T* CreateObject(Args&&... args)
+{
+	return ObjectManager::GetInstance().CreateObject<T>(std::forward<Args>(args)...);
+}
+
+template<typename T>
+inline T* FindObject(const std::string& Name)
+{
+	return ObjectManager::GetInstance().FindObject<T>(Name);
 }

@@ -3,12 +3,13 @@
 #include "Effect/Effect.h"
 
 Item::Item(const ItemData* InData)
+	:Data(InData)
 {
 }
 
 Item::~Item()
 {
-	for (IEffect* effect : Effects)
+	for (Effect* effect : Effects)
 	{
 		delete effect;
 		effect = nullptr;
@@ -17,8 +18,13 @@ Item::~Item()
 
 void Item::Active(Object* Instigator)
 {
-	for (IEffect* effect : Effects)
+	for (Effect* effect : Effects)
 	{
 		effect->Apply(Instigator);
 	}
+}
+
+void Item::AddEffect(Effect* InEffect)
+{
+	Effects.emplace_back(InEffect);
 }

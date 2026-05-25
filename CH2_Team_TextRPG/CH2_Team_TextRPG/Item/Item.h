@@ -3,7 +3,7 @@
 #include "Data/Table/ItemDataTable.h"
 
 class Object;
-class IEffect;
+class Effect;
 
 class Item
 {
@@ -14,8 +14,12 @@ public:
 
 	virtual void Active(Object* Instigator);
 
+	virtual void AddEffect(Effect* InEffect);
+
+	const ItemData* GetItemData() { return Data; }
+	std::vector<Effect*> GetEffects() { return Effects; }
 private:
 	const ItemData* Data;
-	std::vector<IEffect*> Effects;
+	std::vector<Effect*> Effects;
 };
 

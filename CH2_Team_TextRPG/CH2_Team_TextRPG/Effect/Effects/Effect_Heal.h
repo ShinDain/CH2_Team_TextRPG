@@ -1,10 +1,9 @@
 ﻿#pragma once
-#include "Effect.h"
-#include "Factory/EffectFactory.h"
+#include "Effect/Effect.h"
+#include "Effect/Factory/EffectFactory.h"
 #include "Character/Component/HealthComponent.h"
-#include <functional>
 
-class Effect_Heal : public IEffect
+class Effect_Heal : public Effect
 {
 public:
 	Effect_Heal(int InValue);
@@ -13,7 +12,7 @@ public:
 	{
 		HealthComponent* healthComp = Target->FindComponent<HealthComponent>("Health");
 
-		int a = 100;
+		GInput << "[Effect_Heal] Applied";
 
 		return;
 	}
@@ -21,9 +20,9 @@ private:
 	int Value;
 };
 
-inline IEffect* CreateHealEffectInstance(int Value)
+inline Effect* CreateHealEffectInstance(int Value)
 {
 	return new Effect_Heal(Value);
 }
 
-inline bool bHealEffectRegister = EffectFactory::RegisterEffect("Heal", CreateHealEffectInstance);
+inline bool bHealEffectRegister = EffectFactory::RegisterEffect(EFFECT_TAG_HEAL, CreateHealEffectInstance);
