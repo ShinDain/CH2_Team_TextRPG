@@ -1,0 +1,133 @@
+﻿[
+  {
+    "Name": "Slime",
+    "Id": 1,
+    "Level": 1,
+    "HP": 50,
+    "MP": 0,
+    "Attack": 5,
+    "Defence": 2,
+    "Exp": 10,
+    "DropItemName": "Jelly",
+    "DropItemPrice": 10
+  },
+  {
+    "Name": "Goblin",
+    "Id": 2,
+    "Level": 3,
+    "HP": 80,
+    "MP": 0,
+    "Attack": 12,
+    "Defence": 5,
+    "Exp": 25,
+    "DropItemName": "GoblinEar",
+    "DropItemPrice": 30
+  },
+  {
+    "Name": "Orc",
+    "Id": 3,
+    "Level": 6,
+    "HP": 200,
+    "MP": 0,
+    "Attack": 25,
+    "Defence": 12,
+    "Exp": 60,
+    "DropItemName": "OrcTusk",
+    "DropItemPrice": 80
+  },
+  {
+    "Name": "SkeletonKnight",
+    "Id": 4,
+    "Level": 8,
+    "HP": 280,
+    "MP": 0,
+    "Attack": 35,
+    "Defence": 20,
+    "Exp": 90,
+    "DropItemName": "BoneShard",
+    "DropItemPrice": 120
+  },
+  {
+    "Name": "DarkWolf",
+    "Id": 5,
+    "Level": 4,
+    "HP": 110,
+    "MP": 0,
+    "Attack": 18,
+    "Defence": 6,
+    "Exp": 35,
+    "DropItemName": "WolfFang",
+    "DropItemPrice": 45
+  },
+  {
+    "Name": "Vampire",
+    "Id": 6,
+    "Level": 10,
+    "HP": 320,
+    "MP": 100,
+    "Attack": 42,
+    "Defence": 18,
+    "Exp": 130,
+    "DropItemName": "BloodCrystal",
+    "DropItemPrice": 200
+  },
+  {
+    "Name": "Troll",
+    "Id": 7,
+    "Level": 7,
+    "HP": 350,
+    "MP": 0,
+    "Attack": 30,
+    "Defence": 8,
+    "Exp": 75,
+    "DropItemName": "TrollSkin",
+    "DropItemPrice": 100
+  },
+  {
+    "Name": "DarkMage",
+    "Id": 8,
+    "Level": 9,
+    "HP": 180,
+    "MP": 200,
+    "Attack": 50,
+    "Defence": 8,
+    "Exp": 110,
+    "DropItemName": "SpellScroll",
+    "DropItemPrice": 180
+  },
+  {
+    "Name": "Werewolf",
+    "Id": 9,
+    "Level": 11,
+    "HP": 380,
+    "MP": 0,
+    "Attack": 55,
+    "Defence": 15,
+    "Exp": 150,
+    "DropItemName": "SilverClaw",
+    "DropItemPrice": 250
+  },
+  {
+    "Name": "DragonWhelp",
+    "Id": 10,
+    "Level": 15,
+    "HP": 600,
+    "MP": 50,
+    "Attack": 80,
+    "Defence": 30,
+    "Exp": 300,
+    "DropItemName": "DragonScale",
+    "DropItemPrice": 500
+  }
+]
+
+Slime 1 50 5 2 10 입문 몬스터
+Goblin 3 80 12 5 25 약한 잡몹
+DarkWolf 4 110 18 6 35빠르고 공격적
+Orc 6 200 25 12 60균형형
+Troll7 350 30 8 75 HP 많고 방어 낮음
+SkeletonKnight 8 280 35 20 90방어 특화
+DarkMage 9 180 50 8 110 HP 낮고 공격 높음
+Vampire 10 320 42 18 130 MP 보유
+Werewolf 11 380 55 15 150 공격 특화
+DragonWhelp 15 600 80 30 300 미니 보스급

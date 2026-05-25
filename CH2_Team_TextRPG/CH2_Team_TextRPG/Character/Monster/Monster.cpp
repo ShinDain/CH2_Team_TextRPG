@@ -32,19 +32,27 @@ void Monster::Attack(Player* player)
 	{
 		return;
 	}
-	player->TakeDamage(MonsterData.Attack);
+	// 몬스터 공격을 DamageContext로 포장하여 전달
+	DamageContext ctx;
+	ctx.Attack = MonsterData.Attack;
+	ctx.SkillMultiplier = 1.f;
+	ctx.AttackCount = 1;
+
+	player->TakeDamage(ctx);
 }
 void Monster::TakeDamage(const DamageContext& Context)
 {
-	MonsterData.HP -= Context;
+	int damage = std::max(0, Context.Attack - MonsterData.Defence);
+	MonsterData.HP -= damage;
 	if (MonsterData.HP < 0)
 	{
 		MonsterData.HP = 0;
 	}
 }
+
 bool Monster::IsDead() const
 {
-	return false;
+	return MonsterData.HP <= 0;
 }
 
 void Monster::Reset()
@@ -52,28 +60,6 @@ void Monster::Reset()
 	MonsterData = OriginalData;
 }
 
-void Monster::RestoreHP(int Amount)
-{
-	MonsterData.HP += Amount;
-	if (MonsterData.HP > OriginalData.HP)
-	{
-		MonsterData.HP = OriginalData.HP;
-	}
-}
-
-void Monster::RestoreMP(int Amount)
-{
-}
-
-void Monster::AttackUp(int Amount)
-{
-	MonsterData.Attack += Amount;
-}
-
-void Monster::DefenceUp(int Amount)
-{
-	MonsterData.Defence += Amount;
-}
 
 std::string Monster::GetName() const
 {

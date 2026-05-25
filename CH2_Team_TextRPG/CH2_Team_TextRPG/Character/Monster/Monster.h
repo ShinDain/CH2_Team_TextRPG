@@ -5,7 +5,7 @@
 #include "Character/Interface/UnitStat.h"
 
 class Player;
-
+struct DamageContext;
 struct MonsterSetData
 {
     std::string Name;
@@ -83,15 +83,11 @@ public:
     // IDamageable
     void TakeDamage(const struct DamageContext& Context) override;
     bool IsDead() const override;
-    void RestoreHP(int Amount);
-    void RestoreMP(int Amount);
-    void AttackUp(int Amount);
-    void DefenceUp(int Amount);
 
     void Reset();
 
-    int GetStat(EStatType Type) const override;
     // IUnitStat
+    int GetStat(EStatType Type) const override;
     std::string GetName() const;
     int GetHP() const;
     int GetMP() const;
