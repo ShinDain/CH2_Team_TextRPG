@@ -40,20 +40,6 @@ static const std::vector<std::string> SlimeDead =
 	"          '-.______.-'          "
 };
 
-static const std::vector<std::string> Slash1 =
-{
-	"        /",
-	"       / ",
-	"      /  "
-};
-
-static const std::vector<std::string> Slash2 =
-{
-	"            \\",
-	"             \\",
-	"              \\"
-};
-
 static const std::vector<std::string> HitEffect =
 {
 	"      *** HIT! ***      "
@@ -72,16 +58,6 @@ const std::vector<std::string>& AnimationFrameData::GetSlimeIdle2()
 const std::vector<std::string>& AnimationFrameData::GetSlimeDead()
 {
 	return SlimeDead;
-}
-
-const std::vector<std::string>& AnimationFrameData::GetSlash1()
-{
-	return Slash1;
-}
-
-const std::vector<std::string>& AnimationFrameData::GetSlash2()
-{
-	return Slash2;
 }
 
 const std::vector<std::string>& AnimationFrameData::GetHitEffect()

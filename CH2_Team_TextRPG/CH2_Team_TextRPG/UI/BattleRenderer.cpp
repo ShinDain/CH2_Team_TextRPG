@@ -1,23 +1,34 @@
 ﻿#include "pch.h"
 #include "UI/BattleRenderer.h"
+
 #include "UI/ConsoleUtil.h"
-#include "UI/AnimationFrameData.h"
+#include "UI/AsciiArtLoader.h"
 
 #include <iostream>
 #include <windows.h>
+
+BattleRenderer::BattleRenderer()
+	: CurrentMonsterName("goblin")
+{
+}
+
+void BattleRenderer::SetMonsterName(const std::string& monsterName)
+{
+	CurrentMonsterName = monsterName;
+}
 
 void BattleRenderer::DrawBattleScreen()
 {
 	ClearBattleArea();
 	DrawBattleTitle();
 
-	ConsoleUtil::SetCursorPosition(BattleAreaX + 5, BattleAreaY + 3);
+	ConsoleUtil::SetCursorPosition(BattleAreaX + 5, BattleAreaY + 5);
 	std::cout << "몬스터가 나타났다!";
 
 	DrawFrameAt(
-		BattleAreaX + 70,
-		BattleAreaY + 10,
-		AnimationFrameData::GetSlimeIdle1()
+		MonsterDrawX,
+		MonsterDrawY,
+		GetMonsterIdleFrame()
 	);
 }
 
@@ -27,120 +38,66 @@ void BattleRenderer::DrawMonsterIdle()
 	DrawBattleTitle();
 
 	DrawFrameAt(
-		BattleAreaX + 70,
-		BattleAreaY + 10,
-		AnimationFrameData::GetSlimeIdle1()
-	);
-	Sleep(250);
-
-	ClearBattleArea();
-	DrawBattleTitle();
-
-	DrawFrameAt(
-		BattleAreaX + 70,
-		BattleAreaY + 11,
-		AnimationFrameData::GetSlimeIdle2()
-	);
-	Sleep(250);
-
-	ClearBattleArea();
-	DrawBattleTitle();
-
-	DrawFrameAt(
-		BattleAreaX + 70,
-		BattleAreaY + 10,
-		AnimationFrameData::GetSlimeIdle1()
+		MonsterDrawX,
+		MonsterDrawY,
+		GetMonsterIdleFrame()
 	);
 }
 
-void BattleRenderer::PlayPlayerAttackAnimation()
+void BattleRenderer::PlayMonsterAttackAnimation()
 {
 	ClearBattleArea();
 	DrawBattleTitle();
 
 	DrawFrameAt(
-		BattleAreaX + 70,
-		BattleAreaY + 10,
-		AnimationFrameData::GetSlimeIdle1()
+		MonsterDrawX,
+		MonsterDrawY,
+		GetMonsterIdleFrame()
 	);
 
-	DrawFrameAt(
-		BattleAreaX + 55,
-		BattleAreaY + 12,
-		AnimationFrameData::GetSlash1()
-	);
 	Sleep(120);
 
 	ClearBattleArea();
 	DrawBattleTitle();
 
 	DrawFrameAt(
-		BattleAreaX + 72,
-		BattleAreaY + 10,
-		AnimationFrameData::GetSlimeIdle1()
+		MonsterDrawX,
+		MonsterDrawY,
+		GetMonsterAttackFrame()
 	);
 
-	DrawFrameAt(
-		BattleAreaX + 60,
-		BattleAreaY + 12,
-		AnimationFrameData::GetSlash2()
-	);
 	Sleep(120);
 
 	ClearBattleArea();
 	DrawBattleTitle();
 
 	DrawFrameAt(
-		BattleAreaX + 70,
-		BattleAreaY + 10,
-		AnimationFrameData::GetSlimeIdle1()
+		MonsterDrawX,
+		MonsterDrawY,
+		GetMonsterIdleFrame()
 	);
 }
 
 void BattleRenderer::PlayMonsterHitAnimation()
 {
-	for (int i = 0; i < 3; i++)
-	{
-		ClearBattleArea();
-		DrawBattleTitle();
+	ClearBattleArea();
+	DrawBattleTitle();
 
-		DrawFrameAt(
-			BattleAreaX + 67,
-			BattleAreaY + 10,
-			AnimationFrameData::GetSlimeIdle1()
-		);
+	DrawFrameAt(
+		MonsterDrawX,
+		MonsterDrawY,
+		GetMonsterHitFrame()
+	);
 
-		DrawFrameAt(
-			BattleAreaX + 78,
-			BattleAreaY + 8,
-			AnimationFrameData::GetHitEffect()
-		);
-		Sleep(80);
-
-		ClearBattleArea();
-		DrawBattleTitle();
-
-		DrawFrameAt(
-			BattleAreaX + 73,
-			BattleAreaY + 10,
-			AnimationFrameData::GetSlimeIdle1()
-		);
-
-		DrawFrameAt(
-			BattleAreaX + 78,
-			BattleAreaY + 8,
-			AnimationFrameData::GetHitEffect()
-		);
-		Sleep(80);
-	}
+	Sleep(300);
 
 	ClearBattleArea();
 	DrawBattleTitle();
 
 	DrawFrameAt(
-		BattleAreaX + 70,
-		BattleAreaY + 10,
-		AnimationFrameData::GetSlimeIdle1()
+		MonsterDrawX,
+		MonsterDrawY,
+		GetMonsterIdleFrame()
 	);
 }
 
@@ -149,28 +106,10 @@ void BattleRenderer::PlayMonsterDeathAnimation()
 	ClearBattleArea();
 	DrawBattleTitle();
 
-	DrawFrameAt(
-		BattleAreaX + 70,
-		BattleAreaY + 10,
-		AnimationFrameData::GetSlimeIdle1()
-	);
-	Sleep(200);
-
-	ClearBattleArea();
-	DrawBattleTitle();
-
-	DrawFrameAt(
-		BattleAreaX + 70,
-		BattleAreaY + 10,
-		AnimationFrameData::GetSlimeDead()
-	);
-	Sleep(700);
-
-	ClearBattleArea();
-	DrawBattleTitle();
-
 	ConsoleUtil::SetCursorPosition(BattleAreaX + 70, BattleAreaY + 14);
 	std::cout << "몬스터를 처치했다!";
+
+	Sleep(700);
 }
 
 void BattleRenderer::PlayNormalBattleAnimation()
@@ -178,17 +117,17 @@ void BattleRenderer::PlayNormalBattleAnimation()
 	DrawBattleScreen();
 	Sleep(500);
 
-	DrawMonsterIdle();
-	Sleep(300);
-
-	PlayPlayerAttackAnimation();
+	PlayMonsterAttackAnimation();
 	Sleep(200);
 
 	PlayMonsterHitAnimation();
 	Sleep(300);
 
-	PlayPlayerAttackAnimation();
+	PlayMonsterAttackAnimation();
 	Sleep(200);
+
+	PlayMonsterHitAnimation();
+	Sleep(300);
 
 	PlayMonsterDeathAnimation();
 	Sleep(700);
@@ -206,15 +145,74 @@ void BattleRenderer::ClearBattleArea()
 
 void BattleRenderer::DrawFrameAt(int x, int y, const std::vector<std::string>& frame)
 {
+	const int left = BattleAreaX + 1;
+	const int right = BattleAreaX + BattleAreaWidth - 2;
+	const int top = BattleAreaY + 1;
+	const int bottom = BattleAreaY + BattleAreaHeight - 2;
+
+	ConsoleUtil::SetTextColor(ConsoleColor::Green);
+
 	for (int i = 0; i < static_cast<int>(frame.size()); i++)
 	{
-		ConsoleUtil::SetCursorPosition(x, y + i);
-		std::cout << frame[i];
+		const int targetY = y + i;
+
+		if (targetY < top)
+		{
+			continue;
+		}
+
+		if (targetY > bottom)
+		{
+			break;
+		}
+
+		int targetX = x;
+		std::size_t startIndex = 0;
+
+		if (targetX < left)
+		{
+			startIndex = static_cast<std::size_t>(left - targetX);
+			targetX = left;
+		}
+
+		if (targetX > right || startIndex >= frame[i].size())
+		{
+			continue;
+		}
+
+		const std::size_t maxLength = static_cast<std::size_t>(right - targetX + 1);
+
+		ConsoleUtil::SetCursorPosition(targetX, targetY);
+		std::cout << frame[i].substr(startIndex, maxLength);
 	}
+
+	ConsoleUtil::ResetTextColor();
 }
 
 void BattleRenderer::DrawBattleTitle()
 {
 	ConsoleUtil::SetCursorPosition(BattleAreaX + 5, BattleAreaY + 1);
+	ConsoleUtil::SetTextColor(ConsoleColor::Red);
 	std::cout << "[ 전투 화면 ]";
+	ConsoleUtil::ResetTextColor();
+
+	ConsoleUtil::SetCursorPosition(BattleAreaX + 5, BattleAreaY + 3);
+	ConsoleUtil::SetTextColor(ConsoleColor::Yellow);
+	std::cout << "몬스터: " << CurrentMonsterName;
+	ConsoleUtil::ResetTextColor();
+}
+
+std::vector<std::string> BattleRenderer::GetMonsterIdleFrame() const
+{
+	return AsciiArtLoader::LoadFrame(CurrentMonsterName, "idle");
+}
+
+std::vector<std::string> BattleRenderer::GetMonsterHitFrame() const
+{
+	return AsciiArtLoader::LoadFrame(CurrentMonsterName, "hit");
+}
+
+std::vector<std::string> BattleRenderer::GetMonsterAttackFrame() const
+{
+	return AsciiArtLoader::LoadFrame(CurrentMonsterName, "attack");
 }
