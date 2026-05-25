@@ -20,11 +20,6 @@ public:
 	bool UseItem();
 
 	void AcqireItem(const std::string ItemName);
-	std::vector<const std::string&> GetItemList();
-
-private:
-	std::vector<InventoryEntry> Entries;
-	std::unordered_map<std::string, InventoryEntry&> NameMap;
-	std::unordered_map<int, InventoryEntry&> IdMap;
+	std::vector<std::string_view> GetItemList();
 };
 

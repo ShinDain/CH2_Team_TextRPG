@@ -24,7 +24,9 @@ void InventoryComponent::AcqireItem(const std::string ItemName)
 {
 }
 
-std::vector<const std::string&> InventoryComponent::GetItemList()
+std::vector<std::string_view> InventoryComponent::GetItemList()
 {
-	return std::vector<const std::string&>();
+	std::vector<std::string_view> List{};
+
+	return List;
 }
