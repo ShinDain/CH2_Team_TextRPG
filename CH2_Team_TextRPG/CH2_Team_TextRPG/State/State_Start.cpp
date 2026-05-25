@@ -3,11 +3,16 @@
 
 #include "Enum/EState.h"
 #include "Core/Condition.h"
+#include "UI/BattleRenderer.h"
+#include "UI/ConsoleUtil.h"
 #include "Core/GameInstance.h"
 #include "Core/GameProgress.h"
 #include "UI/GameScreen.h"
 
+#include <windows.h>
+
 using namespace std;
+
 
 State_Start::State_Start()
 {
@@ -25,6 +30,8 @@ void State_Start::Process()
 {
 	GameInstance& Instance = GameInstance::GetInstance();
 
+	ConsoleUtil::HideCursor();
+
 	GameScreen::DrawMainScreen(
 		Instance.GetMapManager(),
 		Instance.GetLogManager()
@@ -32,6 +39,9 @@ void State_Start::Process()
 
 	if (Instance.GetMapManager().IsBossNode())
 	{
+		BattleRenderer battleRenderer;
+		battleRenderer.PlayNormalBattleAnimation();
+
 		GameProgress::HandleCurrentNodeEvent(
 			Instance.GetMapManager(),
 			Instance.GetLogManager()
@@ -46,6 +56,9 @@ void State_Start::Process()
 		Instance.GetMapManager(),
 		Instance.GetLogManager()
 	);
+
+	BattleRenderer battleRenderer;
+	battleRenderer.PlayNormalBattleAnimation();
 
 	GameProgress::HandleCurrentNodeEvent(
 		Instance.GetMapManager(),

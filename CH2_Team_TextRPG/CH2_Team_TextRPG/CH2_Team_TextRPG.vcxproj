@@ -333,7 +333,10 @@
     <ClCompile Include="Character\Monster\Slime.cpp" />
     <ClCompile Include="State\State_Battle.cpp" />
     <ClCompile Include="State\State_Start.cpp" />
+    <ClCompile Include="UI\AnimationFrameData.cpp" />
+    <ClCompile Include="UI\BattleRenderer.cpp" />
     <ClCompile Include="UI\ConsoleRenderer.cpp" />
+    <ClCompile Include="UI\ConsoleUtil.cpp" />
     <ClCompile Include="UI\GameScreen.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -373,7 +376,10 @@
     <ClInclude Include="Character\Monster\Slime.h" />
     <ClInclude Include="State\State_Battle.h" />
     <ClInclude Include="State\State_Start.h" />
+    <ClInclude Include="UI\AnimationFrameData.h" />
+    <ClInclude Include="UI\BattleRenderer.h" />
     <ClInclude Include="UI\ConsoleRenderer.h" />
+    <ClInclude Include="UI\ConsoleUtil.h" />
     <ClInclude Include="UI\GameScreen.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
