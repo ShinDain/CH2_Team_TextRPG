@@ -11,9 +11,6 @@
 
 #include <windows.h>
 
-using namespace std;
-
-
 State_Start::State_Start()
 {
 	// 지금은 StartState 안에서 바로 맵 화면을 실행할 것이므로
@@ -40,6 +37,7 @@ void State_Start::Process()
 	if (Instance.GetMapManager().IsBossNode())
 	{
 		BattleRenderer battleRenderer;
+		battleRenderer.SetMonsterName("goblin");
 		battleRenderer.PlayNormalBattleAnimation();
 
 		GameProgress::HandleCurrentNodeEvent(
@@ -58,6 +56,7 @@ void State_Start::Process()
 	);
 
 	BattleRenderer battleRenderer;
+	battleRenderer.SetMonsterName("goblin");
 	battleRenderer.PlayNormalBattleAnimation();
 
 	GameProgress::HandleCurrentNodeEvent(
