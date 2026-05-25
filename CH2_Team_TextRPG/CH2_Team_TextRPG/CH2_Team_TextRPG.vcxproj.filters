@@ -136,6 +136,12 @@
     <ClCompile Include="Effect\Effect.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Character\Component\SkillComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Data\Table\SkillDataTable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -222,5 +228,8 @@
     <ClInclude Include="State\State_Battle.h" />
     <ClInclude Include="Item\Item.h" />
     <ClInclude Include="Effect\Effect.h" />
+    <ClInclude Include="Character\Component\SkillComponent.h" />
+    <ClInclude Include="Data\Table\SkillDataTable.h" />
+    <ClInclude Include="Enum\EEffect.h" />
   </ItemGroup>
 </Project>

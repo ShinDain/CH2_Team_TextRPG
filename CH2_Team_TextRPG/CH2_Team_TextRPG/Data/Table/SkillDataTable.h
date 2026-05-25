@@ -1,8 +1,18 @@
 ﻿#pragma once
 #include "DataTable.h"
+#include "Enum/EEffect.h"
 
-enum class ESkillRange : uint8_t { Single = 0, Area = 1 };
-enum class ESkillType : uint8_t { Attack = 0, Heal = 1, Buff = 2, Debuff = 3 };
+// 스킬의 개별 '효과' 데이터
+struct FSkillEffect
+{
+	EEffectType EffectType;		// 효과 유형 (공격, 회복, 버프, 디버프 등)
+	int BaseValue;				// 고정 수치 (예: 고정 데미지 +10)
+	uint32_t Multiplier;		// 스킬 배율 (예: 공격력의 150% -> 15000, 배율 계산 시 10000으로 나눔)
+	uint8_t SuccessRate;		// 효과 적중 확률 (0~100)
+	uint8_t DurationTurns : 3;	// 버프/디버프 유지 턴 수 (즉발 효과면 0)
+	uint8_t Reserved : 5;          
+};
+
 
 struct FSkillData
 {
@@ -10,17 +20,12 @@ struct FSkillData
 	std::string Description;	// 스킬 설명
 
 	uint16_t Idx;				// 스킬 Idx
-	uint16_t ManaCost;          // MP 소모량
-	union {
-		int16_t SkillPower;			// 스킬 위력 (공격/회복 전용 값)
-		int16_t BuffDebuffValue;	// 버프/디버프 전용 값
-	};
+	uint16_t ManaCost;			// MP 소모량
 
-	uint8_t Duration  : 4;			// 스킬 지속시간
-	uint8_t Cooldown  : 4;			// 쿨타임
-	ESkillRange Range : 1;			// 스킬 범위 (단일, 범위)
-	ESkillType  Type  : 2;			// 스킬 종류 (공격, 회복, 버프, 디버프)
-	uint8_t Padding   : 5;		
+	std::vector<FSkillEffect> Effects;	// 스킬 효과 목록
+	ETargetType TargetType : 3;			// 타겟 유형
+	uint8_t Cooldown : 3;				// 쿨타임
+	uint8_t Reserved : 2;
 };
 
 
@@ -45,4 +50,3 @@ private:
 	std::unordered_map<std::string, const FSkillData*> NameMap;
 	std::unordered_map<uint16_t, const FSkillData*> IndexMap;
 };
-
