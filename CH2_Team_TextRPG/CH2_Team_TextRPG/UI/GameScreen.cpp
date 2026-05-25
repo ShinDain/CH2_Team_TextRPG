@@ -1,6 +1,7 @@
 ﻿#include "pch.h"
 #include "GameScreen.h"
 #include "ConsoleRenderer.h"
+#include "ConsoleUtil.h"
 
 void GameScreen::DrawMainScreen(const MapManager& Map, const LogManager& Log)
 {
@@ -17,21 +18,31 @@ void GameScreen::DrawMainScreen(const MapManager& Map, const LogManager& Log)
 void GameScreen::DrawCharacterPanel()
 {
 	ConsoleRenderer::DrawBox(0, 0, 30, 11);
-	ConsoleRenderer::DrawString(2, 1, "캐릭터 정보");
-	ConsoleRenderer::DrawString(2, 3, "이름 : 전사");
-	ConsoleRenderer::DrawString(2, 4, "직업 : 기사");
-	ConsoleRenderer::DrawString(2, 5, "체력 : 72 / 76");
-	ConsoleRenderer::DrawString(2, 6, "골드 : 155");
-	ConsoleRenderer::DrawString(2, 7, "층   : 1");
+	ConsoleRenderer::SetCursorPosition(2, 1);
+	ConsoleUtil::WriteColored("캐릭터 정보", ConsoleColor::Cyan);
+	ConsoleRenderer::SetCursorPosition(2, 3);
+	ConsoleUtil::WriteColored("이름 : 전사", ConsoleColor::Gray);
+	ConsoleRenderer::SetCursorPosition(2, 4);
+	ConsoleUtil::WriteColored("직업 : 기사", ConsoleColor::Gray);
+	ConsoleRenderer::SetCursorPosition(2, 5);
+	ConsoleUtil::WriteColored("체력 : 72 / 76", ConsoleColor::Red);
+	ConsoleRenderer::SetCursorPosition(2, 6);
+	ConsoleUtil::WriteColored("골드 : 155", ConsoleColor::Yellow);
+	ConsoleRenderer::SetCursorPosition(2, 7);
+	ConsoleUtil::WriteColored("층   : 1", ConsoleColor::Gray);
 }
 
 void GameScreen::DrawInventoryPanel()
 {
 	ConsoleRenderer::DrawBox(0, 11, 30, 23);
-	ConsoleRenderer::DrawString(2, 12, "인벤토리");
-	ConsoleRenderer::DrawString(2, 14, "포션 x2");
-	ConsoleRenderer::DrawString(2, 15, "철검");
-	ConsoleRenderer::DrawString(2, 16, "가죽 갑옷");
+	ConsoleRenderer::SetCursorPosition(2, 12);
+	ConsoleUtil::WriteColored("인벤토리", ConsoleColor::Yellow);
+	ConsoleRenderer::SetCursorPosition(2, 14);
+	ConsoleUtil::WriteColored("포션 x2", ConsoleColor::White);
+	ConsoleRenderer::SetCursorPosition(2, 15);
+	ConsoleUtil::WriteColored("철검", ConsoleColor::White);
+	ConsoleRenderer::SetCursorPosition(2, 16);
+	ConsoleUtil::WriteColored("가죽 갑옷", ConsoleColor::White);
 }
 
 void GameScreen::DrawMapPanel(const MapManager& Map)
@@ -58,21 +69,27 @@ void GameScreen::DrawMapPanel(const MapManager& Map)
 void GameScreen::DrawNavigationPanel(const MapManager& Map)
 {
 	ConsoleRenderer::DrawBox(0, 34, 210, 6);
-	ConsoleRenderer::DrawString(2, 35, "탐험 정보");
+	ConsoleRenderer::SetCursorPosition(2, 35);
+	ConsoleUtil::WriteColored("탐험 정보", ConsoleColor::Cyan);
 
 	const MapNode* CurrentNode = Map.GetCurrentNode();
 
 	if (CurrentNode != nullptr)
 	{
-		ConsoleRenderer::DrawString(4, 36, "현재 위치");
-		ConsoleRenderer::DrawString(4, 37, "번호 : " + std::to_string(CurrentNode->Id));
-		ConsoleRenderer::DrawString(20, 37, "종류 : " + MapManager::NodeTypeToString(CurrentNode->Type));
-		ConsoleRenderer::DrawString(40, 37, "층 : " + std::to_string(CurrentNode->Floor));
+		ConsoleRenderer::SetCursorPosition(4, 36);
+		ConsoleUtil::WriteColored("현재 위치", ConsoleColor::Gray);
+		ConsoleRenderer::SetCursorPosition(4, 37);
+		ConsoleUtil::WriteColored("번호 : " + std::to_string(CurrentNode->Id), ConsoleColor::Gray);
+		ConsoleRenderer::SetCursorPosition(20, 37);
+		ConsoleUtil::WriteColored("종류 : " + MapManager::NodeTypeToString(CurrentNode->Type), ConsoleColor::Gray);
+		ConsoleRenderer::SetCursorPosition(40, 37);
+		ConsoleUtil::WriteColored("층 : " + std::to_string(CurrentNode->Floor), ConsoleColor::Gray);
 	}
 
 	std::vector<int> MovableNodeIds = Map.GetMovableNodeIds();
 
-	ConsoleRenderer::DrawString(95, 36, "이동 가능 노드");
+	ConsoleRenderer::SetCursorPosition(95, 36);
+	ConsoleUtil::WriteColored("이동 가능 노드", ConsoleColor::Green);
 
 	for (int i = 0; i < static_cast<int>(MovableNodeIds.size()); i++)
 	{
@@ -87,21 +104,27 @@ void GameScreen::DrawNavigationPanel(const MapManager& Map)
 			MapManager::NodeTypeToString(Node->Type) +
 			" [노드 번호: " + std::to_string(Node->Id) + "]";
 
-		ConsoleRenderer::DrawString(95, 37 + i, Text);
+		ConsoleRenderer::SetCursorPosition(95, 37 + i);
+		ConsoleUtil::WriteColored(Text, ConsoleColor::White);
 	}
 }
 
 void GameScreen::DrawLogPanel(const LogManager& Log)
 {
 	ConsoleRenderer::DrawBox(0, 40, 210, 10);
-	ConsoleRenderer::DrawString(2, 41, "로그");
+	ConsoleRenderer::SetCursorPosition(2, 41);
+	ConsoleUtil::WriteColored("로그", ConsoleColor::Cyan);
 
-	ConsoleRenderer::DrawString(2, 43, "> 게임을 시작했습니다.");
-	ConsoleRenderer::DrawString(2, 44, "> 던전 지도가 생성되었습니다.");
-	ConsoleRenderer::DrawString(2, 45, "> 이동할 노드를 선택하세요.");
+	ConsoleRenderer::SetCursorPosition(2, 43);
+	ConsoleUtil::WriteColored("> 게임을 시작했습니다.", ConsoleColor::Gray);
+	ConsoleRenderer::SetCursorPosition(2, 44);
+	ConsoleUtil::WriteColored("> 던전 지도가 생성되었습니다.", ConsoleColor::Gray);
+	ConsoleRenderer::SetCursorPosition(2, 45);
+	ConsoleUtil::WriteColored("> 이동할 노드를 선택하세요.", ConsoleColor::Gray);
 }
 
 void GameScreen::DrawInputPanel()
 {
-	ConsoleRenderer::DrawString(2, 48, "이동할 노드 번호 입력 >> ");
+	ConsoleRenderer::SetCursorPosition(2, 48);
+	ConsoleUtil::WriteColored("이동할 노드 번호 입력 >> ", ConsoleColor::White);
 }
