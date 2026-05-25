@@ -142,6 +142,7 @@
     <ClCompile Include="Character\Character.cpp" />
     <ClCompile Include="Character\Component\EquipmentComponent.cpp" />
     <ClCompile Include="Character\Component\HealthComponent.cpp" />
+    <ClCompile Include="Character\Component\SkillComponent.cpp" />
     <ClCompile Include="Character\Component\StatComponent.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -331,6 +332,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Character\Monster\Slime.cpp" />
+    <ClCompile Include="Data\Table\SkillDataTable.cpp" />
     <ClCompile Include="State\State_Battle.cpp" />
     <ClCompile Include="State\State_Start.cpp" />
     <ClCompile Include="UI\ConsoleRenderer.cpp" />
@@ -340,6 +342,7 @@
     <ClInclude Include="Character\Character.h" />
     <ClInclude Include="Character\Component\EquipmentComponent.h" />
     <ClInclude Include="Character\Component\HealthComponent.h" />
+    <ClInclude Include="Character\Component\SkillComponent.h" />
     <ClInclude Include="Character\Component\StatComponent.h" />
     <ClInclude Include="Character\Interface\Damageable.h" />
     <ClInclude Include="Character\Interface\UnitStat.h" />
@@ -371,6 +374,7 @@
     <ClInclude Include="Character\Monster\Monster.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Character\Monster\Slime.h" />
+    <ClInclude Include="Data\Table\SkillDataTable.h" />
     <ClInclude Include="State\State_Battle.h" />
     <ClInclude Include="State\State_Start.h" />
     <ClInclude Include="UI\ConsoleRenderer.h" />
