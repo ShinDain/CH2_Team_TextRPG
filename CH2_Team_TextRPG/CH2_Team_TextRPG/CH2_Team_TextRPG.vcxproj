@@ -232,6 +232,9 @@
     <ClCompile Include="Data\Table\ScriptPathTable.cpp" />
     <ClCompile Include="Effect\Effect.cpp" />
     <ClCompile Include="Character\Component\InventoryComponent.cpp" />
+    <ClCompile Include="Effect\Effect_Heal.cpp" />
+    <ClCompile Include="Effect\Factory\EffectFactory.cpp" />
+    <ClCompile Include="Manager\ItemManager.cpp" />
     <ClCompile Include="Item\Item.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Core\GameInstance.cpp" />
@@ -351,6 +354,9 @@
     <ClInclude Include="Core\GameInstance.h" />
     <ClInclude Include="Effect\Effect.h" />
     <ClInclude Include="Character\Component\InventoryComponent.h" />
+    <ClInclude Include="Effect\Effect_Heal.h" />
+    <ClInclude Include="Effect\Factory\EffectFactory.h" />
+    <ClInclude Include="Manager\ItemManager.h" />
     <ClInclude Include="Item\Item.h" />
     <ClInclude Include="Core\Object.h" />
     <ClInclude Include="Core\State.h" />
