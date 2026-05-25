@@ -232,6 +232,10 @@
     <ClCompile Include="Data\Table\ItemDataTable.cpp" />
     <ClCompile Include="Data\Table\ScriptPathTable.cpp" />
     <ClCompile Include="Effect\Effect.cpp" />
+    <ClCompile Include="Character\Component\InventoryComponent.cpp" />
+    <ClCompile Include="Effect\Effects\Effect_Heal.cpp" />
+    <ClCompile Include="Effect\Factory\EffectFactory.cpp" />
+    <ClCompile Include="Manager\ItemManager.cpp" />
     <ClCompile Include="Item\Item.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Core\GameInstance.cpp" />
@@ -335,7 +339,10 @@
     <ClCompile Include="Data\Table\SkillDataTable.cpp" />
     <ClCompile Include="State\State_Battle.cpp" />
     <ClCompile Include="State\State_Start.cpp" />
+    <ClCompile Include="UI\AnimationFrameData.cpp" />
+    <ClCompile Include="UI\BattleRenderer.cpp" />
     <ClCompile Include="UI\ConsoleRenderer.cpp" />
+    <ClCompile Include="UI\ConsoleUtil.cpp" />
     <ClCompile Include="UI\GameScreen.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -352,6 +359,12 @@
     <ClInclude Include="Core\Condition.h" />
     <ClInclude Include="Core\GameInstance.h" />
     <ClInclude Include="Effect\Effect.h" />
+    <ClInclude Include="Character\Component\InventoryComponent.h" />
+    <ClInclude Include="Effect\Effects\Effect_Heal.h" />
+    <ClInclude Include="Effect\EffectTag.h" />
+    <ClInclude Include="Effect\Factory\EffectFactory.h" />
+    <ClInclude Include="Enum\EItemType.h" />
+    <ClInclude Include="Manager\ItemManager.h" />
     <ClInclude Include="Enum\EEffect.h" />
     <ClInclude Include="Item\Item.h" />
     <ClInclude Include="Core\Object.h" />
@@ -378,7 +391,10 @@
     <ClInclude Include="Data\Table\SkillDataTable.h" />
     <ClInclude Include="State\State_Battle.h" />
     <ClInclude Include="State\State_Start.h" />
+    <ClInclude Include="UI\AnimationFrameData.h" />
+    <ClInclude Include="UI\BattleRenderer.h" />
     <ClInclude Include="UI\ConsoleRenderer.h" />
+    <ClInclude Include="UI\ConsoleUtil.h" />
     <ClInclude Include="UI\GameScreen.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -5,12 +5,6 @@
             "Name" : [
                 "ItemData.json"
             ]
-        },
-        {
-            "Category" : "Data",
-            "Name" : [
-                "TestData.json"
-            ]
         }
     ]
 }
