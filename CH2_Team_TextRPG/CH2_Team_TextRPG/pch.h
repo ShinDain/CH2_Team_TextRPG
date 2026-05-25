@@ -1,4 +1,4 @@
-#ifndef PCH_H
+﻿#ifndef PCH_H
 #define PCH_H
 
 #include <iostream>
@@ -13,5 +13,6 @@
 #include "Core/GameInstance.h"
 
 #define GInput (*GameInstance::GetInstance().GetInputManager())
+#define GLog (GameInstance::GetInstance().GetLogManager())
 
 #endif //PCH_H

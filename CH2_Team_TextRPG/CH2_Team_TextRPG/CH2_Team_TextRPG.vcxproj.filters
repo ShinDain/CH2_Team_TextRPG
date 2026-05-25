@@ -136,6 +136,18 @@
     <ClCompile Include="Effect\Effect.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Character\Component\InventoryComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\ItemManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect\Effects\Effect_Heal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect\Factory\EffectFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -222,5 +234,11 @@
     <ClInclude Include="State\State_Battle.h" />
     <ClInclude Include="Item\Item.h" />
     <ClInclude Include="Effect\Effect.h" />
+    <ClInclude Include="Character\Component\InventoryComponent.h" />
+    <ClInclude Include="Manager\ItemManager.h" />
+    <ClInclude Include="Effect\Effects\Effect_Heal.h" />
+    <ClInclude Include="Effect\Factory\EffectFactory.h" />
+    <ClInclude Include="Enum\EItemType.h" />
+    <ClInclude Include="Effect\EffectTag.h" />
   </ItemGroup>
 </Project>
