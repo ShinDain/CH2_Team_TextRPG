@@ -5,9 +5,7 @@ struct MonsterData
 {
     std::string Name;
     uint32_t Id;
-    uint32_t Level;
     uint32_t HP;
-    uint32_t MP;
     uint32_t Attack;
     uint32_t Defence;
     uint32_t Exp;
