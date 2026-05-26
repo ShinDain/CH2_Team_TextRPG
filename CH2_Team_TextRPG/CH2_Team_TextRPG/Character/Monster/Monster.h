@@ -2,10 +2,10 @@
 #include "pch.h"
 #include "Character/Character.h"
 #include "Character/Interface/Damageable.h"
-#include "Character/Interface/UnitStat.h"
+#include "Data/Character/Damage.h"
 
 class Player;
-struct DamageContext;
+
 struct MonsterSetData
 {
     std::string Name;
@@ -72,7 +72,7 @@ struct MonsterSetData
         return *this;
     }
 };
-class Monster : public Character, public IUnitStat, public IDamageable
+class Monster : public Character, public IDamageable
 {
 public:
     Monster() = delete;
@@ -87,7 +87,6 @@ public:
     void Reset();
 
     // IUnitStat
-    int GetStat(EStatType Type) const override;
     std::string GetName() const;
     int GetHP() const;
     int GetMP() const;
@@ -104,5 +103,3 @@ protected:
         MonsterSetData MonsterData;
         MonsterSetData OriginalData;
     };
-
-

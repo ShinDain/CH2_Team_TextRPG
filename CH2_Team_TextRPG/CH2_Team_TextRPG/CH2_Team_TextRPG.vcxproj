@@ -218,6 +218,7 @@
       <AdditionalOptions>/utf-8</AdditionalOptions>
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
+    <ClCompile Include="Character\Monster\MonsterFactory.cpp" />
     <ClCompile Include="Character\Player\Player.cpp" />
     <ClCompile Include="Common\StringHelper.cpp" />
     <ClCompile Include="Core\Component.cpp" />
@@ -355,6 +356,7 @@
     <ClInclude Include="Character\Component\StatComponent.h" />
     <ClInclude Include="Character\Interface\Damageable.h" />
     <ClInclude Include="Character\Interface\UnitStat.h" />
+    <ClInclude Include="Character\Monster\MonsterFactory.h" />
     <ClInclude Include="Character\Player\Player.h" />
     <ClInclude Include="Common\StringHelper.h" />
     <ClInclude Include="Core\Component.h" />
