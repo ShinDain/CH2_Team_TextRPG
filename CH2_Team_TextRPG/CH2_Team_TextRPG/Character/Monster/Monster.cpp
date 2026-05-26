@@ -1,8 +1,17 @@
 ﻿#include "pch.h"
 #include "Monster.h"
+#include "Character/Player/Player.h"
 #include "Data/Character/Stat.h"
 
-Monster::Monster()
+int Monster::GetStat(EStatType Type) const
+{
+	// Not Implement.
+	return 0;
+}
+
+Monster::Monster(MonsterSetData&& Desc)
+	: MonsterData(std::move(Desc)),
+	OriginalData(MonsterData)
 {
 }
 
@@ -12,143 +21,86 @@ Monster::~Monster()
 
 bool Monster::Initialize()
 {
-	// Not Implement.
-	return false;
+	MonsterData = OriginalData;
+	return Character::Initialize();
 }
 
+
+void Monster::Attack(Player* player)
+{
+	//if (player == nullptr)
+	//{
+	//	return;
+	//}
+	//// 몬스터 공격을 DamageContext로 포장하여 전달
+	//DamageContext ctx;
+	//ctx.Attack = MonsterData.Attack;
+	//ctx.SkillMultiplier = 1.f;
+	//ctx.AttackCount = 1;
+
+	//player->TakeDamage(ctx);
+}
 void Monster::TakeDamage(const DamageContext& Context)
 {
-	// Not Implement.
+	/*int damage = std::max(0, Context.Attack - MonsterData.Defence);
+	MonsterData.HP -= damage;
+	if (MonsterData.HP < 0)
+	{
+		MonsterData.HP = 0;
+	}*/
 }
 
 bool Monster::IsDead() const
 {
-	// Not Implement.
-	return false;
+	return MonsterData.HP <= 0;
 }
 
-int Monster::GetStat(EStatType Type) const
+void Monster::Reset()
 {
-	// Not Implement.
-	return 0;
+	MonsterData = OriginalData;
 }
 
 
+std::string Monster::GetName() const
+{
+	return MonsterData.Name;
+}
 
+int Monster::GetHP() const
+{
+	return MonsterData.HP;
+}
 
+int Monster::GetMP() const
+{
+	return 0;  
+}
 
+int Monster::GetAttack() const
+{
+	return MonsterData.Attack;
+}
 
+int Monster::GetDefence() const
+{
+	return MonsterData.Defence;
+}
 
+int Monster::GetExp() const
+{
+	return MonsterData.Exp;
+}
 
+std::string Monster::GetDropItemName() const
+{
+	return MonsterData.DropItemName;
+}
 
+int Monster::GetDropItemPrice() const
+{
+	return MonsterData.DropItemPrice;
+}
 
-//Monster::Monster(MonsterSetData&& Desc)
-//	: MonsterData(std::move(Desc)),
-//	OriginalData(MonsterData)
-//{
-//}
-//
-//Monster::~Monster()
-//{
-//}
-//
-//bool Monster::Initialize()
-//{
-//	MonsterData = OriginalData;
-//	return Character::Initialize();
-//}
-//
-//void Monster::Attack(Player* player)
-//{
-//	if (player == nullptr)
-//	{
-//		return;
-//	}
-//	player->TakeDamage(MonsterData.Attack);
-//}
-//
-//void Monster::TakeDamage(int Amount)
-//{
-//	MonsterData.HP -= Amount;
-//	if (MonsterData.HP < 0)
-//	{
-//		MonsterData.HP = 0;
-//	}
-//}
-//
-//void Monster::Die()
-//{
-//	MonsterData.HP = 0;
-//}
-//
-//void Monster::Reset()
-//{
-//	MonsterData = OriginalData;
-//}
-//
-//void Monster::RestoreHP(int Amount)
-//{
-//	MonsterData.HP += Amount;
-//	if (MonsterData.HP > OriginalData.HP)
-//	{
-//		MonsterData.HP = OriginalData.HP;
-//	}
-//}
-//
-//void Monster::RestoreMP(int Amount)
-//{
-//}
-//
-//void Monster::AttackUp(int Amount)
-//{
-//	MonsterData.Attack += Amount;
-//}
-//
-//void Monster::DefenceUp(int Amount)
-//{
-//	MonsterData.Defence += Amount;
-//}
-//
-//std::string Monster::GetName() const
-//{
-//	return MonsterData.Name;
-//}
-//
-//int Monster::GetHP() const
-//{
-//	return MonsterData.HP;
-//}
-//
-//int Monster::GetMP() const
-//{
-//	return 0;  
-//}
-//
-//int Monster::GetAttack() const
-//{
-//	return MonsterData.Attack;
-//}
-//
-//int Monster::GetDefence() const
-//{
-//	return MonsterData.Defence;
-//}
-//
-//int Monster::GetExp() const
-//{
-//	return MonsterData.Exp;
-//}
-//
-//std::string Monster::GetDropItemName() const
-//{
-//	return MonsterData.DropItemName;
-//}
-//
-//int Monster::GetDropItemPrice() const
-//{
-//	return MonsterData.DropItemPrice;
-//}
-//
 //MonsterSetData GenerateStat(Player* player)
 //{
 //	int MinHP = player->Level * 20;

@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <windows.h>
 
 void ConsoleUtil::SetCursorPosition(int x, int y)
 {
@@ -33,4 +34,24 @@ void ConsoleUtil::ClearArea(int x, int y, int width, int height)
         SetCursorPosition(x, y + i);
         std::cout << blank;
     }
+}
+
+void ConsoleUtil::SetTextColor(ConsoleColor color)
+{
+    SetConsoleTextAttribute(
+        GetStdHandle(STD_OUTPUT_HANDLE),
+        static_cast<WORD>(color)
+    );
+}
+
+void ConsoleUtil::ResetTextColor()
+{
+    SetTextColor(ConsoleColor::Gray);
+}
+
+void ConsoleUtil::WriteColored(const std::string& text, ConsoleColor color)
+{
+    SetTextColor(color);
+    std::cout << text;
+    ResetTextColor();
 }

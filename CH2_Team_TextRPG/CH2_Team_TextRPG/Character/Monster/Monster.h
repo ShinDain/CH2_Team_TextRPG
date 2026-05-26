@@ -4,11 +4,8 @@
 #include "Character/Interface/Damageable.h"
 #include "Character/Interface/UnitStat.h"
 
-
-//데미지어블,유닛스텟 인터페이스
-
 class Player;
-
+struct DamageContext;
 struct MonsterSetData
 {
     std::string Name;
@@ -78,49 +75,34 @@ struct MonsterSetData
 class Monster : public Character, public IUnitStat, public IDamageable
 {
 public:
-    Monster();
-    ~Monster() override;
+    Monster() = delete;
+    Monster(MonsterSetData&& Desc);
+    virtual ~Monster();
+
+    virtual void Attack(Player* player);
+    // IDamageable
+    void TakeDamage(const struct DamageContext& Context) override;
+    bool IsDead() const override;
+
+    void Reset();
+
+    // IUnitStat
+    int GetStat(EStatType Type) const override;
+    std::string GetName() const;
+    int GetHP() const;
+    int GetMP() const;
+    int GetAttack() const;
+    int GetDefence() const;
+    int GetExp() const;
+
+    std::string GetDropItemName() const;
+    int GetDropItemPrice() const;
 
     bool Initialize() override;
-    void TakeDamage(const DamageContext& Context) override;
-    bool IsDead() const override;
-    int GetStat(EStatType Type) const override;
-};
+
+protected:
+        MonsterSetData MonsterData;
+        MonsterSetData OriginalData;
+    };
 
 
-//class Monster : public Character, public IUnitStat, public IDamageable
-//{
-//public:
-//    Monster() = delete;
-//    Monster(MonsterSetData&& Desc);
-//    virtual ~Monster();
-//
-//    virtual void Attack(Player* player);
-//
-//    // IDamageable
-//    void TakeDamage(int damage) override;
-//    void Reset() override;
-//    void Die() override;
-//    void RestoreHP(int Amount) override;
-//    void RestoreMP(int Amount) override;
-//    void AttackUp(int Amount) override;
-//    void DefenceUp(int Amount) override;
-//
-//    // IUnitStat
-//    std::string GetName() const override;
-//    int GetHP() const override;
-//    int GetMP() const override;
-//    int GetAttack() const override;
-//    int GetDefence() const override;
-//    int GetExp() const override;
-//
-//    std::string GetDropItemName() const;
-//    int GetDropItemPrice() const;
-//    EItemAbility GetItemAbility() const;
-//
-//    bool Initialize() override;
-//
-//protected:
-//    MonsterSetData MonsterData;
-//    MonsterSetData OriginalData;
-//};

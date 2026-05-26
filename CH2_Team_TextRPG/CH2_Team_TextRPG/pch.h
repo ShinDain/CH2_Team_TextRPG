@@ -9,7 +9,7 @@
 #include <string>
 #include <cassert>
 #include <memory>
-
+#include <algorithm>
 #include "Core/GameInstance.h"
 
 #define GInput (*GameInstance::GetInstance().GetInputManager())

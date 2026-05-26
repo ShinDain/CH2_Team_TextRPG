@@ -230,6 +230,7 @@
     <ClCompile Include="Data\JsonDataParser.cpp" />
     <ClCompile Include="Data\Table\DataTable.cpp" />
     <ClCompile Include="Data\Table\ItemDataTable.cpp" />
+    <ClCompile Include="Data\Table\MonsterDataTable.cpp" />
     <ClCompile Include="Data\Table\ScriptPathTable.cpp" />
     <ClCompile Include="Effect\Effect.cpp" />
     <ClCompile Include="Character\Component\InventoryComponent.cpp" />
@@ -340,6 +341,7 @@
     <ClCompile Include="State\State_Battle.cpp" />
     <ClCompile Include="State\State_Start.cpp" />
     <ClCompile Include="UI\AnimationFrameData.cpp" />
+    <ClCompile Include="UI\AsciiArtLoader.cpp" />
     <ClCompile Include="UI\BattleRenderer.cpp" />
     <ClCompile Include="UI\ConsoleRenderer.cpp" />
     <ClCompile Include="UI\ConsoleUtil.cpp" />
@@ -358,6 +360,7 @@
     <ClInclude Include="Core\Component.h" />
     <ClInclude Include="Core\Condition.h" />
     <ClInclude Include="Core\GameInstance.h" />
+    <ClInclude Include="Data\Table\MonsterDataTable.h" />
     <ClInclude Include="Effect\Effect.h" />
     <ClInclude Include="Character\Component\InventoryComponent.h" />
     <ClInclude Include="Effect\Effects\Effect_Heal.h" />
@@ -392,6 +395,7 @@
     <ClInclude Include="State\State_Battle.h" />
     <ClInclude Include="State\State_Start.h" />
     <ClInclude Include="UI\AnimationFrameData.h" />
+    <ClInclude Include="UI\AsciiArtLoader.h" />
     <ClInclude Include="UI\BattleRenderer.h" />
     <ClInclude Include="UI\ConsoleRenderer.h" />
     <ClInclude Include="UI\ConsoleUtil.h" />
