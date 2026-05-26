@@ -340,6 +340,7 @@
     <ClCompile Include="State\State_Battle.cpp" />
     <ClCompile Include="State\State_Start.cpp" />
     <ClCompile Include="UI\AnimationFrameData.cpp" />
+    <ClCompile Include="UI\AsciiArtLoader.cpp" />
     <ClCompile Include="UI\BattleRenderer.cpp" />
     <ClCompile Include="UI\ConsoleRenderer.cpp" />
     <ClCompile Include="UI\ConsoleUtil.cpp" />
@@ -392,6 +393,7 @@
     <ClInclude Include="State\State_Battle.h" />
     <ClInclude Include="State\State_Start.h" />
     <ClInclude Include="UI\AnimationFrameData.h" />
+    <ClInclude Include="UI\AsciiArtLoader.h" />
     <ClInclude Include="UI\BattleRenderer.h" />
     <ClInclude Include="UI\ConsoleRenderer.h" />
     <ClInclude Include="UI\ConsoleUtil.h" />
