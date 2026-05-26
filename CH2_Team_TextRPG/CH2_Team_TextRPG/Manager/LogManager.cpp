@@ -1,10 +1,8 @@
 ﻿#include "pch.h"
 #include "LogManager.h"
+#include "Manager/InputManager.h"
 
-#include <iostream>
 #include <algorithm>
-#include <vector>
-#include <string>
 
 void LogManager::AddLog(const std::string& Message)
 {
@@ -13,11 +11,11 @@ void LogManager::AddLog(const std::string& Message)
 
 void LogManager::PrintRecentLogs(int Count) const
 {
-    std::cout << "\n=== 최근 로그 ===\n";
+    GInput << "\n=== 최근 로그 ===\n";
 
     if (Logs.empty())
     {
-        std::cout << "> 로그가 없습니다.\n";
+        GInput << "> 로그가 없습니다.\n";
         return;
     }
 
@@ -25,23 +23,23 @@ void LogManager::PrintRecentLogs(int Count) const
 
     for (int i = StartIndex; i < static_cast<int>(Logs.size()); i++)
     {
-        std::cout << "> " << Logs[i] << '\n';
+        GInput << "> " << Logs[i] << '\n';
     }
 }
 
 void LogManager::PrintAllLogs() const
 {
-    std::cout << "\n=== 전체 로그 ===\n";
+    GInput << "\n=== 전체 로그 ===\n";
 
     if (Logs.empty())
     {
-        std::cout << "> 로그가 없습니다.\n";
+        GInput << "> 로그가 없습니다.\n";
         return;
     }
 
     for (const std::string& Log : Logs)
     {
-        std::cout << "> " << Log << '\n';
+        GInput << "> " << Log << '\n';
     }
 }
 

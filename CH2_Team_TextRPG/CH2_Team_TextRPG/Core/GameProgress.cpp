@@ -1,7 +1,7 @@
 ﻿#include "pch.h"
 #include "GameProgress.h"
 
-#include <iostream>
+#include "Manager/InputManager.h"
 
 #include "UI/ConsoleRenderer.h"
 
@@ -103,14 +103,14 @@ void GameProgress::EndGame(LogManager& Log)
 {
 	ConsoleRenderer::ClearScreen();
 
-	std::cout << "==============================\n";
-	std::cout << "          게임 클리어          \n";
-	std::cout << "==============================\n";
+	GInput << "==============================\n";
+	GInput << "          게임 클리어          \n";
+	GInput << "==============================\n";
 
 	Log.AddLog("게임을 클리어했습니다.");
 	Log.PrintRecentLogs(10);
 
-	std::cout << "\n엔터를 누르면 종료됩니다...";
+	GInput << "\n엔터를 누르면 종료됩니다...";
 
 	std::cin.ignore();
 	std::cin.get();

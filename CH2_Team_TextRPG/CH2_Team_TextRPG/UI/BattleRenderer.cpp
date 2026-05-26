@@ -1,10 +1,10 @@
 ﻿#include "pch.h"
 #include "UI/BattleRenderer.h"
+#include "Manager/InputManager.h"
 
 #include "UI/ConsoleUtil.h"
 #include "UI/AsciiArtLoader.h"
 
-#include <iostream>
 #include <windows.h>
 
 BattleRenderer::BattleRenderer()
@@ -17,97 +17,162 @@ void BattleRenderer::SetMonsterName(const std::string& monsterName)
 	CurrentMonsterName = monsterName;
 }
 
+void BattleRenderer::ClearMonsters()
+{
+	MonsterViews.clear();
+}
+
+void BattleRenderer::AddMonster(const std::string& monsterName, int drawX, int drawY)
+{
+	MonsterViews.push_back({ monsterName, drawX, drawY });
+}
+
+void BattleRenderer::DrawAllMonsterIdle()
+{
+	ConsoleUtil::HideCursor();
+	ClearMonsterArea();
+
+	for (const BattleMonsterView& MonsterView : MonsterViews)
+	{
+		DrawMonsterFrameAt(MonsterView.MonsterName, "idle", MonsterView.DrawX, MonsterView.DrawY);
+	}
+}
+
 void BattleRenderer::DrawBattleScreen()
 {
+	ConsoleUtil::HideCursor();
 	ClearBattleArea();
 	DrawBattleTitle();
 
 	ConsoleUtil::SetCursorPosition(BattleAreaX + 5, BattleAreaY + 5);
-	std::cout << "몬스터가 나타났다!";
+	GInput << "몬스터가 나타났다!";
 
-	DrawFrameAt(
-		MonsterDrawX,
-		MonsterDrawY,
-		GetMonsterIdleFrame()
-	);
+	if (MonsterViews.empty())
+	{
+		DrawMonsterFrame(GetMonsterIdleFrame());
+	}
+	else
+	{
+		for (const BattleMonsterView& MonsterView : MonsterViews)
+		{
+			DrawMonsterFrameAt(MonsterView.MonsterName, "idle", MonsterView.DrawX, MonsterView.DrawY);
+		}
+	}
 }
 
 void BattleRenderer::DrawMonsterIdle()
 {
-	ClearBattleArea();
-	DrawBattleTitle();
+	if (!MonsterViews.empty())
+	{
+		DrawAllMonsterIdle();
+		return;
+	}
 
-	DrawFrameAt(
-		MonsterDrawX,
-		MonsterDrawY,
-		GetMonsterIdleFrame()
-	);
+	ClearMonsterArea();
+
+	DrawMonsterFrame(GetMonsterIdleFrame());
 }
 
 void BattleRenderer::PlayMonsterAttackAnimation()
 {
-	ClearBattleArea();
-	DrawBattleTitle();
+	if (!MonsterViews.empty())
+	{
+		PlayMonsterAttackAnimation(0);
+		return;
+	}
 
-	DrawFrameAt(
-		MonsterDrawX,
-		MonsterDrawY,
-		GetMonsterIdleFrame()
-	);
+	ConsoleUtil::HideCursor();
 
-	Sleep(120);
-
-	ClearBattleArea();
-	DrawBattleTitle();
-
-	DrawFrameAt(
-		MonsterDrawX,
-		MonsterDrawY,
-		GetMonsterAttackFrame()
-	);
+	ClearMonsterArea();
+	DrawMonsterFrame(GetMonsterAttackFrame());
 
 	Sleep(120);
 
-	ClearBattleArea();
-	DrawBattleTitle();
+	ClearMonsterArea();
+	DrawMonsterFrame(GetMonsterIdleFrame());
+}
 
-	DrawFrameAt(
-		MonsterDrawX,
-		MonsterDrawY,
-		GetMonsterIdleFrame()
-	);
+void BattleRenderer::PlayMonsterAttackAnimation(int monsterIndex)
+{
+	if (monsterIndex < 0 || monsterIndex >= static_cast<int>(MonsterViews.size()))
+	{
+		DrawAllMonsterIdle();
+		return;
+	}
+
+	ConsoleUtil::HideCursor();
+	ClearMonsterArea();
+
+	for (int i = 0; i < static_cast<int>(MonsterViews.size()); i++)
+	{
+		const BattleMonsterView& MonsterView = MonsterViews[i];
+		const std::string State = (i == monsterIndex) ? "attack" : "idle";
+		DrawMonsterFrameAt(MonsterView.MonsterName, State, MonsterView.DrawX, MonsterView.DrawY);
+	}
+
+	Sleep(120);
+	DrawAllMonsterIdle();
 }
 
 void BattleRenderer::PlayMonsterHitAnimation()
 {
-	ClearBattleArea();
-	DrawBattleTitle();
+	if (!MonsterViews.empty())
+	{
+		PlayMonsterHitAnimation(0);
+		return;
+	}
 
-	DrawFrameAt(
-		MonsterDrawX,
-		MonsterDrawY,
-		GetMonsterHitFrame()
-	);
+	ConsoleUtil::HideCursor();
+
+	ClearMonsterArea();
+	DrawMonsterFrame(GetMonsterHitFrame());
 
 	Sleep(300);
 
-	ClearBattleArea();
-	DrawBattleTitle();
+	ClearMonsterArea();
+	DrawMonsterFrame(GetMonsterIdleFrame());
+}
 
-	DrawFrameAt(
-		MonsterDrawX,
-		MonsterDrawY,
-		GetMonsterIdleFrame()
-	);
+void BattleRenderer::PlayMonsterHitAnimation(int monsterIndex)
+{
+	if (monsterIndex < 0 || monsterIndex >= static_cast<int>(MonsterViews.size()))
+	{
+		DrawAllMonsterIdle();
+		return;
+	}
+
+	ConsoleUtil::HideCursor();
+	ClearMonsterArea();
+
+	for (int i = 0; i < static_cast<int>(MonsterViews.size()); i++)
+	{
+		const BattleMonsterView& MonsterView = MonsterViews[i];
+		const std::string State = (i == monsterIndex) ? "hit" : "idle";
+		DrawMonsterFrameAt(MonsterView.MonsterName, State, MonsterView.DrawX, MonsterView.DrawY);
+	}
+
+	Sleep(300);
+	DrawAllMonsterIdle();
 }
 
 void BattleRenderer::PlayMonsterDeathAnimation()
 {
-	ClearBattleArea();
-	DrawBattleTitle();
+	ConsoleUtil::HideCursor();
+	ClearMonsterArea();
 
-	ConsoleUtil::SetCursorPosition(BattleAreaX + 70, BattleAreaY + 14);
-	std::cout << "몬스터를 처치했다!";
+	if (MonsterViews.empty())
+	{
+		DrawMonsterFrame(GetMonsterHitFrame());
+	}
+	else
+	{
+		for (int i = 0; i < static_cast<int>(MonsterViews.size()); i++)
+		{
+			const BattleMonsterView& MonsterView = MonsterViews[i];
+			const std::string State = (i == 0) ? "hit" : "idle";
+			DrawMonsterFrameAt(MonsterView.MonsterName, State, MonsterView.DrawX, MonsterView.DrawY);
+		}
+	}
 
 	Sleep(700);
 }
@@ -140,6 +205,39 @@ void BattleRenderer::ClearBattleArea()
 		BattleAreaY + 1,
 		BattleAreaWidth - 2,
 		BattleAreaHeight - 2
+	);
+}
+
+void BattleRenderer::ClearMonsterArea()
+{
+	ConsoleUtil::ClearArea(
+		MonsterAreaX,
+		MonsterAreaY,
+		MonsterAreaWidth,
+		MonsterAreaHeight
+	);
+}
+
+void BattleRenderer::DrawMonsterFrame(const std::vector<std::string>& frame)
+{
+	DrawFrameAt(
+		MonsterDrawX,
+		MonsterDrawY,
+		frame
+	);
+}
+
+void BattleRenderer::DrawMonsterFrameAt(
+	const std::string& monsterName,
+	const std::string& state,
+	int drawX,
+	int drawY
+)
+{
+	DrawFrameAt(
+		drawX,
+		drawY,
+		AsciiArtLoader::LoadFrame(monsterName, state)
 	);
 }
 
@@ -183,7 +281,7 @@ void BattleRenderer::DrawFrameAt(int x, int y, const std::vector<std::string>& f
 		const std::size_t maxLength = static_cast<std::size_t>(right - targetX + 1);
 
 		ConsoleUtil::SetCursorPosition(targetX, targetY);
-		std::cout << frame[i].substr(startIndex, maxLength);
+		GInput << frame[i].substr(startIndex, maxLength);
 	}
 
 	ConsoleUtil::ResetTextColor();
@@ -193,12 +291,12 @@ void BattleRenderer::DrawBattleTitle()
 {
 	ConsoleUtil::SetCursorPosition(BattleAreaX + 5, BattleAreaY + 1);
 	ConsoleUtil::SetTextColor(ConsoleColor::Red);
-	std::cout << "[ 전투 화면 ]";
+	GInput << "[ 전투 화면 ]";
 	ConsoleUtil::ResetTextColor();
 
 	ConsoleUtil::SetCursorPosition(BattleAreaX + 5, BattleAreaY + 3);
 	ConsoleUtil::SetTextColor(ConsoleColor::Yellow);
-	std::cout << "몬스터: " << CurrentMonsterName;
+	GInput << "몬스터: " << CurrentMonsterName;
 	ConsoleUtil::ResetTextColor();
 }
 

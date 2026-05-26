@@ -1,8 +1,7 @@
 ﻿#include "pch.h"
 #include "ConsoleUtil.h"
+#include "Manager/InputManager.h"
 
-#include <iostream>
-#include <string>
 #include <windows.h>
 
 void ConsoleUtil::SetCursorPosition(int x, int y)
@@ -32,7 +31,7 @@ void ConsoleUtil::ClearArea(int x, int y, int width, int height)
     for (int i = 0; i < height; i++)
     {
         SetCursorPosition(x, y + i);
-        std::cout << blank;
+        GInput << blank;
     }
 }
 
@@ -52,6 +51,6 @@ void ConsoleUtil::ResetTextColor()
 void ConsoleUtil::WriteColored(const std::string& text, ConsoleColor color)
 {
     SetTextColor(color);
-    std::cout << text;
+    GInput << text;
     ResetTextColor();
 }
