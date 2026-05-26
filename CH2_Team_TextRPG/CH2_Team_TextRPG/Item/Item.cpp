@@ -18,6 +18,9 @@ Item::~Item()
 
 void Item::Active(Object* Instigator)
 {
+	if (Instigator == nullptr)
+		return;
+
 	for (Effect* effect : Effects)
 	{
 		effect->Apply(Instigator);

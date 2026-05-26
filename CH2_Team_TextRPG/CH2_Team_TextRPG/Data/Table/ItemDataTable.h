@@ -2,15 +2,7 @@
 #include "DataTable.h"
 #include "Enum/EItemType.h"
 #include "Manager/InputManager.h"
-
-struct ItemEffectData
-{
-public:
-	std::string Tag;
-	int Value;
-};
-
-NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(ItemEffectData, Tag, Value);
+#include "Effect/EffectData.h"
 
 struct ItemData
 {
@@ -18,11 +10,11 @@ public:
 	std::string Name;
 	int Price;
 	uint32_t Id;
-	EItemType Type;
-	std::vector<ItemEffectData> EffectDatas;
+	Category Category;
+	std::vector<EffectData> EffectDatas;
 };
 
-NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(ItemData, Name, Price, Id, EffectDatas);
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(ItemData, Name, Price, Id, Category, EffectDatas);
 
 class ItemDataTable final : public BaseDataTable
 {
