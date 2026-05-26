@@ -24,6 +24,6 @@ void Item_Equipment::OnUnequip(Object* Owner)
 {
 	for (Effect* effect : Effects)
 	{
-		//effect->Cancel(Owner, std::vector<Object*>{Owner});
+		effect->Remove(Owner, std::vector<Object*>{Owner});
 	}
 }
