@@ -62,11 +62,6 @@ int Monster::GetHP() const
 	return MonsterData.HP;
 }
 
-int Monster::GetMP() const
-{
-	return 0;  
-}
-
 int Monster::GetAttack() const
 {
 	return MonsterData.Attack;
