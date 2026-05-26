@@ -10,7 +10,7 @@ struct FSkillEffect
 	uint32_t Multiplier;		// 스킬 배율 (예: 공격력의 150% -> 15000, 배율 계산 시 10000으로 나눔)
 	uint8_t SuccessRate;		// 효과 적중 확률 (0~100)
 	uint8_t DurationTurns : 3;	// 버프/디버프 유지 턴 수 (즉발 효과면 0)
-	uint8_t Reserved : 5;          
+	uint8_t Padding : 5;          
 };
 
 
@@ -25,7 +25,7 @@ struct FSkillData
 	std::vector<FSkillEffect> Effects;	// 스킬 효과 목록
 	ETargetType TargetType : 3;			// 타겟 유형
 	uint8_t Cooldown : 3;				// 쿨타임
-	uint8_t Reserved : 2;
+	uint8_t Padding : 2;
 };
 
 
