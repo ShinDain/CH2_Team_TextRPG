@@ -2,7 +2,7 @@
 
 #include "nlohmann/json.hpp"
 
-enum class Category
+enum class EItemCategory
 {
 	Equipment = 0,
 	Consumable,
@@ -10,8 +10,8 @@ enum class Category
 	None,
 };
 
-NLOHMANN_JSON_SERIALIZE_ENUM(Category, {
-	{Category::Equipment, "Equipment"},
-	{Category::Consumable, "Consumable"},
-	{Category::Ingredient, "Ingredient"}
+NLOHMANN_JSON_SERIALIZE_ENUM(EItemCategory, {
+	{EItemCategory::Equipment, "Equipment"},
+	{EItemCategory::Consumable, "Consumable"},
+	{EItemCategory::Ingredient, "Ingredient"}
 	});

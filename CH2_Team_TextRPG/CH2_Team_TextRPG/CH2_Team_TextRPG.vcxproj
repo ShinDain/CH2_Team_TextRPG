@@ -363,6 +363,7 @@
     <ClInclude Include="Data\Table\MonsterDataTable.h" />
     <ClInclude Include="Effect\Effect.h" />
     <ClInclude Include="Character\Component\InventoryComponent.h" />
+    <ClInclude Include="Effect\EffectData.h" />
     <ClInclude Include="Effect\Effects\Effect_Heal.h" />
     <ClInclude Include="Effect\EffectTag.h" />
     <ClInclude Include="Effect\Factory\EffectFactory.h" />
