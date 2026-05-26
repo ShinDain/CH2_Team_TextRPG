@@ -18,6 +18,7 @@ Effect_Stat_Defense::Effect_Stat_Defense(int InValue)
 
 void Effect_Stat_Defense::Apply(Object* Instigator, std::vector<class Object*> Targets)
 {
+	GLog.AddLog("[Effect_Stat_Defense] Effect Applied.");
 }
 
 Effect_Stat_MaxHP::Effect_Stat_MaxHP(int InValue)
@@ -27,6 +28,7 @@ Effect_Stat_MaxHP::Effect_Stat_MaxHP(int InValue)
 
 void Effect_Stat_MaxHP::Apply(Object* Instigator, std::vector<class Object*> Targets)
 {
+	GLog.AddLog("[Effect_Stat_MaxHP] Effect Applied.");
 }
 
 Effect_Stat_MaxMP::Effect_Stat_MaxMP(int InValue)
@@ -36,6 +38,7 @@ Effect_Stat_MaxMP::Effect_Stat_MaxMP(int InValue)
 
 void Effect_Stat_MaxMP::Apply(Object* Instigator, std::vector<class Object*> Targets)
 {
+	GLog.AddLog("[Effect_Stat_MaxMP] Effect Applied.");
 }
 
 Effect_Stat_ActionSpeed::Effect_Stat_ActionSpeed(int InValue)
@@ -45,4 +48,5 @@ Effect_Stat_ActionSpeed::Effect_Stat_ActionSpeed(int InValue)
 
 void Effect_Stat_ActionSpeed::Apply(Object* Instigator, std::vector<class Object*> Targets)
 {
+	GLog.AddLog("[Effect_Stat_ActionSpeed] Effect Applied.");
 }
