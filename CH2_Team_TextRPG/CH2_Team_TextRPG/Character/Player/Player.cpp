@@ -11,32 +11,52 @@ Player::Player()
 	Stat = AddComponent<StatComponent>(this);
 	Equip = AddComponent<EquipmentComponent>(this);
 	Health = AddComponent<HealthComponent>(this);
+
+	CharacterType = ECharacterType::Player;
 	Inventory = AddComponent<InventoryComponent>(this);
 }
 
 Player::~Player()
 {
+	delete Stat;
+	Stat = nullptr;
+	
+	delete Equip;
+	Equip = nullptr;
+	
+	delete Health;
+	Health = nullptr;
+	
 }
 
 bool Player::Initialize()
 {
-	// Not Implement.
-	return false;
+	Stat->Initialize();
+	Health->Initialize();
+	Equip->Initialize();
+	
+#if DEBUG_CODE
+	Stat->SetStat(EStatType::MaxHP, 200);
+	Stat->SetStat(EStatType::Attack, 30);
+	Stat->SetStat(EStatType::Defense, 0);
+	Stat->SetStat(EStatType::MaxMP, 0);
+	Stat->SetStat(EStatType::ActionSpeed, 10);
+#endif
+	
+	return true;
 }
 
 void Player::TakeDamage(const DamageContext& Context)
 {
-	// Not Implement.
+	//Not Implement.	
 }
 
 bool Player::IsDead() const
 {
-	// Not Implement.
-	return false;
+	return Health ? Health->IsDead() : false;
 }
 
 int Player::GetStat(EStatType Type) const
 {
-	// Not Implement.
-	return 0;
+	return Stat ? Stat->GetStat(Type) : INT_MAX;
 }

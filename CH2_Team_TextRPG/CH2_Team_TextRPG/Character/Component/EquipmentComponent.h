@@ -2,6 +2,8 @@
 #include "Core/Component.h"
 #include "Enum/EItemType.h"
 
+class Item;
+enum class EEquipmentType;
 struct ItemData;
 
 class Item_Equipment;

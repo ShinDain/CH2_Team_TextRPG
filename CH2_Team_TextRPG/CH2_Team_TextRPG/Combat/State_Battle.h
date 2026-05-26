@@ -47,14 +47,14 @@ private:
 	
 	std::vector<Monster*> Monsters;
 	Player* PlayerCharacter;
-	Character* CurTurnCharacter;
-	std::vector<Character*> TargetList;
+	Object* CurTurnCharacter;
+	std::vector<Object*> TargetList;
 	
 	const Skill* SelectedSkillData;
 	const Item* SelectedItemData;
 
 	// UI 출력을 위한 캐릭터 포인터 ↔ 이름 매핑 테이블
-	std::map<Character*, std::string> DisplayNames;
+	std::map<Object*, std::string> DisplayNames;
 
 	// 상태별 처리 함수 분리
 	void ProcessNextTurn();

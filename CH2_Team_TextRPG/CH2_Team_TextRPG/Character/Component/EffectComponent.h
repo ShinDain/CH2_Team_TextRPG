@@ -1,8 +1,17 @@
 ﻿#pragma once
 #include "Core/Component.h"
 #include "Enum/EEffect.h"
-#include <map>
-#include <Data/Table/SkillDataTable.h>
+#include <vector>
+
+class Effect;
+class Object;
+
+struct FActiveEffect
+{
+	Effect* EffectPtr;          // 적용될 효과 객체
+	Object* Caster;             // 효과를 시전한 객체
+	int RemainingDuration;      // 남은 턴 수
+};
 
 class EffectComponent : public Component
 {
@@ -11,7 +20,8 @@ public:
 	EffectComponent(Object* InOwner);
 	~EffectComponent() override;
 
-	//void ApplyEffect(const FSkillEffect& Effect);
+	
+	void AddActiveEffect(Effect* InEffect, Object* InCaster, int InDuration);
 	
 	void UpdateEffects();
 
@@ -20,6 +30,6 @@ public:
 	bool Initialize() override;
 
 private:
-	std::map<FSkillData, uint8_t> SkillDurations;
+	std::vector<FActiveEffect> ActiveEffects;
 	
 };

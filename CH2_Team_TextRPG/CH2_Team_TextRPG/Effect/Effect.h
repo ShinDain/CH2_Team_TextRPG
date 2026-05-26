@@ -11,6 +11,7 @@ public:
 	virtual ~Effect();
 
 	virtual void Apply(class Object* Instigator, std::vector<class Object*> Targets) = 0;
+	virtual void Remove(class Object* Instigator, std::vector<class Object*> Targets) = 0;
 
 	virtual std::string GetTag() { return Tag; }
 private:

@@ -142,6 +142,14 @@ void InventoryComponent::Unequip(const std::string& ItemName)
 	Unequip(equipmentData->EquipmentType);
 }
 
+void InventoryComponent::UnequipAll()
+{
+	for (int i = 0; i < (int)EEquipmentType::End; ++i)
+	{
+		Unequip((EEquipmentType)i);
+	}
+}
+
 bool InventoryComponent::UseItem_Implement(Item* ItemInstance, std::vector<Object*> Targets)
 {
 	if (ItemInstance == nullptr)

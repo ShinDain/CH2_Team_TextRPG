@@ -38,6 +38,7 @@ public:
 	void Unequip(int ItemId);
 	void Unequip(const std::string& ItemName);
 	void Unequip(EEquipmentType EquipmentType);
+	void UnequipAll();
 
 	const std::vector<FInventoryEntry> GetItemList() const { return ItemList; }
 

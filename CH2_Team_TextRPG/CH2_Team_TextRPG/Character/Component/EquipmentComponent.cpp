@@ -3,19 +3,40 @@
 #include "Item/Item_Equipment.h"
 #include "Data/Table/ItemDataTable.h"
 
+#include "StatComponent.h"
+#include "Data/Table/ItemDataTable.h"
+#include "Enum/EItemType.h"
+#include "Item/Item.h"
+#include "Effect/Effect.h"
+#include "Effect/Factory/EffectFactory.h"
+
+
+
 EquipmentComponent::EquipmentComponent(Object* InOwner) :
 	Component(InOwner, "Equipment")
 {
-	
 }
 
 EquipmentComponent::~EquipmentComponent()
 {
-	
 }
 
 bool EquipmentComponent::Initialize()
 {
+	EquipmentSlots.reserve(static_cast<size_t>(EEquipmentType::End));
+	
+#if DEBUG_CODE
+	EffectData D = EffectData();
+	D.Tag = "Heal";
+	D.Value = 30;
+	Effect* NewEffect = EffectFactory::CreateEffect(D);
+	if (!NewEffect) 
+		return false;
+	
+	NewEffect->Apply(Owner, {});
+	delete NewEffect;
+#endif
+	
 	return true;
 }
 
