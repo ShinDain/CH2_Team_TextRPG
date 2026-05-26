@@ -235,12 +235,14 @@
     <ClCompile Include="Data\Table\ItemDataTable.cpp" />
     <ClCompile Include="Data\Table\MonsterDataTable.cpp" />
     <ClCompile Include="Data\Table\ScriptPathTable.cpp" />
+    <ClCompile Include="Character\Component\EffectComponent.cpp" />
     <ClCompile Include="Effect\Effect.cpp" />
     <ClCompile Include="Character\Component\InventoryComponent.cpp" />
     <ClCompile Include="Effect\Effects\Effect_Heal.cpp" />
     <ClCompile Include="Effect\Factory\EffectFactory.cpp" />
     <ClCompile Include="Item\Item_Consumable.cpp" />
     <ClCompile Include="Item\Item_Equipment.cpp" />
+    <ClCompile Include="Manager\CombatManager.cpp" />
     <ClCompile Include="Manager\ItemManager.cpp" />
     <ClCompile Include="Item\Item.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -343,7 +345,8 @@
     </ClCompile>
     <ClCompile Include="Character\Monster\Slime.cpp" />
     <ClCompile Include="Data\Table\SkillDataTable.cpp" />
-    <ClCompile Include="State\State_Battle.cpp" />
+    <ClCompile Include="Combat\State_Battle.cpp" />
+    <ClCompile Include="Skill\Skill.cpp" />
     <ClCompile Include="State\State_Start.cpp" />
     <ClCompile Include="UI\AnimationFrameData.cpp" />
     <ClCompile Include="UI\AsciiArtLoader.cpp" />
@@ -364,12 +367,14 @@
     <ClInclude Include="Character\Monster\Monsters\BossMonster.h" />
     <ClInclude Include="Character\Monster\Monsters\EliteMonster.h" />
     <ClInclude Include="Character\Player\Player.h" />
+    <ClInclude Include="Combat\CombatCondition.h" />
     <ClInclude Include="Common\StringHelper.h" />
     <ClInclude Include="Core\Component.h" />
     <ClInclude Include="Core\Condition.h" />
     <ClInclude Include="Core\GameInstance.h" />
     <ClInclude Include="Data\Character\Equipment.h" />
     <ClInclude Include="Data\Table\MonsterDataTable.h" />
+    <ClInclude Include="Character\Component\EffectComponent.h" />
     <ClInclude Include="Effect\Effect.h" />
     <ClInclude Include="Character\Component\InventoryComponent.h" />
     <ClInclude Include="Effect\EffectData.h" />
@@ -379,6 +384,7 @@
     <ClInclude Include="Enum\EItemType.h" />
     <ClInclude Include="Item\Item_Consumable.h" />
     <ClInclude Include="Item\Item_Equipment.h" />
+    <ClInclude Include="Manager\CombatManager.h" />
     <ClInclude Include="Manager\ItemManager.h" />
     <ClInclude Include="Enum\EEffect.h" />
     <ClInclude Include="Item\Item.h" />
@@ -404,7 +410,8 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="Character\Monster\Slime.h" />
     <ClInclude Include="Data\Table\SkillDataTable.h" />
-    <ClInclude Include="State\State_Battle.h" />
+    <ClInclude Include="Combat\State_Battle.h" />
+    <ClInclude Include="Skill\Skill.h" />
     <ClInclude Include="State\State_Start.h" />
     <ClInclude Include="UI\AnimationFrameData.h" />
     <ClInclude Include="UI\AsciiArtLoader.h" />

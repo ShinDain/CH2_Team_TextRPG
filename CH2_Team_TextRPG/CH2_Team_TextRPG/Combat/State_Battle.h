@@ -2,8 +2,15 @@
 
 #include "Core/State.h"
 #include "Manager/TurnManager.h"
+#include "Manager/CombatManager.h"
 #include "Character/Player/Player.h"
 #include "Character/Monster/Monster.h"
+#include "Character/Character.h"
+#include "Skill/Skill.h"
+#include "Item/Item.h"
+#include <vector>
+#include <map>
+
 
 enum class EBattleState
 {
@@ -36,16 +43,26 @@ private:
 	EBattleState CurBattleState;
 	EActionType CurActionType;
 	TurnManager* TurnManagerInst;
+	CombatManager* CombatManagerInst;
 	
 	std::vector<Monster*> Monsters;
 	Player* PlayerCharacter;
 	Character* CurTurnCharacter;
-	Character* Target;
+	std::vector<Character*> TargetList;
+	
+	const Skill* SelectedSkillData;
+	const Item* SelectedItemData;
 
 	// UI 출력을 위한 캐릭터 포인터 ↔ 이름 매핑 테이블
 	std::map<Character*, std::string> DisplayNames;
 
-	void Action_Attack(Character* player, Character* target);
-	void Action_Skill(Character* player, Character* target);
-	void Action_Item(Player* player);
+	// 상태별 처리 함수 분리
+	void ProcessNextTurn();
+	void ProcessInputAction();
+	void ProcessInputSkill();
+	void ProcessInputItem();
+	void ProcessInputTarget();
+	void ProcessMonsterAction();
+	void ProcessAction();
+	void ProcessEnd();
 };
