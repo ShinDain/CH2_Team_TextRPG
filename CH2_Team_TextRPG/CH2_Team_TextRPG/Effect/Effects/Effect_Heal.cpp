@@ -13,6 +13,9 @@ void Effect_Heal::Apply(Object* Instigator, std::vector<class Object*> Targets)
 		return;
 
 	GInput << "[Effect_Heal] Applied\n";
-
 	return;
+}
+
+void Effect_Heal::Remove(class Object* Instigator, std::vector<class Object*> Targets)
+{
 }

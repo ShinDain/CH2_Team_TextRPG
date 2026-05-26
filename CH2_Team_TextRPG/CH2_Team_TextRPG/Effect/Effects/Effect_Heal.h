@@ -9,6 +9,7 @@ public:
 	Effect_Heal(int InValue);
 
 	virtual void Apply(class Object* Instigator, std::vector<class Object*> Targets) override;
+	virtual void Remove(class Object* Instigator, std::vector<class Object*> Targets) override;
 private:
 	int Value;
 };

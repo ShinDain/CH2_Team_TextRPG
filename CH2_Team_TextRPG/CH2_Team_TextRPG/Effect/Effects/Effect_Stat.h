@@ -8,6 +8,7 @@ public:
 	Effect_Stat_Attack(int InValue);
 
 	virtual void Apply(class Object* Instigator, std::vector<class Object*> Targets) override;
+	virtual void Remove(class Object* Instigator, std::vector<class Object*> Targets) override;
 
 private:
 	int Value;
@@ -19,6 +20,7 @@ public:
 	Effect_Stat_Defense(int InValue);
 
 	virtual void Apply(class Object* Instigator, std::vector<class Object*> Targets) override;
+	virtual void Remove(class Object* Instigator, std::vector<class Object*> Targets) override;
 
 private:
 	int Value;
@@ -30,6 +32,7 @@ public:
 	Effect_Stat_MaxHP(int InValue);
 
 	virtual void Apply(class Object* Instigator, std::vector<class Object*> Targets) override;
+	virtual void Remove(class Object* Instigator, std::vector<class Object*> Targets) override;
 
 private:
 	int Value;
@@ -41,6 +44,7 @@ public:
 	Effect_Stat_MaxMP(int InValue);
 
 	virtual void Apply(class Object* Instigator, std::vector<class Object*> Targets) override;
+	virtual void Remove(class Object* Instigator, std::vector<class Object*> Targets) override;
 
 private:
 	int Value;
@@ -52,6 +56,7 @@ public:
 	Effect_Stat_ActionSpeed(int InValue);
 
 	virtual void Apply(class Object* Instigator, std::vector<class Object*> Targets) override;
+	virtual void Remove(class Object* Instigator, std::vector<class Object*> Targets) override;
 
 private:
 	int Value;
