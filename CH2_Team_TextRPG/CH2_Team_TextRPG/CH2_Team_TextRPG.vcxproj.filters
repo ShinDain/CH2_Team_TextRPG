@@ -42,12 +42,21 @@
     <ClCompile Include="State\State_Start.cpp" />
     <ClCompile Include="UI\AnimationFrameData.cpp" />
     <ClCompile Include="UI\AsciiArtLoader.cpp" />
+    <ClCompile Include="Character\Monster\Slime.cpp" />
+    <ClCompile Include="Data\Table\SkillDataTable.cpp" />
+    <ClCompile Include="Combat\State_Battle.cpp" />
+    <ClCompile Include="State\State_Start.cpp" />
+    <ClCompile Include="UI\AnimationFrameData.cpp" />
     <ClCompile Include="UI\BattleRenderer.cpp" />
     <ClCompile Include="UI\ConsoleRenderer.cpp" />
     <ClCompile Include="UI\ConsoleUtil.cpp" />
     <ClCompile Include="UI\GameScreen.cpp" />
     <ClCompile Include="Item\Item_Consumable.cpp" />
     <ClCompile Include="Item\Item_Equipment.cpp" />
+    <ClCompile Include="Manager\CombatManager.cpp" />
+    <ClCompile Include="Data\Table\MonsterDataTable.cpp" />
+    <ClCompile Include="Character\Component\EffectComponent.cpp" />
+    <ClCompile Include="UI\AsciiArtLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character\Character.h" />
@@ -99,11 +108,22 @@
     <ClInclude Include="State\State_Start.h" />
     <ClInclude Include="UI\AnimationFrameData.h" />
     <ClInclude Include="UI\AsciiArtLoader.h" />
+    <ClInclude Include="Character\Monster\Slime.h" />
+    <ClInclude Include="Data\Table\SkillDataTable.h" />
+    <ClInclude Include="Combat\State_Battle.h" />
+    <ClInclude Include="State\State_Start.h" />
+    <ClInclude Include="UI\AnimationFrameData.h" />
     <ClInclude Include="UI\BattleRenderer.h" />
     <ClInclude Include="UI\ConsoleRenderer.h" />
     <ClInclude Include="UI\ConsoleUtil.h" />
     <ClInclude Include="UI\GameScreen.h" />
     <ClInclude Include="Item\Item_Consumable.h" />
     <ClInclude Include="Item\Item_Equipment.h" />
+    <ClInclude Include="Combat\CombatCondition.h" />
+    <ClInclude Include="Manager\CombatManager.h" />
+    <ClInclude Include="Data\Table\MonsterDataTable.h" />
+    <ClInclude Include="Character\Component\EffectComponent.h" />
+    <ClInclude Include="UI\AsciiArtLoader.h" />
+    <ClInclude Include="Effect\EffectData.h" />
   </ItemGroup>
 </Project>
