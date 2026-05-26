@@ -26,5 +26,8 @@ void Item::Active(Object* Instigator)
 
 void Item::AddEffect(Effect* InEffect)
 {
-	Effects.emplace_back(InEffect);
+	if (InEffect)
+	{
+		Effects.emplace_back(InEffect);
+	}
 }

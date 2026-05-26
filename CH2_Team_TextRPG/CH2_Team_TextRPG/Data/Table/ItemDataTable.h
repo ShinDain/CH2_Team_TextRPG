@@ -1,9 +1,11 @@
 ﻿#pragma once
 #include "DataTable.h"
 #include "Enum/EItemType.h"
+#include "Manager/InputManager.h"
 
 struct ItemEffectData
 {
+public:
 	std::string Tag;
 	int Value;
 };
@@ -12,14 +14,15 @@ NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(ItemEffectData, Tag, Value);
 
 struct ItemData
 {
+public:
 	std::string Name;
 	int Price;
 	uint32_t Id;
 	EItemType Type;
-	std::vector<ItemEffectData> EffectTags;
+	std::vector<ItemEffectData> EffectDatas;
 };
 
-NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(ItemData, Name, Price, Id, EffectTags);
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(ItemData, Name, Price, Id, EffectDatas);
 
 class ItemDataTable final : public BaseDataTable
 {

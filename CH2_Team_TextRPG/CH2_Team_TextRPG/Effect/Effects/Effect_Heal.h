@@ -12,7 +12,7 @@ public:
 	{
 		HealthComponent* healthComp = Target->FindComponent<HealthComponent>("Health");
 
-		GInput << "[Effect_Heal] Applied";
+		GInput << "[Effect_Heal] Applied\n";
 
 		return;
 	}
