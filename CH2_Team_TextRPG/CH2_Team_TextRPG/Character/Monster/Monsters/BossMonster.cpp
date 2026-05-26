@@ -6,6 +6,10 @@ BossMonster::BossMonster(MonsterSetData&& Desc)
     : Monster(std::move(Desc)),
     Phase(1)
 {
+	MonsterData.HP = MonsterData.HP * 3 / 2;// 1.5배
+    MonsterData.Attack = MonsterData.Attack * 3 / 2; // 1.5배
+
+    OriginalData = MonsterData;// 리셋 기준도 갱신
 }
 void BossMonster::Attack(Player* player)
 {

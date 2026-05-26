@@ -2,7 +2,7 @@
 #include <algorithm>
 #include "TurnManager.h"
 #include "Character/Character.h"
-#include "State/State_Battle.h"
+#include "Combat/State_Battle.h"
 #include "Character/Component/StatComponent.h"
 #include "Data/Character/Stat.h"
 #include "Character/Interface/UnitStat.h"
