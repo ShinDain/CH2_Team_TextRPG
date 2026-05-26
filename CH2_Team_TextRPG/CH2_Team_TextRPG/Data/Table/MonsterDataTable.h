@@ -13,7 +13,7 @@ struct MonsterData
     int DropItemPrice;
 };
 NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(MonsterData,
-    Name, Id, Level, HP, MP, Attack, Defence, Exp, DropItemName, DropItemPrice);
+    Name, Id, HP, Attack, Defence, Exp, DropItemName, DropItemPrice);
 
 class MonsterDataTable final : public BaseDataTable
 {
