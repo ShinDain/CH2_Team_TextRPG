@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include <cstdint>
+#include "nlohmann/json.hpp"
 
 enum class ETargetType : uint8_t 
 {
