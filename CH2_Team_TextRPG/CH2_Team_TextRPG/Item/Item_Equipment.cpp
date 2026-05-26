@@ -10,3 +10,11 @@ void Item_Equipment::Active(Object* Instigator, std::vector<Object*> Targets)
 {
 	GLog.AddLog("[Item_Equipment] It's not usable item.");
 }
+
+void Item_Equipment::OnEquip(Object* Owner)
+{
+}
+
+void Item_Equipment::OnUnequip(Object* Owner)
+{
+}

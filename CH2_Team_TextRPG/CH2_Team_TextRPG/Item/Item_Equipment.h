@@ -9,6 +9,9 @@ public:
 
 	virtual void Active(Object* Instigator, std::vector<Object*> Targets) override;
 
+	virtual void OnEquip(Object* Owner);
+	virtual void OnUnequip(Object* Owner);
+
 	const FEquipmentItemData* GetEquipmentData() { return EquipmentData; }
 private:
 	const FEquipmentItemData* EquipmentData;

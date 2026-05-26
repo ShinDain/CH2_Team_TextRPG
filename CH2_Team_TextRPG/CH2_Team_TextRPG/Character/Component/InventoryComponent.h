@@ -2,11 +2,18 @@
 #include "Core/Component.h"
 #include "Data/Table/ItemDataTable.h"
 
-struct InventoryEntry
+class Item;
+
+struct FInventoryEntry
 {
 	int Id;
 	int Amount;
-	std::string Name;
+	Item* ItemInstance;
+
+	bool operator==(const FInventoryEntry& rhs)
+	{
+		return (this->Id == rhs.Id);
+	}
 };
 
 class InventoryComponent : public Component
@@ -16,10 +23,27 @@ public:
 	virtual ~InventoryComponent() override;
 
 	bool Initialize() override;
-	
-	bool UseItem();
 
-	void AcqireItem(const std::string ItemName);
-	std::vector<std::string_view> GetItemList();
+	bool UseItem(int ItemId, std::vector<Object*> Targets);
+	bool UseItem(const ItemData* ItemData, std::vector<Object*> Targets);
+	bool UseItem(const Item* ItemInstance, std::vector<Object*> Targets);
+
+	void AcquireItem(const std::string ItemName, int Amount);
+	void AcquireItem(int ItemId, int Amount);
+
+	void Equip();
+	void Unequip();
+
+	std::vector<FInventoryEntry> GetItemList() { return ItemList; }
+
+private:
+	bool UseItem_Implement(Item* ItemInstance, std::vector<Object*> Targets);
+
+	FInventoryEntry* FindInventoryItemEntry(int ItemId);
+	void AddEntry(int ItemId, int Amount);
+	void RemoveEntry(int ItemId);
+
+private:
+	std::vector<FInventoryEntry> ItemList;
 };
 
