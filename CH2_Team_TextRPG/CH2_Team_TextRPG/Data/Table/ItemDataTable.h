@@ -12,11 +12,9 @@ public:
 	int Price;
 	uint32_t Id;
 	EItemCategory Category;
-	ETargetType TargetType;
-	std::vector<EffectData> EffectDatas;
 };
 
-NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(ItemData, Name, Price, Id, Category, TargetType, EffectDatas);
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(ItemData, Name, Price, Id, Category);
 
 class ItemDataTable final : public BaseDataTable
 {

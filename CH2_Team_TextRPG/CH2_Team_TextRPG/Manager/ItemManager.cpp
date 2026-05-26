@@ -65,23 +65,23 @@ Item* ItemManager::FindItemById(uint32_t Id)
 
 Item* ItemManager::CreateItemInstance(const ItemData* Data)
 {
-	Item* newItem = new Item(Data);
+//	Item* newItem = new Item(Data);
+//	
+//	if (newItem)
+//	{
+//		for (const auto& tagData : Data->EffectDatas)
+//		{
+//			Effect* newEffect = EffectFactory::CreateEffect(tagData);
+//			newItem->AddEffect(newEffect);
+//		}
+//
+//		std::string Name = Data->Name;
+//		uint32_t Id = Data->Id;
+//
+//		Items.emplace_back(newItem);
+//		NameMap[Name] = newItem;
+//		IdMap[Id] = newItem;
+//	}
 	
-	if (newItem)
-	{
-		for (const auto& tagData : Data->EffectDatas)
-		{
-			Effect* newEffect = EffectFactory::CreateEffect(tagData);
-			newItem->AddEffect(newEffect);
-		}
-
-		std::string Name = Data->Name;
-		uint32_t Id = Data->Id;
-
-		Items.emplace_back(newItem);
-		NameMap[Name] = newItem;
-		IdMap[Id] = newItem;
-	}
-	
-	return newItem;
+	return nullptr;
 }

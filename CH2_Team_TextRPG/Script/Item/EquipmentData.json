@@ -1,0 +1,49 @@
+[
+  {
+    "Id": 2001,
+    "EquipmentType": "Weapon",
+    "EffectDatas": [
+      { "Tag": "Stat_Attack", "Value": 15 },
+      { "Tag": "Stat_ActionSpeed", "Value": -2 }
+    ]
+  },
+  {
+    "Id": 2002,
+    "EquipmentType": "Body",
+    "EffectDatas": [
+      { "Tag": "Stat_Defense", "Value": 8 },
+      { "Tag": "Stat_MaxHP", "Value": 20 }
+    ]
+  },
+  {
+    "Id": 2003,
+    "EquipmentType": "Head",
+    "EffectDatas": [
+      { "Tag": "Stat_Defense", "Value": 4 },
+      { "Tag": "Stat_MaxMP", "Value": 15 }
+    ]
+  },
+  {
+    "Id": 2004,
+    "EquipmentType": "Shoes",
+    "EffectDatas": [
+      { "Tag": "Stat_ActionSpeed", "Value": 12 }
+    ]
+  },
+  {
+    "Id": 2005,
+    "EquipmentType": "Ring",
+    "EffectDatas": [
+      { "Tag": "Stat_MaxHP", "Value": 30 },
+      { "Tag": "Stat_MaxMP", "Value": 30 }
+    ]
+  },
+  {
+    "Id": 2006,
+    "EquipmentType": "Gloves",
+    "EffectDatas": [
+      { "Tag": "Stat_Attack", "Value": 5 },
+      { "Tag": "Stat_Defense", "Value": 2 }
+    ]
+  }
+]
