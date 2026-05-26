@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "InputManager.h"
 
+#include <conio.h>
+
 InputSession::InputSession(InputManager* InSystem) 
 	: InputSystem(InSystem)
 {
@@ -34,6 +36,11 @@ InputManager::InputManager()
 bool InputManager::IsFailed() const
 {
 	return bFailed;
+}
+
+void InputManager::WaitForKey()
+{
+	_getch();
 }
 
 void InputManager::ApplyFail()

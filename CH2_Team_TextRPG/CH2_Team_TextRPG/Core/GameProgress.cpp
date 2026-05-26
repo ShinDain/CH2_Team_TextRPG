@@ -17,7 +17,7 @@ void GameProgress::HandleNodeSelection(MapManager& Map, LogManager& Log)
 
 	int Input = 0;
 	ConsoleRenderer::SetCursorPosition(28, 48);
-	std::cin >> Input;
+	GInput >> Input;
 
 	if (Input < 1 || Input > static_cast<int>(MovableNodeIds.size()))
 	{
@@ -110,8 +110,7 @@ void GameProgress::EndGame(LogManager& Log)
 	Log.AddLog("게임을 클리어했습니다.");
 	Log.PrintRecentLogs(10);
 
-	GInput << "\n엔터를 누르면 종료됩니다...";
+	GInput << "\n아무 키나 누르면 종료됩니다...";
 
-	std::cin.ignore();
-	std::cin.get();
+	GInput.WaitForKey();
 }

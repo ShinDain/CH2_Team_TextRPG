@@ -1,23 +1,18 @@
 ﻿#include "pch.h"
 #include "ConsoleRenderer.h"
 #include "Manager/InputManager.h"
+#include "UI/ConsoleUtil.h"
 
 #include <windows.h>
-#include <conio.h>
 
 void ConsoleRenderer::SetupConsoleSize(int Width, int Height)
 {
-    std::string Command = "mode con: cols=" +
-        std::to_string(Width) +
-        " lines=" +
-        std::to_string(Height);
-
-    system(Command.c_str());
+    ConsoleUtil::SetupConsoleCharacterSize(Width, Height);
 }
 
 void ConsoleRenderer::SetupLargeConsole()
 {
-    SetupConsoleSize(210, 65);
+    ConsoleUtil::SetupLargeConsole();
 }
 
 void ConsoleRenderer::WaitForConsoleReady()
@@ -31,15 +26,13 @@ void ConsoleRenderer::WaitForConsoleReady()
     std::cout << "                    Text RPG 실행 준비\n";
     std::cout << "============================================================\n\n";
     std::cout << "이 게임은 큰 ASCII 그래픽을 사용합니다.\n\n";
-    std::cout << "콘솔 창을 전체화면 또는 최대한 크게 키워주세요.\n";
-    std::cout << "창 크기를 키운 뒤 아무 키나 누르면 게임이 시작됩니다.\n\n";
-    std::cout << "권장 화면 크기: 가로 120 이상, 세로 50 이상\n\n";
+    std::cout << "콘솔 창 크기를 자동으로 설정했습니다.\n";
+    std::cout << "아무 키나 누르면 게임이 시작됩니다.\n\n";
+    std::cout << "설정 화면 크기: 가로 210, 세로 65\n\n";
     std::cout << "계속하려면 아무 키나 누르세요...";
 
     FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE));
-    _getch();
-
-    SetupLargeConsole();
+    GInput.WaitForKey();
 
     system("cls");
 }
