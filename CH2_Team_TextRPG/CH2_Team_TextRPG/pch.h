@@ -10,7 +10,10 @@
 #include <cassert>
 #include <memory>
 #include <algorithm>
+#include <functional>
 #include "Core/GameInstance.h"
+
+#define DEBUG_CODE 0
 
 #define GInput (*GameInstance::GetInstance().GetInputManager())
 #define GLog (GameInstance::GetInstance().GetLogManager())

@@ -16,8 +16,8 @@ public:
 
 	virtual void AddEffect(Effect* InEffect);
 
-	const ItemData* GetItemData() { return Data; }
-	std::vector<Effect*> GetEffects() { return Effects; }
+	const ItemData* GetItemData() const { return Data; }
+	std::vector<Effect*> GetEffects() const { return Effects; }
 	
 protected:
 	const ItemData* Data;

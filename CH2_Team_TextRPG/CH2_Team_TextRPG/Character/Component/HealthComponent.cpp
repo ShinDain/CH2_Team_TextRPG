@@ -40,7 +40,8 @@ void HealthComponent::Increase(int Amount)
 		return;
 	}
 	int MaxHP = GetMax();
-	CurrentHP = std::max(CurrentHP + Amount, MaxHP);
+	CurrentHP = std::min(CurrentHP + Amount, MaxHP);
+	
 }
 
 void HealthComponent::Decrease(int Amount)
@@ -49,7 +50,7 @@ void HealthComponent::Decrease(int Amount)
 	{
 		return;
 	}
-	CurrentHP = std::min(CurrentHP - Amount, 0);
+	CurrentHP = std::max(CurrentHP - Amount, 0);
 }
 
 void HealthComponent::Restore()

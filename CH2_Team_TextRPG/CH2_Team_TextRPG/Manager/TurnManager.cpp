@@ -12,14 +12,14 @@ TurnManager::~TurnManager()
 	turnQueue.clear();
 }
 
-void TurnManager::AddCharacterToTimeline(Character* character)
+void TurnManager::AddCharacterToTimeline(Object* character)
 {
 	if (character == nullptr) return;
 	float initialActionValue = TurnThreshold / GetCharacterSpeed(character);
 	turnQueue.push_back(FTimelineNode{ character, initialActionValue });
 }
 
-Character* TurnManager::GetNextTurnCharacter()
+Object* TurnManager::GetNextTurnCharacter()
 {
 	if (turnQueue.empty()) return nullptr;
 	sort(turnQueue.begin(), turnQueue.end());
@@ -32,7 +32,7 @@ Character* TurnManager::GetNextTurnCharacter()
     return turnQueue.front().unit;
 }
 
-void TurnManager::ResetCharacterTurn(Character* character)
+void TurnManager::ResetCharacterTurn(Object* character)
 {
 	if (character == nullptr) return;
 
@@ -46,7 +46,7 @@ void TurnManager::ResetCharacterTurn(Character* character)
 	}
 }
 
-void TurnManager::AddActionValue(Character* character, float value)
+void TurnManager::AddActionValue(Object* character, float value)
 {
 	if (character == nullptr) return;
 	for (auto& node : turnQueue)
@@ -59,7 +59,7 @@ void TurnManager::AddActionValue(Character* character, float value)
 	}
 }
 
-float TurnManager::GetCharacterSpeed(Character* character) const
+float TurnManager::GetCharacterSpeed(Object* character) const
 {
 	float speed = 1.0f;
 	IUnitStat* StatInterface = dynamic_cast<IUnitStat*>(character);

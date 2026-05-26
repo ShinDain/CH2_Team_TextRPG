@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "Character/Character.h"
 #include "Character/Interface/Damageable.h"
 #include "Character/Interface/UnitStat.h"
@@ -18,5 +18,6 @@ private:
 	class StatComponent* Stat;
 	class HealthComponent* Health;
 	class EquipmentComponent* Equip;
+	class InventoryComponent* Inventory;
 	
 };

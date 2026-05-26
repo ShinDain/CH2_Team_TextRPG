@@ -1,6 +1,8 @@
 ﻿#pragma once
 #include "Core/Component.h"
-#include <set>
+#include "Skill/Skill.h"
+#include <vector>
+#include <map>
 
 class SkillComponent : public Component
 {
@@ -11,22 +13,63 @@ public:
 
 	virtual bool Initialize() override;
 
-	// 캐릭터에게 새로운 스킬을 가르칩니다.
+	/**
+	* @brief 캐릭터에게 새로운 스킬을 가르칩니다.
+	* @param SkillId 가르칠 스킬의 ID
+	*/ 
 	void AddSkill(uint16_t SkillId);
 
-	// 보유한 스킬IDX 목록을 반환합니다.
-	const std::set<uint16_t>& GetLearnedSkills() const;
+	/**
+	* @brief 보유한 스킬 객체 목록을 반환합니다.
+	* @return 보유한 스킬 객체 목록
+	*/
+	const std::vector<Skill*>& GetLearnedSkills() const { return LearnedSkills; };
 
-	// 매 턴 시작 시 쿨타임을 1씩 감소시킵니다.
+	/**
+	* @brief 매 턴 시작 시 쿨타임을 1씩 감소시킵니다.
+	*/
 	void UpdateCooldowns();
-	// 스킬 사용 가능 여부 (쿨타임이 0 이하인지) 확인합니다.
+
+	/**
+	* @brief 스킬 사용 가능 여부 (쿨타임이 0 이하인지) 확인합니다.
+	* @param SkillId 확인할 스킬의 ID
+	* @return 스킬 사용 가능 여부
+	*/
 	bool IsSkillReady(uint16_t SkillId) const;
-	// 스킬 사용 시 쿨타임을 적용합니다.
+
+	/**
+	* @brief 스킬 사용 시 쿨타임을 적용합니다.
+	* @param SkillId 적용할 스킬의 ID
+	* @param CooldownAmount 적용할 쿨타임 값
+	*/
 	void ApplyCooldown(uint16_t SkillId, uint8_t CooldownAmount);
 
+	/**
+	* @brief 스킬 사용 시 비용을 소모할 수 있는지 확인합니다.
+	* @param SkillId 소모할 스킬의 ID
+	* @return 비용 소모 성공 여부
+	*/
+	bool CheckCost(uint16_t SkillId);
+
+	/**
+	* @brief 스킬 사용 시 비용을 소모합니다.
+	* @param SkillId 소모할 스킬의 ID
+	* @return 비용 소모 성공 여부
+	*/
+	bool ConsumeCost(uint16_t SkillId);
+	bool ConsumeCost(const Skill* InSkill);
+
 private:
-	// 사용가능한 스킬IDX 목록
-	std::set<uint16_t> LearnedSkills; 
+	/**
+	* @brief 스킬 ID에 해당하는 스킬 객체를 찾습니다.
+	* @param SkillId 찾을 스킬의 ID
+	* @return 해당 스킬 객체 포인터 (찾지 못한 경우 nullptr)
+	*/
+	Skill* FindSkillById(uint16_t SkillId) const;
+
+private:
+	// 사용가능한 스킬 객체 목록
+	std::vector<Skill*> LearnedSkills; 
 	// 스킬IDX별 남은 쿨타임
 	std::map<uint16_t, uint8_t> CurrentCooldowns;
 };

@@ -4,7 +4,7 @@
 
 StatComponent::StatComponent(Object* InOwner) :
 	Component(InOwner, "Stat"),
-	Stats(static_cast<int>(EStatType::Max))
+	Stats(static_cast<size_t>(EStatType::Max))
 {
 	
 }

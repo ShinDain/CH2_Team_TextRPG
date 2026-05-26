@@ -6,6 +6,7 @@ Monster::Monster(MonsterSetData&& Desc)
 	: MonsterData(std::move(Desc)),
 	OriginalData(MonsterData)
 {
+	CharacterType = ECharacterType::Monster;
 }
 
 Monster::~Monster()
