@@ -18,14 +18,3 @@ NLOHMANN_JSON_SERIALIZE_ENUM(ETargetType, {
 	{ETargetType::SINGLE_ALLY, "SINGLE_ALLY"},
 	{ETargetType::ALL_ALLIES, "ALL_ALLIES"}
 	});
-
-enum class EEffectType : uint8_t 
-{
-    ATTACK = 0,
-    HEAL = 1,
-    BUFF = 100,
-	BUFF_IMMORTAL = 101,
-    DEBUFF = 200,
-	DEBUFF_STUN = 201,
-	DEBUFF_POISON = 202,
-};

@@ -15,10 +15,9 @@ public:
 	virtual void Active(Object* Instigator, std::vector<Object*> Targets);
 	virtual void AddEffect(Effect* InEffect);
 
-	const FSkillData* GetSkillData() { return Data; }
-	std::vector<Effect*> GetEffects() { return Effects; }
+	const FSkillData* GetSkillData() const { return Data; }
+	std::vector<Effect*> GetEffects() const { return Effects; }
 private:
 	const FSkillData* Data;
 	std::vector<Effect*> Effects;
 };
-

@@ -3,7 +3,7 @@
 #include "Effect/Effect.h"
 
 
-Skill::Skill(const FSkillData* InData)
+Skill::Skill(const FSkillData* InData) : Data(InData)
 {
 }
 
