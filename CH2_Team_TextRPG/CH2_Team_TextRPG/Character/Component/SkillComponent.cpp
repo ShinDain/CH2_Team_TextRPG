@@ -1,5 +1,8 @@
 ﻿#include "pch.h"
 #include "SkillComponent.h"
+#include "Character/Component/HealthComponent.h"	
+#include "Data/Table/SkillDataTable.h"
+#include "Effect/Factory/EffectFactory.h"
 
 SkillComponent::SkillComponent(Object* InOwner) :
 	Component(InOwner, "Skill")
@@ -8,6 +11,11 @@ SkillComponent::SkillComponent(Object* InOwner) :
 
 SkillComponent::~SkillComponent()
 {
+	for (Skill* skill : LearnedSkills)
+	{
+		delete skill;
+	}
+	LearnedSkills.clear();
 }
 
 bool SkillComponent::Initialize()
@@ -17,12 +25,23 @@ bool SkillComponent::Initialize()
 
 void SkillComponent::AddSkill(uint16_t SkillId)
 {
-	LearnedSkills.insert(SkillId);
-}
+	// 중복 스킬 습득 방지
+	for (Skill* skill : LearnedSkills)
+	{
+		if (skill->GetSkillData()->Idx == SkillId)
+			return;
+	}
 
-const std::set<uint16_t>& SkillComponent::GetLearnedSkills() const
-{
-	return LearnedSkills;
+	const FSkillData* Data = SkillDataTable::GetInstance().FindSkillDataByIndex(SkillId);
+	if (Data != nullptr)
+	{
+		Skill* newSkill = new Skill(Data);
+		for (const EffectData& effectData : Data->Effects)
+		{
+			newSkill->AddEffect(EffectFactory::CreateEffect(effectData));
+		}
+		LearnedSkills.push_back(newSkill);
+	}
 }
 
 void SkillComponent::UpdateCooldowns()
@@ -52,4 +71,70 @@ void SkillComponent::ApplyCooldown(uint16_t SkillId, uint8_t CooldownAmount)
 	{
 		CurrentCooldowns[SkillId] = CooldownAmount;
 	}
+}
+
+bool SkillComponent::CheckCost(uint16_t SkillId)
+{
+	Skill* skill = FindSkillById(SkillId);
+	if (skill)
+	{
+		const FSkillData* skillData = skill->GetSkillData();
+		if (skillData)
+		{
+			HealthComponent* manaComponent = this->FindComponent<HealthComponent>("Mana");
+			if (manaComponent && manaComponent->GetCurrent() >= skillData->ManaCost)
+			{
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+bool SkillComponent::ConsumeCost(uint16_t SkillId)
+{
+	Skill* skill = FindSkillById(SkillId);
+	if (skill)
+	{
+		const FSkillData* skillData = skill->GetSkillData();
+		if (skillData)
+		{
+			HealthComponent* manaComponent = this->FindComponent<HealthComponent>("Mana");
+			if (manaComponent)
+			{
+				manaComponent->Decrease(skillData->ManaCost);
+				return true;
+			}
+		}
+	}
+	return false;
+}
+bool SkillComponent::ConsumeCost(const Skill* InSkill)
+{
+	if (InSkill)
+	{
+		const FSkillData* skillData = InSkill->GetSkillData();
+		if (skillData)
+		{
+			HealthComponent* manaComponent = this->FindComponent<HealthComponent>("Mana");
+			if (manaComponent)
+			{
+				manaComponent->Decrease(skillData->ManaCost);
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+Skill* SkillComponent::FindSkillById(uint16_t SkillId) const
+{
+	for (Skill* skill : LearnedSkills)
+	{
+		if (skill->GetSkillData()->Idx == SkillId)
+		{
+			return skill;
+		}
+	}
+	return nullptr;
 }
