@@ -12,7 +12,17 @@ bool JsonDataParser::Load(const std::string& FilePath, json& OutJsonData)
 		return false;
 	}
 
-	InFile >> OutJsonData;
+	try
+	{
+		OutJsonData = json::parse(InFile, nullptr, true, true);
+	}
+	catch (const json::exception& Exception)
+	{
+		std::cerr << "JSON 파일 파싱 실패: " << FilePath << "\n";
+		std::cerr << Exception.what() << "\n";
+		InFile.close();
+		return false;
+	}
 
 	InFile.close();
 

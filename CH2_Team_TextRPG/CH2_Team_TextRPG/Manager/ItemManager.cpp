@@ -69,9 +69,10 @@ Item* ItemManager::CreateItemInstance(const ItemData* Data)
 	
 	if (newItem)
 	{
-		for (const auto& tagData : Data->EffectTags)
+		for (const auto& tagData : Data->EffectDatas)
 		{
-			newItem->AddEffect(EffectFactory::CreateEffect(tagData.Tag, tagData.Value));
+			Effect* newEffect = EffectFactory::CreateEffect(tagData);
+			newItem->AddEffect(newEffect);
 		}
 
 		std::string Name = Data->Name;

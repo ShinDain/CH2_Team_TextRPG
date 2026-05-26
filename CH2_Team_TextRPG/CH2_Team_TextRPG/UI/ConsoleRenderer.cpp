@@ -1,8 +1,7 @@
 ﻿#include "pch.h"
 #include "ConsoleRenderer.h"
+#include "Manager/InputManager.h"
 
-#include <iostream>
-#include <string>
 #include <windows.h>
 #include <conio.h>
 
@@ -63,7 +62,7 @@ void ConsoleRenderer::DrawString(int X, int Y, const std::string& Text)
 {
     SetCursorPosition(X, Y);
 
-    std::cout << Text;
+    GInput << Text;
 }
 
 void ConsoleRenderer::DrawBox(int X, int Y, int Width, int Height)
@@ -72,10 +71,10 @@ void ConsoleRenderer::DrawBox(int X, int Y, int Width, int Height)
 
     for (int i = 0; i < Width - 2; i++)
     {
-        std::cout << "-";
+        GInput << "-";
     }
 
-    std::cout << "+";
+    GInput << "+";
 
     for (int Row = 1; Row < Height - 1; Row++)
     {
@@ -87,10 +86,10 @@ void ConsoleRenderer::DrawBox(int X, int Y, int Width, int Height)
 
     for (int i = 0; i < Width - 2; i++)
     {
-        std::cout << "-";
+        GInput << "-";
     }
 
-    std::cout << "+";
+    GInput << "+";
 }
 
 void ConsoleRenderer::DrawLines(int X, int Y, const std::vector<std::string>& Lines)

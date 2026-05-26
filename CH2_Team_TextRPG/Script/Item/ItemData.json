@@ -1,12 +1,108 @@
 [
   {
-    "Id": 2001,
+    "Id": 1001,
     "Name": "하급 체력 포션",
     "Category": "Consumable",
     "Grade": "Common",
     "Price": 20,
-    "EffectTags":[
-      {"Tag" : "Heal", "Value" : 30}
+    "EffectDatas": [
+      { "Tag": "Heal", "Value": 30 }
+    ]
+  },
+  {
+    "Id": 1002,
+    "Name": "하급 마나 포션",
+    "Category": "Consumable",
+    "Grade": "Common",
+    "Price": 25,
+    "EffectDatas": [
+      { "Tag": "ManaRegen", "Value": 20 }
+    ]
+  },
+  {
+    "Id": 1003,
+    "Name": "재생의 물약",
+    "Category": "Consumable",
+    "Grade": "Uncommon",
+    "Price": 50,
+    "EffectDatas": [
+      { "Tag": "HealOverTurn", "Value": 15 },
+      { "Tag": "Duration_Turn", "Value": 3 }
+    ]
+  },
+  {
+    "Id": 1004,
+    "Name": "용기의 비약",
+    "Category": "Consumable",
+    "Grade": "Uncommon",
+    "Price": 120,
+    "EffectDatas": [
+      { "Tag": "Buff_Atk", "Value": 15 },
+      { "Tag": "Duration_Turn", "Value": 3 }
+    ]
+  },
+  {
+    "Id": 1005,
+    "Name": "집중의 주문서",
+    "Category": "Consumable",
+    "Grade": "Uncommon",
+    "Price": 150,
+    "EffectDatas": [
+      { "Tag": "Buff_CritRate", "Value": 20 },
+      { "Tag": "Duration_Turn", "Value": 2 }
+    ]
+  },
+  {
+    "Id": 1006,
+    "Name": "신속의 알약",
+    "Category": "Consumable",
+    "Grade": "Rare",
+    "Price": 200,
+    "EffectDatas": [
+      { "Tag": "Buff_Speed", "Value": 30 },
+      { "Tag": "Duration_Turn", "Value": 2 }
+    ]
+  },
+  {
+    "Id": 1007,
+    "Name": "화염 병",
+    "Category": "Consumable",
+    "Grade": "Common",
+    "Price": 40,
+    "EffectDatas": [
+      { "Tag": "Damage_Fire", "Value": 50 }
+    ]
+  },
+  {
+    "Id": 1008,
+    "Name": "섬광탄",
+    "Category": "Consumable",
+    "Grade": "Uncommon",
+    "Price": 80,
+    "EffectDatas": [
+      { "Tag": "CrowdControl_Stun", "Value": 1 }
+    ]
+  },
+  {
+    "Id": 1009,
+    "Name": "인드라의 창",
+    "Category": "Consumable",
+    "Grade": "Rare",
+    "Price": 350,
+    "EffectDatas": [
+      { "Tag": "Damage_Lightning", "Value": 120 },
+      { "Tag": "CrowdControl_Paralyze", "Value": 1 }
+    ]
+  },
+  {
+    "Id": 1010,
+    "Name": "수호의 부적",
+    "Category": "Consumable",
+    "Grade": "Epic",
+    "Price": 500,
+    "EffectDatas": [
+      { "Tag": "Buff_Invincible", "Value": 1 },
+      { "Tag": "Duration_Turn", "Value": 1 }
     ]
   }
 ]
