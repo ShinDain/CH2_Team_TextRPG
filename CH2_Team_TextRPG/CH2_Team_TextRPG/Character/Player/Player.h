@@ -18,5 +18,4 @@ private:
 	class StatComponent* Stat;
 	class HealthComponent* Health;
 	class EquipmentComponent* Equip;
-	
 };

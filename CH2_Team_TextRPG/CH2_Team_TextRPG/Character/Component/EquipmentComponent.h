@@ -15,8 +15,6 @@ public:
 	void Unequip(EEquipmentType Slot);
 	void UnequipAll();
 
-	void ApplySlotItem(const Item& InItem);
-	
 	Item* FindItemFromSlot(EEquipmentType Slot);
 	
 private:

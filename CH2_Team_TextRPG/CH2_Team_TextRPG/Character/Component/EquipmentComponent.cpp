@@ -119,11 +119,6 @@ void EquipmentComponent::UnequipAll()
 	}
 }
 
-void EquipmentComponent::ApplySlotItem(const Item& InItem)
-{
-	
-}
-
 Item* EquipmentComponent::FindItemFromSlot(EEquipmentType Slot)
 {
 	auto It = Slots.find(Slot);
