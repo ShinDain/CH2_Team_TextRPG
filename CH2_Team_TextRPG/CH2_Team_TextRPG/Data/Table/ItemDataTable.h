@@ -62,7 +62,7 @@ public:
 
 	static ConsumableDataTable& GetInstance();
 
-	const FConsumableItemData* FindItemDataByIndex(uint32_t Index) const;
+	const FConsumableItemData* FindConsumableDataByIndex(uint32_t Index) const;
 
 protected:
 	virtual void ParseData(const json& InData) override;

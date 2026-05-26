@@ -9,6 +9,7 @@ public:
 
 	virtual void Active(Object* Instigator, std::vector<Object*> Targets) override;
 
+	const FEquipmentItemData* GetEquipmentData() { return EquipmentData; }
 private:
 	const FEquipmentItemData* EquipmentData;
 };

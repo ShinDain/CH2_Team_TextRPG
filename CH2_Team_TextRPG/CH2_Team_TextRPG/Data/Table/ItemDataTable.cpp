@@ -87,6 +87,15 @@ ConsumableDataTable& ConsumableDataTable::GetInstance()
 	return Instance;
 }
 
+const FConsumableItemData* ConsumableDataTable::FindConsumableDataByIndex(uint32_t Index) const
+{
+	if (ConsumableDataMap.find(Index) != ConsumableDataMap.end())
+	{
+		return ConsumableDataMap.at(Index);
+	}
+	return nullptr;
+}
+
 ConsumableDataTable::~ConsumableDataTable()
 {
 	for (auto& pair : ConsumableDataMap)
@@ -116,6 +125,15 @@ EquipmentDataTable& EquipmentDataTable::GetInstance()
 {
 	static EquipmentDataTable Instance;
 	return Instance;
+}
+
+const FEquipmentItemData* EquipmentDataTable::FindEquipmentDataByIndex(uint32_t Index) const
+{
+	if (EquipmentDataMap.find(Index) != EquipmentDataMap.end())
+	{
+		return EquipmentDataMap.at(Index);
+	}
+	return nullptr;
 }
 
 EquipmentDataTable::~EquipmentDataTable()

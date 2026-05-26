@@ -10,8 +10,9 @@ public:
 	
 	virtual void Active(class Object* Instigator, std::vector<class Object*> Targets) override;
 
+	const FConsumableItemData* GetConsumableData() { return ConsumableData; }
 private:
-	const FConsumableItemData* ConsumableItemData;
+	const FConsumableItemData* ConsumableData;
 
 };
 
