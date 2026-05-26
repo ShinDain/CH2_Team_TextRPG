@@ -13,10 +13,16 @@ Object::Object(const std::string& InName)
 
 void Object::AddComponent(Component* InComp)
 {
-	if (InComp) OwnedComponents.insert(InComp);
+	if (InComp)
+	{
+		OwnedComponents.insert(InComp);
+	}
 }
 
 void Object::RemoveComponent(Component* InComp)
 {
-	if (InComp) OwnedComponents.erase(InComp);
+	if (InComp)
+	{
+		OwnedComponents.erase(InComp);
+	}
 }

@@ -15,11 +15,11 @@ public:
 	void AddComponent(Component* InComp);
 	void RemoveComponent(Component* InComp);
 
-	template<typename T>
+	template <typename T>
 	T* FindComponent(const std::string& ComponentName) const;
 	
-	template<typename T>
-	void AddComponent(const std::string& ComponentName);
+	template <typename T, typename... Arguments>
+	T* AddComponent(Arguments&&... Args);
 
 protected:
 	std::string Name;
@@ -36,16 +36,18 @@ T* Object::FindComponent(const std::string& ComponentName) const
 		if (Compoent && Compoent->GetName() == ComponentName)
 		{
 			T* CastCompoent = dynamic_cast<T*>(Compoent);
-			assert(CastCompoent && "Cast Failed Please Check");
 			return CastCompoent;
 		}
 	}
 	return nullptr;
 }
 
-template <typename T>
-void Object::AddComponent(const std::string& ComponentName)
+template <typename T, typename... Arguments>
+T* Object::AddComponent(Arguments&&... Args)
 {
-	T* NewComponent = new T();
+	static_assert(std::is_base_of_v<class Component, T>, "T 는 Component 또는 그 파생만 허용합니다.");
+	
+	T* NewComponent = new T(std::forward<Arguments>(Args)...);
 	OwnedComponents.emplace(NewComponent);
+	return NewComponent;
 }
