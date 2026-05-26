@@ -3,12 +3,6 @@
 #include "Character/Player/Player.h"
 #include "Data/Character/Stat.h"
 
-int Monster::GetStat(EStatType Type) const
-{
-	// Not Implement.
-	return 0;
-}
-
 Monster::Monster(MonsterSetData&& Desc)
 	: MonsterData(std::move(Desc)),
 	OriginalData(MonsterData)
@@ -28,26 +22,23 @@ bool Monster::Initialize()
 
 void Monster::Attack(Player* player)
 {
-	//if (player == nullptr)
-	//{
-	//	return;
-	//}
-	//// 몬스터 공격을 DamageContext로 포장하여 전달
-	//DamageContext ctx;
-	//ctx.Attack = MonsterData.Attack;
-	//ctx.SkillMultiplier = 1.f;
-	//ctx.AttackCount = 1;
+	if (player == nullptr)
+	{
+		return;
+	}
+	DamageContext mtp;
+	mtp.Attack = MonsterData.Attack;
 
-	//player->TakeDamage(ctx);
+	player->TakeDamage(mtp);
 }
 void Monster::TakeDamage(const DamageContext& Context)
 {
-	/*int damage = std::max(0, Context.Attack - MonsterData.Defence);
+	int damage = std::max(0, Context.Attack - MonsterData.Defence);
 	MonsterData.HP -= damage;
 	if (MonsterData.HP < 0)
 	{
 		MonsterData.HP = 0;
-	}*/
+	}
 }
 
 bool Monster::IsDead() const
@@ -69,11 +60,6 @@ std::string Monster::GetName() const
 int Monster::GetHP() const
 {
 	return MonsterData.HP;
-}
-
-int Monster::GetMP() const
-{
-	return 0;  
 }
 
 int Monster::GetAttack() const
