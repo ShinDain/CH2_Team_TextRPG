@@ -10,10 +10,25 @@ MonsterDataTable& MonsterDataTable::GetInstance()
 // JSON 한 항목을 파싱해서 세 컨테이너에 등록
 void MonsterDataTable::ParseData(const json& InData)
 {
-    MonsterData* data = new MonsterData(InData.get<MonsterData>());
-    MonsterDatas.push_back(data);
-    NameMap[data->Name] = data;
-    IndexMap[data->Id] = data;
+    if (!InData.is_array())
+    {
+        return;
+    }
+
+    for (const json& data : InData)
+    {
+        try
+        {
+            MonsterData* newData = new MonsterData(data.get<MonsterData>());
+            MonsterDatas.push_back(newData);
+            NameMap[newData->Name] = newData;
+            IndexMap[newData->Id] = newData;
+        }
+        catch (const json::exception&)
+        {
+            continue;
+        }
+    }
 }
 
 // 이름으로 검색
