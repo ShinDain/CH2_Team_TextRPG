@@ -12,7 +12,7 @@ public:
 	Item(const ItemData* InData);
 	virtual ~Item();
 
-	virtual void Active(Object* Instigator);
+	virtual void Active(Object* Instigator, std::vector<Object*> Targets);
 
 	virtual void AddEffect(Effect* InEffect);
 

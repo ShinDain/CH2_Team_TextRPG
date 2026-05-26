@@ -236,6 +236,8 @@
     <ClCompile Include="Character\Component\InventoryComponent.cpp" />
     <ClCompile Include="Effect\Effects\Effect_Heal.cpp" />
     <ClCompile Include="Effect\Factory\EffectFactory.cpp" />
+    <ClCompile Include="Item\Item_Consumable.cpp" />
+    <ClCompile Include="Item\Item_Equipment.cpp" />
     <ClCompile Include="Manager\ItemManager.cpp" />
     <ClCompile Include="Item\Item.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -368,6 +370,8 @@
     <ClInclude Include="Effect\EffectTag.h" />
     <ClInclude Include="Effect\Factory\EffectFactory.h" />
     <ClInclude Include="Enum\EItemType.h" />
+    <ClInclude Include="Item\Item_Consumable.h" />
+    <ClInclude Include="Item\Item_Equipment.h" />
     <ClInclude Include="Manager\ItemManager.h" />
     <ClInclude Include="Enum\EEffect.h" />
     <ClInclude Include="Item\Item.h" />

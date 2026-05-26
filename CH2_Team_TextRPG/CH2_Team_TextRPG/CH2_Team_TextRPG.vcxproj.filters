@@ -1,251 +1,109 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Source Files\Core">
-      <UniqueIdentifier>{8921af1c-6dce-4cf6-bd08-bd9f6d9ca113}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Manager">
-      <UniqueIdentifier>{0eb808a0-480c-421e-91e6-fefae8f751c0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\State">
-      <UniqueIdentifier>{202a49a5-d831-4476-8f15-85c1192fc4f2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Enum">
-      <UniqueIdentifier>{185ac5d6-8062-4a1c-a43e-06bfa730c997}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Data">
-      <UniqueIdentifier>{99e7f1eb-137d-4292-a74f-3d1022ae6b54}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Common">
-      <UniqueIdentifier>{9ab5a859-8eb8-431f-ac6c-5f7ede08d5be}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Data\Table">
-      <UniqueIdentifier>{062f9394-d871-4282-b6b6-485d662a2e42}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\UI">
-      <UniqueIdentifier>{8bd787c6-aab6-48bd-a7f3-35dc64418a63}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Map">
-      <UniqueIdentifier>{f9822b46-0d57-4d55-a649-f8a97c99238a}</UniqueIdentifier>
-    </Filter>
+    <ClCompile Include="Character\Character.cpp" />
+    <ClCompile Include="Character\Component\EquipmentComponent.cpp" />
+    <ClCompile Include="Character\Component\HealthComponent.cpp" />
+    <ClCompile Include="Character\Component\SkillComponent.cpp" />
+    <ClCompile Include="Character\Component\StatComponent.cpp" />
+    <ClCompile Include="Character\Player\Player.cpp" />
+    <ClCompile Include="Common\StringHelper.cpp" />
+    <ClCompile Include="Core\Component.cpp" />
+    <ClCompile Include="Core\Condition.cpp" />
+    <ClCompile Include="Core\Object.cpp" />
+    <ClCompile Include="Core\State.cpp" />
+    <ClCompile Include="Core\Transition.cpp" />
+    <ClCompile Include="Core\GameProgress.cpp" />
+    <ClCompile Include="Data\DataLoader.cpp" />
+    <ClCompile Include="Data\JsonDataParser.cpp" />
+    <ClCompile Include="Data\Table\DataTable.cpp" />
+    <ClCompile Include="Data\Table\ItemDataTable.cpp" />
+    <ClCompile Include="Data\Table\MonsterDataTable.cpp" />
+    <ClCompile Include="Data\Table\ScriptPathTable.cpp" />
+    <ClCompile Include="Effect\Effect.cpp" />
+    <ClCompile Include="Character\Component\InventoryComponent.cpp" />
+    <ClCompile Include="Effect\Effects\Effect_Heal.cpp" />
+    <ClCompile Include="Effect\Factory\EffectFactory.cpp" />
+    <ClCompile Include="Manager\ItemManager.cpp" />
+    <ClCompile Include="Item\Item.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Core\GameInstance.cpp" />
+    <ClCompile Include="Manager\InputManager.cpp" />
+    <ClCompile Include="Manager\LogManager.cpp" />
+    <ClCompile Include="Manager\ObjectManager.cpp" />
+    <ClCompile Include="Manager\StateManager.cpp" />
+    <ClCompile Include="Manager\TurnManager.cpp" />
+    <ClCompile Include="Map\MapManager.cpp" />
+    <ClCompile Include="Character\Monster\Monster.cpp" />
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="Character\Monster\Slime.cpp" />
+    <ClCompile Include="Data\Table\SkillDataTable.cpp" />
+    <ClCompile Include="State\State_Battle.cpp" />
+    <ClCompile Include="State\State_Start.cpp" />
+    <ClCompile Include="UI\AnimationFrameData.cpp" />
+    <ClCompile Include="UI\AsciiArtLoader.cpp" />
+    <ClCompile Include="UI\BattleRenderer.cpp" />
+    <ClCompile Include="UI\ConsoleRenderer.cpp" />
+    <ClCompile Include="UI\ConsoleUtil.cpp" />
+    <ClCompile Include="UI\GameScreen.cpp" />
+    <ClCompile Include="Item\Item_Consumable.cpp" />
+    <ClCompile Include="Item\Item_Equipment.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="pch.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\GameInstance.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\State.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Manager\ObjectManager.cpp">
-      <Filter>Source Files\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="Manager\StateManager.cpp">
-      <Filter>Source Files\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\Object.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\Component.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="State\State_Start.cpp">
-      <Filter>Source Files\State</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\Transition.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\Condition.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Data\JsonDataParser.cpp">
-      <Filter>Source Files\Data</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\StringHelper.cpp">
-      <Filter>Source Files\Common</Filter>
-    </ClCompile>
-    <ClCompile Include="Data\Table\DataTable.cpp">
-      <Filter>Source Files\Data\Table</Filter>
-    </ClCompile>
-    <ClCompile Include="Data\Table\ItemDataTable.cpp">
-      <Filter>Source Files\Data\Table</Filter>
-    </ClCompile>
-    <ClCompile Include="Data\Table\ScriptPathTable.cpp">
-      <Filter>Source Files\Data\Table</Filter>
-    </ClCompile>
-    <ClCompile Include="Data\DataLoader.cpp">
-      <Filter>Source Files\Data</Filter>
-    </ClCompile>
-    <ClCompile Include="Map\MapManager.cpp">
-      <Filter>Source Files\Map</Filter>
-    </ClCompile>
-    <ClCompile Include="UI\GameScreen.cpp">
-      <Filter>Source Files\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="UI\ConsoleRenderer.cpp">
-      <Filter>Source Files\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\GameProgress.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Manager\InputManager.cpp">
-      <Filter>Source Files\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="Manager\LogManager.cpp">
-      <Filter>Source Files\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="Character\Character.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Character\Component\EquipmentComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Character\Component\HealthComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Character\Component\StatComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Character\Player\Player.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Character\Monster\Monster.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Character\Monster\Slime.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Manager\TurnManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="State\State_Battle.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Item\Item.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Effect\Effect.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Character\Component\InventoryComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Manager\ItemManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Effect\Effects\Effect_Heal.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Effect\Factory\EffectFactory.cpp">
-    <ClCompile Include="Character\Component\SkillComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Data\Table\SkillDataTable.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="pch.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\GameInstance.h">
-      <Filter>Source Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\State.h">
-      <Filter>Source Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Manager\ObjectManager.h">
-      <Filter>Source Files\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="Manager\StateManager.h">
-      <Filter>Source Files\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\Object.h">
-      <Filter>Source Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\Component.h">
-      <Filter>Source Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="State\State_Start.h">
-      <Filter>Source Files\State</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\Transition.h">
-      <Filter>Source Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\Condition.h">
-      <Filter>Source Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Enum\EState.h">
-      <Filter>Source Files\Enum</Filter>
-    </ClInclude>
-    <ClInclude Include="Data\JsonDataParser.h">
-      <Filter>Source Files\Data</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\StringHelper.h">
-      <Filter>Source Files\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="Data\Table\DataTable.h">
-      <Filter>Source Files\Data\Table</Filter>
-    </ClInclude>
-    <ClInclude Include="Data\Table\ItemDataTable.h">
-      <Filter>Source Files\Data\Table</Filter>
-    </ClInclude>
-    <ClInclude Include="Data\Table\ScriptPathTable.h">
-      <Filter>Source Files\Data\Table</Filter>
-    </ClInclude>
-    <ClInclude Include="Data\DataLoader.h">
-      <Filter>Source Files\Data</Filter>
-    </ClInclude>
-    <ClInclude Include="Map\MapManager.h">
-      <Filter>Source Files\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="UI\GameScreen.h">
-      <Filter>Source Files\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="UI\ConsoleRenderer.h">
-      <Filter>Source Files\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\GameProgress.h">
-      <Filter>Source Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Manager\InputManager.h">
-      <Filter>Source Files\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="Manager\LogManager.h">
-      <Filter>Source Files\Manager</Filter>
-    </ClInclude>
     <ClInclude Include="Character\Character.h" />
     <ClInclude Include="Character\Component\EquipmentComponent.h" />
     <ClInclude Include="Character\Component\HealthComponent.h" />
+    <ClInclude Include="Character\Component\SkillComponent.h" />
     <ClInclude Include="Character\Component\StatComponent.h" />
     <ClInclude Include="Character\Interface\Damageable.h" />
     <ClInclude Include="Character\Interface\UnitStat.h" />
     <ClInclude Include="Character\Player\Player.h" />
-    <ClInclude Include="Data\Character\Damage.h" />
-    <ClInclude Include="Data\Character\Stat.h" />
-    <ClInclude Include="Character\Monster\Monster.h" />
-    <ClInclude Include="Character\Monster\Slime.h" />
-    <ClInclude Include="Manager\TurnManager.h" />
-    <ClInclude Include="State\State_Battle.h" />
-    <ClInclude Include="Item\Item.h" />
+    <ClInclude Include="Common\StringHelper.h" />
+    <ClInclude Include="Core\Component.h" />
+    <ClInclude Include="Core\Condition.h" />
+    <ClInclude Include="Core\GameInstance.h" />
+    <ClInclude Include="Data\Table\MonsterDataTable.h" />
     <ClInclude Include="Effect\Effect.h" />
     <ClInclude Include="Character\Component\InventoryComponent.h" />
-    <ClInclude Include="Manager\ItemManager.h" />
+    <ClInclude Include="Effect\EffectData.h" />
     <ClInclude Include="Effect\Effects\Effect_Heal.h" />
+    <ClInclude Include="Effect\EffectTag.h" />
     <ClInclude Include="Effect\Factory\EffectFactory.h" />
     <ClInclude Include="Enum\EItemType.h" />
-    <ClInclude Include="Effect\EffectTag.h" />
-    <ClInclude Include="Character\Component\SkillComponent.h" />
-    <ClInclude Include="Data\Table\SkillDataTable.h" />
+    <ClInclude Include="Manager\ItemManager.h" />
     <ClInclude Include="Enum\EEffect.h" />
+    <ClInclude Include="Item\Item.h" />
+    <ClInclude Include="Core\Object.h" />
+    <ClInclude Include="Core\State.h" />
+    <ClInclude Include="Core\Transition.h" />
+    <ClInclude Include="Data\Character\Damage.h" />
+    <ClInclude Include="Data\Character\Stat.h" />
+    <ClInclude Include="Data\DataLoader.h" />
+    <ClInclude Include="Data\JsonDataParser.h" />
+    <ClInclude Include="Data\Table\DataTable.h" />
+    <ClInclude Include="Data\Table\ItemDataTable.h" />
+    <ClInclude Include="Data\Table\ScriptPathTable.h" />
+    <ClInclude Include="Enum\EState.h" />
+    <ClInclude Include="Manager\InputManager.h" />
+    <ClInclude Include="Manager\LogManager.h" />
+    <ClInclude Include="Manager\ObjectManager.h" />
+    <ClInclude Include="Manager\StateManager.h" />
+    <ClInclude Include="Core\GameProgress.h" />
+    <ClInclude Include="Manager\TurnManager.h" />
+    <ClInclude Include="Map\MapManager.h" />
+    <ClInclude Include="Character\Monster\Monster.h" />
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="Character\Monster\Slime.h" />
+    <ClInclude Include="Data\Table\SkillDataTable.h" />
+    <ClInclude Include="State\State_Battle.h" />
+    <ClInclude Include="State\State_Start.h" />
+    <ClInclude Include="UI\AnimationFrameData.h" />
+    <ClInclude Include="UI\AsciiArtLoader.h" />
+    <ClInclude Include="UI\BattleRenderer.h" />
+    <ClInclude Include="UI\ConsoleRenderer.h" />
+    <ClInclude Include="UI\ConsoleUtil.h" />
+    <ClInclude Include="UI\GameScreen.h" />
+    <ClInclude Include="Item\Item_Consumable.h" />
+    <ClInclude Include="Item\Item_Equipment.h" />
   </ItemGroup>
 </Project>

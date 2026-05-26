@@ -16,7 +16,7 @@ public:
 	std::vector<EffectData> EffectDatas;
 };
 
-NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(ItemData, Name, Price, Id, Category, EffectDatas);
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(ItemData, Name, Price, Id, Category, TargetType, EffectDatas);
 
 class ItemDataTable final : public BaseDataTable
 {

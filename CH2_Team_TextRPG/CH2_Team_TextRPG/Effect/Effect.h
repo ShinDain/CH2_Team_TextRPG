@@ -10,7 +10,7 @@ public:
 	Effect(const std::string& Tag);
 	virtual ~Effect();
 
-	virtual void Apply(class Object* Target) = 0;
+	virtual void Apply(class Object* Instigator, std::vector<class Object*> Targets) = 0;
 
 	virtual std::string GetTag() { return Tag; }
 private:

@@ -16,14 +16,17 @@ Item::~Item()
 	}
 }
 
-void Item::Active(Object* Instigator)
+void Item::Active(Object* Instigator, std::vector<Object*> Targets)
 {
 	if (Instigator == nullptr)
 		return;
 
 	for (Effect* effect : Effects)
 	{
-		effect->Apply(Instigator);
+		if (effect == nullptr)
+			continue;
+
+		effect->Apply(Instigator, Targets);
 	}
 }
 

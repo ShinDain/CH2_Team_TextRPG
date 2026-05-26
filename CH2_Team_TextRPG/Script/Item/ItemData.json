@@ -5,6 +5,7 @@
     "Category": "Consumable",
     "Grade": "Common",
     "Price": 20,
+    "TargetType": "SINGLE_ALLY",
     "EffectDatas": [
       { "Tag": "Heal", "Value": 30 }
     ]
@@ -15,6 +16,7 @@
     "Category": "Consumable",
     "Grade": "Common",
     "Price": 25,
+    "TargetType": "SINGLE_ALLY",
     "EffectDatas": [
       { "Tag": "ManaRegen", "Value": 20 }
     ]
@@ -25,6 +27,7 @@
     "Category": "Consumable",
     "Grade": "Uncommon",
     "Price": 50,
+    "TargetType": "SINGLE_ALLY",
     "EffectDatas": [
       { "Tag": "HealOverTurn", "Value": 15 },
       { "Tag": "Duration_Turn", "Value": 3 }
@@ -36,6 +39,7 @@
     "Category": "Consumable",
     "Grade": "Uncommon",
     "Price": 120,
+    "TargetType": "SINGLE_ALLY",
     "EffectDatas": [
       { "Tag": "Buff_Atk", "Value": 15 },
       { "Tag": "Duration_Turn", "Value": 3 }
@@ -47,6 +51,7 @@
     "Category": "Consumable",
     "Grade": "Uncommon",
     "Price": 150,
+    "TargetType": "ALL_ALLIES",
     "EffectDatas": [
       { "Tag": "Buff_CritRate", "Value": 20 },
       { "Tag": "Duration_Turn", "Value": 2 }
@@ -58,6 +63,7 @@
     "Category": "Consumable",
     "Grade": "Rare",
     "Price": 200,
+    "TargetType": "SELF",
     "EffectDatas": [
       { "Tag": "Buff_Speed", "Value": 30 },
       { "Tag": "Duration_Turn", "Value": 2 }
@@ -69,6 +75,7 @@
     "Category": "Consumable",
     "Grade": "Common",
     "Price": 40,
+    "TargetType": "SINGLE_ENEMY",
     "EffectDatas": [
       { "Tag": "Damage_Fire", "Value": 50 }
     ]
@@ -79,6 +86,7 @@
     "Category": "Consumable",
     "Grade": "Uncommon",
     "Price": 80,
+    "TargetType": "ALL_ENEMIES",
     "EffectDatas": [
       { "Tag": "CrowdControl_Stun", "Value": 1 }
     ]
@@ -89,6 +97,7 @@
     "Category": "Consumable",
     "Grade": "Rare",
     "Price": 350,
+    "TargetType": "SINGLE_ENEMY",
     "EffectDatas": [
       { "Tag": "Damage_Lightning", "Value": 120 },
       { "Tag": "CrowdControl_Paralyze", "Value": 1 }
@@ -100,6 +109,7 @@
     "Category": "Consumable",
     "Grade": "Epic",
     "Price": 500,
+    "TargetType": "SINGLE_ALLY",
     "EffectDatas": [
       { "Tag": "Buff_Invincible", "Value": 1 },
       { "Tag": "Duration_Turn", "Value": 1 }

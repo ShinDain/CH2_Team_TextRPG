@@ -10,6 +10,14 @@ enum class ETargetType : uint8_t
 	ALL_ALLIES = 4       // 아군 전체
 };
 
+NLOHMANN_JSON_SERIALIZE_ENUM(ETargetType, {
+	{ETargetType::SELF, "SELF"},
+	{ETargetType::SINGLE_ENEMY, "SINGLE_ENEMY"},
+	{ETargetType::ALL_ENEMIES, "ALL_ENEMIES"},
+	{ETargetType::SINGLE_ALLY, "SINGLE_ALLY"},
+	{ETargetType::ALL_ALLIES, "ALL_ALLIES"}
+	});
+
 enum class EEffectType : uint8_t 
 {
     ATTACK = 0,

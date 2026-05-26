@@ -8,14 +8,7 @@ class Effect_Heal : public Effect
 public:
 	Effect_Heal(int InValue);
 
-	virtual void Apply(class Object* Target)
-	{
-		HealthComponent* healthComp = Target->FindComponent<HealthComponent>("Health");
-
-		GInput << "[Effect_Heal] Applied\n";
-
-		return;
-	}
+	virtual void Apply(class Object* Instigator, std::vector<class Object*> Targets) override;
 private:
 	int Value;
 };
