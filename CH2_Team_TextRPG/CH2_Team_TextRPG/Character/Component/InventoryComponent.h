@@ -28,13 +28,18 @@ public:
 	bool UseItem(const ItemData* ItemData, std::vector<Object*> Targets);
 	bool UseItem(const Item* ItemInstance, std::vector<Object*> Targets);
 
-	void AcquireItem(const std::string ItemName, int Amount);
-	void AcquireItem(int ItemId, int Amount);
+	void AcquireItem(const std::string ItemName, int InAmount = 1);
+	void AcquireItem(int ItemId, int InAmount = 1);
 
-	void Equip();
-	void Unequip();
+	void RemoveItem(int ItemId, int InAmount = 1);
 
-	std::vector<FInventoryEntry> GetItemList() { return ItemList; }
+	void Equip(int ItemId);
+	void Equip(const std::string& ItemName);
+	void Unequip(int ItemId);
+	void Unequip(const std::string& ItemName);
+	void Unequip(EEquipmentType EquipmentType);
+
+	const std::vector<FInventoryEntry> GetItemList() const { return ItemList; }
 
 private:
 	bool UseItem_Implement(Item* ItemInstance, std::vector<Object*> Targets);
