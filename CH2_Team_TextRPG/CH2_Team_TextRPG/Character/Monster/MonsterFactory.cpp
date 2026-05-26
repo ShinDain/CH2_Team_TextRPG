@@ -1,6 +1,8 @@
 ﻿#pragma once
 #include "pch.h"
 #include "MonsterFactory.h"
+#include "Character/Monster/Monsters/BossMonster.h"
+#include "Character/Monster/Monsters/EliteMonster.h"
 #include "Data/Table/MonsterDataTable.h"
 
 Monster* MonsterFactory::CreateForPlayer(const std::string& Name, Player* player)
@@ -9,7 +11,7 @@ Monster* MonsterFactory::CreateForPlayer(const std::string& Name, Player* player
     if (monsterData == nullptr)
         return nullptr;
 
-    //int Level = player ? player->GetStat(Level) : 1;
+    //int Level = player ? player->GetStat(EStatType::Level) : 1;
 
     MonsterSetData data;
     data.Name = monsterData->Name;
@@ -20,7 +22,15 @@ Monster* MonsterFactory::CreateForPlayer(const std::string& Name, Player* player
     data.DropItemPrice = monsterData->DropItemPrice;
     data.Exp = monsterData->Exp;
 
-    Monster* newMonster = new Monster(std::move(data));
+    Monster* newMonster = nullptr;
+
+    if (monsterData->Type == "Boss")
+        newMonster = new BossMonster(std::move(data));
+    else if (monsterData->Type == "Elite")
+        newMonster = new EliteMonster(std::move(data));
+    else
+        newMonster = new Monster(std::move(data));
+
     newMonster->Initialize();
     return newMonster;
 }
