@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include "DataTable.h"
 #include "Enum/EItemType.h"
+#include "Enum/EEffect.h"
 #include "Manager/InputManager.h"
 #include "Effect/EffectData.h"
 
@@ -10,7 +11,8 @@ public:
 	std::string Name;
 	int Price;
 	uint32_t Id;
-	Category Category;
+	EItemCategory Category;
+	ETargetType TargetType;
 	std::vector<EffectData> EffectDatas;
 };
 
