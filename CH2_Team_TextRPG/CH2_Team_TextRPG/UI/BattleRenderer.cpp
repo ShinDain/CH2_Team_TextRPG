@@ -96,7 +96,6 @@ void BattleRenderer::PlayMonsterAttackAnimation(int monsterIndex)
 {
 	if (monsterIndex < 0 || monsterIndex >= static_cast<int>(MonsterViews.size()))
 	{
-		DrawAllMonsterIdle();
 		return;
 	}
 
@@ -137,7 +136,6 @@ void BattleRenderer::PlayMonsterHitAnimation(int monsterIndex)
 {
 	if (monsterIndex < 0 || monsterIndex >= static_cast<int>(MonsterViews.size()))
 	{
-		DrawAllMonsterIdle();
 		return;
 	}
 
