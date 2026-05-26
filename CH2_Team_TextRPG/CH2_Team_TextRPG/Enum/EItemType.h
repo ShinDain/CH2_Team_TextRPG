@@ -2,7 +2,7 @@
 
 #include "nlohmann/json.hpp"
 
-enum class EItemCategory
+enum class EItemCategory : uint8_t
 {
 	Equipment = 0,
 	Consumable,

@@ -1,8 +1,11 @@
 ﻿#pragma once
 #include "Item/Item.h"
+#include "Enum/EItemType.h"
 
 class ItemManager
 {
+	using CreateItemFunc = Item * (ItemManager::*)(const ItemData*);
+
 public:
 	ItemManager();
 	~ItemManager();
@@ -15,11 +18,16 @@ public:
 private:
 	Item* CreateItemInstance(const ItemData* Data);
 
+	Item* CreateConsumableItemInstance(const ItemData* Data);
+	Item* CreateEquipmentItemInstance(const ItemData* Data);
+	Item* CreateIngredientItemInstance(const ItemData* Data);
 private:
 	std::vector<Item*> Items;
 
 	std::unordered_map<std::string, Item*> NameMap;
 	std::unordered_map<uint32_t, Item*> IdMap;
+
+	std::unordered_map<EItemCategory, CreateItemFunc> CreateItemFuncMap;
 };
 
 inline Item* FindItemByName(const std::string& Name)
