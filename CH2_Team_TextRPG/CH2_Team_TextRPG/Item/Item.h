@@ -12,13 +12,14 @@ public:
 	Item(const ItemData* InData);
 	virtual ~Item();
 
-	virtual void Active(Object* Instigator, std::vector<Object*> Targets);
+	virtual void Active(Object* Instigator, std::vector<Object*> Targets) = 0;
 
 	virtual void AddEffect(Effect* InEffect);
 
 	const ItemData* GetItemData() { return Data; }
 	std::vector<Effect*> GetEffects() { return Effects; }
-private:
+	
+protected:
 	const ItemData* Data;
 	std::vector<Effect*> Effects;
 };

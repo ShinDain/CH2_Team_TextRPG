@@ -3,7 +3,9 @@
         {
             "Category" : "Item",
             "Name" : [
-                "ItemData.json"
+                "ItemData.json",
+                "ConsumableData.json",
+                "EquipmentData.json"
             ]
         },
         {
