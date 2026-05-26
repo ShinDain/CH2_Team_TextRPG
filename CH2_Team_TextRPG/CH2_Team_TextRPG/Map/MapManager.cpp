@@ -1,8 +1,6 @@
 ﻿#include "pch.h"
 #include "MapManager.h"
 
-#include <iostream>
-
 void MapManager::GenerateFixedMap()
 {
     Nodes.clear();
