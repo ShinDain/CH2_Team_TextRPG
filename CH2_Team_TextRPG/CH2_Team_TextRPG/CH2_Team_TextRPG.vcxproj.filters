@@ -36,9 +36,7 @@
     <ClCompile Include="Map\MapManager.cpp" />
     <ClCompile Include="Character\Monster\Monster.cpp" />
     <ClCompile Include="pch.cpp" />
-    <ClCompile Include="Character\Monster\Slime.cpp" />
     <ClCompile Include="Data\Table\SkillDataTable.cpp" />
-    <ClCompile Include="State\State_Battle.cpp" />
     <ClCompile Include="State\State_Start.cpp" />
     <ClCompile Include="UI\AnimationFrameData.cpp" />
     <ClCompile Include="UI\AsciiArtLoader.cpp" />
@@ -57,6 +55,10 @@
     <ClCompile Include="Data\Table\MonsterDataTable.cpp" />
     <ClCompile Include="Character\Component\EffectComponent.cpp" />
     <ClCompile Include="UI\AsciiArtLoader.cpp" />
+    <ClCompile Include="Character\Monster\MonsterFactory.cpp" />
+    <ClCompile Include="Character\Monster\Monsters\BossMonster.cpp" />
+    <ClCompile Include="Character\Monster\Monsters\EliteMonster.cpp" />
+    <ClCompile Include="Skill\Skill.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character\Character.h" />
@@ -102,9 +104,7 @@
     <ClInclude Include="Map\MapManager.h" />
     <ClInclude Include="Character\Monster\Monster.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="Character\Monster\Slime.h" />
     <ClInclude Include="Data\Table\SkillDataTable.h" />
-    <ClInclude Include="State\State_Battle.h" />
     <ClInclude Include="State\State_Start.h" />
     <ClInclude Include="UI\AnimationFrameData.h" />
     <ClInclude Include="UI\AsciiArtLoader.h" />
@@ -125,5 +125,10 @@
     <ClInclude Include="Character\Component\EffectComponent.h" />
     <ClInclude Include="UI\AsciiArtLoader.h" />
     <ClInclude Include="Effect\EffectData.h" />
+    <ClInclude Include="Character\Monster\MonsterFactory.h" />
+    <ClInclude Include="Character\Monster\Monsters\BossMonster.h" />
+    <ClInclude Include="Character\Monster\Monsters\EliteMonster.h" />
+    <ClInclude Include="Data\Character\Equipment.h" />
+    <ClInclude Include="Skill\Skill.h" />
   </ItemGroup>
 </Project>
