@@ -1,6 +1,7 @@
 ﻿[
   {
     "Name": "Slime",
+    "Type": "Normal",
     "Id": 1,
     "HP": 50,
     "Attack": 5,
@@ -11,6 +12,7 @@
   },
   {
     "Name": "Goblin",
+    "Type": "Normal",
     "Id": 2,
     "HP": 80,
     "Attack": 12,
@@ -21,6 +23,7 @@
   },
   {
     "Name": "Orc",
+    "Type": "Normal",
     "Id": 3,
     "HP": 200,
     "Attack": 25,
@@ -31,6 +34,7 @@
   },
   {
     "Name": "SkeletonKnight",
+    "Type": "Normal",
     "Id": 4,
     "HP": 280,
     "Attack": 35,
@@ -41,6 +45,7 @@
   },
   {
     "Name": "Werewolf",
+    "Type": "Normal",
     "Id": 5,
     "HP": 110,
     "Attack": 18,
@@ -50,18 +55,9 @@
     "DropItemPrice": 45
   },
   {
-    "Name": "Vampire",
-    "Id": 6,
-    "HP": 320,
-    "Attack": 42,
-    "Defence": 18,
-    "Exp": 130,
-    "DropItemName": "BloodCrystal",
-    "DropItemPrice": 200
-  },
-  {
     "Name": "Troll",
-    "Id": 7,
+    "Type": "Elite",
+    "Id": 6,
     "HP": 350,
     "Attack": 30,
     "Defence": 8,
@@ -70,7 +66,19 @@
     "DropItemPrice": 100
   },
   {
+    "Name": "Vampire",
+    "Type": "Elite",
+    "Id": 7,
+    "HP": 320,
+    "Attack": 42,
+    "Defence": 18,
+    "Exp": 130,
+    "DropItemName": "BloodCrystal",
+    "DropItemPrice": 200
+  },
+  {
     "Name": "DarkWitch",
+    "Type": "Elite",
     "Id": 8,
     "HP": 180,
     "Attack": 50,
@@ -81,6 +89,7 @@
   },
   {
     "Name": "DragonWhelp",
+    "Type": "Elite",
     "Id": 9,
     "HP": 600,
     "Attack": 80,
@@ -91,6 +100,7 @@
   },
   {
     "Name": "DragonKing",
+    "Type": "Boss",
     "Id": 10,
     "HP": 380,
     "Attack": 55,
@@ -101,13 +111,13 @@
   }
 ]
 
-//Slime          50 5 2 10         기본 몬스터
-//Goblin         80 12 5 25        기본 몬스터
-//Orc            200 25 12 60      기본 몬스터
-//Werewolf       110 18 6 35       공격형
-//Troll          350 30 8 75       HP 많고 방어 낮음
-//SkeletonKnight 280 35 20 90      방어력 특화
-//DarkWitch      180 50 8 110      HP 낮고 공격 높음 유리대포
-//Vampire        320 42 18 130     중간 체력회복 가능
-//DragonWhelp    600 80 30 300     미니 보스급
-//DragonKing     1000 100 30 300   보스
+//Slime          50 5 2 10         Normal 기본 몬스터  
+//Goblin         80 12 5 25        Normal 기본 몬스터
+//Orc            200 25 12 60      Normal 기본 몬스터
+//SkeletonKnight 280 35 20 90      Normal 방어력 특화
+//Werewolf       110 18 6 35       Normal 공격형
+//Troll          350 30 8 75       Elite HP 많고 방어 낮음
+//Vampire        320 42 18 130     Elite 중간 체력회복 가능
+//DarkWitch      180 50 8 110      Elite HP 낮고 공격 높음 유리대포
+//DragonWhelp    600 80 30 300     Elite 미니 보스급
+//DragonKing     1000 100 30 300   Boss 보스

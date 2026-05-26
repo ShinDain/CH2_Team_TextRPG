@@ -1,6 +1,13 @@
 ﻿#pragma once
 #include "DataTable.h"
 
+enum class EMonsterType
+{
+    Normal,
+    Elite,
+    Boss,
+};
+
 struct MonsterData
 {
     std::string Name;
@@ -11,9 +18,10 @@ struct MonsterData
     uint32_t Exp;
     std::string DropItemName;
     int DropItemPrice;
+    std::string Type; 
 };
 NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(MonsterData,
-    Name, Id, HP, Attack, Defence, Exp, DropItemName, DropItemPrice);
+    Name, Id, HP, Attack, Defence, Exp, DropItemName, DropItemPrice, Type);
 
 class MonsterDataTable final : public BaseDataTable
 {
