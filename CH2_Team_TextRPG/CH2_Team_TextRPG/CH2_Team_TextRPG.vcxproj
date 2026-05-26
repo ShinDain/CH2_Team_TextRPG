@@ -384,6 +384,7 @@
     <ClInclude Include="Effect\Factory\EffectFactory.h" />
     <ClInclude Include="Effect\Effects\Effect_Stat.h" />
     <ClInclude Include="Enum\EItemType.h" />
+    <ClInclude Include="Item\ItemData.h" />
     <ClInclude Include="Item\Item_Consumable.h" />
     <ClInclude Include="Item\Item_Equipment.h" />
     <ClInclude Include="Manager\CombatManager.h" />

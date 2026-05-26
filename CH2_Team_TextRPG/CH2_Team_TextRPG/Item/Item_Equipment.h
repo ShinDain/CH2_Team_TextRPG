@@ -1,24 +1,6 @@
 ﻿#pragma once
 #include "Item/Item.h"
-#include "Enum/EItemType.h"
-#include "Data/Character/Stat.h"
-
-struct FEquipmentStatData
-{
-	EStatType StatType;
-	int Value;
-};
-
-NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(FEquipmentStatData, StatType, Value);
-
-struct FEquipmentItemData
-{
-	int Id;
-	EEquipmentType Type;
-	std::vector<FEquipmentStatData> StatDatas;
-};
-
-NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(FEquipmentItemData, Type, StatDatas);
+#include "ItemData.h"
 
 class Item_Equipment : public Item
 {

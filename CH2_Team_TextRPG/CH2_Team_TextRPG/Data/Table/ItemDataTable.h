@@ -4,6 +4,7 @@
 #include "Enum/EEffect.h"
 #include "Manager/InputManager.h"
 #include "Effect/EffectData.h"
+#include "Item/ItemData.h"
 
 struct ItemData
 {
@@ -28,6 +29,8 @@ public:
 	const ItemData* FindItemDataByName(const std::string& Name) const;
 	const ItemData* FindItemDataByIndex(uint32_t Index) const;
 
+	virtual bool Load(const std::string& FilePath) override;
+
 protected:
 	virtual void ParseData(const json& InData) override;
 
@@ -47,3 +50,43 @@ inline const ItemData* FindItemDataById(uint32_t Index)
 {
 	return ItemDataTable::GetInstance().FindItemDataByIndex(Index);
 }
+
+class ConsumableDataTable final : public BaseDataTable
+{
+	friend ItemDataTable;
+
+private:
+	ConsumableDataTable() {};
+public:
+	~ConsumableDataTable();
+
+	static ConsumableDataTable& GetInstance();
+
+	const FConsumableItemData* FindItemDataByIndex(uint32_t Index) const;
+
+protected:
+	virtual void ParseData(const json& InData) override;
+
+private:
+	std::unordered_map<uint32_t, const FConsumableItemData*> ConsumableDataMap;
+};
+
+class EquipmentDataTable final : public BaseDataTable
+{
+	friend ItemDataTable;
+
+private:
+	EquipmentDataTable() {};
+public:
+	~EquipmentDataTable();
+
+	static EquipmentDataTable& GetInstance();
+
+	const FEquipmentItemData* FindEquipmentDataByIndex(uint32_t Index) const;
+
+protected:
+	virtual void ParseData(const json& InData) override;
+
+private:
+	std::unordered_map<uint32_t, const FEquipmentItemData*> EquipmentDataMap;
+};
