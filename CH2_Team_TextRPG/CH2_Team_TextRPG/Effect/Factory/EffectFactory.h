@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include "Manager/InputManager.h"
 #include "Manager/LogManager.h"
-#include "Data/Table/ItemDataTable.h"
+#include "Effect/EffectData.h"
 
 class Effect;
 
@@ -22,7 +22,7 @@ public:
 		return true;
 	}
 
-	static Effect* CreateEffect(const ItemEffectData& InEffectData)
+	static Effect* CreateEffect(const EffectData& InEffectData)
 	{
 		std::string Tag = InEffectData.Tag;
 		int Value = InEffectData.Value;

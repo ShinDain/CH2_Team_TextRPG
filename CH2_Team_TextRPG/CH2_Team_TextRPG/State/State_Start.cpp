@@ -38,7 +38,7 @@ namespace
 		GInput << "전투 테스트 종료: 0 입력 >> ";
 
 		int Input = 0;
-		std::cin >> Input;
+		GInput >> Input;
 
 		if (Input == 0)
 		{

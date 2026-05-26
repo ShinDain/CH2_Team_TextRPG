@@ -1,7 +1,6 @@
 ﻿#pragma once
 
 #include <string>
-#include <windows.h>
 
 enum class ConsoleColor
 {
@@ -26,6 +25,12 @@ enum class ConsoleColor
 class ConsoleUtil
 {
 public:
+    static void SetupConsoleFont();
+    static void SetupConsoleCharacterSize(int columns, int rows);
+    static void SetupConsoleWindowPosition();
+    static void DisableConsoleResize();
+    static void SetupLargeConsole();
+    static void PrintConsoleSizeDebug();
     static void SetCursorPosition(int x, int y);
     static void HideCursor();
     static void ClearArea(int x, int y, int width, int height);

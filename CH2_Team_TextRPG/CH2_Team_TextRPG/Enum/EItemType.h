@@ -1,9 +1,17 @@
 ﻿#pragma once
 
-enum class EItemType
+#include "nlohmann/json.hpp"
+
+enum class EItemCategory
 {
 	Equipment = 0,
-	Cunsumable,
+	Consumable,
 	Ingredient,
 	None,
 };
+
+NLOHMANN_JSON_SERIALIZE_ENUM(EItemCategory, {
+	{EItemCategory::Equipment, "Equipment"},
+	{EItemCategory::Consumable, "Consumable"},
+	{EItemCategory::Ingredient, "Ingredient"}
+	});
