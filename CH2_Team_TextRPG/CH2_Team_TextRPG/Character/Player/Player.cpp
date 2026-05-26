@@ -1,9 +1,15 @@
 #include "pch.h"
 #include "Player.h"
 #include "Data/Character/Stat.h"
+#include "Character/Component/StatComponent.h"
+#include "Character/Component/HealthComponent.h"
+#include "Character/Component/EquipmentComponent.h"
 
 Player::Player()
 {
+	Stat = AddComponent<StatComponent>(this);
+	Equip = AddComponent<EquipmentComponent>(this);
+	Health = AddComponent<HealthComponent>(this);
 }
 
 Player::~Player()

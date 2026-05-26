@@ -13,4 +13,10 @@ public:
 	void TakeDamage(const DamageContext& Context) override;
 	bool IsDead() const override;
 	int GetStat(EStatType Type) const override;
+	
+private:
+	class StatComponent* Stat;
+	class HealthComponent* Health;
+	class EquipmentComponent* Equip;
+	
 };

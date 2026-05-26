@@ -362,6 +362,7 @@
     <ClInclude Include="Core\Component.h" />
     <ClInclude Include="Core\Condition.h" />
     <ClInclude Include="Core\GameInstance.h" />
+    <ClInclude Include="Data\Character\Equipment.h" />
     <ClInclude Include="Data\Table\MonsterDataTable.h" />
     <ClInclude Include="Effect\Effect.h" />
     <ClInclude Include="Character\Component\InventoryComponent.h" />
