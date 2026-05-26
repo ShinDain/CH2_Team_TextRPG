@@ -13,9 +13,11 @@ bool DataLoader::LoadInitialGameData()
 	{
 		ItemDataTable::GetInstance().Load(path);
 	}
+
 	for (const std::string& path : ScriptPathTable::GetInstance().GetFilePaths(DATA_CATEGORY_MONSTER))
 	{
 		MonsterDataTable::GetInstance().Load(path);
 	}
-    return false;
+
+    return true;
 }
