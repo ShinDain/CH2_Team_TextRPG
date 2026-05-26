@@ -66,16 +66,18 @@ LogManager& GameInstance::GetLogManager()
 
 bool GameInstance::InitializeManager()
 {
+	if (GameInputManager == nullptr)
+	{
+		GameInputManager = new InputManager();
+	}
+
 	Map.GenerateFixedMap();
 
 	Log.AddLog("게임을 시작했습니다.");
 	Log.AddLog("던전 지도가 생성되었습니다.");
 
 	StateManager::GetInstance().Initialize();
-	
-	GameInputManager = new InputManager();
-	
-	
+
 	return true;
 }
 
