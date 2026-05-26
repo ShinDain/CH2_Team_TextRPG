@@ -243,6 +243,7 @@
     <ClCompile Include="Effect\Effects\Effect_Stat.cpp" />
     <ClCompile Include="Item\Item_Consumable.cpp" />
     <ClCompile Include="Item\Item_Equipment.cpp" />
+    <ClCompile Include="Item\Item_Ingredient.cpp" />
     <ClCompile Include="Manager\CombatManager.cpp" />
     <ClCompile Include="Manager\ItemManager.cpp" />
     <ClCompile Include="Item\Item.cpp" />
@@ -383,8 +384,10 @@
     <ClInclude Include="Effect\Factory\EffectFactory.h" />
     <ClInclude Include="Effect\Effects\Effect_Stat.h" />
     <ClInclude Include="Enum\EItemType.h" />
+    <ClInclude Include="Item\ItemData.h" />
     <ClInclude Include="Item\Item_Consumable.h" />
     <ClInclude Include="Item\Item_Equipment.h" />
+    <ClInclude Include="Item\Item_Ingredient.h" />
     <ClInclude Include="Manager\CombatManager.h" />
     <ClInclude Include="Manager\ItemManager.h" />
     <ClInclude Include="Enum\EEffect.h" />

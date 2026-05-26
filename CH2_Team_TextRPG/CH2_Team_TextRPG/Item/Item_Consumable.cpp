@@ -3,7 +3,7 @@
 #include "Effect/Effect.h"
 
 Item_Consumable::Item_Consumable(const ItemData* InData, const FConsumableItemData* InConsumableItemData)
-	:Item(InData), ConsumableItemData(InConsumableItemData)
+	:Item(InData), ConsumableData(InConsumableItemData)
 {
 }
 
