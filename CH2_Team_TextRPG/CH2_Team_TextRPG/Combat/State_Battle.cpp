@@ -151,8 +151,15 @@ void State_Battle::ProcessInputSkill()
 		return;
 	}
 
-	std::set<uint16_t> LearnedSkills = playerSkillComponent->GetLearnedSkills();
-
+	/**
+	 * Author: chwy
+	 * FIXME: LearnedSkills 자료형 바뀌면서 컴파일 에러 발생
+	 *	기존 코드 주석걸고 임시 코드 작성하였음 확인 바랍니다.
+	 */
+	// std::set<uint16_t> LearnedSkills = playerSkillComponent->GetLearnedSkills();
+	
+	std::set<uint16_t> LearnedSkills; // <-- 임시코드
+	
 	GInput << "스킬을 선택하세요.\n";
 	int skillOptionIndex = 1;
 	for (uint16_t skillId : LearnedSkills)
