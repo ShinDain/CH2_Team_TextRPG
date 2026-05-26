@@ -337,7 +337,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Character\Monster\Slime.cpp" />
     <ClCompile Include="Data\Table\SkillDataTable.cpp" />
     <ClCompile Include="State\State_Battle.cpp" />
     <ClCompile Include="State\State_Start.cpp" />
@@ -365,6 +364,7 @@
     <ClInclude Include="Data\Table\MonsterDataTable.h" />
     <ClInclude Include="Effect\Effect.h" />
     <ClInclude Include="Character\Component\InventoryComponent.h" />
+    <ClInclude Include="Effect\EffectData.h" />
     <ClInclude Include="Effect\Effects\Effect_Heal.h" />
     <ClInclude Include="Effect\EffectTag.h" />
     <ClInclude Include="Effect\Factory\EffectFactory.h" />
@@ -392,7 +392,6 @@
     <ClInclude Include="Map\MapManager.h" />
     <ClInclude Include="Character\Monster\Monster.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="Character\Monster\Slime.h" />
     <ClInclude Include="Data\Table\SkillDataTable.h" />
     <ClInclude Include="State\State_Battle.h" />
     <ClInclude Include="State\State_Start.h" />

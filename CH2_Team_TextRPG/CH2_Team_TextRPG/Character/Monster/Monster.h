@@ -5,7 +5,6 @@
 #include "Data/Character/Damage.h"
 
 class Player;
-
 struct MonsterSetData
 {
     std::string Name;
@@ -86,17 +85,14 @@ public:
 
     void Reset();
 
-    // IUnitStat
+    // Stat
     std::string GetName() const;
     int GetHP() const;
-    int GetMP() const;
     int GetAttack() const;
     int GetDefence() const;
     int GetExp() const;
-
     std::string GetDropItemName() const;
     int GetDropItemPrice() const;
-
     bool Initialize() override;
 
 protected:

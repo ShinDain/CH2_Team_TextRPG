@@ -24,6 +24,7 @@ public:
 	InputManager();
 	~InputManager() = default;
 	bool IsFailed() const;
+	void WaitForKey();
 
 	template <typename Ty>
 	InputSession operator>>(Ty& RHS)
