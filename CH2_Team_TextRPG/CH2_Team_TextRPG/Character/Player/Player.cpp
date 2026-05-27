@@ -1,19 +1,24 @@
 ﻿#include "pch.h"
 #include "Player.h"
 #include "Data/Character/Stat.h"
+#include "Data/Character/Damage.h"
 #include "Character/Component/StatComponent.h"
-#include "Character/Component/HealthComponent.h"
+#include "Character/Component/ResourceComponent.h"
 #include "Character/Component/EquipmentComponent.h"
 #include "Character/Component/InventoryComponent.h"
+#include "Character/Component/LevelComponent.h"
+
+#define COMPONENT_CHECK(x) assert((x) && #x "Component 생성되지 않음")
 
 Player::Player()
 {
+	CharacterType = ECharacterType::Player;
+	
 	Stat = AddComponent<StatComponent>(this);
 	Equip = AddComponent<EquipmentComponent>(this);
-	Health = AddComponent<HealthComponent>(this);
-
-	CharacterType = ECharacterType::Player;
+	Resource = AddComponent<ResourceComponent>(this);
 	Inventory = AddComponent<InventoryComponent>(this);
+	Level = AddComponent<LevelComponent>(this);
 }
 
 Player::~Player()
@@ -24,31 +29,112 @@ Player::~Player()
 bool Player::Initialize()
 {
 	Stat->Initialize();
-	Health->Initialize();
+	Resource->Initialize();
 	Equip->Initialize();
-	
+
 #if DEBUG_CODE
-	Stat->SetStat(EStatType::MaxHP, 200);
+	Stat->SetStat(EStatType::Health, 200);
 	Stat->SetStat(EStatType::Attack, 30);
 	Stat->SetStat(EStatType::Defense, 0);
-	Stat->SetStat(EStatType::MaxMP, 0);
+	Stat->SetStat(EStatType::Mana, 0);
 	Stat->SetStat(EStatType::ActionSpeed, 10);
 #endif
-	
+
 	return true;
 }
 
 void Player::TakeDamage(const DamageContext& Context)
 {
-	//Not Implement.	
+	COMPONENT_CHECK(Resource);
+	COMPONENT_CHECK(Stat);
+
+	const int Defense = std::max(1, Stat->GetStat(EStatType::Defense));
+	const float ScaledAttack = static_cast<float>(Context.Attack) * Context.SkillMultiplier;
+	const float DamagePerHit = ScaledAttack / static_cast<float>(Defense);
+	const int FinalDamage = static_cast<int>(DamagePerHit) * Context.AttackCount;
+
+	Resource->Decrease(EResourceType::Health, FinalDamage);
+}
+
+void Player::Recovery(EResourceType Type, int Amount)
+{
+	COMPONENT_CHECK(Resource);
+	Resource->Increase(Type, Amount);
+}
+
+void Player::Restore(EResourceType Type)
+{
+	COMPONENT_CHECK(Resource);
+	Resource->Restore(Type);
+}
+
+void Player::RestoreAll()
+{
+	COMPONENT_CHECK(Resource);
+	Resource->Restore();
 }
 
 bool Player::IsDead() const
 {
-	return Health ? Health->IsDead() : false;
+	COMPONENT_CHECK(Resource);
+	return Resource->GetCurrent(EResourceType::Health) <= 0;
+}
+
+bool Player::IsMaxLevel() const
+{
+	COMPONENT_CHECK(Level);
+	return Level->IsMaxLevel();
 }
 
 int Player::GetStat(EStatType Type) const
 {
-	return Stat ? Stat->GetStat(Type) : INT_MAX;
+	COMPONENT_CHECK(Stat);
+	return Stat->GetStat(Type);
+}
+
+int Player::GetLevel() const
+{
+	COMPONENT_CHECK(Level);
+	return Level->GetLevel();
+}
+
+int Player::GetExp() const
+{
+	COMPONENT_CHECK(Level);
+	return Level->GetExp();
+}
+
+void Player::ApplyStat(EStatType Type, int Delta)
+{
+	if (Delta == 0)
+	{
+		GLog.AddLog("ApplyStat() -> Delta == 0");
+		GLog.PrintAllLogs();
+		return;
+	}
+	
+	if (IsResourceType(Type))
+	{
+		COMPONENT_CHECK(Resource);
+		const EResourceType ResourceType = ToResourceType(Type);
+		if (Delta > 0)
+		{
+			Resource->Increase(ResourceType, Delta);
+		}
+		else
+		{
+			Resource->Decrease(ResourceType, -Delta);
+		}
+	}
+	else
+	{
+		COMPONENT_CHECK(Stat);
+		Stat->AddStat(Type, Delta);
+	}
+}
+
+void Player::AddExp(int Amount)
+{
+	COMPONENT_CHECK(Level);
+	Level->AddExp(Amount);
 }

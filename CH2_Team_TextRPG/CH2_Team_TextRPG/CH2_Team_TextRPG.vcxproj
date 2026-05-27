@@ -144,7 +144,7 @@
   <ItemGroup>
     <ClCompile Include="Character\Character.cpp" />
     <ClCompile Include="Character\Component\EquipmentComponent.cpp" />
-    <ClCompile Include="Character\Component\HealthComponent.cpp" />
+    <ClCompile Include="Character\Component\ResourceComponent.cpp" />
     <ClCompile Include="Character\Component\LevelComponent.cpp" />
     <ClCompile Include="Character\Component\SkillComponent.cpp" />
     <ClCompile Include="Character\Component\StatComponent.cpp" />
@@ -197,6 +197,7 @@
     <ClCompile Include="Combat\State_Battle.cpp" />
     <ClCompile Include="Shop\ShopCondition.cpp" />
     <ClCompile Include="Skill\Skill.cpp" />
+    <ClCompile Include="State\State_Entry.cpp" />
     <ClCompile Include="State\State_Start.cpp" />
     <ClCompile Include="Shop\State_Shop.cpp" />
     <ClCompile Include="UI\AnimationFrameData.cpp" />
@@ -209,17 +210,20 @@
   <ItemGroup>
     <ClInclude Include="Character\Character.h" />
     <ClInclude Include="Character\Component\EquipmentComponent.h" />
-    <ClInclude Include="Character\Component\HealthComponent.h" />
+    <ClInclude Include="Character\Component\ResourceComponent.h" />
     <ClInclude Include="Character\Component\LevelComponent.h" />
     <ClInclude Include="Character\Component\SkillComponent.h" />
     <ClInclude Include="Character\Component\StatComponent.h" />
     <ClInclude Include="Character\Interface\Damageable.h" />
+    <ClInclude Include="Character\Interface\Resource.h" />
+    <ClInclude Include="Character\Interface\Levelable.h" />
     <ClInclude Include="Character\Interface\UnitStat.h" />
     <ClInclude Include="Character\Monster\MonsterFactory.h" />
     <ClInclude Include="Character\Monster\Monsters\BossMonster.h" />
     <ClInclude Include="Character\Monster\Monsters\EliteMonster.h" />
     <ClInclude Include="Character\Player\Player.h" />
     <ClInclude Include="Combat\CombatCondition.h" />
+    <ClInclude Include="Common\Deletor.h" />
     <ClInclude Include="Common\StringHelper.h" />
     <ClInclude Include="Core\Component.h" />
     <ClInclude Include="Core\Condition.h" />
@@ -267,6 +271,7 @@
     <ClInclude Include="Combat\State_Battle.h" />
     <ClInclude Include="Shop\ShopCondition.h" />
     <ClInclude Include="Skill\Skill.h" />
+    <ClInclude Include="State\State_Entry.h" />
     <ClInclude Include="State\State_Start.h" />
     <ClInclude Include="Shop\State_Shop.h" />
     <ClInclude Include="UI\AnimationFrameData.h" />

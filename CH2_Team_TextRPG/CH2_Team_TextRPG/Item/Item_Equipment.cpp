@@ -33,29 +33,29 @@ std::unordered_map<EStatType, int> const Item_Equipment::GetEquipmentStats()
 	std::unordered_map<EStatType, int> retStats;
 	retStats[EStatType::Attack] = 0;
 	retStats[EStatType::Defense] = 0;
-	retStats[EStatType::MaxHP] = 0;
-	retStats[EStatType::MaxMP] = 0;
+	retStats[EStatType::Health] = 0;
+	retStats[EStatType::Mana] = 0;
 	retStats[EStatType::ActionSpeed] = 0;
 
 	for (Effect* effect : Effects)
 	{
-		if (effect->GetTag() == EFFECT_TAG_STAT_ATTACK)
+		if (effect->GetTag() == Game::EffectTag::Stat::Attack)
 		{
 			retStats[EStatType::Attack] += effect->GetValue();
 		}
-		else if (effect->GetTag() == EFFECT_TAG_STAT_DEFENSE)
+		else if (effect->GetTag() == Game::EffectTag::Stat::Defence)
 		{
 			retStats[EStatType::Defense] += effect->GetValue();
 		}
-		else if (effect->GetTag() == EFFECT_TAG_STAT_MAXHP)
+		else if (effect->GetTag() == Game::EffectTag::Stat::Health)
 		{
-			retStats[EStatType::MaxHP] += effect->GetValue();
+			retStats[EStatType::Health] += effect->GetValue();
 		}
-		else if (effect->GetTag() == EFFECT_TAG_STAT_MAXMP)
+		else if (effect->GetTag() == Game::EffectTag::Stat::Mana)
 		{
-			retStats[EStatType::MaxMP] += effect->GetValue();
+			retStats[EStatType::Mana] += effect->GetValue();
 		}
-		else if (effect->GetTag() == EFFECT_TAG_STAT_ACTIONSPEED)
+		else if (effect->GetTag() == Game::EffectTag::Stat::ActionSpeed)
 		{
 			retStats[EStatType::ActionSpeed] += effect->GetValue();
 		}

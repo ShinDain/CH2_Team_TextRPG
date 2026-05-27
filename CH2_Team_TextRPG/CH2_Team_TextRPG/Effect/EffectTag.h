@@ -1,10 +1,23 @@
 ﻿#pragma once
 
-const std::string EFFECT_TAG_HEAL = "Heal";
-
-// Effect Stat
-const std::string EFFECT_TAG_STAT_ATTACK = "Stat_Attack";
-const std::string EFFECT_TAG_STAT_DEFENSE = "Stat_Defense";
-const std::string EFFECT_TAG_STAT_MAXHP = "Stat_MaxHP";
-const std::string EFFECT_TAG_STAT_MAXMP = "Stat_MaxMP";
-const std::string EFFECT_TAG_STAT_ACTIONSPEED = "Stat_ActionSpeed";
+namespace Game
+{
+	namespace EffectTag
+	{
+		namespace Stat
+		{
+			const std::string Attack = "Stat_Attack";
+			const std::string Defence = "Stat_Defense";
+			const std::string Health = "Stat_Health";
+			const std::string Mana = "Stat_Mana";
+			const std::string ActionSpeed = "Stat_ActionSpeed";	
+		}
+		namespace Resource
+		{
+			const std::string RestoreHeal = "Resource_RestoreHeal";
+			const std::string RestoreMana = "Resource_RestoreMana";
+			const std::string RecoveryHeal = "Resource_RecoveryHeal";
+			const std::string RecoveryMana = "Resource_RecoveryMana";
+		}
+	}	
+}

@@ -1,6 +1,8 @@
 ﻿#include "pch.h"
 #include "SkillComponent.h"
-#include "Character/Component/HealthComponent.h"	
+#include "Character/Component/ResourceComponent.h"
+#include "Character/Interface/UnitStat.h"
+#include "Data/Character/Stat.h"
 #include "Data/Table/SkillDataTable.h"
 #include "Effect/Factory/EffectFactory.h"
 
@@ -81,11 +83,15 @@ bool SkillComponent::CheckCost(uint16_t SkillId)
 		const FSkillData* skillData = skill->GetSkillData();
 		if (skillData)
 		{
-			auto manaComponent = this->FindComponent<HealthComponent>("Mana");
-			if (manaComponent && manaComponent->GetCurrent() >= skillData->ManaCost)
+			if (const auto& UnitStat = dynamic_cast<IUnitStat*>(Owner))
 			{
-				return true;
+				UnitStat->ApplyStat(EStatType::Mana, skillData->ManaCost);
 			}
+			// auto manaComponent = this->FindComponent<ResourceComponent>("Mana");
+			// if (manaComponent && manaComponent->GetCurrent() >= skillData->ManaCost)
+			// {
+			// 	return true;
+			// }
 		}
 	}
 	return false;
@@ -99,10 +105,10 @@ bool SkillComponent::ConsumeCost(uint16_t SkillId)
 		const FSkillData* skillData = skill->GetSkillData();
 		if (skillData)
 		{
-			auto manaComponent = this->FindComponent<HealthComponent>("Mana");
+			auto manaComponent = this->FindComponent<ResourceComponent>("Mana");
 			if (manaComponent)
 			{
-				manaComponent->Decrease(skillData->ManaCost);
+				manaComponent->Decrease(EResourceType::Mana, skillData->ManaCost);
 				return true;
 			}
 		}
@@ -116,10 +122,10 @@ bool SkillComponent::ConsumeCost(const Skill* InSkill)
 		const FSkillData* skillData = InSkill->GetSkillData();
 		if (skillData)
 		{
-			auto manaComponent = this->FindComponent<HealthComponent>("Mana");
+			auto manaComponent = this->FindComponent<ResourceComponent>("Mana");
 			if (manaComponent)
 			{
-				manaComponent->Decrease(skillData->ManaCost);
+				manaComponent->Decrease(EResourceType::Mana, skillData->ManaCost);
 				return true;
 			}
 		}

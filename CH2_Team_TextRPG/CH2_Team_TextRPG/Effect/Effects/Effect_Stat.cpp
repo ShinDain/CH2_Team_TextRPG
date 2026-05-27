@@ -1,93 +1,91 @@
 ﻿#include "pch.h"
 #include "Effect_Stat.h"
-#include "Character/Component/StatComponent.h"
+#include "Core/Object.h"
+#include "Character/Interface/UnitStat.h"
 #include "Data/Character/Stat.h"
 
-void AdjustOwnerStat(Object* Instigator, EStatType Type, int Delta)
+void ApplyStat(Object* StatObject, EStatType Type, int Delta)
 {
-	if (!Instigator) return;
-	if (auto Stat = Instigator->FindComponent<StatComponent>("Stat"))
-	{
-		Stat->AddStat(Type, Delta);
-	}
+	if (auto UnitStat = dynamic_cast<IUnitStat*>(StatObject))
+		UnitStat->ApplyStat(Type, Delta);
 }
 
 // --- Attack ---
 Effect_Stat_Attack::Effect_Stat_Attack(int InValue)
-	:Effect(EFFECT_TAG_STAT_ATTACK, InValue)
+	:Effect(Game::EffectTag::Stat::Attack, InValue)
 {
 }
 
 void Effect_Stat_Attack::Apply(Object* Instigator, std::vector<class Object*> Targets)
 {
-	AdjustOwnerStat(Instigator, EStatType::Attack, +Value);
+	ApplyStat(Instigator, EStatType::Attack, -Value);
 }
 
 void Effect_Stat_Attack::Remove(Object* Instigator, std::vector<class Object*> Targets)
 {
-	AdjustOwnerStat(Instigator, EStatType::Attack, -Value);
+	ApplyStat(Instigator, EStatType::Attack, -Value);
 }
 
 // --- Defense ---
 Effect_Stat_Defense::Effect_Stat_Defense(int InValue)
-	:Effect(EFFECT_TAG_STAT_DEFENSE, InValue)
+	:Effect(Game::EffectTag::Stat::Defence, InValue)
 {
 }
 
 void Effect_Stat_Defense::Apply(Object* Instigator, std::vector<class Object*> Targets)
 {
-	AdjustOwnerStat(Instigator, EStatType::Defense, +Value);
+	ApplyStat(Instigator, EStatType::Defense, +Value);
 }
 
 void Effect_Stat_Defense::Remove(Object* Instigator, std::vector<class Object*> Targets)
 {
-	AdjustOwnerStat(Instigator, EStatType::Defense, -Value);
+	ApplyStat(Instigator, EStatType::Defense, -Value);
 }
 
-// --- MaxHP ---
-Effect_Stat_MaxHP::Effect_Stat_MaxHP(int InValue)
-	:Effect(EFFECT_TAG_STAT_MAXHP, InValue)
+// --- Health ---
+Effect_Stat_Health::Effect_Stat_Health(int InValue)
+	:Effect(Game::EffectTag::Stat::Health, InValue)
 {
 }
 
-void Effect_Stat_MaxHP::Apply(Object* Instigator, std::vector<class Object*> Targets)
+void Effect_Stat_Health::Apply(Object* Instigator, std::vector<class Object*> Targets)
 {
-	AdjustOwnerStat(Instigator, EStatType::MaxHP, +Value);
+	ApplyStat(Instigator, EStatType::Health, +Value);
 }
 
-void Effect_Stat_MaxHP::Remove(Object* Instigator, std::vector<class Object*> Targets)
+void Effect_Stat_Health::Remove(Object* Instigator, std::vector<class Object*> Targets)
 {
-	AdjustOwnerStat(Instigator, EStatType::MaxHP, -Value);
+	ApplyStat(Instigator, EStatType::Health, -Value);
 }
 
-// --- MaxMP ---
-Effect_Stat_MaxMP::Effect_Stat_MaxMP(int InValue)
-	:Effect(EFFECT_TAG_STAT_MAXMP, InValue)
+// --- Mana ---
+Effect_Stat_Mana::Effect_Stat_Mana(int InValue)
+	:Effect(Game::EffectTag::Stat::Mana, InValue)
 {
 }
 
-void Effect_Stat_MaxMP::Apply(Object* Instigator, std::vector<class Object*> Targets)
+void Effect_Stat_Mana::Apply(Object* Instigator, std::vector<class Object*> Targets)
 {
-	AdjustOwnerStat(Instigator, EStatType::MaxMP, +Value);
+	ApplyStat(Instigator, EStatType::Mana, +Value);
 }
 
-void Effect_Stat_MaxMP::Remove(Object* Instigator, std::vector<class Object*> Targets)
+void Effect_Stat_Mana::Remove(Object* Instigator, std::vector<class Object*> Targets)
 {
-	AdjustOwnerStat(Instigator, EStatType::MaxMP, -Value);
+	ApplyStat(Instigator, EStatType::Mana, -Value);
 }
 
 // --- ActionSpeed ---
 Effect_Stat_ActionSpeed::Effect_Stat_ActionSpeed(int InValue)
-	:Effect(EFFECT_TAG_STAT_ACTIONSPEED, InValue)
+	:Effect(Game::EffectTag::Stat::ActionSpeed, InValue)
 {
 }
 
 void Effect_Stat_ActionSpeed::Apply(Object* Instigator, std::vector<class Object*> Targets)
 {
-	AdjustOwnerStat(Instigator, EStatType::ActionSpeed, +Value);
+	ApplyStat(Instigator, EStatType::ActionSpeed, +Value);
 }
 
 void Effect_Stat_ActionSpeed::Remove(Object* Instigator, std::vector<class Object*> Targets)
 {
-	AdjustOwnerStat(Instigator, EStatType::ActionSpeed, -Value);
+	ApplyStat(Instigator, EStatType::ActionSpeed, -Value);
 }
