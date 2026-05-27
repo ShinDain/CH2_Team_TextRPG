@@ -89,7 +89,10 @@ void Merchant::RestoreItemList()
 		ClearItemList();
 		for (const ItemData* data : SteadySellers)
 		{
-			inventory->AcquireItem(data->Id, 99);
+			if (data)
+			{
+				inventory->AcquireItem(data->Id, 99);
+			}
 		}
 
 		int curSpecialItemCnt = 0;

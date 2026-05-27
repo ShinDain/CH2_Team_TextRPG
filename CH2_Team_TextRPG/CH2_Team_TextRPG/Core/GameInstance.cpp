@@ -29,10 +29,10 @@ GameInstance& GameInstance::GetInstance()
 bool GameInstance::Initialize()
 {
 	bool Result = true;
-	Result = InitializeManager();
 	Result = InitializeDataTable();
+	Result = InitializeManager();
 
-	MainPlayer = make_shared<Player>();
+	MainPlayer = CreateObject<Player>();
 
 	IsRunning = true;
 	return Result;

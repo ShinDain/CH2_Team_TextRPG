@@ -28,7 +28,7 @@ public:
     
     InputManager* GetInputManager() const { return GameInputManager; }
 
-	std::shared_ptr<class Player> GetMainPlayer() const { return MainPlayer; }
+	class Player* GetMainPlayer() const { return MainPlayer; }
 private:
 	bool InitializeManager();
 	bool InitializeDataTable();
@@ -41,10 +41,10 @@ protected:
     
     InputManager* GameInputManager;  
 
-	std::shared_ptr<class Player> MainPlayer;
+	class Player* MainPlayer;
 };
 
-inline std::shared_ptr<class Player> GetMainPlayer()
+inline class Player* GetMainPlayer()
 {
 	return GameInstance::GetInstance().GetMainPlayer();
 }

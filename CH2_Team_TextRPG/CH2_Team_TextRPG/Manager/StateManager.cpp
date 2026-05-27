@@ -51,7 +51,13 @@ bool StateManager::ChangeState(EState InNextState)
 
 		return true;
 	}
-
+	else
+	{
+		CurrentState->Exit();
+		CurrentState->InitTransitions();
+		CurrentState->Enter();
+	}
+	
 	return false;
 }
 
