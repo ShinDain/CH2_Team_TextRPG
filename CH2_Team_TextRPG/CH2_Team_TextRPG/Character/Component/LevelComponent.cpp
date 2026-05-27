@@ -81,7 +81,7 @@ void LevelComponent::ApplyLevelupEvent(int Level)
 			for (const StatValue& Stat : Data->Stats)
 			{
 				if (Stat.Type == EStatType::Max) continue;
-				StatComp->SetStat(Stat.Type, Stat.Value);
+				StatComp->AddStat(Stat.Type, Stat.Value);
 			}
 		}
 		if (auto* Resource = dynamic_cast<IResource*>(Owner))
