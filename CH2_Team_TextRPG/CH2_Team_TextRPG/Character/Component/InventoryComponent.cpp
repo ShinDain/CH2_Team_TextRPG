@@ -99,6 +99,10 @@ bool InventoryComponent::RemoveItem(int ItemId, int InAmount)
 
 	return true;
 }
+void InventoryComponent::ClearItemList()
+{
+	ItemList.clear();
+}
 
 void InventoryComponent::Equip(int ItemId)
 {

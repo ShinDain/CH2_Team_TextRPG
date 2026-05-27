@@ -21,7 +21,7 @@ private:
 	template<typename T>
 	void AddState(EState InState);
 private:
-	BaseState* CurrentState;
+	BaseState* CurrentState = nullptr;
 	std::map<EState, BaseState*> States;
 
 public:

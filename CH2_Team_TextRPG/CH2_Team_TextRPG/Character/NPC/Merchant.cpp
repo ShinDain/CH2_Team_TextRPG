@@ -1,9 +1,15 @@
 ﻿#include "pch.h"
 #include "Merchant.h"
 #include "Character/Component/InventoryComponent.h"
+#include "Data/Table/ItemDataTable.h"
+#include "Item/ItemData.h"
+
+const std::vector<std::string> SteadySellerItemNames = {
+	"하급 체력 포션", "하급 마나 포션", "화염 병"
+};
 
 Merchant::Merchant()
-	: NPC()
+	: NPC(), SteadySellers{}, SpecialItemCnt(MERCHANT_SPECIAL_ITEM_BASIC_CNT)
 {
 }
 
@@ -14,6 +20,12 @@ Merchant::~Merchant()
 bool Merchant::Initialize()
 {
 	NPC::Initialize();
+
+	for (const std::string& itemName : SteadySellerItemNames)
+	{
+		const ItemData* data = FindItemDataByName(itemName);
+		SteadySellers.push_back(data);
+	}
 
     return false;
 }
@@ -69,7 +81,60 @@ bool Merchant::Trade(ITrade* Buyer, ITrade* Seller, int ItemId, int Price)
 	return false;
 }
 
-std::vector<FTradeItemEntry> Merchant::GetInventoryItemList()
+void Merchant::RestoreItemList()
 {
-	return std::vector<FTradeItemEntry>();
+	std::shared_ptr<InventoryComponent> inventory = GetInventory();
+	if (inventory)
+	{
+		ClearItemList();
+		for (const ItemData* data : SteadySellers)
+		{
+			inventory->AcquireItem(data->Id, 99);
+		}
+
+		int curSpecialItemCnt = 0;
+		while (curSpecialItemCnt < SpecialItemCnt)
+		{
+			const ItemData* data = RandomSpecialItem();
+			if (inventory->HaveItem(data->Id))
+				continue;
+
+			inventory->AcquireItem(data->Id);
+
+			++curSpecialItemCnt;
+		}
+	}
+}
+
+void Merchant::ClearItemList()
+{
+	std::shared_ptr<InventoryComponent> inventory = GetInventory();
+	if (inventory)
+	{
+		inventory->ClearItemList();
+	}
+}
+
+const std::vector<FInventoryEntry> Merchant::GetInventoryItemList()
+{
+	std::shared_ptr<InventoryComponent> inventory = GetInventory();
+	if(inventory)
+	{
+		return inventory->GetItemList();
+	}
+
+	return {};
+}
+
+const ItemData* Merchant::RandomSpecialItem()
+{
+	const std::vector<const ItemData*> itemDatas = ItemDataTable::GetInstance().GetItemDatas();
+
+	if (itemDatas.empty())
+		return nullptr;
+
+	size_t itemCnt = itemDatas.size();
+	int randNum = rand() % itemCnt;
+
+	return itemDatas[randNum];
 }

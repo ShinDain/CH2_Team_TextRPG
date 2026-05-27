@@ -1,6 +1,7 @@
 ﻿#include "pch.h"
 #include "StateManager.h"
 #include "State/State_Start.h"
+#include "Shop/State_Shop.h"
 
 StateManager& StateManager::GetInstance()
 {
@@ -57,6 +58,8 @@ bool StateManager::ChangeState(EState InNextState)
 bool StateManager::InitializeStates()
 {
 	AddState<State_Start>(EState::Start);
+
+	AddState<State_Shop>(EState::Shop);
 
 	return true;
 }

@@ -33,6 +33,7 @@ public:
 	void AcquireItem(int ItemId, int InAmount = 1);
 
 	bool RemoveItem(int ItemId, int InAmount = 1);
+	void ClearItemList();
 
 	void Equip(int ItemId);
 	void Equip(const std::string& ItemName);

@@ -4,7 +4,7 @@
 #include "Manager/InputManager.h"
 #include "Manager/StateManager.h"
 #include "Data/DataLoader.h"
-
+#include "Character/Player/Player.h"
 
 using namespace std;
 
@@ -31,6 +31,8 @@ bool GameInstance::Initialize()
 	bool Result = true;
 	Result = InitializeManager();
 	Result = InitializeDataTable();
+
+	MainPlayer = make_shared<Player>();
 
 	IsRunning = true;
 	return Result;
