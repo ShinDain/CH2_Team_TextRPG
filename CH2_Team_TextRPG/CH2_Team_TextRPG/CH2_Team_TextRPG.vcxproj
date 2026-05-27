@@ -190,6 +190,8 @@
     <ClCompile Include="Manager\TurnManager.cpp" />
     <ClCompile Include="Map\MapManager.cpp" />
     <ClCompile Include="Character\Monster\Monster.cpp" />
+    <ClCompile Include="Character\NPC\Merchant.cpp" />
+    <ClCompile Include="Character\NPC\NPC.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -273,6 +275,8 @@
     <ClInclude Include="Manager\TurnManager.h" />
     <ClInclude Include="Map\MapManager.h" />
     <ClInclude Include="Character\Monster\Monster.h" />
+    <ClInclude Include="Character\NPC\Merchant.h" />
+    <ClInclude Include="Character\NPC\NPC.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Data\Table\SkillDataTable.h" />
     <ClInclude Include="Combat\State_Battle.h" />
@@ -281,6 +285,7 @@
     <ClInclude Include="State\State_Entry.h" />
     <ClInclude Include="State\State_Start.h" />
     <ClInclude Include="Shop\State_Shop.h" />
+    <ClInclude Include="Character\Interface\Trade.h" />
     <ClInclude Include="UI\AnimationFrameData.h" />
     <ClInclude Include="UI\AsciiArtLoader.h" />
     <ClInclude Include="UI\BattleRenderer.h" />

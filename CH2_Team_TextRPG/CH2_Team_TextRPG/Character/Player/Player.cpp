@@ -7,6 +7,7 @@
 #include "Character/Component/EquipmentComponent.h"
 #include "Character/Component/InventoryComponent.h"
 #include "Character/Component/LevelComponent.h"
+#include "Data/Table/ItemDataTable.h"
 
 #define COMPONENT_CHECK(x) assert((x) && #x "Component 생성되지 않음")
 
@@ -41,6 +42,17 @@ bool Player::Initialize()
 #endif
 
 	return true;
+}
+
+void Player::AcquireItem(int ItemId, int InAmount)
+{
+	Inventory->AcquireItem(ItemId, InAmount);
+}
+
+void Player::AcquireItem(const std::string ItemName, int InAmount)
+{
+	const ItemData* data = FindItemDataByName(ItemName);
+	AcquireItem(data->Id, InAmount);
 }
 
 void Player::TakeDamage(const DamageContext& Context)
@@ -137,4 +149,29 @@ void Player::AddExp(int Amount)
 {
 	COMPONENT_CHECK(Level);
 	Level->AddExp(Amount);
+}
+
+bool Player::CanAfford(int Price)
+{
+	std::shared_ptr<InventoryComponent> inventoryComp = GetInventory();
+	if (inventoryComp)
+	{
+		return inventoryComp->GetOwnedGold() > Price;
+	}
+
+	return false;
+}
+
+void Player::ModifyGold(int Value)
+{
+	std::shared_ptr<InventoryComponent> inventoryComp = GetInventory();
+	if (inventoryComp)
+	{
+		inventoryComp->ModifyGold(Value);
+	}
+}
+
+std::shared_ptr<InventoryComponent> Player::GetInventory()
+{
+	return Inventory;
 }

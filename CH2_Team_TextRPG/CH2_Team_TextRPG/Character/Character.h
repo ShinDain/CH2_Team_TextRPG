@@ -5,7 +5,9 @@
 enum class ECharacterType
 {
 	Player,
-	Monster
+	Monster,
+	NPC,
+	End
 };
 
 class Character : public Object

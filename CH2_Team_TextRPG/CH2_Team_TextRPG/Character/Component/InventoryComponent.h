@@ -1,7 +1,8 @@
 ﻿#pragma once
 #include "Core/Component.h"
-#include "Data/Table/ItemDataTable.h"
+#include "Enum/EItemType.h"
 
+struct ItemData;
 class Item;
 
 struct FInventoryEntry
@@ -31,7 +32,7 @@ public:
 	void AcquireItem(const std::string ItemName, int InAmount = 1);
 	void AcquireItem(int ItemId, int InAmount = 1);
 
-	void RemoveItem(int ItemId, int InAmount = 1);
+	bool RemoveItem(int ItemId, int InAmount = 1);
 
 	void Equip(int ItemId);
 	void Equip(const std::string& ItemName);
@@ -40,7 +41,9 @@ public:
 	void Unequip(EEquipmentType EquipmentType);
 	void UnequipAll();
 
-	const std::vector<FInventoryEntry> GetItemList() const { return ItemList; }
+	bool HaveItem(int ItemId);
+
+	void ModifyGold(int Value);
 
 private:
 	bool UseItem_Implement(Item* ItemInstance, std::vector<Object*> Targets);
@@ -49,8 +52,12 @@ private:
 	void AddEntry(int ItemId, int Amount);
 	void RemoveEntry(int ItemId);
 
+public: 
+	const std::vector<FInventoryEntry> GetItemList() const { return ItemList; }
+	int GetOwnedGold() const { return OwnedGold; }
+
 private:
 	std::vector<FInventoryEntry> ItemList;
-
+	int OwnedGold;
 };
 

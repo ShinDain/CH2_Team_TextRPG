@@ -5,56 +5,65 @@ void MapManager::GenerateFixedMap()
 {
     Nodes.clear();
 
-    MapNode Start;
-    Start.Id = 0;
-    Start.Type = ENodeType::Start;
-    Start.Floor = 0;
-    Start.bIsVisited = true;
-    Start.ConnectedNodeIds = { 1 };
+    auto AddNode = [this](
+        int Id,
+        ENodeType Type,
+        int Floor,
+        std::vector<int> ConnectedNodeIds,
+        bool bIsVisited = false)
+    {
+        MapNode Node;
+        Node.Id = Id;
+        Node.Type = Type;
+        Node.Floor = Floor;
+        Node.bIsVisited = bIsVisited;
+        Node.ConnectedNodeIds = ConnectedNodeIds;
+        Nodes.push_back(Node);
+    };
 
-    MapNode Event;
-    Event.Id = 1;
-    Event.Type = ENodeType::Event;
-    Event.Floor = 1;
-    Event.ConnectedNodeIds = { 2, 3 };
+    AddNode(0, ENodeType::Start, 0, { 1, 2, 3 }, true);
 
-    MapNode Shop;
-    Shop.Id = 2;
-    Shop.Type = ENodeType::Shop;
-    Shop.Floor = 2;
-    Shop.ConnectedNodeIds = { 4 };
+    AddNode(1, ENodeType::Monster, 1, { 4, 5 });
+    AddNode(2, ENodeType::Event, 1, { 4, 5, 6 });
+    AddNode(3, ENodeType::Monster, 1, { 5, 6 });
 
-    MapNode Monster;
-    Monster.Id = 3;
-    Monster.Type = ENodeType::Monster;
-    Monster.Floor = 2;
-    Monster.ConnectedNodeIds = { 5 };
+    AddNode(4, ENodeType::Shop, 2, { 7, 8 });
+    AddNode(5, ENodeType::Monster, 2, { 7, 8, 9 });
+    AddNode(6, ENodeType::Event, 2, { 8, 9 });
 
-    MapNode Rest;
-    Rest.Id = 4;
-    Rest.Type = ENodeType::Rest;
-    Rest.Floor = 3;
-    Rest.ConnectedNodeIds = { 6 };
+    AddNode(7, ENodeType::Monster, 3, { 10, 11 });
+    AddNode(8, ENodeType::Event, 3, { 10, 11, 12 });
+    AddNode(9, ENodeType::Rest, 3, { 11, 12 });
 
-    MapNode Elite;
-    Elite.Id = 5;
-    Elite.Type = ENodeType::Elite;
-    Elite.Floor = 3;
-    Elite.ConnectedNodeIds = { 6 };
+    AddNode(10, ENodeType::Elite, 4, { 13, 14 });
+    AddNode(11, ENodeType::Monster, 4, { 13, 14, 15 });
+    AddNode(12, ENodeType::Shop, 4, { 14, 15 });
 
-    MapNode Boss;
-    Boss.Id = 6;
-    Boss.Type = ENodeType::Boss;
-    Boss.Floor = 4;
-    Boss.ConnectedNodeIds = {};
+    AddNode(13, ENodeType::Event, 5, { 16, 17 });
+    AddNode(14, ENodeType::Monster, 5, { 16, 17, 18 });
+    AddNode(15, ENodeType::Shop, 5, { 17, 18 });
 
-    Nodes.push_back(Start);
-    Nodes.push_back(Event);
-    Nodes.push_back(Shop);
-    Nodes.push_back(Monster);
-    Nodes.push_back(Rest);
-    Nodes.push_back(Elite);
-    Nodes.push_back(Boss);
+    AddNode(16, ENodeType::Rest, 6, { 19, 20 });
+    AddNode(17, ENodeType::Elite, 6, { 19, 20, 21 });
+    AddNode(18, ENodeType::Monster, 6, { 20, 21 });
+
+    AddNode(19, ENodeType::Monster, 7, { 22, 23 });
+    AddNode(20, ENodeType::Event, 7, { 22, 23, 24 });
+    AddNode(21, ENodeType::Shop, 7, { 23, 24 });
+
+    AddNode(22, ENodeType::Elite, 8, { 25, 26 });
+    AddNode(23, ENodeType::Monster, 8, { 25, 26, 27 });
+    AddNode(24, ENodeType::Rest, 8, { 26, 27 });
+
+    AddNode(25, ENodeType::Event, 9, { 28, 29 });
+    AddNode(26, ENodeType::Monster, 9, { 28, 29, 30 });
+    AddNode(27, ENodeType::Rest, 9, { 29, 30 });
+
+    AddNode(28, ENodeType::Rest, 10, { 31 });
+    AddNode(29, ENodeType::Elite, 10, { 31 });
+    AddNode(30, ENodeType::Monster, 10, { 31 });
+
+    AddNode(31, ENodeType::Boss, 11, {});
 
     CurrentNodeId = 0;
 }
@@ -170,15 +179,29 @@ void MapManager::PrintSimpleMap() const
 {
     std::cout << "\n=== Dungeon Map ===\n\n";
 
-    std::cout << "              [Boss:6]\n";
-    std::cout << "              /      \\\n";
-    std::cout << "        [Rest:4]   [Elite:5]\n";
-    std::cout << "           |          |\n";
-    std::cout << "        [Shop:2]  [Monster:3]\n";
-    std::cout << "             \\      /\n";
-    std::cout << "            [Event:1]\n";
-    std::cout << "                |\n";
-    std::cout << "            [Start:0]\n\n";
+    std::cout << "                              [Boss:31]\n";
+    std::cout << "                         /       |       \\\n";
+    std::cout << "                  [Rest:28] [Elite:29] [Monster:30]\n";
+    std::cout << "                    /       |       \\\n";
+    std::cout << "                [Event:25] [Monster:26] [Rest:27]\n";
+    std::cout << "                    \\       |       /\n";
+    std::cout << "                [Elite:22] [Monster:23] [Rest:24]\n";
+    std::cout << "                    /       |       \\\n";
+    std::cout << "              [Monster:19] [Event:20] [Shop:21]\n";
+    std::cout << "                    \\       |       /\n";
+    std::cout << "                [Rest:16] [Elite:17] [Monster:18]\n";
+    std::cout << "                    /       |       \\\n";
+    std::cout << "               [Event:13] [Monster:14] [Shop:15]\n";
+    std::cout << "                    \\       |       /\n";
+    std::cout << "               [Elite:10] [Monster:11] [Shop:12]\n";
+    std::cout << "                    /       |       \\\n";
+    std::cout << "                [Monster:7] [Event:8] [Rest:9]\n";
+    std::cout << "                    \\       |       /\n";
+    std::cout << "                 [Shop:4] [Monster:5] [Event:6]\n";
+    std::cout << "                    /       |       \\\n";
+    std::cout << "                [Monster:1] [Event:2] [Monster:3]\n";
+    std::cout << "                         \\    |    /\n";
+    std::cout << "                              [Start:0]\n\n";
 
     std::cout << "Current Position: Node " << CurrentNodeId << "\n";
 }
@@ -210,7 +233,7 @@ std::string MapManager::NodeTypeToString(ENodeType Type)
     case ENodeType::Shop:
         return "상점";
     case ENodeType::Treasure:
-        return "보물";
+        return "이벤트";
     case ENodeType::Rest:
         return "휴식";
     case ENodeType::Boss:

@@ -9,6 +9,8 @@
 InventoryComponent::InventoryComponent(Object* InOwner)
 	:Component(InOwner, "Inventory")
 {
+	ItemList = {};
+	OwnedGold = 0;
 }
 
 InventoryComponent::~InventoryComponent()
@@ -82,15 +84,20 @@ void InventoryComponent::AcquireItem(int ItemId, int InAmount)
 	entry->Amount += InAmount;
 }
 
-void InventoryComponent::RemoveItem(int ItemId, int InAmount)
+bool InventoryComponent::RemoveItem(int ItemId, int InAmount)
 {
 	FInventoryEntry* entry = FindInventoryItemEntry(ItemId);
+	if (entry == nullptr)
+		return false;
+
 	entry->Amount -= InAmount;
 
 	if (entry->Amount <= 0)
 	{
 		RemoveEntry(entry->Id);
 	}
+
+	return true;
 }
 
 void InventoryComponent::Equip(int ItemId)
@@ -147,6 +154,24 @@ void InventoryComponent::UnequipAll()
 	for (int i = 0; i < (int)EEquipmentType::End; ++i)
 	{
 		Unequip((EEquipmentType)i);
+	}
+}
+
+bool InventoryComponent::HaveItem(int ItemId)
+{
+	FInventoryEntry* entry = FindInventoryItemEntry(ItemId);
+	if (entry == nullptr)
+		return false;
+
+	return true;
+}
+
+void InventoryComponent::ModifyGold(int Value)
+{
+	OwnedGold += Value;
+	if (OwnedGold < 0)
+	{
+		OwnedGold = 0;
 	}
 }
 

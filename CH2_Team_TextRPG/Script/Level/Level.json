@@ -1,0 +1,65 @@
+﻿[
+  {
+    "Level": 2, "Exp": 100,
+    "Stats": [
+      { "Type": "Health", "Value": 20 },
+      { "Type": "Attack", "Value": 5  }
+    ]
+  },
+  {
+    "Level": 3, "Exp": 100,
+    "Stats": [
+      { "Type": "Health", "Value": 40 },
+      { "Type": "Attack", "Value": 10 }
+    ]
+  },
+  {
+    "Level": 4, "Exp": 100,
+    "Stats": [
+      { "Type": "Health", "Value": 60 },
+      { "Type": "Attack", "Value": 15 }
+    ]
+  },
+  {
+    "Level": 5, "Exp": 100,
+    "Stats": [
+      { "Type": "Health", "Value": 80 },
+      { "Type": "Attack", "Value": 20 }
+    ]
+  },
+  {
+    "Level": 6, "Exp": 100,
+    "Stats": [
+      { "Type": "Health", "Value": 100 },
+      { "Type": "Attack", "Value": 25  }
+    ]
+  },
+  {
+    "Level": 7, "Exp": 100,
+    "Stats": [
+      { "Type": "Health", "Value": 120 },
+      { "Type": "Attack", "Value": 30  }
+    ]
+  },
+  {
+    "Level": 8, "Exp": 100,
+    "Stats": [
+      { "Type": "Health", "Value": 140 },
+      { "Type": "Attack", "Value": 35  }
+    ]
+  },
+  {
+    "Level": 9, "Exp": 100,
+    "Stats": [
+      { "Type": "Health", "Value": 160 },
+      { "Type": "Attack", "Value": 40  }
+    ]
+  },
+  {
+    "Level": 10, "Exp": 100,
+    "Stats": [
+      { "Type": "Health", "Value": 180 },
+      { "Type": "Attack", "Value": 45  }
+    ]
+  }
+]

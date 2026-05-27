@@ -81,7 +81,7 @@ void GameProgress::HandleCurrentNodeEvent(const MapManager& Map, LogManager& Log
 		break;
 
 	case ENodeType::Treasure:
-		Log.AddLog("보물 상자를 발견했습니다.");
+		Log.AddLog("이벤트 지점에 도착했습니다.");
 		break;
 
 	case ENodeType::Rest:

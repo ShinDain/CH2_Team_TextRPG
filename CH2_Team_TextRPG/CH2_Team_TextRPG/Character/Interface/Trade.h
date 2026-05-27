@@ -1,0 +1,15 @@
+﻿#pragma once
+
+class InventoryComponent;
+
+class ITrade
+{
+public:
+	virtual ~ITrade() = default;
+
+	virtual bool CanAfford(int Price) = 0;
+	virtual void ModifyGold(int Value) = 0;
+
+	virtual std::shared_ptr<InventoryComponent> GetInventory() = 0;
+};
+
