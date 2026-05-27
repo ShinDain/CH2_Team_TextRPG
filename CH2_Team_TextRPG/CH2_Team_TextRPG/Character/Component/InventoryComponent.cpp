@@ -135,7 +135,6 @@ void InventoryComponent::Unequip(EEquipmentType EquipmentType)
 	if (EquipComp)
 	{
 		const ItemData* unequipedItemData = EquipComp->OnUnequip(EquipmentType);
-		AcquireItem(unequipedItemData->Id, 1);
 	}
 }
 

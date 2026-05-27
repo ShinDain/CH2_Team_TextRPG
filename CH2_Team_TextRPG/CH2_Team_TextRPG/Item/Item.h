@@ -21,6 +21,7 @@ public:
 	
 	const std::string& GetName() const { return Data->Name; }
 	int GetPrice() const { return Data->Price; }
+	int GetId() const { return Data->Id; }
 protected:
 	const ItemData* Data;
 	std::vector<Effect*> Effects;

@@ -1,4 +1,4 @@
-#include "pch.h"
+﻿#include "pch.h"
 
 #include "EquipmentComponent.h"
 #include "Data/Table/ItemDataTable.h"
@@ -7,6 +7,7 @@
 #include "Effect/Effect.h"
 #include "Effect/Factory/EffectFactory.h"
 #include "Item/Item_Equipment.h"
+#include "Character/Component/InventoryComponent.h"
 
 EquipmentComponent::EquipmentComponent(Object* InOwner) :
 	Component(InOwner, "Equipment")
@@ -81,6 +82,10 @@ void EquipmentComponent::OnEquip(Item_Equipment* InEquipment)
 
 const ItemData* EquipmentComponent::OnUnequip(EEquipmentType Type)
 {
+	std::shared_ptr<InventoryComponent> inventoryComp = Owner->FindComponent<InventoryComponent>("Inventory");
+	if (inventoryComp == nullptr)
+		return nullptr;
+
 	const ItemData* Ret = nullptr;
 	if (EquipmentSlots[Type] != nullptr)
 	{
@@ -89,6 +94,8 @@ const ItemData* EquipmentComponent::OnUnequip(EEquipmentType Type)
 
 		SlotItem->OnUnequip(Owner);
 		EquipmentSlots[Type] = nullptr;
+
+		inventoryComp->AcquireItem(Ret->Id, 1);
 	}
 
 	return Ret;

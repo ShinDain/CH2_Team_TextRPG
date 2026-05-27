@@ -7,6 +7,7 @@
 #include "Manager/InputManager.h"
 #include "Manager/ObjectManager.h"
 #include "Item/Item.h"
+#include "Item/Item_Equipment.h"
 #include "Character/Component/InventoryComponent.h"
 #include "Character/Component/EquipmentComponent.h"
 #include "Enum/EItemType.h"
@@ -123,25 +124,6 @@ void State_Shop::HandleSellAction()
 	GInput << "플레이어 현재 Gold : " << mainPlayer->GetInventory()->GetOwnedGold() << "G\n";
 }
 
-void State_Shop::HandleInventoryAction()
-{
-	//Player* mainPlayer = GetMainPlayer();
-
-	//std::vector<FInventoryEntry> itemList = mainPlayer->GetInventory()->GetItemList();
-	//GInput << "\n 장착중인 플레이어 아이템\n";
-
-
-	//int idx = 1;
-	//for (FInventoryEntry entry : itemList)
-	//{
-	//	int sellPrice = (float)(entry.ItemInstance->GetPrice()) * 0.6f;
-
-	//	GInput << idx << ". " << entry.ItemInstance->GetName() << " " << entry.Amount << "개, 개당 판매가 " << sellPrice << "G\n";
-	//	++idx;
-	//}
-	CurrentAction = Shop::EActionType::Menu;
-}
-
 void State_Shop::HandleTrade(ITrade* Buyer, ITrade* Seller)
 {
 	std::vector<std::pair<int, int>> sellerItemList = {};
@@ -184,6 +166,150 @@ void State_Shop::HandleTrade(ITrade* Buyer, ITrade* Seller)
 		else
 		{
 			GInput << "거래에 실패했습니다. 다시 시도해주세요.\n";
+		}
+	}
+}
+
+void State_Shop::HandleInventoryAction()
+{
+	Player* mainPlayer = GetMainPlayer();
+	if (mainPlayer == nullptr)
+	{
+		CurrentAction = Shop::EActionType::Menu;
+		return;
+	}
+	std::shared_ptr<EquipmentComponent> equipmentComp = mainPlayer->FindComponent<EquipmentComponent>("Equipment");
+	std::shared_ptr<InventoryComponent> inventoryComp = mainPlayer->GetInventory();
+	if (equipmentComp == nullptr
+		|| inventoryComp == nullptr)
+	{
+		CurrentAction = Shop::EActionType::Menu;
+		return;
+	}
+
+	int idx = 1;
+	std::vector<int> playerItemList = {};
+	auto equipments = equipmentComp->GetEquipmentSlots();
+	GInput << "\n 장착중인 플레이어 아이템\n";
+	for (const auto& pair : equipments)
+	{
+		Item_Equipment* equipment = pair.second;
+		if (equipment)
+		{
+			const ItemData* data = equipment->GetItemData();
+			if (data)
+			{
+				playerItemList.push_back(data->Id);
+				GInput << idx << ". " << equipment->GetName() << "\n";
+				++idx;
+			}
+		}
+	}
+	int equipmentCnt = idx;
+
+	GInput << "\n 인벤토리 아이템\n";
+	std::vector<FInventoryEntry> itemList = inventoryComp->GetItemList();
+
+	for (FInventoryEntry entry : itemList)
+	{
+		playerItemList.push_back(entry.Id);
+		GInput << idx << ". " << entry.ItemInstance->GetName() << " " << entry.Amount << "개\n";
+		++idx;
+	}
+	GInput << idx << ". " << "뒤로 가기\n";
+	int exitIdx = idx;
+
+
+	int input = -1;
+	GInput >> input;
+
+	if (GInput.IsFailed() || input < 1 || input > exitIdx)
+	{
+		GInput << "유효하지 않은 입력입니다. 다시 입력해주세요.\n";
+		return;
+	}
+
+	if (input == exitIdx)
+	{
+		CurrentAction = Shop::EActionType::Menu;
+	}
+	else
+	{
+		const ItemData* data = FindItemDataById(playerItemList[input - 1]);
+		if (data == nullptr)
+		{
+			GInput << "유효하지 않은 입력입니다. 다시 입력해주세요.\n";
+			return;
+		}
+
+		if (input < equipmentCnt)
+		{
+			GInput << data->Name << "을 해제하시겠습니까? : 1. 네   2. 아니요\n";
+
+			while (true)
+			{
+				GInput >> input;
+
+				if (GInput.IsFailed() || input < 1 || input > 2)
+				{
+					GInput << "유효하지 않은 입력입니다. 다시 입력해주세요.\n";
+					continue;
+				}
+
+				if (input == 1)
+				{
+					inventoryComp->Unequip(data->Id);
+				}
+
+				break;
+			}
+		}
+		else
+		{
+			if (data->Category == EItemCategory::Equipment)
+			{
+				GInput << data->Name << "을 장착하시겠습니까? : 1. 네   2. 아니요\n";
+
+				while (true)
+				{
+					GInput >> input;
+
+					if (GInput.IsFailed() || input < 1 || input > 2)
+					{
+						GInput << "유효하지 않은 입력입니다. 다시 입력해주세요.\n";
+						continue;
+					}
+
+					if (input == 1)
+					{
+						inventoryComp->Equip(data->Id);
+					}
+
+					break;
+				}
+			}
+			else if (data->Category == EItemCategory::Consumable)
+			{
+				GInput << data->Name << "을 사용하시겠습니까? : 1. 네   2. 아니요\n";
+
+				while (true)
+				{
+					GInput >> input;
+
+					if (GInput.IsFailed() || input < 1 || input > 2)
+					{
+						GInput << "유효하지 않은 입력입니다. 다시 입력해주세요.\n";
+						continue;
+					}
+
+					if (input == 1)
+					{
+						inventoryComp->UseItem(data->Id, { mainPlayer });
+					}
+
+					break;
+				}
+			}
 		}
 	}
 }
