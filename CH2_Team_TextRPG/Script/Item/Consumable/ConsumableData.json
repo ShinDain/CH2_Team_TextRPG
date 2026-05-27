@@ -4,7 +4,7 @@
     "TargetType": "SINGLE_ALLY",
     "Duration": 0,
     "EffectDatas": [
-      { "Tag": "Heal", "Value": 30 }
+      { "Tag": "Resource_RecoveryHeal", "Value": 30 }
     ]
   },
   {
@@ -12,7 +12,7 @@
     "TargetType": "SINGLE_ALLY",
     "Duration": 0,
     "EffectDatas": [
-      { "Tag": "ManaRegen", "Value": 20 }
+      { "Tag": "Resource_RecoveryMana", "Value": 20 }
     ]
   },
   {
@@ -20,7 +20,7 @@
     "TargetType": "SINGLE_ALLY",
     "Duration": 3,
     "EffectDatas": [
-      { "Tag": "HealOverTurn", "Value": 15 }
+      { "Tag": "Resource_RecoveryHeal", "Value": 15 }
     ]
   },
   {
@@ -28,15 +28,15 @@
     "TargetType": "SINGLE_ALLY",
     "Duration": 3,
     "EffectDatas": [
-      { "Tag": "Buff_Atk", "Value": 15 }
+      { "Tag": "Buff_Attack", "Value": 15 }
     ]
   },
   {
     "Id": 1005,
-    "TargetType": "ALL_ALLIES",
-    "Duration": 2,
+    "TargetType": "SINGLE_ALLY",
+    "Duration": 3,
     "EffectDatas": [
-      { "Tag": "Buff_CritRate", "Value": 20 }
+      { "Tag": "Buff_Defense", "Value": 25 }
     ]
   },
   {
@@ -44,7 +44,7 @@
     "TargetType": "SELF",
     "Duration": 2,
     "EffectDatas": [
-      { "Tag": "Buff_Speed", "Value": 30 }
+      { "Tag": "Buff_ActionSpeed", "Value": 30 }
     ]
   },
   {
@@ -52,24 +52,24 @@
     "TargetType": "SINGLE_ENEMY",
     "Duration": 0,
     "EffectDatas": [
-      { "Tag": "Damage_Fire", "Value": 50 }
+      { "Tag": "Damage", "Value": 50 }
     ]
   },
   {
     "Id": 1008,
     "TargetType": "ALL_ENEMIES",
-    "Duration": 0,
+    "Duration": 1,
     "EffectDatas": [
-      { "Tag": "CrowdControl_Stun", "Value": 1 }
+      { "Tag": "CC_Stun", "Value": 1 }
     ]
   },
   {
     "Id": 1009,
     "TargetType": "SINGLE_ENEMY",
-    "Duration": 0,
+    "Duration": 1,
     "EffectDatas": [
-      { "Tag": "Damage_Lightning", "Value": 120 },
-      { "Tag": "CrowdControl_Paralyze", "Value": 1 }
+      { "Tag": "Damage", "Value": 120 },
+      { "Tag": "CC_Stun", "Value": 1 }
     ]
   },
   {
@@ -78,6 +78,14 @@
     "Duration": 1,
     "EffectDatas": [
       { "Tag": "Buff_Invincible", "Value": 1 }
+    ]
+  },
+  {
+    "Id": 1011,
+    "TargetType": "ALL_ALLIES",
+    "Duration": 2,
+    "EffectDatas": [
+      { "Tag": "Buff_Attack", "Value": 35 }
     ]
   }
 ]

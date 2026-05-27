@@ -175,6 +175,10 @@
     <ClCompile Include="Effect\Effects\Effect_Stat.cpp" />
     <ClCompile Include="Effect\Effects\Effect_Damage.cpp" />
     <ClCompile Include="Effect\Effects\Effect_Poison.cpp" />
+    <ClCompile Include="Effect\Effects\Buff\Effect_Buff_Stat.cpp" />
+    <ClCompile Include="Effect\Effects\CC\Effect_CC_Stun.cpp" />
+    <ClCompile Include="Effect\Effects\Effect_ManaRegen.cpp" />
+    <ClCompile Include="Effect\Effects\Buff\Effect_Buff_Invincible.cpp" />
     <ClCompile Include="Item\Item_Consumable.cpp" />
     <ClCompile Include="Item\Item_Equipment.cpp" />
     <ClCompile Include="Item\Item_Ingredient.cpp" />
@@ -247,6 +251,10 @@
     <ClInclude Include="Effect\Effects\Effect_Stat.h" />
     <ClInclude Include="Effect\Effects\Effect_Damage.h" />
     <ClInclude Include="Effect\Effects\Effect_Poison.h" />
+    <ClInclude Include="Effect\Effects\Buff\Effect_Buff_Stat.h" />
+    <ClInclude Include="Effect\Effects\CC\Effect_CC_Stun.h" />
+    <ClInclude Include="Effect\Effects\Effect_ManaRegen.h" />
+    <ClInclude Include="Effect\Effects\Buff\Effect_Buff_Invincible.h" />
     <ClInclude Include="Enum\EItemType.h" />
     <ClInclude Include="Item\ItemData.h" />
     <ClInclude Include="Item\Item_Consumable.h" />
