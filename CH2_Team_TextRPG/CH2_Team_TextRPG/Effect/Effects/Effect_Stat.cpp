@@ -1,4 +1,4 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "Effect_Stat.h"
 #include "Character/Component/StatComponent.h"
 #include "Data/Character/Stat.h"
@@ -19,7 +19,7 @@ namespace
 
 // --- Attack ---
 Effect_Stat_Attack::Effect_Stat_Attack(int InValue)
-	:Effect(EFFECT_TAG_STAT_ATTACK), Value(InValue)
+	:Effect(EFFECT_TAG_STAT_ATTACK, InValue)
 {
 }
 
@@ -35,7 +35,7 @@ void Effect_Stat_Attack::Remove(Object* Instigator, std::vector<class Object*> T
 
 // --- Defense ---
 Effect_Stat_Defense::Effect_Stat_Defense(int InValue)
-	:Effect(EFFECT_TAG_STAT_DEFENSE), Value(InValue)
+	:Effect(EFFECT_TAG_STAT_DEFENSE, InValue)
 {
 }
 
@@ -51,7 +51,7 @@ void Effect_Stat_Defense::Remove(Object* Instigator, std::vector<class Object*> 
 
 // --- MaxHP ---
 Effect_Stat_MaxHP::Effect_Stat_MaxHP(int InValue)
-	:Effect(EFFECT_TAG_STAT_MAXHP), Value(InValue)
+	:Effect(EFFECT_TAG_STAT_MAXHP, InValue)
 {
 }
 
@@ -67,7 +67,7 @@ void Effect_Stat_MaxHP::Remove(Object* Instigator, std::vector<class Object*> Ta
 
 // --- MaxMP ---
 Effect_Stat_MaxMP::Effect_Stat_MaxMP(int InValue)
-	:Effect(EFFECT_TAG_STAT_MAXMP), Value(InValue)
+	:Effect(EFFECT_TAG_STAT_MAXMP, InValue)
 {
 }
 
@@ -83,7 +83,7 @@ void Effect_Stat_MaxMP::Remove(Object* Instigator, std::vector<class Object*> Ta
 
 // --- ActionSpeed ---
 Effect_Stat_ActionSpeed::Effect_Stat_ActionSpeed(int InValue)
-	:Effect(EFFECT_TAG_STAT_ACTIONSPEED), Value(InValue)
+	:Effect(EFFECT_TAG_STAT_ACTIONSPEED, InValue)
 {
 }
 

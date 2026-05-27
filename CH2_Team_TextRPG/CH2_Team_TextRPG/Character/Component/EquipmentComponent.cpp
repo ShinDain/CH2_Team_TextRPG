@@ -40,6 +40,29 @@ bool EquipmentComponent::Initialize()
 	return true;
 }
 
+std::unordered_map<EStatType, int> EquipmentComponent::GetEquipmentStats()
+{
+	std::unordered_map<EStatType, int> retStat;
+	retStat[EStatType::Attack] = 0;
+	retStat[EStatType::Defense] = 0;
+	retStat[EStatType::MaxHP] = 0;
+	retStat[EStatType::MaxMP] = 0;
+	retStat[EStatType::ActionSpeed] = 0;
+
+	for (const auto& pair : EquipmentSlots)
+	{
+		Item_Equipment* equipment = pair.second;
+		for (auto& pair : equipment->GetEquipmentStats())
+		{
+			EStatType type = pair.first;
+			int value = pair.second;
+			retStat[type] += value;
+		}
+	}
+
+    return retStat;
+}
+
 void EquipmentComponent::OnEquip(Item_Equipment* InEquipment)
 {
 	if (InEquipment == nullptr)

@@ -27,3 +27,39 @@ void Item_Equipment::OnUnequip(Object* Owner)
 		effect->Remove(Owner, std::vector<Object*>{Owner});
 	}
 }
+
+std::unordered_map<EStatType, int> const Item_Equipment::GetEquipmentStats()
+{
+	std::unordered_map<EStatType, int> retStats;
+	retStats[EStatType::Attack] = 0;
+	retStats[EStatType::Defense] = 0;
+	retStats[EStatType::MaxHP] = 0;
+	retStats[EStatType::MaxMP] = 0;
+	retStats[EStatType::ActionSpeed] = 0;
+
+	for (Effect* effect : Effects)
+	{
+		if (effect->GetTag() == EFFECT_TAG_STAT_ATTACK)
+		{
+			retStats[EStatType::Attack] += effect->GetValue();
+		}
+		else if (effect->GetTag() == EFFECT_TAG_STAT_DEFENSE)
+		{
+			retStats[EStatType::Defense] += effect->GetValue();
+		}
+		else if (effect->GetTag() == EFFECT_TAG_STAT_MAXHP)
+		{
+			retStats[EStatType::MaxHP] += effect->GetValue();
+		}
+		else if (effect->GetTag() == EFFECT_TAG_STAT_MAXMP)
+		{
+			retStats[EStatType::MaxMP] += effect->GetValue();
+		}
+		else if (effect->GetTag() == EFFECT_TAG_STAT_ACTIONSPEED)
+		{
+			retStats[EStatType::ActionSpeed] += effect->GetValue();
+		}
+	}
+
+	return retStats;
+}

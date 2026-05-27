@@ -51,5 +51,6 @@ private:
 
 private:
 	std::vector<FInventoryEntry> ItemList;
+
 };
 

@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include "Item/Item.h"
 #include "ItemData.h"
+#include "Data/Character/Stat.h"
 
 class Item_Equipment : public Item
 {
@@ -15,6 +16,8 @@ private:
 	virtual void OnEquip(Object* Owner);
 	virtual void OnUnequip(Object* Owner);
 
+public:
+	std::unordered_map<EStatType, int> const GetEquipmentStats();
 	const FEquipmentItemData* GetEquipmentData() { return EquipmentData; }
 private:
 	const FEquipmentItemData* EquipmentData;

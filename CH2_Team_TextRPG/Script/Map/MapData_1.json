@@ -1,0 +1,128 @@
+[
+  {
+    "Floor": 1,
+    "Encounters": [
+      {
+        "Id": 1,
+        "Count": 2
+      }
+    ]
+  },
+  {
+    "Floor": 2,
+    "Encounters": [
+      {
+        "Id": 1,
+        "Count": 1
+      },
+      {
+        "Id": 2,
+        "Count": 2
+      }
+    ]
+  },
+  {
+    "Floor": 3,
+    "Encounters": [
+      {
+        "Id": 2,
+        "Count": 2
+      },
+      {
+        "Id": 3,
+        "Count": 1
+      }
+    ]
+  },
+  {
+    "Floor": 4,
+    "Encounters": [
+      {
+        "Id": 4,
+        "Count": 1
+      },
+      {
+        "Id": 2,
+        "Count": 2
+      }
+    ]
+  },
+  {
+    "Floor": 5,
+    "Encounters": [
+      {
+        "Id": 3,
+        "Count": 1
+      },
+      {
+        "Id": 5,
+        "Count": 2
+      }
+    ]
+  },
+  {
+    "Floor": 6,
+    "Encounters": [
+      {
+        "Id": 4,
+        "Count": 1
+      },
+      {
+        "Id": 6,
+        "Count": 1
+      }
+    ]
+  },
+  {
+    "Floor": 7,
+    "Encounters": [
+      {
+        "Id": 5,
+        "Count": 2
+      },
+      {
+        "Id": 7,
+        "Count": 1
+      }
+    ]
+  },
+  {
+    "Floor": 8,
+    "Encounters": [
+      {
+        "Id": 6,
+        "Count": 1
+      },
+      {
+        "Id": 8,
+        "Count": 2
+      }
+    ]
+  },
+  {
+    "Floor": 9,
+    "Encounters": [
+      {
+        "Id": 7,
+        "Count": 1
+      },
+      {
+        "Id": 9,
+        "Count": 1
+      }
+    ]
+  },
+  {
+    "Floor": 10,
+    "Encounters": [
+      {
+        "Id": 8,
+        "Count": 1
+      },
+      {
+        "Id": 10,
+        "Count": 1
+      }
+    ]
+  }
+]

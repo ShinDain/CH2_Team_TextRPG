@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include "Core/Component.h"
 #include "Enum/EItemType.h"
+#include "Data/Character/Stat.h"
 
 class Item;
 enum class EEquipmentType;
@@ -19,6 +20,9 @@ public:
 	
 	bool Initialize() override;
 
+	std::unordered_map<EStatType, int> GetEquipmentStats();
+
+	const std::unordered_map<EEquipmentType, Item_Equipment*> GetEquipmentSlots() { return EquipmentSlots; }
 private:
 	void OnEquip(Item_Equipment* InEquipment);
 	const ItemData* OnUnequip(EEquipmentType Type);
