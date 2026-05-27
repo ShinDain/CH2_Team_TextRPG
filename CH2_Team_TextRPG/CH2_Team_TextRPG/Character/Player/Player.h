@@ -21,7 +21,6 @@ public:
 	void AcquireItem(int ItemId, int InAmount = 1);
 	void AcquireItem(const std::string ItemName, int InAmount = 1);
 
-	// IDamageable's interface
 public:
 	void TakeDamage(const DamageContext& Context) override;
 	void Recovery(EResourceType Type, int Amount) override;
@@ -30,13 +29,11 @@ public:
 	
 	bool IsDead() const override;
 
-	// IUnitStat's interface
 public:
 	int GetStat(EStatType Type) const override;
 	int GetLevel() const override;
 	int GetExp() const override;
 
-	// ITrade's Interface
 public:
 	virtual bool CanAfford(int Price) override;
 	virtual void ModifyGold(int Value) override;

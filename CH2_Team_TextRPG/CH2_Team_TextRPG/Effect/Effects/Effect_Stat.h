@@ -64,7 +64,7 @@ inline Effect* CreateStat_DefenseInstance(int Value)
 	return new Effect_Stat_Defense(Value);
 }
 
-inline bool bStat_DefenseEffectRegister = EffectFactory::RegisterEffect(Game::EffectTag::Stat::Defence, CreateStat_DefenseInstance);
+inline bool bStat_DefenseEffectRegister = EffectFactory::RegisterEffect(Game::EffectTag::Stat::Defense, CreateStat_DefenseInstance);
 
 inline Effect* CreateStat_HealthInstance(int Value)
 {

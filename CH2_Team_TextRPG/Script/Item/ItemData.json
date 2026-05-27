@@ -29,10 +29,10 @@
   },
   {
     "Id": 1005,
-    "Name": "집중의 주문서",
+    "Name": "강철 보호 주문서",
     "Category": "Consumable",
     "Grade": "Uncommon",
-    "Price": 180
+    "Price": 120
   },
   {
     "Id": 1006,
@@ -68,6 +68,13 @@
     "Category": "Consumable",
     "Grade": "Epic",
     "Price": 800
+  },
+  {
+    "Id": 1011,
+    "Name": "광폭의 비약",
+    "Category": "Consumable",
+    "Grade": "Rare",
+    "Price": 250
   },
   {
     "Id": 2001,

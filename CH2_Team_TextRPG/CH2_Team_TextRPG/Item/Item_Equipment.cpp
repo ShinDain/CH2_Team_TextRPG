@@ -43,7 +43,7 @@ std::unordered_map<EStatType, int> const Item_Equipment::GetEquipmentStats()
 		{
 			retStats[EStatType::Attack] += effect->GetValue();
 		}
-		else if (effect->GetTag() == Game::EffectTag::Stat::Defence)
+		else if (effect->GetTag() == Game::EffectTag::Stat::Defense)
 		{
 			retStats[EStatType::Defense] += effect->GetValue();
 		}

@@ -2,18 +2,18 @@
 #include "Effect/Effect.h"
 #include "Effect/Factory/EffectFactory.h"
 
-class Effect_Heal : public Effect
+class Effect_CC_Stun : public Effect
 {
 public:
-	Effect_Heal(int InValue);
+	Effect_CC_Stun(int InValue);
 
 	virtual void Apply(class Object* Instigator, std::vector<class Object*> Targets) override;
 	virtual void Remove(class Object* Instigator, std::vector<class Object*> Targets) override;
 };
 
-inline Effect* CreateHealEffectInstance(int Value)
+inline Effect* CreateCC_StunEffectInstance(int Value)
 {
-	return new Effect_Heal(Value);
+	return new Effect_CC_Stun(Value);
 }
 
-inline bool bHealEffectRegister = EffectFactory::RegisterEffect(Game::EffectTag::Resource::RecoveryHeal, CreateHealEffectInstance);
+inline bool bCC_StunEffectRegister = EffectFactory::RegisterEffect(Game::EffectTag::CC::Stun, CreateCC_StunEffectInstance);

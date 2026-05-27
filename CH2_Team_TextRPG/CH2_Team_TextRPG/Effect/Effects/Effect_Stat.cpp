@@ -18,7 +18,7 @@ Effect_Stat_Attack::Effect_Stat_Attack(int InValue)
 
 void Effect_Stat_Attack::Apply(Object* Instigator, std::vector<class Object*> Targets)
 {
-	ApplyStat(Instigator, EStatType::Attack, -Value);
+	ApplyStat(Instigator, EStatType::Attack, +Value);
 }
 
 void Effect_Stat_Attack::Remove(Object* Instigator, std::vector<class Object*> Targets)
@@ -28,7 +28,7 @@ void Effect_Stat_Attack::Remove(Object* Instigator, std::vector<class Object*> T
 
 // --- Defense ---
 Effect_Stat_Defense::Effect_Stat_Defense(int InValue)
-	:Effect(Game::EffectTag::Stat::Defence, InValue)
+	:Effect(Game::EffectTag::Stat::Defense, InValue)
 {
 }
 

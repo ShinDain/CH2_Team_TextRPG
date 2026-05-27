@@ -7,7 +7,7 @@ namespace Game
 		namespace Stat
 		{
 			const std::string Attack = "Stat_Attack";
-			const std::string Defence = "Stat_Defense";
+			const std::string Defense = "Stat_Defense";
 			const std::string Health = "Stat_Health";
 			const std::string Mana = "Stat_Mana";
 			const std::string ActionSpeed = "Stat_ActionSpeed";	
@@ -20,13 +20,26 @@ namespace Game
 			const std::string RecoveryMana = "Resource_RecoveryMana";
 		}
 
+		namespace Buff
+		{
+			const std::string Attack = "Buff_Attack";
+			const std::string Defense = "Buff_Defense";
+			const std::string ActionSpeed = "Buff_ActionSpeed";
+
+			const std::string Invincible = "Buff_Invincible";
+		}
 		namespace Debuff
 		{
 			const std::string Poison = "Debuff_Poison";
 			const std::string Burn = "Debuff_Burn";
-			const std::string Stun = "Debuff_Stun";
 			const std::string Freeze = "Debuff_Freeze";
 		}
+
+		namespace CC
+		{
+			const std::string Stun = "CC_Stun";
+		}
+
 		const std::string EFFECT_TAG_DAMAGE = "Damage";
 	}	
 }
