@@ -152,6 +152,7 @@
     <ClCompile Include="Character\Monster\Monsters\BossMonster.cpp" />
     <ClCompile Include="Character\Monster\Monsters\EliteMonster.cpp" />
     <ClCompile Include="Character\Player\Player.cpp" />
+    <ClCompile Include="Combat\BattleUI.cpp" />
     <ClCompile Include="Common\StringHelper.cpp" />
     <ClCompile Include="Core\Component.cpp" />
     <ClCompile Include="Core\Condition.cpp" />
@@ -172,6 +173,8 @@
     <ClCompile Include="Effect\Effects\Effect_Heal.cpp" />
     <ClCompile Include="Effect\Factory\EffectFactory.cpp" />
     <ClCompile Include="Effect\Effects\Effect_Stat.cpp" />
+    <ClCompile Include="Effect\Effects\Effect_Damage.cpp" />
+    <ClCompile Include="Effect\Effects\Effect_Poison.cpp" />
     <ClCompile Include="Item\Item_Consumable.cpp" />
     <ClCompile Include="Item\Item_Equipment.cpp" />
     <ClCompile Include="Item\Item_Ingredient.cpp" />
@@ -222,11 +225,13 @@
     <ClInclude Include="Character\Monster\Monsters\BossMonster.h" />
     <ClInclude Include="Character\Monster\Monsters\EliteMonster.h" />
     <ClInclude Include="Character\Player\Player.h" />
+    <ClInclude Include="Combat\BattleUI.h" />
     <ClInclude Include="Combat\CombatCondition.h" />
     <ClInclude Include="Common\Deletor.h" />
     <ClInclude Include="Common\StringHelper.h" />
     <ClInclude Include="Core\Component.h" />
     <ClInclude Include="Core\Condition.h" />
+    <ClInclude Include="Core\Delegate.h" />
     <ClInclude Include="Core\GameInstance.h" />
     <ClInclude Include="Data\Table\LevelDataTable.h" />
     <ClInclude Include="Data\Table\MonsterDataTable.h" />
@@ -238,6 +243,8 @@
     <ClInclude Include="Effect\EffectTag.h" />
     <ClInclude Include="Effect\Factory\EffectFactory.h" />
     <ClInclude Include="Effect\Effects\Effect_Stat.h" />
+    <ClInclude Include="Effect\Effects\Effect_Damage.h" />
+    <ClInclude Include="Effect\Effects\Effect_Poison.h" />
     <ClInclude Include="Enum\EItemType.h" />
     <ClInclude Include="Item\ItemData.h" />
     <ClInclude Include="Item\Item_Consumable.h" />

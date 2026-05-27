@@ -3,7 +3,7 @@
 #include "Effect/Effect.h"
 
 
-Skill::Skill(const FSkillData* InData) : Data(InData)
+Skill::Skill(const FSkillData* InData) : Data(InData), CurrentCooldown(0)
 {
 }
 
@@ -29,4 +29,20 @@ void Skill::AddEffect(Effect* InEffect)
 	{
 		Effects.emplace_back(InEffect);
 	}
+}
+
+void Skill::UpdateCooldown()
+{
+	if (CurrentCooldown > 0)
+		CurrentCooldown--;
+}
+
+void Skill::ApplyCooldown()
+{
+	CurrentCooldown = Data->Cooldown;
+}
+
+bool Skill::IsReady() const
+{
+	return CurrentCooldown == 0;
 }
