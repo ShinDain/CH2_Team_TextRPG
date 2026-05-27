@@ -39,10 +39,9 @@ public:
 
 	/**
 	* @brief 스킬 사용 시 쿨타임을 적용합니다.
-	* @param SkillId 적용할 스킬의 ID
-	* @param CooldownAmount 적용할 쿨타임 값
 	*/
-	void ApplyCooldown(uint16_t SkillId, uint8_t CooldownAmount);
+	void ApplyCooldown(uint16_t SkillId);
+	void ApplyCooldown(const Skill* InSkill);
 
 	/**
 	* @brief 스킬 사용 시 비용을 소모할 수 있는지 확인합니다.
@@ -70,6 +69,4 @@ private:
 private:
 	// 사용가능한 스킬 객체 목록
 	std::vector<Skill*> LearnedSkills; 
-	// 스킬IDX별 남은 쿨타임
-	std::map<uint16_t, uint8_t> CurrentCooldowns;
 };

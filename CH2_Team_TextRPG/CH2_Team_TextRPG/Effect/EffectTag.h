@@ -19,5 +19,14 @@ namespace Game
 			const std::string RecoveryHeal = "Resource_RecoveryHeal";
 			const std::string RecoveryMana = "Resource_RecoveryMana";
 		}
+
+		namespace Debuff
+		{
+			const std::string Poison = "Debuff_Poison";
+			const std::string Burn = "Debuff_Burn";
+			const std::string Stun = "Debuff_Stun";
+			const std::string Freeze = "Debuff_Freeze";
+		}
+		const std::string EFFECT_TAG_DAMAGE = "Damage";
 	}	
 }

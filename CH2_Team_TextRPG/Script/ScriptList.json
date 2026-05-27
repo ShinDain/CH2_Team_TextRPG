@@ -15,6 +15,12 @@
             ]
         },
         {
+            "Category" : "Skill",
+            "Name" : [
+                "SkillData.json"
+            ]
+        },
+        {
             "Category" : "Map",
             "Name" : [
                 "MapData_1.json"
