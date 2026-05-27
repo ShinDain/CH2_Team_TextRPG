@@ -75,8 +75,8 @@
     "Exp": 450,
     "DropItemId": 1010,
     "DropGold": 1200
-  }
-  /* {
+  },
+  {
     "Name": "Troll",
     "Type": "Elite",
     "Id": 8,
@@ -108,5 +108,5 @@
     "Exp": 300,
     "DropItemId": 2004,
     "DropGold": 500
-  } */
+  }
 ]

@@ -61,15 +61,8 @@ void DrawMapPath(int FromX, int FromY, int ToX, int ToY, ConsoleColor Color, boo
 
 	for (float T : Points)
 	{
-		const int X =
-			static_cast<int>(
-				FromX + static_cast<float>(DeltaX) * T
-			);
-
-		const int Y =
-			static_cast<int>(
-				FromY + static_cast<float>(DeltaY) * T
-			);
+		const int X = static_cast<int>(FromX + static_cast<float>(DeltaX) * T);
+		const int Y = static_cast<int>(FromY + static_cast<float>(DeltaY) * T);
 
 		if (X <= 32 || X >= 208 || Y <= 1 || Y >= 33)
 		{
@@ -177,7 +170,6 @@ void GameScreen::DrawMapPanel(const MapManager& Map)
 	};
 
 	const MapNode* CurrentNode = Map.GetCurrentNode();
-
 	std::vector<int> MovableNodeIds = Map.GetMovableNodeIds();
 
 	auto FindView = [&NodeViews](int NodeId) -> const MapNodeView*
@@ -241,8 +233,7 @@ void GameScreen::DrawMapPanel(const MapManager& Map)
 			continue;
 		}
 
-		const char Icon = GetMapNodeIcon(Node->Type);
-		const std::string Label(1, Icon);
+		const std::string Label(1, GetMapNodeIcon(Node->Type));
 
 		ConsoleRenderer::SetCursorPosition(View.X, View.Y);
 
@@ -321,12 +312,20 @@ void GameScreen::DrawLogPanel(const LogManager& Log)
 	ConsoleRenderer::SetCursorPosition(2, 41);
 	ConsoleUtil::WriteColored("로그", ConsoleColor::Cyan);
 
-	ConsoleRenderer::SetCursorPosition(2, 43);
-	ConsoleUtil::WriteColored("> 게임을 시작했습니다.", ConsoleColor::Gray);
-	ConsoleRenderer::SetCursorPosition(2, 44);
-	ConsoleUtil::WriteColored("> 던전 지도가 생성되었습니다.", ConsoleColor::Gray);
-	ConsoleRenderer::SetCursorPosition(2, 45);
-	ConsoleUtil::WriteColored("> 이동할 노드를 선택하세요.", ConsoleColor::Gray);
+	std::vector<std::string> RecentLogs = Log.GetRecentLogs(5);
+
+	if (RecentLogs.empty())
+	{
+		ConsoleRenderer::SetCursorPosition(2, 43);
+		ConsoleUtil::WriteColored("> 로그가 없습니다.", ConsoleColor::Gray);
+		return;
+	}
+
+	for (int i = 0; i < static_cast<int>(RecentLogs.size()); i++)
+	{
+		ConsoleRenderer::SetCursorPosition(2, 43 + i);
+		ConsoleUtil::WriteColored("> " + RecentLogs[i], ConsoleColor::Gray);
+	}
 }
 
 void GameScreen::DrawInputPanel()
