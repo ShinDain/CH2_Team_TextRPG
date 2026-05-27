@@ -54,6 +54,6 @@ inline Effect* CreateBuff_ActionSpeedEffectInstance(int Value)
 }
 
 inline bool bBuff_AttackEffectRegister = EffectFactory::RegisterEffect(Game::EffectTag::Buff::Attack, CreateBuff_AttackEffectInstance);
-inline bool bBuff_AttackEffectRegister = EffectFactory::RegisterEffect(Game::EffectTag::Buff::Defense, CreateBuff_DefenseEffectInstance);
-inline bool bBuff_AttackEffectRegister = EffectFactory::RegisterEffect(Game::EffectTag::Buff::ActionSpeed, CreateBuff_ActionSpeedEffectInstance);
+inline bool bBuff_DefenseEffectRegister = EffectFactory::RegisterEffect(Game::EffectTag::Buff::Defense, CreateBuff_DefenseEffectInstance);
+inline bool bBuff_ActionSpeedEffectRegister = EffectFactory::RegisterEffect(Game::EffectTag::Buff::ActionSpeed, CreateBuff_ActionSpeedEffectInstance);
 

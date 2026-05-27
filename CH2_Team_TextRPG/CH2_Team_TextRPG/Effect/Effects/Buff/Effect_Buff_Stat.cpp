@@ -4,7 +4,7 @@
 #include "Character/Interface/UnitStat.h"
 #include "Data/Character/Stat.h"
 
-void ApplyStat(Object* StatObject, EStatType Type, int Delta)
+void ApplyBuffStat(Object* StatObject, EStatType Type, int Delta)
 {
 	if (auto UnitStat = dynamic_cast<IUnitStat*>(StatObject))
 		UnitStat->ApplyStat(Type, Delta);
@@ -20,7 +20,7 @@ void Effect_Buff_Attack::Apply(Object* Instigator, std::vector<class Object*> Ta
 {
 	if (bApply == false)
 	{
-		ApplyStat(Instigator, EStatType::Attack, +Value);
+		ApplyBuffStat(Instigator, EStatType::Attack, +Value);
 		bApply = true;
 	}
 }
@@ -29,7 +29,7 @@ void Effect_Buff_Attack::Remove(Object* Instigator, std::vector<class Object*> T
 {
 	if (bApply)
 	{
-		ApplyStat(Instigator, EStatType::Attack, -Value);
+		ApplyBuffStat(Instigator, EStatType::Attack, -Value);
 		bApply = false;
 	}
 }
@@ -44,7 +44,7 @@ void Effect_Buff_Defense::Apply(Object* Instigator, std::vector<class Object*> T
 {
 	if (bApply == false)
 	{
-		ApplyStat(Instigator, EStatType::Defense, +Value);
+		ApplyBuffStat(Instigator, EStatType::Defense, +Value);
 		bApply = true;
 	}
 }
@@ -53,7 +53,7 @@ void Effect_Buff_Defense::Remove(Object* Instigator, std::vector<class Object*> 
 {
 	if (bApply)
 	{
-		ApplyStat(Instigator, EStatType::Defense, -Value);
+		ApplyBuffStat(Instigator, EStatType::Defense, -Value);
 		bApply = false;
 	}
 }
@@ -68,7 +68,7 @@ void Effect_Buff_ActionSpeed::Apply(Object* Instigator, std::vector<class Object
 {
 	if (bApply == false)
 	{
-		ApplyStat(Instigator, EStatType::ActionSpeed, +Value);
+		ApplyBuffStat(Instigator, EStatType::ActionSpeed, +Value);
 		bApply = true;
 	}
 }
@@ -77,7 +77,7 @@ void Effect_Buff_ActionSpeed::Remove(Object* Instigator, std::vector<class Objec
 {
 	if (bApply)
 	{
-		ApplyStat(Instigator, EStatType::ActionSpeed, -Value);
+		ApplyBuffStat(Instigator, EStatType::ActionSpeed, -Value);
 		bApply = false;
 	}
 }
