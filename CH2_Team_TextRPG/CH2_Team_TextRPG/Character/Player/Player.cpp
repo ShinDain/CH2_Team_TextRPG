@@ -5,6 +5,7 @@
 #include "Character/Component/HealthComponent.h"
 #include "Character/Component/EquipmentComponent.h"
 #include "Character/Component/InventoryComponent.h"
+#include "Data/Table/ItemDataTable.h"
 
 Player::Player()
 {
@@ -42,8 +43,19 @@ bool Player::Initialize()
 	Stat->SetStat(EStatType::MaxMP, 0);
 	Stat->SetStat(EStatType::ActionSpeed, 10);
 #endif
-	
+
 	return true;
+}
+
+void Player::AcquireItem(int ItemId, int InAmount)
+{
+	Inventory->AcquireItem(ItemId, InAmount);
+}
+
+void Player::AcquireItem(const std::string ItemName, int InAmount)
+{
+	const ItemData* data = FindItemDataByName(ItemName);
+	AcquireItem(data->Id, InAmount);
 }
 
 void Player::TakeDamage(const DamageContext& Context)
@@ -59,4 +71,29 @@ bool Player::IsDead() const
 int Player::GetStat(EStatType Type) const
 {
 	return Stat ? Stat->GetStat(Type) : INT_MAX;
+}
+
+bool Player::CanAfford(int Price)
+{
+	InventoryComponent* inventoryComp = GetInventory();
+	if (inventoryComp)
+	{
+		return inventoryComp->GetOwnedGold() > Price;
+	}
+
+	return false;
+}
+
+void Player::ModifyGold(int Value)
+{
+	InventoryComponent* inventoryComp = GetInventory();
+	if (inventoryComp)
+	{
+		inventoryComp->ModifyGold(Value);
+	}
+}
+
+InventoryComponent* Player::GetInventory()
+{
+	return Inventory;
 }
