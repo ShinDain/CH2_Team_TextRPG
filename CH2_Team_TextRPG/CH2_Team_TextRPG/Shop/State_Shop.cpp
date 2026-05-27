@@ -78,7 +78,7 @@ Shop::EActionType State_Shop::ShowShopMenu()
 	GInput << "\n어떤 행동을 하시겠습니까?\n1. 구매\n2. 판매\n3. 인벤토리\n4. 나가기\n";
 	GInput >> input;
 
-	if (GInput.IsFailed() || input < 1 || input >(int)Shop::EActionType::End)
+	if (GInput.IsFailed() || input < 1 || input >= (int)Shop::EActionType::End)
 	{
 		GInput << "유효하지 않은 입력입니다. 다시 입력해주세요.\n";
 		return Shop::EActionType::Menu;
