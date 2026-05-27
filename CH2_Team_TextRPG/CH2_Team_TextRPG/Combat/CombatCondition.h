@@ -1,6 +1,8 @@
 ﻿#pragma once
 #include "Core/Condition.h"
-
+#include "Manager/ObjectManager.h"
+#include "Manager/CombatManager.h"
+#include "Character/Player/Player.h"
 
 class CombatVictoryCondition : public ICondition {
 public:
@@ -11,8 +13,8 @@ public:
         // TODO : 몬스터 사망 시 알림 처리 로직
 	}
     virtual bool Check() override {
-		// TODO : 몬스터 객체가 사망했는지 체크
-        return false;
+        Player* player = ObjectManager::GetInstance().FindObject<Player>("Player");
+        return CombatManager::GetInstance().GetAliveMonsters().empty() && player && !player->IsDead();
     }
 };
 
@@ -26,7 +28,11 @@ public:
         // TODO : 플레이어 사망 시 알림 처리 로직
     }
     virtual bool Check() override {
-		// TODO : 플레이어 객체가 사망했는지 체크
+        Player* player = ObjectManager::GetInstance().FindObject<Player>("Player");
+        if (player)
+        {
+            return player->IsDead();
+        }
         return false;
     }
 };

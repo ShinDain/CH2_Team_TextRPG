@@ -13,6 +13,12 @@
             "Name" : [
                 "MonsterData.json"
             ]
+        },
+        {
+            "Category" : "Skill",
+            "Name" : [
+                "SkillData.json"
+            ]
         }
     ]
 }
