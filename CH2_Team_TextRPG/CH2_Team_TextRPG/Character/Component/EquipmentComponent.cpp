@@ -54,6 +54,9 @@ std::unordered_map<EStatType, int> EquipmentComponent::GetEquipmentStats()
 	for (const auto& pair : EquipmentSlots)
 	{
 		Item_Equipment* equipment = pair.second;
+		if (equipment == nullptr)
+			continue;
+
 		for (auto& pair : equipment->GetEquipmentStats())
 		{
 			EStatType type = pair.first;
