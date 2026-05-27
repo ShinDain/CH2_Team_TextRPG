@@ -11,7 +11,7 @@
     "DropItemPrice": 10
   },
   {
-    "Name": "Goblin",
+    "Name": "goblin",
     "Type": "Normal",
     "Id": 2,
     "HP": 70,
@@ -22,7 +22,7 @@
     "DropItemPrice": 30
   },
   {
-    "Name": "Orc",
+    "Name": "orc",
     "Type": "Normal",
     "Id": 3,
     "HP": 100,
@@ -33,7 +33,7 @@
     "DropItemPrice": 80
   },
   {
-    "Name": "SkeletonKnight",
+    "Name": "Skeleton",
     "Type": "Normal",
     "Id": 4,
     "HP": 90,
@@ -55,7 +55,7 @@
     "DropItemPrice": 45
   },
   {
-    "Name": "DarkWitch",
+    "Name": "Witch",
     "Type": "Elite",
     "Id": 6,
     "HP": 80,
@@ -66,7 +66,7 @@
     "DropItemPrice": 180
   },
   {
-    "Name": "DragonKing",
+    "Name": "Dragon",
     "Type": "Boss",
     "Id": 7,
     "HP": 250,
