@@ -27,7 +27,6 @@ bool SkillComponent::Initialize()
 
 void SkillComponent::AddSkill(uint16_t SkillId)
 {
-	// 중복 스킬 습득 방지
 	for (Skill* skill : LearnedSkills)
 	{
 		if (skill->GetSkillData()->Idx == SkillId)
@@ -48,30 +47,35 @@ void SkillComponent::AddSkill(uint16_t SkillId)
 
 void SkillComponent::UpdateCooldowns()
 {
-	for (auto& pair : CurrentCooldowns)
+	for (Skill* skill : LearnedSkills)
 	{
-		if (pair.second > 0)
-		{
-			pair.second--;
-		}
+		skill->UpdateCooldown();
 	}
 }
 
 bool SkillComponent::IsSkillReady(uint16_t SkillId) const
 {
-	auto it = CurrentCooldowns.find(SkillId);
-	if (it != CurrentCooldowns.end())
+	Skill* skill = FindSkillById(SkillId);
+	if (skill)
 	{
-		return it->second <= 0;
+		return skill->IsReady();
 	}
-	return true; 
+	return false;
 }
 
-void SkillComponent::ApplyCooldown(uint16_t SkillId, uint8_t CooldownAmount)
+void SkillComponent::ApplyCooldown(uint16_t SkillId)
 {
-	if (CooldownAmount > 0)
+	Skill* skill = FindSkillById(SkillId);
+	if (skill)
 	{
-		CurrentCooldowns[SkillId] = CooldownAmount;
+		skill->ApplyCooldown();
+	}
+}
+void SkillComponent::ApplyCooldown(const Skill* InSkill)
+{
+	if (InSkill && InSkill->GetSkillData())
+	{
+		ApplyCooldown(InSkill->GetSkillData()->Idx);
 	}
 }
 
@@ -83,15 +87,11 @@ bool SkillComponent::CheckCost(uint16_t SkillId)
 		const FSkillData* skillData = skill->GetSkillData();
 		if (skillData)
 		{
-			if (const auto& UnitStat = dynamic_cast<IUnitStat*>(Owner))
+			auto manaComponent = this->FindComponent<ResourceComponent>("Resource");
+			if(manaComponent && manaComponent->GetCurrent(EResourceType::Mana) >= skillData->ManaCost)
 			{
-				UnitStat->ApplyStat(EStatType::Mana, skillData->ManaCost);
+				return true;
 			}
-			// auto manaComponent = this->FindComponent<ResourceComponent>("Mana");
-			// if (manaComponent && manaComponent->GetCurrent() >= skillData->ManaCost)
-			// {
-			// 	return true;
-			// }
 		}
 	}
 	return false;
@@ -117,18 +117,9 @@ bool SkillComponent::ConsumeCost(uint16_t SkillId)
 }
 bool SkillComponent::ConsumeCost(const Skill* InSkill)
 {
-	if (InSkill)
+	if (InSkill && InSkill->GetSkillData())
 	{
-		const FSkillData* skillData = InSkill->GetSkillData();
-		if (skillData)
-		{
-			auto manaComponent = this->FindComponent<ResourceComponent>("Mana");
-			if (manaComponent)
-			{
-				manaComponent->Decrease(EResourceType::Mana, skillData->ManaCost);
-				return true;
-			}
-		}
+		return ConsumeCost(InSkill->GetSkillData()->Idx);
 	}
 	return false;
 }

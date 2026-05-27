@@ -23,6 +23,8 @@ public:
 	
 	void AddActiveEffect(Effect* InEffect, Object* InCaster, int InDuration);
 	
+	bool HasActiveEffect(Effect* InEffect) const;
+
 	void UpdateEffects();
 
 	void RemoveExpiredEffects();

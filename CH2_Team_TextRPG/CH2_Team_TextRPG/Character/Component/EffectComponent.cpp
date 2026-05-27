@@ -20,6 +20,16 @@ void EffectComponent::AddActiveEffect(Effect* InEffect, Object* InCaster, int In
 	}
 }
 
+bool EffectComponent::HasActiveEffect(Effect* InEffect) const
+{
+	for (const FActiveEffect& activeEffect : ActiveEffects)
+	{
+		if (activeEffect.EffectPtr == InEffect)
+			return true;
+	}
+	return false;
+}
+
 void EffectComponent::UpdateEffects()
 {
 	// TODO : 버프/디버프일시 턴수만 감소하게 수정필요
@@ -36,6 +46,15 @@ void EffectComponent::UpdateEffects()
 
 void EffectComponent::RemoveExpiredEffects()
 {
+	for (FActiveEffect& effect : ActiveEffects)
+	{
+		if (effect.RemainingDuration <= 0)
+		{
+			std::vector<Object*> target = { Owner };
+			effect.EffectPtr->Remove(effect.Caster, target);
+		}
+	}
+
 	auto it = std::remove_if(ActiveEffects.begin(), ActiveEffects.end(),
 		[](const FActiveEffect& effect) {
 			return effect.RemainingDuration <= 0;
