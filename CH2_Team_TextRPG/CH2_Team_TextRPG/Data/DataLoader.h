@@ -7,6 +7,9 @@ const std::string DATA_CATEGORY_ITEM_CONSUMABLE = "Consumable";
 const std::string DATA_CATEGORY_ITEM_EQUIPMENT = "Equipment";
 
 const std::string DATA_CATEGORY_MONSTER = "Monster";
+
+const std::string DATA_CATEGORY_MAP = "Map";
+
 class DataLoader
 {
 	friend class GameInstance;

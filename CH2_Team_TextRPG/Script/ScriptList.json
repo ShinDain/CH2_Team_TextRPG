@@ -13,6 +13,12 @@
             "Name" : [
                 "MonsterData.json"
             ]
+        },
+        {
+            "Category" : "Map",
+            "Name" : [
+                "MapData_1.json"
+            ]
         }
     ]
 }

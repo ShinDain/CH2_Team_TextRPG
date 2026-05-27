@@ -7,8 +7,8 @@
     "Attack": 20,
     "Defence": 2,
     "Exp": 10,
-    "DropItemName": "Jelly",
-    "DropItemPrice": 10
+    "DropItemId": 1001,
+    "DropGold": 15
   },
   {
     "Name": "goblin",
@@ -18,8 +18,8 @@
     "Attack": 25,
     "Defence": 5,
     "Exp": 25,
-    "DropItemName": "GoblinEar",
-    "DropItemPrice": 30
+    "DropItemId": 1007,
+    "DropGold": 35
   },
   {
     "Name": "orc",
@@ -29,8 +29,8 @@
     "Attack": 30,
     "Defence": 12,
     "Exp": 60,
-    "DropItemName": "OrcTusk",
-    "DropItemPrice": 80
+    "DropItemId": 2006,
+    "DropGold": 70
   },
   {
     "Name": "Skeleton",
@@ -40,8 +40,8 @@
     "Attack": 25,
     "Defence": 25,
     "Exp": 90,
-    "DropItemName": "BoneShard",
-    "DropItemPrice": 120
+    "DropItemId": 2002,
+    "DropGold": 100
   },
   {
     "Name": "Werewolf",
@@ -51,8 +51,8 @@
     "Attack": 40,
     "Defence": 6,
     "Exp": 80,
-    "DropItemName": "WolfFang",
-    "DropItemPrice": 45
+    "DropItemId": 1004,
+    "DropGold": 110
   },
   {
     "Name": "Witch",
@@ -62,8 +62,8 @@
     "Attack": 60,
     "Defence": 8,
     "Exp": 110,
-    "DropItemName": "SpellScroll",
-    "DropItemPrice": 180
+    "DropItemId": 1005,
+    "DropGold": 200
   },
   {
     "Name": "Dragon",
@@ -73,57 +73,40 @@
     "Attack": 80,
     "Defence": 15,
     "Exp": 450,
-    "DropItemName": "BossEssence",
-    "DropItemPrice": 1000
+    "DropItemId": 1010,
+    "DropGold": 1200
   }
-  /*{
+  /* {
     "Name": "Troll",
     "Type": "Elite",
-    "Id": 6,
+    "Id": 8,
     "HP": 150,
     "Attack": 30,
     "Defence": 8,
     "Exp": 75,
-    "DropItemName": "TrollSkin",
-    "DropItemPrice": 100
+    "DropItemId": 2001,
+    "DropGold": 180
   },
   {
     "Name": "Vampire",
     "Type": "Elite",
-    "Id": 7,
+    "Id": 9,
     "HP": 120,
     "Attack": 45,
     "Defence": 18,
     "Exp": 130,
-    "DropItemName": "BloodCrystal",
-    "DropItemPrice": 200
+    "DropItemId": 2005,
+    "DropGold": 350
   },
   {
     "Name": "DragonWhelp",
     "Type": "Elite",
-    "Id": 9,
+    "Id": 10,
     "HP": 200,
     "Attack": 70,
     "Defence": 30,
     "Exp": 300,
-    "DropItemName": "DragonScale",
-    "DropItemPrice": 500
-  }*/
+    "DropItemId": 2004,
+    "DropGold": 500
+  } */
 ]
-//몬스터 스탯표 (레벨 1 기준)
-//==================================================
-//Name              HP          ATK         특징
-//==================================================
-//Slime           80  ~ 90    25  ~ 35    입문
-//Goblin          90  ~ 100   30  ~ 40    기본
-//Orc             120 ~ 130   35  ~ 45    균형
-//SkeletonKnight  110 ~ 120   30  ~ 40    방어 특화
-//Werewolf        90  ~ 100   45  ~ 55    공격 특화
-//DarkWitch       100 ~ 110   65  ~ 75    유리대포
-//DragonKing      405 ~ 420   120 ~ 135   보스 1.5배
-//==================================================
-//Troll           170 ~ 180   35  ~ 45    HP 특화  --
-//Vampire         140 ~ 150   50  ~ 60    균형     --
-//DragonWhelp     220 ~ 230   75  ~ 85    미니보스 --
-//==================================================
-//* 플레이어 레벨이 오를수록 수치 증가

@@ -4,111 +4,111 @@
     "Name": "하급 체력 포션",
     "Category": "Consumable",
     "Grade": "Common",
-    "Price": 20
+    "Price": 30
   },
   {
     "Id": 1002,
     "Name": "하급 마나 포션",
     "Category": "Consumable",
     "Grade": "Common",
-    "Price": 25
+    "Price": 40
   },
   {
     "Id": 1003,
     "Name": "재생의 물약",
     "Category": "Consumable",
     "Grade": "Uncommon",
-    "Price": 50
+    "Price": 80
   },
   {
     "Id": 1004,
     "Name": "용기의 비약",
     "Category": "Consumable",
     "Grade": "Uncommon",
-    "Price": 120
+    "Price": 150
   },
   {
     "Id": 1005,
     "Name": "집중의 주문서",
     "Category": "Consumable",
     "Grade": "Uncommon",
-    "Price": 150
+    "Price": 180
   },
   {
     "Id": 1006,
     "Name": "신속의 알약",
     "Category": "Consumable",
     "Grade": "Rare",
-    "Price": 200
+    "Price": 300
   },
   {
     "Id": 1007,
     "Name": "화염 병",
     "Category": "Consumable",
     "Grade": "Common",
-    "Price": 40
+    "Price": 60
   },
   {
     "Id": 1008,
     "Name": "섬광탄",
     "Category": "Consumable",
     "Grade": "Uncommon",
-    "Price": 80
+    "Price": 120
   },
   {
     "Id": 1009,
     "Name": "인드라의 창",
     "Category": "Consumable",
     "Grade": "Rare",
-    "Price": 350
+    "Price": 450
   },
   {
     "Id": 1010,
     "Name": "수호의 부적",
     "Category": "Consumable",
     "Grade": "Epic",
-    "Price": 500
+    "Price": 800
   },
   {
     "Id": 2001,
     "Name": "녹슨 철검",
     "Category": "Equipment",
     "Grade": "Common",
-    "Price": 150
+    "Price": 450
   },
   {
     "Id": 2002,
     "Name": "가죽 갑옷",
     "Category": "Equipment",
     "Grade": "Common",
-    "Price": 120
+    "Price": 400
   },
   {
     "Id": 2003,
     "Name": "기사의 투구",
     "Category": "Equipment",
     "Grade": "Uncommon",
-    "Price": 300
+    "Price": 1200
   },
   {
     "Id": 2004,
     "Name": "신속의 장화",
     "Category": "Equipment",
     "Grade": "Rare",
-    "Price": 600
+    "Price": 3500
   },
   {
     "Id": 2005,
     "Name": "금반지",
     "Category": "Equipment",
     "Grade": "Uncommon",
-    "Price": 400
+    "Price": 2000
   },
   {
     "Id": 2006,
     "Name": "가죽 장갑",
     "Category": "Equipment",
     "Grade": "Common",
-    "Price": 80
+    "Price": 250
   }
 ]

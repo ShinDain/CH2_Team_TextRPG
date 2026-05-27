@@ -8,53 +8,54 @@ class Player;
 struct MonsterSetData
 {
     std::string Name;
-    std::string DropItemName;
+	int DropItemId;
     int HP;
     int Attack;
     int Defence;
-    int DropItemPrice;
+	int DropGold;
     int Exp;
 
     MonsterSetData() :
         HP(0),
         Attack(0),
         Defence(0),
-        DropItemPrice(0),
-        Exp(0)
+		DropItemId(0),
+        Exp(0),
+		DropGold(0)
     {
     }
 
-    MonsterSetData(const std::string& Name, const std::string& DropItemName,
+    MonsterSetData(const std::string& Name, int DropItemId,
         int HP, int Attack, int Defence,
-        int DropItemPrice, int Exp) :
+        int DropGold, int Exp) :
         Name(Name),
-        DropItemName(DropItemName),
+		DropItemId(DropItemId),
         HP(HP),
         Attack(Attack),
         Defence(Defence),
-        DropItemPrice(DropItemPrice),
+		DropGold(DropGold),
         Exp(Exp)
     {
     }
 
     MonsterSetData(const MonsterSetData& Other) :
         Name(Other.Name),
-        DropItemName(Other.DropItemName),
+		DropItemId(Other.DropItemId),
         HP(Other.HP),
         Attack(Other.Attack),
         Defence(Other.Defence),
-        DropItemPrice(Other.DropItemPrice),
+		DropGold(Other.DropGold),
         Exp(Other.Exp)
     {
     }
 
     MonsterSetData(MonsterSetData&& Other) noexcept :
         Name(std::move(Other.Name)),
-        DropItemName(std::move(Other.DropItemName)),
+		DropItemId(std::move(Other.DropItemId)),
         HP(Other.HP),
         Attack(Other.Attack),
         Defence(Other.Defence),
-        DropItemPrice(Other.DropItemPrice),
+		DropGold(Other.DropGold),
         Exp(Other.Exp)
     {
     }
@@ -62,11 +63,11 @@ struct MonsterSetData
     MonsterSetData& operator=(const MonsterSetData& Other)
     {
         Name = Other.Name;
-        DropItemName = Other.DropItemName;
+		DropItemId = Other.DropItemId;
         HP = Other.HP;
         Attack = Other.Attack;
         Defence = Other.Defence;
-        DropItemPrice = Other.DropItemPrice;
+		DropGold = Other.DropGold;
         Exp = Other.Exp;
         return *this;
     }
@@ -91,8 +92,8 @@ public:
     int GetAttack() const;
     int GetDefence() const;
     int GetExp() const;
-    std::string GetDropItemName() const;
-    int GetDropItemPrice() const;
+    int GetDropItemId() const;
+    int GetDropGold() const;
     bool Initialize() override;
 
 protected:

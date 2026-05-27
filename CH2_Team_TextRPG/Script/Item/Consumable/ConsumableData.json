@@ -2,6 +2,7 @@
   {
     "Id": 1001,
     "TargetType": "SINGLE_ALLY",
+    "Duration": 0,
     "EffectDatas": [
       { "Tag": "Heal", "Value": 30 }
     ]
@@ -9,6 +10,7 @@
   {
     "Id": 1002,
     "TargetType": "SINGLE_ALLY",
+    "Duration": 0,
     "EffectDatas": [
       { "Tag": "ManaRegen", "Value": 20 }
     ]
@@ -16,38 +18,39 @@
   {
     "Id": 1003,
     "TargetType": "SINGLE_ALLY",
+    "Duration": 3,
     "EffectDatas": [
-      { "Tag": "HealOverTurn", "Value": 15 },
-      { "Tag": "Duration_Turn", "Value": 3 }
+      { "Tag": "HealOverTurn", "Value": 15 }
     ]
   },
   {
     "Id": 1004,
     "TargetType": "SINGLE_ALLY",
+    "Duration": 3,
     "EffectDatas": [
-      { "Tag": "Buff_Atk", "Value": 15 },
-      { "Tag": "Duration_Turn", "Value": 3 }
+      { "Tag": "Buff_Atk", "Value": 15 }
     ]
   },
   {
     "Id": 1005,
     "TargetType": "ALL_ALLIES",
+    "Duration": 2,
     "EffectDatas": [
-      { "Tag": "Buff_CritRate", "Value": 20 },
-      { "Tag": "Duration_Turn", "Value": 2 }
+      { "Tag": "Buff_CritRate", "Value": 20 }
     ]
   },
   {
     "Id": 1006,
     "TargetType": "SELF",
+    "Duration": 2,
     "EffectDatas": [
-      { "Tag": "Buff_Speed", "Value": 30 },
-      { "Tag": "Duration_Turn", "Value": 2 }
+      { "Tag": "Buff_Speed", "Value": 30 }
     ]
   },
   {
     "Id": 1007,
     "TargetType": "SINGLE_ENEMY",
+    "Duration": 0,
     "EffectDatas": [
       { "Tag": "Damage_Fire", "Value": 50 }
     ]
@@ -55,6 +58,7 @@
   {
     "Id": 1008,
     "TargetType": "ALL_ENEMIES",
+    "Duration": 0,
     "EffectDatas": [
       { "Tag": "CrowdControl_Stun", "Value": 1 }
     ]
@@ -62,6 +66,7 @@
   {
     "Id": 1009,
     "TargetType": "SINGLE_ENEMY",
+    "Duration": 0,
     "EffectDatas": [
       { "Tag": "Damage_Lightning", "Value": 120 },
       { "Tag": "CrowdControl_Paralyze", "Value": 1 }
@@ -70,9 +75,9 @@
   {
     "Id": 1010,
     "TargetType": "SINGLE_ALLY",
+    "Duration": 1,
     "EffectDatas": [
-      { "Tag": "Buff_Invincible", "Value": 1 },
-      { "Tag": "Duration_Turn", "Value": 1 }
+      { "Tag": "Buff_Invincible", "Value": 1 }
     ]
   }
 ]

@@ -78,13 +78,13 @@ int Monster::GetExp() const
 	return MonsterData.Exp;
 }
 
-std::string Monster::GetDropItemName() const
+int Monster::GetDropItemId() const
 {
-	return MonsterData.DropItemName;
+	return MonsterData.DropItemId;
 }
 
-int Monster::GetDropItemPrice() const
+int Monster::GetDropGold() const
 {
-	return MonsterData.DropItemPrice;
+	return MonsterData.DropGold;
 }
 

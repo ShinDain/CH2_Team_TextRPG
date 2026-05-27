@@ -19,5 +19,10 @@ bool DataLoader::LoadInitialGameData()
 		MonsterDataTable::GetInstance().Load(path);
 	}
 
+	/*for (const std::string& path : ScriptPathTable::GetInstance().GetFilePaths(DATA_CATEGORY_MAP))
+	{
+		MapDataTable::GetInstance().Load(path);
+	}*/
+
     return true;
 }
