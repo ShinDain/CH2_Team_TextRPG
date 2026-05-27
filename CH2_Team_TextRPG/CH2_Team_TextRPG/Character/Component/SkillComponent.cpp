@@ -81,7 +81,7 @@ bool SkillComponent::CheckCost(uint16_t SkillId)
 		const FSkillData* skillData = skill->GetSkillData();
 		if (skillData)
 		{
-			HealthComponent* manaComponent = this->FindComponent<HealthComponent>("Mana");
+			auto manaComponent = this->FindComponent<HealthComponent>("Mana");
 			if (manaComponent && manaComponent->GetCurrent() >= skillData->ManaCost)
 			{
 				return true;
@@ -99,7 +99,7 @@ bool SkillComponent::ConsumeCost(uint16_t SkillId)
 		const FSkillData* skillData = skill->GetSkillData();
 		if (skillData)
 		{
-			HealthComponent* manaComponent = this->FindComponent<HealthComponent>("Mana");
+			auto manaComponent = this->FindComponent<HealthComponent>("Mana");
 			if (manaComponent)
 			{
 				manaComponent->Decrease(skillData->ManaCost);
@@ -116,7 +116,7 @@ bool SkillComponent::ConsumeCost(const Skill* InSkill)
 		const FSkillData* skillData = InSkill->GetSkillData();
 		if (skillData)
 		{
-			HealthComponent* manaComponent = this->FindComponent<HealthComponent>("Mana");
+			auto manaComponent = this->FindComponent<HealthComponent>("Mana");
 			if (manaComponent)
 			{
 				manaComponent->Decrease(skillData->ManaCost);

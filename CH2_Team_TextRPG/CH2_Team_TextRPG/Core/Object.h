@@ -7,47 +7,48 @@ class Object
 public:
 	Object();
 	Object(const std::string& InName);
+	virtual ~Object() = default;
 
 	const std::string& GetName() const { return Name; }
-	
+
 	virtual bool Initialize() = 0;
 
-	void AddComponent(Component* InComp);
-	void RemoveComponent(Component* InComp);
+	void AddComponent(const std::shared_ptr<Component>& InComp);
+	void RemoveComponent(const std::shared_ptr<Component>& InComp);
 
 	template <typename T>
-	T* FindComponent(const std::string& ComponentName) const;
-	
+	std::shared_ptr<T> FindComponent(const std::string& ComponentName) const;
+
 	template <typename T, typename... Arguments>
-	T* AddComponent(Arguments&&... Args);
+	std::shared_ptr<T> AddComponent(Arguments&&... Args);
 
 protected:
 	std::string Name;
 
 private:
-	std::unordered_set<Object*> OwnedComponents;
+	std::vector<std::shared_ptr<Object>> OwnedComponents;
 };
 
 template <typename T>
-T* Object::FindComponent(const std::string& ComponentName) const
+std::shared_ptr<T> Object::FindComponent(const std::string& ComponentName) const
 {
-	for (Object* Compoent : OwnedComponents)
+	for (const auto& Comp : OwnedComponents)
 	{
-		if (Compoent && Compoent->GetName() == ComponentName)
+		if (Comp && Comp->GetName() == ComponentName)
 		{
-			T* CastCompoent = dynamic_cast<T*>(Compoent);
-			return CastCompoent;
+			if (auto Casted = std::dynamic_pointer_cast<T>(Comp))
+				return Casted;
 		}
 	}
 	return nullptr;
 }
 
 template <typename T, typename... Arguments>
-T* Object::AddComponent(Arguments&&... Args)
+std::shared_ptr<T> Object::AddComponent(Arguments&&... Args)
 {
 	static_assert(std::is_base_of_v<class Component, T>, "T 는 Component 또는 그 파생만 허용합니다.");
-	
-	T* NewComponent = new T(std::forward<Arguments>(Args)...);
-	OwnedComponents.emplace(NewComponent);
+
+	auto NewComponent = std::make_shared<T>(std::forward<Arguments>(Args)...);
+	OwnedComponents.push_back(NewComponent);
 	return NewComponent;
 }

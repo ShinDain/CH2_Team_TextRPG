@@ -103,7 +103,7 @@ void InventoryComponent::Equip(int ItemId)
 	Item_Equipment* equipment = dynamic_cast<Item_Equipment*>(itemInstance);
 	if (equipment)
 	{
-		EquipmentComponent* EquipComp = Owner->FindComponent<EquipmentComponent>("Equipment");
+		auto EquipComp = Owner->FindComponent<EquipmentComponent>("Equipment");
 		if (EquipComp)
 		{
 			EquipComp->OnEquip(equipment);
@@ -120,7 +120,7 @@ void InventoryComponent::Equip(const std::string& ItemName)
 
 void InventoryComponent::Unequip(EEquipmentType EquipmentType)
 {
-	EquipmentComponent* EquipComp = Owner->FindComponent<EquipmentComponent>("Equipment");
+	auto EquipComp = Owner->FindComponent<EquipmentComponent>("Equipment");
 	if (EquipComp)
 	{
 		const ItemData* unequipedItemData = EquipComp->OnUnequip(EquipmentType);

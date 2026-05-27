@@ -15,9 +15,9 @@ public:
 	int GetStat(EStatType Type) const override;
 	
 private:
-	class StatComponent* Stat;
-	class HealthComponent* Health;
-	class EquipmentComponent* Equip;
-	class InventoryComponent* Inventory;
+	std::shared_ptr<class StatComponent> Stat;
+	std::shared_ptr<class HealthComponent> Health;
+	std::shared_ptr<class EquipmentComponent> Equip;
+	std::shared_ptr<class InventoryComponent> Inventory;
 	
 };

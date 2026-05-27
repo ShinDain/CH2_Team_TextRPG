@@ -3,17 +3,12 @@
 #include "Character/Component/StatComponent.h"
 #include "Data/Character/Stat.h"
 
-namespace
+void AdjustOwnerStat(Object* Instigator, EStatType Type, int Delta)
 {
-	// Instigator 의 StatComponent 에 Delta 만큼 가산하는 헬퍼.
-	// 5개 Stat Effect 가 같은 패턴이라 중복 제거 목적.
-	void AdjustOwnerStat(Object* Instigator, EStatType Type, int Delta)
+	if (!Instigator) return;
+	if (auto Stat = Instigator->FindComponent<StatComponent>("Stat"))
 	{
-		if (!Instigator) return;
-		if (auto* Stat = Instigator->FindComponent<StatComponent>("Stat"))
-		{
-			Stat->AddStat(Type, Delta);
-		}
+		Stat->AddStat(Type, Delta);
 	}
 }
 

@@ -18,15 +18,7 @@ Player::Player()
 
 Player::~Player()
 {
-	delete Stat;
-	Stat = nullptr;
-	
-	delete Equip;
-	Equip = nullptr;
-	
-	delete Health;
-	Health = nullptr;
-	
+		
 }
 
 bool Player::Initialize()
