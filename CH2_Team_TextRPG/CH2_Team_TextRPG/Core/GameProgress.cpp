@@ -90,7 +90,6 @@ void GameProgress::HandleCurrentNodeEvent(const MapManager& Map, LogManager& Log
 
 	case ENodeType::Boss:
 		Log.AddLog("보스가 나타났습니다.");
-		Log.AddLog("보스를 처치했습니다.");
 		break;
 
 	default:

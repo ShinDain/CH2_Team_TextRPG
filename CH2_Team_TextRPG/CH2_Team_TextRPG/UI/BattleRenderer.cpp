@@ -8,7 +8,7 @@
 #include <windows.h>
 
 BattleRenderer::BattleRenderer()
-	: CurrentMonsterName("goblin")
+	: CurrentMonsterName("")
 {
 }
 
