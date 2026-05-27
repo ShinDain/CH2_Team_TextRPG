@@ -1,8 +1,5 @@
 #include "pch.h"
 #include "State_Start.h"
-
-#include "Enum/EState.h"
-#include "Core/Condition.h"
 #include "Manager/InputManager.h"
 #include "UI/BattleRenderer.h"
 #include "UI/ConsoleUtil.h"
@@ -10,10 +7,7 @@
 #include "Core/GameProgress.h"
 #include "UI/GameScreen.h"
 #include "Character/Player/Player.h"
-
 #include <windows.h>
-
-#include "Character/Player/Player.h"
 
 namespace
 {
@@ -55,22 +49,12 @@ namespace
 
 State_Start::State_Start()
 {
-	// 지금은 StartState 안에서 바로 맵 화면을 실행할 것이므로
-	// 자동 전환은 사용하지 않습니다.
-	// AddTransition<AlwaysTrueCondition>(EState::Start);
+
 }
 
 void State_Start::Enter()
 {
 	GameInstance::GetInstance().GetLogManager().AddLog("맵 화면에 진입했습니다.");
-	
-#if DEBUG_CODE
-	Player* player = new Player();
-	player->Initialize();
-	
-	delete player;
-	player = nullptr;
-#endif
 }
 
 void State_Start::Process()

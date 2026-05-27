@@ -143,7 +143,7 @@ void State_Battle::ProcessInputAction()
 
 void State_Battle::ProcessInputSkill()
 {
-	SkillComponent* playerSkillComponent = PlayerCharacter->FindComponent<SkillComponent>("Skill");
+	auto playerSkillComponent = PlayerCharacter->FindComponent<SkillComponent>("Skill");
 	if (!playerSkillComponent)
 	{
 		GInput << "Error: Player does not have a SkillComponent!\n";

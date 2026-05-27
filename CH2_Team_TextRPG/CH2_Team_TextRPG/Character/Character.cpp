@@ -2,6 +2,7 @@
 #include "Character.h"
 
 Character::Character()
+	:Object(), CharacterType(ECharacterType::End)
 {
 }
 

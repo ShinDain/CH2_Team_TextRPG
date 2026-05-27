@@ -45,9 +45,9 @@ bool ItemDataTable::Load(const std::string& FilePath)
 		return false;
 	}
 
+	std::filesystem::path path(FilePath);
+	std::string prefix = path.parent_path().stem().string();
 	bool ret = true;
-	std::string prefix = FilePath.substr(0, FilePath.find_last_of('\/'));
-	prefix = prefix.substr(prefix.find_last_of('\/') + 1);
 
 	if (prefix == DATA_CATEGORY_ITEM_CONSUMABLE)
 	{

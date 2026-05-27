@@ -11,18 +11,20 @@ Object::Object(const std::string& InName)
 {
 }
 
-void Object::AddComponent(Component* InComp)
+void Object::AddComponent(const std::shared_ptr<Component>& InComp)
 {
 	if (InComp)
 	{
-		OwnedComponents.insert(InComp);
+		OwnedComponents.push_back(InComp);
 	}
 }
 
-void Object::RemoveComponent(Component* InComp)
+void Object::RemoveComponent(const std::shared_ptr<Component>& InComp)
 {
-	if (InComp)
+	if (!InComp) return;
+	auto It = std::find(OwnedComponents.begin(), OwnedComponents.end(), InComp);
+	if (It != OwnedComponents.end())
 	{
-		OwnedComponents.erase(InComp);
+		OwnedComponents.erase(It);
 	}
 }

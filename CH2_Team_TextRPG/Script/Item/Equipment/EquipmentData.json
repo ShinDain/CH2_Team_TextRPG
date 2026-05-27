@@ -12,7 +12,7 @@
     "EquipmentType": "Body",
     "EffectDatas": [
       { "Tag": "Stat_Defense", "Value": 8 },
-      { "Tag": "Stat_MaxHP", "Value": 20 }
+      { "Tag": "Stat_Health", "Value": 20 }
     ]
   },
   {
@@ -20,7 +20,7 @@
     "EquipmentType": "Head",
     "EffectDatas": [
       { "Tag": "Stat_Defense", "Value": 4 },
-      { "Tag": "Stat_MaxMP", "Value": 15 }
+      { "Tag": "Stat_Mana", "Value": 15 }
     ]
   },
   {
@@ -34,8 +34,8 @@
     "Id": 2005,
     "EquipmentType": "Ring",
     "EffectDatas": [
-      { "Tag": "Stat_MaxHP", "Value": 30 },
-      { "Tag": "Stat_MaxMP", "Value": 30 }
+      { "Tag": "Stat_Health", "Value": 30 },
+      { "Tag": "Stat_Mana", "Value": 30 }
     ]
   },
   {
