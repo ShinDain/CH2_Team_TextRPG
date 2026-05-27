@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "Transition.h"
 #include "Enum/EState.h"
@@ -14,20 +14,22 @@ protected:
 public:
 	virtual ~BaseState();
 
-	EState CanTransition() const;
 	bool CheckTransition();
+
 protected:
 	virtual void Enter() {};
 	virtual void Process() {};
 	virtual void Exit() {};
 
-	void InitTransition();
-
+	EState CanTransition() const;
+	void InitTransitions();
 	template<typename T>
 	void AddTransition(EState InState);
+
 protected:
 	std::string Name;
 	std::map<EState, Transition*> Transitions;
+
 public:
 	std::string GetName() { return Name; }
 };

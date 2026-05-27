@@ -1,4 +1,4 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "State.h"
 #include "Manager/StateManager.h"
 
@@ -12,6 +12,18 @@ BaseState::~BaseState()
 	for (const auto& pair : Transitions)
 	{
 		delete pair.second;
+	}
+}
+
+void BaseState::InitTransitions()
+{
+	for (auto& pair : Transitions)
+	{
+		Transition* transition = pair.second;
+		if (transition)
+		{
+			transition->InitTransition();
+		}
 	}
 }
 

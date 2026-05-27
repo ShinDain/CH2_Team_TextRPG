@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 class ICondition
 {
 public:
@@ -15,4 +15,17 @@ public:
 	virtual void Init() override;
 	virtual void OnNotify() override;
 	virtual bool Check() override;
+};
+
+class SimpleTriggerCondition : public ICondition
+{
+public:
+	SimpleTriggerCondition();
+
+	virtual void Init() override;
+	virtual void OnNotify() override;
+	virtual bool Check() override;
+
+protected:
+	bool bTrigger;
 };

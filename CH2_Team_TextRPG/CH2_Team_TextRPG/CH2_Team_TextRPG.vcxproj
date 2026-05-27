@@ -195,8 +195,10 @@
     </ClCompile>
     <ClCompile Include="Data\Table\SkillDataTable.cpp" />
     <ClCompile Include="Combat\State_Battle.cpp" />
+    <ClCompile Include="Shop\ShopCondition.cpp" />
     <ClCompile Include="Skill\Skill.cpp" />
     <ClCompile Include="State\State_Start.cpp" />
+    <ClCompile Include="Shop\State_Shop.cpp" />
     <ClCompile Include="UI\AnimationFrameData.cpp" />
     <ClCompile Include="UI\AsciiArtLoader.cpp" />
     <ClCompile Include="UI\BattleRenderer.cpp" />
@@ -263,8 +265,10 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="Data\Table\SkillDataTable.h" />
     <ClInclude Include="Combat\State_Battle.h" />
+    <ClInclude Include="Shop\ShopCondition.h" />
     <ClInclude Include="Skill\Skill.h" />
     <ClInclude Include="State\State_Start.h" />
+    <ClInclude Include="Shop\State_Shop.h" />
     <ClInclude Include="UI\AnimationFrameData.h" />
     <ClInclude Include="UI\AsciiArtLoader.h" />
     <ClInclude Include="UI\BattleRenderer.h" />

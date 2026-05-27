@@ -1,4 +1,4 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "StateManager.h"
 #include "State/State_Start.h"
 
@@ -45,6 +45,7 @@ bool StateManager::ChangeState(EState InNextState)
 		if (CurrentState)
 			CurrentState->Exit();
 		CurrentState = States[InNextState];
+		CurrentState->InitTransitions();
 		CurrentState->Enter();
 
 		return true;

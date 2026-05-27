@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "Core/State.h"
 #include "Enum/EState.h"
 
