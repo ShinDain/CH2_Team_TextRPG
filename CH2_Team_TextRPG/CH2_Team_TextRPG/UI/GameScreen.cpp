@@ -1,7 +1,86 @@
-﻿#include "pch.h"
+#include "pch.h"
 #include "GameScreen.h"
 #include "ConsoleRenderer.h"
 #include "ConsoleUtil.h"
+
+namespace
+{
+struct MapNodeView
+{
+	int NodeId;
+	int X;
+	int Y;
+};
+
+char GetMapNodeIcon(ENodeType Type)
+{
+	switch (Type)
+	{
+	case ENodeType::Start:
+		return 'S';
+	case ENodeType::Monster:
+		return 'M';
+	case ENodeType::Event:
+		return '?';
+	case ENodeType::Shop:
+		return '$';
+	case ENodeType::Treasure:
+		return '?';
+	case ENodeType::Rest:
+		return 'R';
+	case ENodeType::Elite:
+		return 'E';
+	case ENodeType::Boss:
+		return 'B';
+	default:
+		return '?';
+	}
+}
+
+void DrawMapPath(int FromX, int FromY, int ToX, int ToY, ConsoleColor Color, bool bHighlighted)
+{
+	if (FromX == ToX && FromY == ToY)
+	{
+		return;
+	}
+
+	const int DeltaX = ToX - FromX;
+	const int DeltaY = ToY - FromY;
+	const int AbsDeltaX = DeltaX < 0 ? -DeltaX : DeltaX;
+	const int AbsDeltaY = DeltaY < 0 ? -DeltaY : DeltaY;
+	const int Steps = AbsDeltaX > AbsDeltaY ? AbsDeltaX : AbsDeltaY;
+
+	if (Steps <= 1)
+	{
+		return;
+	}
+
+	std::vector<float> Points = bHighlighted
+		? std::vector<float>{ 0.25f, 0.5f, 0.75f }
+		: std::vector<float>{ 0.33f, 0.66f };
+
+	for (float T : Points)
+	{
+		const int X =
+			static_cast<int>(
+				FromX + static_cast<float>(DeltaX) * T
+			);
+
+		const int Y =
+			static_cast<int>(
+				FromY + static_cast<float>(DeltaY) * T
+			);
+
+		if (X <= 32 || X >= 208 || Y <= 1 || Y >= 33)
+		{
+			continue;
+		}
+
+		ConsoleRenderer::SetCursorPosition(X, Y);
+		ConsoleUtil::WriteColored(bHighlighted ? "*" : ".", Color);
+	}
+}
+}
 
 void GameScreen::DrawMainScreen(const MapManager& Map, const LogManager& Log)
 {
@@ -50,20 +129,147 @@ void GameScreen::DrawMapPanel(const MapManager& Map)
 	ConsoleRenderer::DrawBox(30, 0, 180, 34);
 	ConsoleRenderer::DrawString(32, 1, "던전 지도");
 
-	std::vector<std::string> MapLines =
+	std::vector<MapNodeView> NodeViews =
 	{
-		"                         [Boss:6]",
-		"                         /      \\",
-		"                   [Rest:4]   [Elite:5]",
-		"                      |          |",
-		"                   [Shop:2]  [Monster:3]",
-		"                        \\      /",
-		"                       [Event:1]",
-		"                           |",
-		"                       [Start:0]"
+		{ 31, 112, 2 },
+
+		{ 28, 84, 4 },
+		{ 29, 112, 4 },
+		{ 30, 140, 4 },
+
+		{ 25, 76, 7 },
+		{ 26, 106, 7 },
+		{ 27, 146, 7 },
+
+		{ 22, 88, 10 },
+		{ 23, 118, 10 },
+		{ 24, 140, 10 },
+
+		{ 19, 76, 13 },
+		{ 20, 112, 13 },
+		{ 21, 148, 13 },
+
+		{ 16, 92, 16 },
+		{ 17, 122, 16 },
+		{ 18, 144, 16 },
+
+		{ 13, 76, 19 },
+		{ 14, 108, 19 },
+		{ 15, 140, 19 },
+
+		{ 10, 88, 22 },
+		{ 11, 118, 22 },
+		{ 12, 148, 22 },
+
+		{ 7, 76, 25 },
+		{ 8, 106, 25 },
+		{ 9, 136, 25 },
+
+		{ 4, 88, 28 },
+		{ 5, 118, 28 },
+		{ 6, 146, 28 },
+
+		{ 1, 84, 30 },
+		{ 2, 112, 30 },
+		{ 3, 140, 30 },
+
+		{ 0, 112, 32 }
 	};
 
-	ConsoleRenderer::DrawLines(98, 12, MapLines);
+	const MapNode* CurrentNode = Map.GetCurrentNode();
+
+	std::vector<int> MovableNodeIds = Map.GetMovableNodeIds();
+
+	auto FindView = [&NodeViews](int NodeId) -> const MapNodeView*
+	{
+		for (const MapNodeView& View : NodeViews)
+		{
+			if (View.NodeId == NodeId)
+			{
+				return &View;
+			}
+		}
+
+		return nullptr;
+	};
+
+	auto IsMovableNode = [&MovableNodeIds](int NodeId)
+	{
+		return std::find(MovableNodeIds.begin(), MovableNodeIds.end(), NodeId) != MovableNodeIds.end();
+	};
+
+	for (const MapNodeView& FromView : NodeViews)
+	{
+		const MapNode* FromNode = Map.GetNodeById(FromView.NodeId);
+
+		if (FromNode == nullptr)
+		{
+			continue;
+		}
+
+		for (int ToNodeId : FromNode->ConnectedNodeIds)
+		{
+			const MapNodeView* ToView = FindView(ToNodeId);
+
+			if (ToView == nullptr)
+			{
+				continue;
+			}
+
+			const bool bIsCurrentOutgoing =
+				CurrentNode != nullptr &&
+				CurrentNode->Id == FromNode->Id &&
+				IsMovableNode(ToNodeId);
+
+			DrawMapPath(
+				FromView.X,
+				FromView.Y,
+				ToView->X,
+				ToView->Y,
+				bIsCurrentOutgoing ? ConsoleColor::Green : ConsoleColor::DarkGray,
+				bIsCurrentOutgoing
+			);
+		}
+	}
+
+	for (const MapNodeView& View : NodeViews)
+	{
+		const MapNode* Node = Map.GetNodeById(View.NodeId);
+
+		if (Node == nullptr)
+		{
+			continue;
+		}
+
+		const char Icon = GetMapNodeIcon(Node->Type);
+		const std::string Label(1, Icon);
+
+		ConsoleRenderer::SetCursorPosition(View.X, View.Y);
+
+		if (CurrentNode != nullptr && CurrentNode->Id == View.NodeId)
+		{
+			ConsoleUtil::WriteColored(Label, ConsoleColor::Yellow);
+		}
+		else if (IsMovableNode(View.NodeId))
+		{
+			ConsoleUtil::WriteColored(Label, ConsoleColor::Green);
+		}
+		else if (Node->bIsVisited)
+		{
+			ConsoleUtil::WriteColored(Label, ConsoleColor::DarkYellow);
+		}
+		else if (Node->Type == ENodeType::Boss)
+		{
+			ConsoleUtil::WriteColored(Label, ConsoleColor::Magenta);
+		}
+		else
+		{
+			ConsoleUtil::WriteColored(Label, ConsoleColor::Gray);
+		}
+	}
+
+	ConsoleRenderer::SetCursorPosition(34, 2);
+	ConsoleUtil::WriteColored("S 시작  M 전투  ? 이벤트  $ 상점  R 휴식  E 엘리트  B 보스", ConsoleColor::DarkGray);
 }
 
 void GameScreen::DrawNavigationPanel(const MapManager& Map)
@@ -88,7 +294,7 @@ void GameScreen::DrawNavigationPanel(const MapManager& Map)
 
 	std::vector<int> MovableNodeIds = Map.GetMovableNodeIds();
 
-	ConsoleRenderer::SetCursorPosition(95, 36);
+	ConsoleRenderer::SetCursorPosition(95, 35);
 	ConsoleUtil::WriteColored("이동 가능 노드", ConsoleColor::Green);
 
 	for (int i = 0; i < static_cast<int>(MovableNodeIds.size()); i++)
@@ -104,7 +310,7 @@ void GameScreen::DrawNavigationPanel(const MapManager& Map)
 			MapManager::NodeTypeToString(Node->Type) +
 			" [노드 번호: " + std::to_string(Node->Id) + "]";
 
-		ConsoleRenderer::SetCursorPosition(95, 37 + i);
+		ConsoleRenderer::SetCursorPosition(95, 36 + i);
 		ConsoleUtil::WriteColored(Text, ConsoleColor::White);
 	}
 }
