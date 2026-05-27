@@ -3,6 +3,7 @@
     "Id": 1001,
     "TargetType": "SINGLE_ALLY",
     "Duration": 0,
+    "ConsumableTime" : "Always",
     "EffectDatas": [
       { "Tag": "Resource_RecoveryHeal", "Value": 30 }
     ]
@@ -11,6 +12,7 @@
     "Id": 1002,
     "TargetType": "SINGLE_ALLY",
     "Duration": 0,
+    "ConsumableTime" : "Always",
     "EffectDatas": [
       { "Tag": "Resource_RecoveryMana", "Value": 20 }
     ]
@@ -19,6 +21,7 @@
     "Id": 1003,
     "TargetType": "SINGLE_ALLY",
     "Duration": 3,
+    "ConsumableTime" : "InCombat",
     "EffectDatas": [
       { "Tag": "Resource_RecoveryHeal", "Value": 15 }
     ]
@@ -27,6 +30,7 @@
     "Id": 1004,
     "TargetType": "SINGLE_ALLY",
     "Duration": 3,
+    "ConsumableTime" : "InCombat",
     "EffectDatas": [
       { "Tag": "Buff_Attack", "Value": 15 }
     ]
@@ -35,14 +39,16 @@
     "Id": 1005,
     "TargetType": "SINGLE_ALLY",
     "Duration": 3,
+    "ConsumableTime" : "InCombat",
     "EffectDatas": [
       { "Tag": "Buff_Defense", "Value": 25 }
     ]
   },
   {
     "Id": 1006,
-    "TargetType": "SELF",
+    "TargetType": "SINGLE_ALLY",
     "Duration": 2,
+    "ConsumableTime" : "InCombat",
     "EffectDatas": [
       { "Tag": "Buff_ActionSpeed", "Value": 30 }
     ]
@@ -51,6 +57,7 @@
     "Id": 1007,
     "TargetType": "SINGLE_ENEMY",
     "Duration": 0,
+    "ConsumableTime" : "InCombat",
     "EffectDatas": [
       { "Tag": "Damage", "Value": 50 }
     ]
@@ -59,6 +66,7 @@
     "Id": 1008,
     "TargetType": "ALL_ENEMIES",
     "Duration": 1,
+    "ConsumableTime" : "InCombat",
     "EffectDatas": [
       { "Tag": "CC_Stun", "Value": 1 }
     ]
@@ -67,6 +75,7 @@
     "Id": 1009,
     "TargetType": "SINGLE_ENEMY",
     "Duration": 1,
+    "ConsumableTime" : "InCombat",
     "EffectDatas": [
       { "Tag": "Damage", "Value": 120 },
       { "Tag": "CC_Stun", "Value": 1 }
@@ -76,6 +85,7 @@
     "Id": 1010,
     "TargetType": "SINGLE_ALLY",
     "Duration": 1,
+    "ConsumableTime" : "InCombat",
     "EffectDatas": [
       { "Tag": "Buff_Invincible", "Value": 1 }
     ]
@@ -84,6 +94,7 @@
     "Id": 1011,
     "TargetType": "ALL_ALLIES",
     "Duration": 2,
+    "ConsumableTime" : "InCombat",
     "EffectDatas": [
       { "Tag": "Buff_Attack", "Value": 35 }
     ]

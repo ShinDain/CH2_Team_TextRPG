@@ -11,7 +11,7 @@ struct FInventoryEntry
 	int Amount;
 	Item* ItemInstance;
 
-	bool operator==(const FInventoryEntry& rhs)
+	bool operator==(const FInventoryEntry& rhs) const
 	{
 		return (this->Id == rhs.Id);
 	}

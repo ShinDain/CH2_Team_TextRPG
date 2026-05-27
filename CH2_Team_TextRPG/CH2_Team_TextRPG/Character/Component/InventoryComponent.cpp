@@ -214,11 +214,14 @@ void InventoryComponent::RemoveEntry(int ItemId)
 {
 	for (FInventoryEntry& entry : ItemList)
 	{
-		auto it = std::find(ItemList.begin(), ItemList.end(), entry);
-
-		if (it != ItemList.end())
+		if (entry.Id == ItemId)
 		{
-			ItemList.erase(it);
+			auto it = std::find(ItemList.begin(), ItemList.end(), entry);
+
+			if (it != ItemList.end())
+			{
+				ItemList.erase(it);
+			}
 		}
 	}
 }

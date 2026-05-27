@@ -93,6 +93,7 @@ void State_Shop::HandleBuyAction()
 	if (mainPlayer == nullptr)
 		return;
 
+	GInput << "플레이어 현재 Gold : " << mainPlayer->GetInventory()->GetOwnedGold() << "\n";
 	GInput << "\n 상인의 판매 아이템 리스트\n";
 
 	ITrade* buyer = dynamic_cast<ITrade*>(mainPlayer);
@@ -102,15 +103,15 @@ void State_Shop::HandleBuyAction()
 	{
 		HandleTrade(buyer, seller);
 	}
-
-	GInput << "플레이어 현재 Gold : " << mainPlayer->GetInventory()->GetOwnedGold();
 }
 
 void State_Shop::HandleSellAction()
 {
 	Player* mainPlayer = GetMainPlayer();
 	if (mainPlayer == nullptr)
+		return;
 
+	GInput << "플레이어 현재 Gold : " << mainPlayer->GetInventory()->GetOwnedGold() << "\n";
 	GInput << "\n판매 가능한 플레이어 아이템 리스트\n";
 
 	ITrade* buyer = dynamic_cast<ITrade*>(MerchantInstance);
@@ -120,8 +121,6 @@ void State_Shop::HandleSellAction()
 	{
 		HandleTrade(buyer, seller);
 	}
-
-	GInput << "플레이어 현재 Gold : " << mainPlayer->GetInventory()->GetOwnedGold() << "G\n";
 }
 
 void State_Shop::HandleTrade(ITrade* Buyer, ITrade* Seller)
@@ -290,24 +289,34 @@ void State_Shop::HandleInventoryAction()
 			}
 			else if (data->Category == EItemCategory::Consumable)
 			{
-				GInput << data->Name << "을 사용하시겠습니까? : 1. 네   2. 아니요\n";
+				const FConsumableItemData* consumableData = ConsumableDataTable::GetInstance().FindConsumableDataByIndex(data->Id);
 
-				while (true)
+				EConsumableTime usableTime = consumableData->ConsumableTime;
+				if (usableTime == EConsumableTime::Always)
 				{
-					GInput >> input;
+					GInput << data->Name << "을 사용하시겠습니까? : 1. 네   2. 아니요\n";
 
-					if (GInput.IsFailed() || input < 1 || input > 2)
+					while (true)
 					{
-						GInput << "유효하지 않은 입력입니다. 다시 입력해주세요.\n";
-						continue;
-					}
+						GInput >> input;
 
-					if (input == 1)
-					{
-						inventoryComp->UseItem(data->Id, { mainPlayer });
-					}
+						if (GInput.IsFailed() || input < 1 || input > 2)
+						{
+							GInput << "유효하지 않은 입력입니다. 다시 입력해주세요.\n";
+							continue;
+						}
 
-					break;
+						if (input == 1)
+						{
+							inventoryComp->UseItem(data->Id, { mainPlayer });
+						}
+
+						break;
+					}
+				}
+				else
+				{
+					GInput << "지금은 사용할 수 없습니다.\n";
 				}
 			}
 		}

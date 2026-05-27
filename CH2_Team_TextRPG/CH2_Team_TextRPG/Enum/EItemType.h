@@ -16,6 +16,18 @@ NLOHMANN_JSON_SERIALIZE_ENUM(EItemCategory, {
 	{EItemCategory::Ingredient, "Ingredient"}
 	});
 
+enum class EConsumableTime
+{
+	Always,
+	InCombat,
+	End,
+};
+
+NLOHMANN_JSON_SERIALIZE_ENUM(EConsumableTime, {
+	{EConsumableTime::Always, "Always"},
+	{EConsumableTime::InCombat, "InCombat"}
+	});
+
 enum class EEquipmentType
 {
 	Head = 0,
