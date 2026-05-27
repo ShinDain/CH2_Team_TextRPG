@@ -25,7 +25,7 @@ public:
 	virtual bool CanAfford(int Price) override;
 	virtual void ModifyGold(int Value) override;
 
-	virtual InventoryComponent* GetInventory() override;
+	virtual std::shared_ptr<class InventoryComponent> GetInventory() override;
 
 };
 

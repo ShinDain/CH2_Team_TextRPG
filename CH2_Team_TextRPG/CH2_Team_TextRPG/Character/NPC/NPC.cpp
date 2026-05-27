@@ -10,8 +10,6 @@ NPC::NPC()
 
 NPC::~NPC()
 {
-	delete Inventory;
-	Inventory = nullptr;
 }
 
 bool NPC::Initialize()

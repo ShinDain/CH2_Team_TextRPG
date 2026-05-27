@@ -6,7 +6,7 @@ class Component : public Object
 public:
 	Component() = delete;
 	Component(Object* InOwner, std::string InName);
-	virtual ~Component();
+	~Component() override = default;
 	bool Initialize() override;
 
 protected:

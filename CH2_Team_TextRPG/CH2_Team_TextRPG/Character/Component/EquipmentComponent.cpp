@@ -1,16 +1,12 @@
-﻿#include "pch.h"
-#include "EquipmentComponent.h"
-#include "Item/Item_Equipment.h"
-#include "Data/Table/ItemDataTable.h"
+#include "pch.h"
 
-#include "StatComponent.h"
+#include "EquipmentComponent.h"
 #include "Data/Table/ItemDataTable.h"
 #include "Enum/EItemType.h"
 #include "Item/Item.h"
 #include "Effect/Effect.h"
 #include "Effect/Factory/EffectFactory.h"
-
-
+#include "Item/Item_Equipment.h"
 
 EquipmentComponent::EquipmentComponent(Object* InOwner) :
 	Component(InOwner, "Equipment")
@@ -23,8 +19,13 @@ EquipmentComponent::~EquipmentComponent()
 
 bool EquipmentComponent::Initialize()
 {
-	EquipmentSlots.reserve(static_cast<size_t>(EEquipmentType::End));
-	
+	const size_t SlotCount = static_cast<size_t>(EEquipmentType::End);
+	EquipmentSlots.reserve(SlotCount);
+	for (size_t i = 0; i < SlotCount; ++i)
+	{
+		EquipmentSlots.emplace(static_cast<EEquipmentType>(i), nullptr);
+	}
+
 #if DEBUG_CODE
 	EffectData D = EffectData();
 	D.Tag = "Heal";
@@ -45,8 +46,8 @@ std::unordered_map<EStatType, int> EquipmentComponent::GetEquipmentStats()
 	std::unordered_map<EStatType, int> retStat;
 	retStat[EStatType::Attack] = 0;
 	retStat[EStatType::Defense] = 0;
-	retStat[EStatType::MaxHP] = 0;
-	retStat[EStatType::MaxMP] = 0;
+	retStat[EStatType::Health] = 0;
+	retStat[EStatType::Mana] = 0;
 	retStat[EStatType::ActionSpeed] = 0;
 
 	for (const auto& pair : EquipmentSlots)
@@ -68,26 +69,27 @@ void EquipmentComponent::OnEquip(Item_Equipment* InEquipment)
 	if (InEquipment == nullptr)
 		return;
 
-	EEquipmentType equipmentType = InEquipment->GetEquipmentData()->EquipmentType;
-	if (EquipmentSlots[equipmentType] != nullptr)
+	EEquipmentType EquipmentType = InEquipment->GetEquipmentData()->EquipmentType;
+	if (EquipmentSlots[EquipmentType] != nullptr)
 	{
-		OnUnequip(equipmentType);
+		OnUnequip(EquipmentType);
 	}
 
-	EquipmentSlots[equipmentType] = InEquipment;
+	EquipmentSlots[EquipmentType] = InEquipment;
 	InEquipment->OnEquip(Owner);
 }
 
 const ItemData* EquipmentComponent::OnUnequip(EEquipmentType Type)
 {
-	const ItemData* retData = nullptr;
+	const ItemData* Ret = nullptr;
 	if (EquipmentSlots[Type] != nullptr)
 	{
-		retData = EquipmentSlots[Type]->GetItemData();
+		Item_Equipment* SlotItem = EquipmentSlots[Type];
+		Ret = SlotItem->GetItemData();
 
-		EquipmentSlots[Type]->OnUnequip(Owner);
+		SlotItem->OnUnequip(Owner);
 		EquipmentSlots[Type] = nullptr;
 	}
 
-	return retData;
+	return Ret;
 }

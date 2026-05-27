@@ -10,7 +10,6 @@ public:
 	bool Initialize() override;
 
 private:
-	class InventoryComponent* Inventory;
-
+	std::shared_ptr<class InventoryComponent> Inventory;
 };
 

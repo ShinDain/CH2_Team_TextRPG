@@ -2,7 +2,7 @@
 #include "Effect_Heal.h"
 
 Effect_Heal::Effect_Heal(int InValue)
-	:Effect(EFFECT_TAG_HEAL, InValue)
+	:Effect(Game::EffectTag::Resource::RecoveryHeal, InValue)
 {
 }
 

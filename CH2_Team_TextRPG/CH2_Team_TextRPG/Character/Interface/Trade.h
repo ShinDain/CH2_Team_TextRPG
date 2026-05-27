@@ -10,6 +10,6 @@ public:
 	virtual bool CanAfford(int Price) = 0;
 	virtual void ModifyGold(int Value) = 0;
 
-	virtual InventoryComponent* GetInventory() = 0;
+	virtual std::shared_ptr<InventoryComponent> GetInventory() = 0;
 };
 

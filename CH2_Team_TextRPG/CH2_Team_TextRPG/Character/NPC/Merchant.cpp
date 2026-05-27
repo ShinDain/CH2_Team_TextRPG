@@ -30,9 +30,9 @@ void Merchant::ModifyGold(int Value)
 	return;
 }
 
-InventoryComponent* Merchant::GetInventory()
+std::shared_ptr<InventoryComponent> Merchant::GetInventory()
 {
-	InventoryComponent* inventoryComp = FindComponent<InventoryComponent>("Inventory");
+	std::shared_ptr<InventoryComponent> inventoryComp = FindComponent<InventoryComponent>("Inventory");
 	if (inventoryComp == nullptr)
 	{
 		GLog.AddLog(__FUNCTION__);
@@ -45,8 +45,8 @@ InventoryComponent* Merchant::GetInventory()
 
 bool Merchant::Trade(ITrade* Buyer, ITrade* Seller, int ItemId, int Price)
 {
-	InventoryComponent* buyerInventory = Buyer->GetInventory();
-	InventoryComponent* sellerInventory = Seller->GetInventory();
+	std::shared_ptr<InventoryComponent> buyerInventory = Buyer->GetInventory();
+	std::shared_ptr<InventoryComponent> sellerInventory = Seller->GetInventory();
 
 	if (buyerInventory && sellerInventory)
 	{

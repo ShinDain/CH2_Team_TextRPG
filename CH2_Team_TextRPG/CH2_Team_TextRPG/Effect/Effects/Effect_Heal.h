@@ -1,7 +1,6 @@
 ﻿#pragma once
 #include "Effect/Effect.h"
 #include "Effect/Factory/EffectFactory.h"
-#include "Character/Component/HealthComponent.h"
 
 class Effect_Heal : public Effect
 {
@@ -17,4 +16,4 @@ inline Effect* CreateHealEffectInstance(int Value)
 	return new Effect_Heal(Value);
 }
 
-inline bool bHealEffectRegister = EffectFactory::RegisterEffect(EFFECT_TAG_HEAL, CreateHealEffectInstance);
+inline bool bHealEffectRegister = EffectFactory::RegisterEffect(Game::EffectTag::Resource::RecoveryHeal, CreateHealEffectInstance);
