@@ -6,6 +6,7 @@ namespace Shop
 {
 	enum class EActionType
 	{
+		Menu,
 		Buy,
 		Sell,
 		Inventory,
@@ -25,18 +26,14 @@ protected:
 
 private:
 	Shop::EActionType ShowShopMenu();
-	void ShowShopItemList();
-	void ShowPlayerItemList();
-	void ShowPlayerInventory();
-
-	void HandleShopAction();
 
 	void HandleBuyAction();
 	void HandleSellAction();
 	void HandleInventoryAction();
 
+	void HandleTrade(ITrade* Buyer, ITrade* Seller);
 private:
-	Merchant MerchantInstance;
+	Merchant* MerchantInstance;
 	Shop::EActionType CurrentAction;
 };
 
