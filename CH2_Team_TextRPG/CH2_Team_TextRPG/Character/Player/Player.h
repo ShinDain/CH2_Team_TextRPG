@@ -34,8 +34,8 @@ public:
 	int GetStat(EStatType Type) const override;
 	int GetLevel() const override;
 	int GetExp() const override;
-	int GetCurrentResource(EResourceType Type) const;
-	int GetMaxResource(EResourceType Type) const;
+	int GetCurrentResource(EResourceType Type) const override;
+	int GetMaxResource(EResourceType Type) const override;
 
 public:
 	virtual bool CanAfford(int Price) override;
