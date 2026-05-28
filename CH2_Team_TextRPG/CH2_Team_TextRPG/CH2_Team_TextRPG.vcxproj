@@ -221,6 +221,7 @@ if exist "$(SolutionDir)Resources" xcopy /E /I /Y "$(SolutionDir)Resources" "$(O
     <ClCompile Include="Shop\ShopItemDescriptionBuilder.cpp" />
     <ClCompile Include="Shop\ShopItemProvider.cpp" />
     <ClCompile Include="Skill\Skill.cpp" />
+    <ClCompile Include="State\State_BattleEnd.cpp" />
     <ClCompile Include="State\State_Entry.cpp" />
     <ClCompile Include="State\State_Result.cpp" />
     <ClCompile Include="State\State_Map.cpp" />
@@ -315,6 +316,7 @@ if exist "$(SolutionDir)Resources" xcopy /E /I /Y "$(SolutionDir)Resources" "$(O
     <ClInclude Include="State\State_Battle.h" />
     <ClInclude Include="Shop\ShopCondition.h" />
     <ClInclude Include="Skill\Skill.h" />
+    <ClInclude Include="State\State_BattleEnd.h" />
     <ClInclude Include="State\State_Entry.h" />
     <ClInclude Include="State\State_Result.h" />
     <ClInclude Include="State\State_Map.h" />
@@ -335,7 +337,6 @@ if exist "$(SolutionDir)Resources" xcopy /E /I /Y "$(SolutionDir)Resources" "$(O
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Save\" />
-    <Folder Include="Start\" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -14,14 +14,15 @@ struct MonsterData
     uint32_t Id;
     uint32_t HP;
     uint32_t Attack;
-    uint32_t Defence;
+    uint32_t Defense;
     uint32_t Exp;
+	uint32_t ActionSpeed;
 	int DropItemId;
 	int DropGold;
     std::string Type; 
 };
 NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(MonsterData,
-    Name, Id, HP, Attack, Defence, Exp, DropItemId, DropGold, Type);
+    Name, Id, HP, Attack, Defense, Exp, ActionSpeed, DropItemId, DropGold, Type);
 
 class MonsterDataTable final : public BaseDataTable
 {

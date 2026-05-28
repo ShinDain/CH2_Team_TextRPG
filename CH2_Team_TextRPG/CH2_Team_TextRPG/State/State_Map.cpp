@@ -1,4 +1,4 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "State_Map.h"
 #include "Combat/BattleStartData.h"
 #include "Core/GameProgress.h"
@@ -155,7 +155,7 @@ bool TryFindMonsterStartData(uint32_t MonsterId, BattleMonsterStartData& OutMons
 		OutMonster.Name = Monster->Name;
 		OutMonster.HP = static_cast<int>(Monster->HP);
 		OutMonster.Attack = static_cast<int>(Monster->Attack);
-		OutMonster.Defense = static_cast<int>(Monster->Defence);
+		OutMonster.Defense = static_cast<int>(Monster->Defense);
 		OutMonster.Type = Monster->Type;
 		return true;
 	}
@@ -177,7 +177,7 @@ bool TryFindMonsterStartData(uint32_t MonsterId, BattleMonsterStartData& OutMons
 			!MonsterDataJson.contains("Type") ||
 			!MonsterDataJson.contains("HP") ||
 			!MonsterDataJson.contains("Attack") ||
-			!MonsterDataJson.contains("Defence"))
+			!MonsterDataJson.contains("Defense"))
 		{
 			continue;
 		}
@@ -188,7 +188,7 @@ bool TryFindMonsterStartData(uint32_t MonsterId, BattleMonsterStartData& OutMons
 			OutMonster.Name = MonsterDataJson["Name"].get<std::string>();
 			OutMonster.HP = MonsterDataJson["HP"].get<int>();
 			OutMonster.Attack = MonsterDataJson["Attack"].get<int>();
-			OutMonster.Defense = MonsterDataJson["Defence"].get<int>();
+			OutMonster.Defense = MonsterDataJson["Defense"].get<int>();
 			OutMonster.Type = MonsterDataJson["Type"].get<std::string>();
 			return true;
 		}

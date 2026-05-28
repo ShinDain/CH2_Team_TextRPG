@@ -2,33 +2,53 @@
 #include "BossMonster.h"
 #include "Character/Player/Player.h"
 #include "Data/Character/Damage.h"
+#include "Data/Character/Stat.h"
+#include "Character/Component/EffectComponent.h" 
+#include <cassert> 
+
+#define COMPONENT_CHECK(x) assert((x) && #x "Component 생성되지 않음")
 
 BossMonster::BossMonster(MonsterSetData&& Desc)
-    : Monster(std::move(Desc)),
-    Phase(1)
+    : Monster(std::move(Desc))
 {
-	MonsterData.HP = MonsterData.HP * 3 / 2;// 1.5배
-    MonsterData.Attack = MonsterData.Attack * 3 / 2; // 1.5배
-
-    OriginalData = MonsterData;// 리셋 기준도 갱신
+    Phase = 1;
 }
-void BossMonster::Attack(Player* player)
+
+bool BossMonster::Initialize()
 {
-    if (player == nullptr)
-        return;
+    MonsterData.HP *= 2;
+    MonsterData.Attack = static_cast<int>(MonsterData.Attack * 1.5f);
+    MonsterData.Defense = static_cast<int>(MonsterData.Defense * 1.5f);
+    OriginalData = MonsterData;
 
-    UpdatePhase();
+    if (!Monster::Initialize())
+    {
+        return false;
+    }
+    return true;
+}
 
-    DamageContext btp;
-    btp.Attack = MonsterData.Attack;
-    btp.SkillMultiplier = (Phase == 2) ? 1.5f : 1.f; // 2페이즈면 1.5배
-    btp.AttackCount = (Phase == 2) ? 2 : 1;       // 2페이즈면 2회 공격
-    player->TakeDamage(MonsterData.Attack);
+void BossMonster::TakeDamage(int Damage)
+{
+    Monster::TakeDamage(Damage);
+    if (!IsDead())
+    {
+        UpdatePhase();
+    }
 }
 
 void BossMonster::UpdatePhase()
 {
-    // HP 50% 이하면 2페이즈
-    if (MonsterData.HP <= OriginalData.HP / 2)
+    int CurrentHP = GetCurrentResource(EResourceType::Health);
+    int MaxHP = GetMaxResource(EResourceType::Health);
+
+    if (MaxHP <= 0) return;
+
+    float HPRatio = static_cast<float>(CurrentHP) / MaxHP;
+
+    if (HPRatio <= 0.5f && Phase < 2)
+    {
         Phase = 2;
+        //COMPONENT_CHECK(Effect);
+    }
 }

@@ -19,6 +19,7 @@ public:
 	void Clear();
 
 	Object* GetNextTurnCharacter();
+	std::vector<Monster*> GetAllMonsters() const { return Monsters; };
 	std::vector<Monster*> GetAliveMonsters() const;
 	bool IsBattleEnd() const;
 

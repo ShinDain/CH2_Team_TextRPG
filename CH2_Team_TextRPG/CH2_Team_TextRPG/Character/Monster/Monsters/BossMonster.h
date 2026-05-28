@@ -5,8 +5,8 @@ class BossMonster : public Monster
 {
 public:
     BossMonster(MonsterSetData&& Desc);
-    void Attack(Player* player) override;
-
+	bool Initialize() override;
+    void TakeDamage(int Damage);
 private:
     int Phase = 1; // 페이즈
     void UpdatePhase();
