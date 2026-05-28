@@ -82,6 +82,12 @@ bool CombatManager::IsBattleEnd() const
 	if (GetAliveMonsters().empty()) return true;
 	return false;
 }
+bool CombatManager::IsVictory() const
+{
+	if (PlayerCharacter && PlayerCharacter->IsDead()) return false;
+	if (GetAliveMonsters().empty()) return true;
+	return false;
+}
 
 void CombatManager::ExecuteSkill(Object* Caster, const std::vector<Object*>& Targets, Skill* InSkill)
 {

@@ -16,8 +16,8 @@ public:
 	bool Initialize();
 	void Process();
 
-private:
 	bool ChangeState(EState InNextState);
+private:
 	bool InitializeStates();
 
 	template<typename T>
