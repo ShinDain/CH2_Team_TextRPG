@@ -5,6 +5,7 @@
 #include <vector>
 
 struct ItemData;
+class Player;
 
 class State_Shop : public BaseState
 {
@@ -17,6 +18,19 @@ protected:
 	virtual void Exit() override;
 
 private:
+	enum class EShopScreenMode
+	{
+		ItemList,
+		ItemDetail
+	};
+
+	void ProcessItemList(Player* MainPlayer);
+	void ProcessItemDetail(Player* MainPlayer);
+	const ItemData* GetSelectedItem() const;
+	std::string TryBuyItem(Player* MainPlayer, int ItemIndex) const;
+
 	std::vector<const ItemData*> ShopItems;
 	std::string LastMessage;
+	EShopScreenMode CurrentMode = EShopScreenMode::ItemList;
+	int SelectedItemIndex = -1;
 };
