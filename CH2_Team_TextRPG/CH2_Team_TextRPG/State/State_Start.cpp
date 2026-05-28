@@ -85,6 +85,7 @@ void State_Start::NewPlayer()
 	}
 	
 	Player* NewPlayer = ObjectManager::GetInstance().CreateObject<Player>();
+	NewPlayer->SetDisplayName(Data.UserName);
 	if (!NewPlayer)
 	{
 		GLog.AddLog("플레이어 생성에 실패했습니다.");
@@ -120,14 +121,14 @@ void State_Start::NewPlayer()
 			Data.ClassIndex = Input;
 			GSharedSaveMgr->Save(Data);
 			GSharedSaveMgr->SaveSnapShot();
-
+			
 			GLog.AddLog("새 게임을 시작합니다: " + Data.UserName);
 			return;
 		}
 		GLog.AddLog("직업 데이터를 찾을 수 없습니다.");
 		return;
 	}
-
+	
 	GLog.AddLog("직업 번호를 다시 선택해주세요.");
 }
 

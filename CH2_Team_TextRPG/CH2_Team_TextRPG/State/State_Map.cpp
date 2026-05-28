@@ -301,6 +301,8 @@ State_Map::State_Map()
 void State_Map::Enter()
 {
 	ConsoleUtil::HideCursor();
+	Player* LoadPlayer = ObjectManager::GetInstance().FindObject<Player>("Player");
+	LoadPlayer->RestoreAll();
 	
 	GSharedSaveMgr->SaveSnapShot();
 }
