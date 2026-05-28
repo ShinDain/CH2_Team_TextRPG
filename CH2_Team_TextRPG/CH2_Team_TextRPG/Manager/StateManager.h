@@ -4,6 +4,8 @@
 
 class StateManager
 {
+	friend BaseState;
+	
 private:
 	StateManager() {};
 public:
@@ -14,8 +16,8 @@ public:
 	bool Initialize();
 	void Process();
 
-	bool ChangeState(EState InNextState);
 private:
+	bool ChangeState(EState InNextState);
 	bool InitializeStates();
 
 	template<typename T>

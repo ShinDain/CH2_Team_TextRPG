@@ -5,6 +5,7 @@
 #include "Character/Component/LevelComponent.h"
 #include "Character/Component/SkillComponent.h"
 #include "Character/Player/Player.h"
+#include "Combat/CombatCondition.h"
 #include "Core/GameInstance.h"
 #include "Data/Table/PlayerDataTable.h"
 #include "Data/User/UserData.h"
@@ -14,7 +15,6 @@
 #include "Manager/UserSaveManager.h"
 #include "UI/PlayerSetupScreen.h"
 #include "UI/StartMenuScreen.h"
-
 
 State_Start::State_Start()
 {

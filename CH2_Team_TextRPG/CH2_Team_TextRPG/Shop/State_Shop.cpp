@@ -62,7 +62,7 @@ void State_Shop::ProcessItemList(Player* MainPlayer)
 
 	if (Input == 0)
 	{
-		StateManager::GetInstance().ChangeState(EState::Map);
+		AddTransition<AlwaysTrueCondition>(EState::Map);
 		return;
 	}
 

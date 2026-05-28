@@ -66,11 +66,11 @@ void State_BattleEnd::Process()
 		
 		if (LoadPlayer->IsDead())
 		{
-			StateManager::GetInstance().ChangeState(EState::Result);
+			AddTransition<AlwaysTrueCondition>(EState::Result);
 		}
 		else
 		{
-			StateManager::GetInstance().ChangeState(EState::Map);
+			AddTransition<AlwaysTrueCondition>(EState::Map);
 		}
 	}
 }
