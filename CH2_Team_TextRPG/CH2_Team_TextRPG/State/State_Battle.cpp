@@ -1,10 +1,11 @@
 ﻿#include "pch.h"
-#include "BattleUI.h"
-#include "CombatCondition.h"
+#include "Combat/BattleUI.h"
+#include "Combat/CombatCondition.h"
 #include "Character/Component/EffectComponent.h"
 #include "Character/Component/SkillComponent.h"
 #include "Character/Player/Player.h"
 #include "Character/Monster/Monster.h"
+#include "Character/Monster/MonsterFactory.h"
 #include "Data/Table/SkillDataTable.h"
 #include "Data/Table/ItemDataTable.h"
 #include "Manager/ObjectManager.h"
@@ -27,11 +28,19 @@ State_Battle::~State_Battle()
 
 void State_Battle::Enter()
 {
-	Player* PlayerCharacter = ObjectManager::GetInstance().FindObject<Player>("Player");
-	
-	// TODO : 몬스터 데이터 추가필요
-	std::vector<Monster*> Monsters;
-	
+	Player* PlayerCharacter = GameInstance::GetInstance().GetMainPlayer();
+
+	const BattleStartData* StartData = GameInstance::GetInstance().GetBattleStartData();
+
+	vector<Monster*> Monsters;
+	for (const BattleMonsterStartData& data : StartData->Monsters)
+	{
+		Monster* NewMonster = MonsterFactory::CreateForPlayer(data.Name, PlayerCharacter);
+		if (NewMonster)
+		{
+			Monsters.emplace_back(NewMonster);
+		}
+	}
 	CombatManager::GetInstance().Initialize(PlayerCharacter, Monsters);
 }
 
@@ -45,10 +54,11 @@ void State_Battle::Process()
 	Object* CurTurnCharacter = CombatManager::GetInstance().GetNextTurnCharacter();
 	if (!CurTurnCharacter) return;
 	
-	// 상태이상 컴포넌트 처리
 	auto EffectComp = CurTurnCharacter->FindComponent<EffectComponent>("Effect");
+	bool bIsStunned = false;
 	if (EffectComp)
 	{
+		bIsStunned = EffectComp->HasEffectByTag("State_Stun");
 		EffectComp->UpdateEffects();
 		EffectComp->RemoveExpiredEffects();
 	}
@@ -56,19 +66,29 @@ void State_Battle::Process()
 	if (Player* PlayerChar = dynamic_cast<Player*>(CurTurnCharacter))
 	{
 		if (PlayerChar->IsDead()) return;
+		if (bIsStunned)
+		{
+			GLog.AddLog("[상태이상] " + PlayerChar->GetName() + "은(는) 기절하여 턴을 넘깁니다.");
+			return;
+		}
 		HandlePlayerTurn(PlayerChar);
 	}
 	else if (Monster* MonsterChar = dynamic_cast<Monster*>(CurTurnCharacter))
 	{
 		if (MonsterChar->IsDead()) return;
+		if (bIsStunned)
+		{
+			GLog.AddLog("[상태이상] " + MonsterChar->GetName() + "은(는) 기절하여 턴을 넘깁니다.");
+			return;
+		}
 		HandleMonsterTurn(MonsterChar);
 	}
 }
 
 void State_Battle::Exit()
 {
-	// TODO: 전투 중에만 적용되는 버프/디버프를 플레이어의 EffectComponent에서 제거합니다.
-	
+	// TODO : 전투 종료 시 효과 제거 (버프/디버프 등)
+	GameInstance::GetInstance().GetMainPlayer()->FindComponent<EffectComponent>("Effect");
 	CombatManager::GetInstance().Clear();
 }
 
@@ -124,7 +144,7 @@ void State_Battle::HandleMonsterTurn(Monster* MonsterCharacter)
 	if (SkillComp && !SkillComp->GetLearnedSkills().empty())
 	{
 		Skill* BasicAttack = SkillComp->GetLearnedSkills()[0];
-		Player* PlayerCharacter = ObjectManager::GetInstance().FindObject<Player>("Player");
+		Player* PlayerCharacter = GameInstance::GetInstance().GetMainPlayer();
 		
 		if (PlayerCharacter && !PlayerCharacter->IsDead())
 		{

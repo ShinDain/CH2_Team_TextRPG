@@ -2,10 +2,10 @@
 #include <algorithm>
 #include "TurnManager.h"
 #include "Character/Character.h"
-#include "Combat/State_Battle.h"
 #include "Character/Component/StatComponent.h"
-#include "Data/Character/Stat.h"
 #include "Character/Interface/UnitStat.h"
+#include "Data/Character/Stat.h"
+#include "State/State_Battle.h"
 
 TurnManager::~TurnManager()
 {

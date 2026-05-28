@@ -8,6 +8,7 @@
 #include "Effect/Effect.h"
 #include "Character/Component/ResourceComponent.h"
 #include "Character/Component/EffectComponent.h"
+#include "ObjectManager.h"
 
 CombatManager& CombatManager::GetInstance()
 {
@@ -43,7 +44,7 @@ void CombatManager::Clear()
 	
 	for (Monster* monster : Monsters)
 	{
-		delete monster;
+		ObjectManager::GetInstance().RemoveObject(monster);
 	}
 	Monsters.clear();
 
