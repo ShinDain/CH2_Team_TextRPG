@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 enum class EState
 {
@@ -11,6 +11,5 @@ enum class EState
 	Shop,
 	RandomEvent,
 	Result,
-	Ending,
 	End,
 };
