@@ -1,4 +1,4 @@
-[
+﻿[
   {
     "Idx": 1,
     "Name": "전사 기본 공격",
@@ -9,7 +9,10 @@
     "TargetType": "SINGLE_ENEMY",
     "HitCount": 1,
     "Effects": [
-      { "Tag": "Damage", "Value": 10000 }
+      {
+        "Tag": "Damage",
+        "Value": 10000
+      }
     ]
   },
   {
@@ -22,7 +25,10 @@
     "TargetType": "SINGLE_ENEMY",
     "HitCount": 2,
     "Effects": [
-      { "Tag": "Damage", "Value": 6000 }
+      {
+        "Tag": "Damage",
+        "Value": 6000
+      }
     ]
   },
   {
@@ -35,7 +41,10 @@
     "TargetType": "SINGLE_ENEMY",
     "HitCount": 1,
     "Effects": [
-      { "Tag": "Damage", "Value": 12000 }
+      {
+        "Tag": "Damage",
+        "Value": 12000
+      }
     ]
   },
   {
@@ -48,7 +57,10 @@
     "TargetType": "SINGLE_ENEMY",
     "HitCount": 1,
     "Effects": [
-      { "Tag": "Damage", "Value": 15000 }
+      {
+        "Tag": "Damage",
+        "Value": 15000
+      }
     ]
   },
   {
@@ -61,10 +73,12 @@
     "TargetType": "ALL_ENEMIES",
     "HitCount": 1,
     "Effects": [
-      { "Tag": "Damage", "Value": 8000 }
+      {
+        "Tag": "Damage",
+        "Value": 8000
+      }
     ]
-  }
-  ,
+  },
   {
     "Idx": 103,
     "Name": "독단검",
@@ -75,8 +89,30 @@
     "TargetType": "SINGLE_ENEMY",
     "HitCount": 1,
     "Effects": [
-      { "Tag": "Damage", "Value": 8000 },
-      { "Tag": "OverTime_Debuff_Poison", "Value": 10 }
+      {
+        "Tag": "Damage",
+        "Value": 8000
+      },
+      {
+        "Tag": "OverTime_Debuff_Poison",
+        "Value": 10
+      }
+    ]
+  },
+  {
+    "Idx": 104,
+    "Name": "몸통 박치기",
+    "Description": "적에게 몸통으로 강하게 박치기하여 피해를 입힙니다.",
+    "ManaCost": 0,
+    "Duration": 3,
+    "Cooldown": 2,
+    "TargetType": "SINGLE_ENEMY",
+    "HitCount": 1,
+    "Effects": [
+      {
+        "Tag": "Damage",
+        "Value": 8000
+      }
     ]
   }
 ]
