@@ -1,8 +1,5 @@
 ﻿#pragma once
 
-#include <vector>
-#include <string>
-
 enum class ENodeType
 {
     Start,
@@ -29,10 +26,11 @@ class MapManager
 private:
     std::vector<MapNode> Nodes;
     int CurrentNodeId = 0;
+    int MaxNodeId = 0;
 
 public:
     void GenerateFixedMap();
-
+    
     const MapNode* GetCurrentNode() const;
     const MapNode* GetNodeById(int NodeId) const;
 
@@ -40,6 +38,7 @@ public:
 
     bool MoveToNode(int NodeId);
 
+    void SetCurrentNodeId(const int NewId);
     void PrintCurrentNode() const;
     void PrintMovableNodes() const;
     void PrintSimpleMap() const;

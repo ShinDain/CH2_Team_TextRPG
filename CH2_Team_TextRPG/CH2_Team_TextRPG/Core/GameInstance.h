@@ -34,16 +34,16 @@ public:
 
     MapManager& GetMapManager();
     LogManager& GetLogManager();
-    Player* GetMainPlayer() const;
 
-	void SetBattleStartData(const BattleStartData& InBattleStartData);
+
+    void SetBattleStartData(const BattleStartData& InBattleStartData);
 	const BattleStartData* GetBattleStartData() const;
 	void ClearBattleStartData();
 	void SetResultType(EResultType Type);
     EResultType GetResultType() const;
     
     InputManager* GetInputManager() const { return GameInputManager; }
-
+	std::shared_ptr<class UserSaveManager> GetUserSaveManager() { return UserSaveManagerPtr; }
 private:
 	bool InitializeManager();
 	bool InitializeDataTable();
@@ -57,12 +57,6 @@ protected:
 	bool bHasBattleStartData = false;
     EResultType ResultType = EResultType::GameOver;
     
-    InputManager* GameInputManager;  
-
-	class Player* MainPlayer;
+    InputManager* GameInputManager;
+	std::shared_ptr<class UserSaveManager> UserSaveManagerPtr;
 };
-
-inline class Player* GetMainPlayer()
-{
-	return GameInstance::GetInstance().GetMainPlayer();
-}

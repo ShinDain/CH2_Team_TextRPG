@@ -2,6 +2,7 @@
 #include "BattleUI.h"
 #include "Manager/InputManager.h"
 #include "Character/Component/SkillComponent.h"
+#include "Data/Table/SkillDataTable.h"
 #include "Character/Monster/Monster.h"
 #include "Character/Player/Player.h"
 #include "Character/Interface/Resource.h"
@@ -11,6 +12,8 @@
 #include "UI/ConsoleUtil.h"
 #include <windows.h>
 #include <map>
+
+#include "Manager/ObjectManager.h"
 
 namespace
 {
@@ -69,7 +72,11 @@ void BattleUI::DrawBattleView(const std::vector<Monster*>& AliveMonsters)
 		RenderedMonsterIndices[AliveMonsters[i]] = i;
 	}
 
-	GameScreen::DrawCharacterPanel(GameInstance::GetInstance().GetMainPlayer());
+	if (Player* LoadPlayer = ObjectManager::GetInstance().FindObject<Player>("Player"))
+	{
+		GameScreen::DrawCharacterPanel(LoadPlayer);
+	}
+	
 	Renderer.DrawBattleScreen();
 	GameScreen::DrawLogPanel(GameInstance::GetInstance().GetLogManager());
 }

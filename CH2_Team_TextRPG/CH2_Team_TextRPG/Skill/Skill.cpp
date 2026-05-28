@@ -2,6 +2,7 @@
 #include "Skill.h"
 #include "Effect/Effect.h"
 #include "Character/Component/EffectComponent.h"
+#include "Data/Table/SkillDataTable.h"
 
 
 Skill::Skill(const FSkillData* InData) : Data(InData), CurrentCooldown(0)

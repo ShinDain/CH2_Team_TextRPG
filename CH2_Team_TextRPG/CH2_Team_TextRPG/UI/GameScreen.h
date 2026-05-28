@@ -1,11 +1,11 @@
 ﻿#pragma once
 
 #include "Map/MapManager.h"
-#include "Manager/LogManager.h"
 #include "Combat/BattleSystem.h"
 #include <string>
 #include <vector>
 
+class LogManager;
 class Player;
 
 struct FCommandOption

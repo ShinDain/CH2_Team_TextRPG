@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "UI/JobSelectUIScreen.h"
+#include "UI/PlayerSetupScreen.h"
 #include "Manager/InputManager.h"
 #include "UI/ConsoleRenderer.h"
 #include "UI/ConsoleUtil.h"
@@ -33,7 +33,30 @@ const JobSelectViewData JobViews[] =
 };
 }
 
-void JobSelectUIScreen::Draw()
+void PlayerSetupScreen::DrawPlayerNameInput()
+{
+	ConsoleUtil::HideCursor();
+	ConsoleRenderer::ClearScreen();
+	ConsoleRenderer::DrawBox(45, 5, 120, 40);
+
+	ConsoleRenderer::SetCursorPosition(47, 7);
+	GInput << "이름을 입력하세요: ";
+
+	ConsoleRenderer::SetCursorPosition(47, 9);
+	
+}
+
+void PlayerSetupScreen::DrawPlayerNameError()
+{
+	ConsoleUtil::HideCursor();
+	ConsoleRenderer::ClearScreen();
+	ConsoleRenderer::DrawBox(45, 5, 120, 40);
+
+	ConsoleRenderer::SetCursorPosition(47, 7);
+	ConsoleUtil::WriteColored("잘못 입력하였습니다!", ConsoleColor::Red);
+}
+
+void PlayerSetupScreen::DrawPlayerJobSelect()
 {
 	ConsoleUtil::HideCursor();
 	ConsoleRenderer::ClearScreen();

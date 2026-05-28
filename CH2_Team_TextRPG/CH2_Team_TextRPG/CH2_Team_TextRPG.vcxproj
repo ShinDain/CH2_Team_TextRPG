@@ -176,6 +176,7 @@ if exist "$(SolutionDir)Resources" xcopy /E /I /Y "$(SolutionDir)Resources" "$(O
     <ClCompile Include="Data\Table\LevelDataTable.cpp" />
     <ClCompile Include="Data\Table\ItemDataTable.cpp" />
     <ClCompile Include="Data\Table\MonsterDataTable.cpp" />
+    <ClCompile Include="Data\Table\PlayerDataTable.cpp" />
     <ClCompile Include="Data\Table\ScriptPathTable.cpp" />
     <ClCompile Include="Character\Component\EffectComponent.cpp" />
     <ClCompile Include="Effect\Effect.cpp" />
@@ -201,6 +202,7 @@ if exist "$(SolutionDir)Resources" xcopy /E /I /Y "$(SolutionDir)Resources" "$(O
     <ClCompile Include="Manager\LogManager.cpp" />
     <ClCompile Include="Manager\ObjectManager.cpp" />
     <ClCompile Include="Manager\RecordManager.cpp" />
+    <ClCompile Include="Manager\UserSaveManager.cpp" />
     <ClCompile Include="Manager\StateManager.cpp" />
     <ClCompile Include="Manager\TurnManager.cpp" />
     <ClCompile Include="Map\MapManager.cpp" />
@@ -219,8 +221,6 @@ if exist "$(SolutionDir)Resources" xcopy /E /I /Y "$(SolutionDir)Resources" "$(O
     <ClCompile Include="Shop\ShopItemDescriptionBuilder.cpp" />
     <ClCompile Include="Shop\ShopItemProvider.cpp" />
     <ClCompile Include="Skill\Skill.cpp" />
-    <ClCompile Include="Start\Condition\LoadGameCondition.cpp" />
-    <ClCompile Include="Start\Condition\NewGameCondition.cpp" />
     <ClCompile Include="State\State_BattleEnd.cpp" />
     <ClCompile Include="State\State_Entry.cpp" />
     <ClCompile Include="State\State_Result.cpp" />
@@ -233,7 +233,7 @@ if exist "$(SolutionDir)Resources" xcopy /E /I /Y "$(SolutionDir)Resources" "$(O
     <ClCompile Include="UI\ConsoleRenderer.cpp" />
     <ClCompile Include="UI\ConsoleUtil.cpp" />
     <ClCompile Include="UI\GameScreen.cpp" />
-    <ClCompile Include="UI\JobSelectUIScreen.cpp" />
+    <ClCompile Include="UI\PlayerSetupScreen.cpp" />
     <ClCompile Include="UI\ShopScreen.cpp" />
     <ClCompile Include="UI\StartMenuScreen.cpp" />
   </ItemGroup>
@@ -260,11 +260,12 @@ if exist "$(SolutionDir)Resources" xcopy /E /I /Y "$(SolutionDir)Resources" "$(O
     <ClInclude Include="Common\StringHelper.h" />
     <ClInclude Include="Core\Component.h" />
     <ClInclude Include="Core\Condition.h" />
-    <ClInclude Include="Core\Delegate.h" />
     <ClInclude Include="Core\GameInstance.h" />
     <ClInclude Include="Data\Table\LevelDataTable.h" />
     <ClInclude Include="Data\Table\MonsterDataTable.h" />
     <ClInclude Include="Character\Component\EffectComponent.h" />
+    <ClInclude Include="Data\Table\PlayerDataTable.h" />
+    <ClInclude Include="Data\User\UserData.h" />
     <ClInclude Include="Effect\Effect.h" />
     <ClInclude Include="Character\Component\InventoryComponent.h" />
     <ClInclude Include="Effect\EffectData.h" />
@@ -302,6 +303,7 @@ if exist "$(SolutionDir)Resources" xcopy /E /I /Y "$(SolutionDir)Resources" "$(O
     <ClInclude Include="Manager\LogManager.h" />
     <ClInclude Include="Manager\ObjectManager.h" />
     <ClInclude Include="Manager\RecordManager.h" />
+    <ClInclude Include="Manager\UserSaveManager.h" />
     <ClInclude Include="Manager\StateManager.h" />
     <ClInclude Include="Core\GameProgress.h" />
     <ClInclude Include="Manager\TurnManager.h" />
@@ -314,8 +316,6 @@ if exist "$(SolutionDir)Resources" xcopy /E /I /Y "$(SolutionDir)Resources" "$(O
     <ClInclude Include="State\State_Battle.h" />
     <ClInclude Include="Shop\ShopCondition.h" />
     <ClInclude Include="Skill\Skill.h" />
-    <ClInclude Include="Start\Condition\LoadGameCondition.h" />
-    <ClInclude Include="Start\Condition\NewGameCondition.h" />
     <ClInclude Include="State\State_BattleEnd.h" />
     <ClInclude Include="State\State_Entry.h" />
     <ClInclude Include="State\State_Result.h" />
@@ -331,9 +331,12 @@ if exist "$(SolutionDir)Resources" xcopy /E /I /Y "$(SolutionDir)Resources" "$(O
     <ClInclude Include="UI\ConsoleRenderer.h" />
     <ClInclude Include="UI\ConsoleUtil.h" />
     <ClInclude Include="UI\GameScreen.h" />
-    <ClInclude Include="UI\JobSelectUIScreen.h" />
+    <ClInclude Include="UI\PlayerSetupScreen.h" />
     <ClInclude Include="UI\ShopScreen.h" />
     <ClInclude Include="UI\StartMenuScreen.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Save\" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

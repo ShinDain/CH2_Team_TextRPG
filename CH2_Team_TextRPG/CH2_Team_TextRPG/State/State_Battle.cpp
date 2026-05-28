@@ -28,20 +28,21 @@ State_Battle::~State_Battle()
 
 void State_Battle::Enter()
 {
-	Player* PlayerCharacter = GameInstance::GetInstance().GetMainPlayer();
+	Player* LoadPlayer = ObjectManager::GetInstance().FindObject<Player>("Player");
+	assert(LoadPlayer && "LoadPlayer is null");
 
 	const BattleStartData* StartData = GameInstance::GetInstance().GetBattleStartData();
 	
 	vector<Monster*> Monsters;
 	for (const BattleMonsterStartData& data : StartData->Monsters)
 	{
-		Monster* NewMonster = MonsterFactory::CreateForPlayer(data.Name, PlayerCharacter);
+		Monster* NewMonster = MonsterFactory::CreateForPlayer(data.Name, LoadPlayer);
 		if (NewMonster)
 		{
 			Monsters.emplace_back(NewMonster);
 		}
 	}
-	CombatManager::GetInstance().Initialize(PlayerCharacter, Monsters);
+	CombatManager::GetInstance().Initialize(LoadPlayer, Monsters);
 }
 
 void State_Battle::Process()
@@ -93,11 +94,8 @@ void State_Battle::Process()
 
 void State_Battle::Exit()
 {
-
 	// TODO : 전투 종료 시 효과 제거 (버프/디버프 등)
-	GameInstance::GetInstance().GetMainPlayer()->FindComponent<EffectComponent>("Effect");
 }
-
 
 void State_Battle::HandlePlayerTurn(Player* PlayerCharacter)
 {
@@ -150,11 +148,13 @@ void State_Battle::HandleMonsterTurn(Monster* MonsterCharacter)
 	if (SkillComp && !SkillComp->GetLearnedSkills().empty())
 	{
 		Skill* BasicAttack = SkillComp->GetLearnedSkills()[0];
-		Player* PlayerCharacter = GameInstance::GetInstance().GetMainPlayer();
+
+		Player* LoadPlayer = ObjectManager::GetInstance().FindObject<Player>("Player");
+		assert(LoadPlayer && "LoadPlayer is null");
 		
-		if (PlayerCharacter && !PlayerCharacter->IsDead())
+		if (LoadPlayer && !LoadPlayer->IsDead())
 		{
-			std::vector<Object*> Targets = { PlayerCharacter };
+			std::vector<Object*> Targets = { LoadPlayer };
 			
 			// 몬스터 공격 애니메이션 재생
 			BattleUI::PlayAttackAnimation(MonsterCharacter);

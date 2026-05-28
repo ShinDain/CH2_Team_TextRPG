@@ -1,7 +1,6 @@
 ﻿#pragma once
 
-#include "Data/Table/SkillDataTable.h"
-
+struct FSkillData;
 class Object;
 class Effect;
 

@@ -1,7 +1,6 @@
 ﻿#include "pch.h"
 #include "Player.h"
 #include "Data/Character/Stat.h"
-#include "Data/Character/Damage.h"
 #include "Character/Component/StatComponent.h"
 #include "Character/Component/ResourceComponent.h"
 #include "Character/Component/EquipmentComponent.h"
@@ -13,7 +12,7 @@
 
 #define COMPONENT_CHECK(x) assert((x) && #x "Component 생성되지 않음")
 
-Player::Player()
+Player::Player(const std::string& InName)
 {
 	Name = "Player";
 	CharacterType = ECharacterType::Player;

@@ -6,6 +6,7 @@
 #include "Character/Interface/UnitStat.h"
 #include "Data/Character/Damage.h"
 
+struct DamageContext;
 class Player;
 struct MonsterSetData
 {

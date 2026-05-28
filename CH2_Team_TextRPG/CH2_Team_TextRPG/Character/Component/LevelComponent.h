@@ -10,7 +10,10 @@ public:
 	bool Initialize() override;
 
 	bool IsMaxLevel() const;
+	
+	void SetExp(int NewExp);
 	void AddExp(int Amount);
+	void ReviveLevel(int TargetLevel);
 
 	int GetLevel() const { return CurrentLevel; }
 	int GetExp() const { return CurrentExp; }

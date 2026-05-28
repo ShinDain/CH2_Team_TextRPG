@@ -1,5 +1,5 @@
-#include "Core/Component.h"
 #pragma once
+#include "Core/Component.h"
 
 enum class EStatType;
 class StatComponent : public Component

@@ -9,7 +9,7 @@
 class Player : public Character, public IDamageable, public IUnitStat, public IResource, public ILevelable, public ITrade
 {
 public:
-	Player();
+	Player(const std::string& InName = "Unknown");
 	~Player() override;
 
 	bool Initialize() override;

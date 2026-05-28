@@ -6,6 +6,8 @@
 #include "Manager/StateManager.h"
 #include "Core/GameInstance.h"
 #include "Manager/InputManager.h"
+#include "Manager/ObjectManager.h"
+
 State_BattleEnd::State_BattleEnd()
 {
 	Name = "BattleEnd";
@@ -17,13 +19,14 @@ State_BattleEnd::~State_BattleEnd()
 
 void State_BattleEnd::Enter()
 {
-	Player* PlayerCharacter = GameInstance::GetInstance().GetMainPlayer();
-	if (!PlayerCharacter) 
+	Player* LoadPlayer = ObjectManager::GetInstance().FindObject<Player>("Player");
+	assert(LoadPlayer && "LoadPlayer is null");
+	if (!LoadPlayer) 
 	{
 		return;
 	}
 	std::vector<Monster*> AliveMonsters = CombatManager::GetInstance().GetAliveMonsters();
-	if (AliveMonsters.empty() && !PlayerCharacter->IsDead())
+	if (AliveMonsters.empty() && !LoadPlayer->IsDead())
 	{
 		int TotalExp = 0;
 		int TotalGold = 0;
@@ -38,14 +41,14 @@ void State_BattleEnd::Enter()
 			}
 		}
 
-		PlayerCharacter->AddExp(TotalExp);
-		PlayerCharacter->ModifyGold(TotalGold);
+		LoadPlayer->AddExp(TotalExp);
+		LoadPlayer->ModifyGold(TotalGold);
 
 		GLog.AddLog("[전투 승리] 모든 적을 쓰러뜨렸습니다!");
 		GLog.AddLog("[보상] 획득 경험치: " + std::to_string(TotalExp) + " EXP");
 		GLog.AddLog("[보상] 획득 골드: " + std::to_string(TotalGold) + " GOLD");
 	}
-	else if (PlayerCharacter->IsDead())
+	else if (LoadPlayer->IsDead())
 	{
 		GLog.AddLog("[전투 패배] 플레이어가 사망했습니다...");
 	}
@@ -58,8 +61,10 @@ void State_BattleEnd::Process()
 	std::string Dummy;
 	if (GInput >> Dummy)
 	{
-		Player* PlayerCharacter = GameInstance::GetInstance().GetMainPlayer();
-		if (PlayerCharacter && PlayerCharacter->IsDead())
+		Player* LoadPlayer = ObjectManager::GetInstance().FindObject<Player>("Player");
+		assert(LoadPlayer && "LoadPlayer is null");
+		
+		if (LoadPlayer->IsDead())
 		{
 			StateManager::GetInstance().ChangeState(EState::Result);
 		}

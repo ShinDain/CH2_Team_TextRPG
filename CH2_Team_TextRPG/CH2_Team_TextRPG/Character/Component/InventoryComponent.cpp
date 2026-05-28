@@ -10,7 +10,7 @@ InventoryComponent::InventoryComponent(Object* InOwner)
 	:Component(InOwner, "Inventory")
 {
 	ItemList = {};
-	OwnedGold = 0;
+	OwnedGold = 100;
 }
 
 InventoryComponent::~InventoryComponent()

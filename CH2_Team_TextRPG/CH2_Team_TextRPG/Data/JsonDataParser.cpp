@@ -29,9 +29,29 @@ bool JsonDataParser::Load(const std::string& FilePath, json& OutJsonData)
 	return true;
 }
 
-void JsonDataParser::Save(const std::string& FilePath, const json& InJsonData)
+bool JsonDataParser::Save(const std::string& FilePath, const json& InJsonData)
 {
 	std::ofstream File(FilePath);
-	File << InJsonData.dump(4); 
+	if (!File)
+	{
+		GLog.AddLog("SaveFailed! ");
+		GLog.AddLog("FilePaht: ");
+		GLog.AddLog(FilePath);
+		return false;
+	}
+
+	try
+	{
+		File << InJsonData.dump(4);	
+	}
+	catch (const json::exception& Exception)
+	{
+		std::cerr << "JSON 파일 파싱 실패: " << FilePath << "\n";
+		std::cerr << Exception.what() << "\n";
+		File.close();
+	}
+	File.close();
+	
+	return true;
 }
 

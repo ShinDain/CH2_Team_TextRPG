@@ -1,5 +1,7 @@
 ﻿#include "pch.h"
 #include "BossMonster.h"
+#include "Character/Player/Player.h"
+#include "Data/Character/Damage.h"
 #include "Data/Character/Stat.h"
 #include "Character/Component/EffectComponent.h" 
 #include <cassert> 

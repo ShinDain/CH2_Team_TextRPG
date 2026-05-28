@@ -4,23 +4,24 @@
 #include "Data/Table/MonsterDataTable.h"
 #include "Data/Table/SkillDataTable.h"
 #include "Data/Table/ScriptPathTable.h"
+#include "Table/PlayerDataTable.h"
 
 bool DataLoader::LoadInitialGameData()
 {
-	if (!ScriptPathTable::GetInstance().Load(INIT_FILE_PATH))
+	if (!ScriptPathTable::GetInstance().Load(Game::DataPaths::ScriptList))
 		return false;
 
-	for (const std::string& path : ScriptPathTable::GetInstance().GetFilePaths(DATA_CATEGORY_ITEM))
+	for (const std::string& path : ScriptPathTable::GetInstance().GetFilePaths(Game::DataPaths::Item))
 	{
 		ItemDataTable::GetInstance().Load(path);
 	}
 
-	for (const std::string& path : ScriptPathTable::GetInstance().GetFilePaths(DATA_CATEGORY_MONSTER))
+	for (const std::string& path : ScriptPathTable::GetInstance().GetFilePaths(Game::DataPaths::Monster))
 	{
 		MonsterDataTable::GetInstance().Load(path);
 	}
 
-	for (const std::string& path : ScriptPathTable::GetInstance().GetFilePaths(DATA_CATEGORY_SKILL))
+	for (const std::string& path : ScriptPathTable::GetInstance().GetFilePaths(Game::DataPaths::Skill))
 	{
 		SkillDataTable::GetInstance().Load(path);
 	}
@@ -29,6 +30,11 @@ bool DataLoader::LoadInitialGameData()
 	{
 		MapDataTable::GetInstance().Load(path);
 	}*/
+	
+	for (const std::string& path : ScriptPathTable::GetInstance().GetFilePaths(Game::DataPaths::Player))
+	{
+		PlayerDataTable::GetInstance().Load(path);
+	}
 
     return true;
 }

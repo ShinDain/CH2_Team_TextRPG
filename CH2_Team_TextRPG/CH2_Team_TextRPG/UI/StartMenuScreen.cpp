@@ -4,7 +4,7 @@
 #include "UI/ConsoleUtil.h"
 #include "Manager/InputManager.h"
 
-void StartMenuScreen::Draw()
+void StartMenuScreen::DrawStartMenu()
 {
 	ConsoleUtil::HideCursor();
 	ConsoleRenderer::ClearScreen();

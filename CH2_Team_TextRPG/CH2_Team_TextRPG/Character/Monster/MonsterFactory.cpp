@@ -1,8 +1,8 @@
-﻿#pragma once
-#include "pch.h"
+﻿#include "pch.h"
 #include "MonsterFactory.h"
 #include "Character/Monster/Monsters/BossMonster.h"
 #include "Character/Monster/Monsters/EliteMonster.h"
+#include "Character/Player/Player.h"
 #include "Data/Table/MonsterDataTable.h"
 #include "Manager/ObjectManager.h"
 #include "Data/Character/Stat.h"

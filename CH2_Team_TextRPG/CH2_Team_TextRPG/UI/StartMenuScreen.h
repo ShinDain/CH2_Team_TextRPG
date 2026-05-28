@@ -3,5 +3,7 @@
 class StartMenuScreen
 {
 public:
-	static void Draw();
+	static void DrawStartMenu();
+	static void DrawNewPlayerNameInput();
+	static void DrawLoadPlayer();
 };

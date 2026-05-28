@@ -49,11 +49,11 @@ bool ItemDataTable::Load(const std::string& FilePath)
 	std::string prefix = path.parent_path().stem().string();
 	bool ret = true;
 
-	if (prefix == DATA_CATEGORY_ITEM_CONSUMABLE)
+	if (prefix == Game::DataPaths::Consumable)
 	{
 		ConsumableDataTable::GetInstance().ParseData(jsonData);
 	}
-	else if (prefix == DATA_CATEGORY_ITEM_EQUIPMENT)
+	else if (prefix == Game::DataPaths::Equipment)
 	{
 		EquipmentDataTable::GetInstance().ParseData(jsonData);
 	}

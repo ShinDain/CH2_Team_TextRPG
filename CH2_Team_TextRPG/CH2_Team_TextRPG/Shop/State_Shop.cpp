@@ -4,6 +4,7 @@
 #include "Core/GameInstance.h"
 #include "Data/Table/ItemDataTable.h"
 #include "Manager/InputManager.h"
+#include "Manager/ObjectManager.h"
 #include "Manager/StateManager.h"
 #include "Shop/ShopItemProvider.h"
 #include "UI/ShopScreen.h"
@@ -24,20 +25,25 @@ void State_Shop::Enter()
 
 void State_Shop::Process()
 {
-	Player* MainPlayer = GameInstance::GetInstance().GetMainPlayer();
-
-	switch (CurrentMode)
+	if (Player* LoadPlayer = ObjectManager::GetInstance().FindObject<Player>("Player"))
 	{
-	case EShopScreenMode::ItemList:
-		ProcessItemList(MainPlayer);
-		break;
-	case EShopScreenMode::ItemDetail:
-		ProcessItemDetail(MainPlayer);
-		break;
-	default:
-		CurrentMode = EShopScreenMode::ItemList;
-		ProcessItemList(MainPlayer);
-		break;
+		switch (CurrentMode)
+		{
+			case EShopScreenMode::ItemList:
+				ProcessItemList(LoadPlayer);
+				break;
+			case EShopScreenMode::ItemDetail:
+				ProcessItemDetail(LoadPlayer);
+				break;
+			default:
+				CurrentMode = EShopScreenMode::ItemList;
+				ProcessItemList(LoadPlayer);
+				break;
+		}
+	}
+	else
+	{
+		assert(0 && "Player Not Found");
 	}
 }
 

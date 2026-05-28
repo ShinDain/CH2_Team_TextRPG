@@ -5,12 +5,12 @@
 #include "Manager/StateManager.h"
 #include "Data/DataLoader.h"
 #include "Character/Player/Player.h"
+#include "Manager/UserSaveManager.h"
 
 using namespace std;
 
 GameInstance::GameInstance() :
-	GameInputManager(nullptr),
-	MainPlayer(nullptr)
+	GameInputManager(nullptr)
 {
 	IsRunning = false;
 }
@@ -19,6 +19,8 @@ GameInstance::~GameInstance()
 {
 	delete GameInputManager;
 	GameInputManager = nullptr;
+	
+	UserSaveManagerPtr.reset();
 }
 
 GameInstance& GameInstance::GetInstance()
@@ -32,8 +34,6 @@ bool GameInstance::Initialize()
 	bool Result = true;
 	Result = InitializeDataTable();
 	Result = InitializeManager();
-
-	MainPlayer = CreateObject<Player>();
 
 	IsRunning = true;
 	return Result;
@@ -65,11 +65,6 @@ MapManager& GameInstance::GetMapManager()
 LogManager& GameInstance::GetLogManager()
 {
 	return Log;
-}
-
-Player* GameInstance::GetMainPlayer() const
-{
-	return MainPlayer;
 }
 
 void GameInstance::SetBattleStartData(const BattleStartData& InBattleStartData)
@@ -105,6 +100,8 @@ bool GameInstance::InitializeManager()
 	{
 		GameInputManager = new InputManager();
 	}
+	
+	UserSaveManagerPtr = make_shared<UserSaveManager>();
 
 	Map.GenerateFixedMap();
 

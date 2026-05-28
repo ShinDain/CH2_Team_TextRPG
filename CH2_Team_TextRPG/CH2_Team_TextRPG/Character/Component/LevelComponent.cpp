@@ -26,6 +26,14 @@ bool LevelComponent::IsMaxLevel() const
 	return CurrentLevel >= LevelDataTable::GetInstance().GetMaxLevel();
 }
 
+void LevelComponent::SetExp(int NewExp)
+{
+	if (NewExp <= 0) 
+		return;
+	
+	CurrentExp = NewExp;
+}
+
 int LevelComponent::GetExpToNextLevel() const
 {
 	if (IsMaxLevel())
@@ -43,6 +51,14 @@ void LevelComponent::AddExp(int Amount)
 	if (Amount <= 0 || IsMaxLevel()) return;
 	CurrentExp += Amount;
 	CheckLevelUp();
+}
+
+void LevelComponent::ReviveLevel(int TargetLevel)
+{
+	while (CurrentLevel < TargetLevel && !IsMaxLevel())
+	{
+		LevelUp();
+	}
 }
 
 void LevelComponent::CheckLevelUp()

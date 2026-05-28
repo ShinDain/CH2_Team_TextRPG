@@ -1,11 +1,11 @@
 ﻿#include "pch.h"
 #include "SkillComponent.h"
 #include "Character/Component/ResourceComponent.h"
-#include "Character/Interface/UnitStat.h"
 #include "Character/Interface/Resource.h"
 #include "Data/Character/Stat.h"
 #include "Data/Table/SkillDataTable.h"
 #include "Effect/Factory/EffectFactory.h"
+#include "Skill/Skill.h"
 
 SkillComponent::SkillComponent(Object* InOwner) :
 	Component(InOwner, "Skill")
