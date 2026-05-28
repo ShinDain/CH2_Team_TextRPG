@@ -14,8 +14,7 @@ void Effect_Debuff_Poison::Apply(Object* Instigator, std::vector<Object*> Target
 {
 	for (Object* Target : Targets)
 	{
-		auto TargetHP = dynamic_cast<IDamageable*>(Target);
-		if (TargetHP)
+		if (auto TargetHP = dynamic_cast<IDamageable*>(Target))
 		{
 			TargetHP->TakeDamage(Value);
 			GLog.AddLog("[독] " + Target->GetName() + "이(가) 독으로 인해 " + std::to_string(Value) + "의 피해를 입었습니다!");

@@ -30,7 +30,8 @@ namespace Game
 		{
 			const std::string Poison = "OverTime_Debuff_Poison";
 			const std::string Burn = "OverTime_Debuff_Burn";
-			const std::string Freeze = "Modifier_Debuff_Freeze";
+			const std::string Weakness = "Modifier_Debuff_Weakness";
+			const std::string Slow = "Modifier_Debuff_Slow";
 		}
 
 		namespace State

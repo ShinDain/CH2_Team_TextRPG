@@ -63,8 +63,7 @@
     "Effects": [
       { "Tag": "Damage", "Value": 8000 }
     ]
-  }
-  ,
+  },
   {
     "Idx": 103,
     "Name": "독단검",
@@ -77,6 +76,181 @@
     "Effects": [
       { "Tag": "Damage", "Value": 8000 },
       { "Tag": "OverTime_Debuff_Poison", "Value": 10 }
+    ]
+  },
+  {
+    "Idx": 104,
+    "Name": "방패 강타",
+    "Description": "방패로 적을 강하게 가격하여 피해를 주고 기절시킵니다.",
+    "ManaCost": 20,
+    "Duration": 1,
+    "Cooldown": 4,
+    "TargetType": "SINGLE_ENEMY",
+    "HitCount": 1,
+    "Effects": [
+      { "Tag": "Damage", "Value": 6000 },
+      { "Tag": "State_Stun", "Value": 1 }
+    ]
+  },
+  {
+    "Idx": 105,
+    "Name": "전장의 함성",
+    "Description": "우렁찬 함성으로 아군 전체의 공격력을 증가시킵니다.",
+    "ManaCost": 30,
+    "Duration": 3,
+    "Cooldown": 5,
+    "TargetType": "ALL_ALLIES",
+    "HitCount": 1,
+    "Effects": [
+      { "Tag": "Modifier_Buff_Attack", "Value": 25 }
+    ]
+  },
+  {
+    "Idx": 106,
+    "Name": "출혈 베기",
+    "Description": "적의 급소를 베어 지속적인 출혈 피해를 입힙니다.",
+    "ManaCost": 25,
+    "Duration": 3,
+    "Cooldown": 3,
+    "TargetType": "SINGLE_ENEMY",
+    "HitCount": 1,
+    "Effects": [
+      { "Tag": "Damage", "Value": 5000 },
+      { "Tag": "OverTime_Debuff_Bleed", "Value": 1500 }
+    ]
+  },
+  {
+    "Idx": 107,
+    "Name": "불굴의 의지",
+    "Description": "자신의 방어력을 높이고 체력을 지속적으로 회복합니다.",
+    "ManaCost": 40,
+    "Duration": 3,
+    "Cooldown": 6,
+    "TargetType": "SELF",
+    "HitCount": 1,
+    "Effects": [
+      { "Tag": "Modifier_Buff_Defense", "Value": 20 },
+      { "Tag": "OverTime_Heal", "Value": 50 }
+    ]
+  },
+  {
+    "Idx": 108,
+    "Name": "눈보라",
+    "Description": "얼음 폭풍을 소환해 적 전체에게 피해를 주고 행동 속도를 늦춥니다.",
+    "ManaCost": 50,
+    "Duration": 2,
+    "Cooldown": 4,
+    "TargetType": "ALL_ENEMIES",
+    "HitCount": 3,
+    "Effects": [
+      { "Tag": "Damage", "Value": 6000 },
+      { "Tag": "Modifier_Buff_ActionSpeed", "Value": 30 }
+    ]
+  },
+  {
+    "Idx": 109,
+    "Name": "치유의 빛",
+    "Description": "마법의 힘으로 아군 1명의 체력을 즉시 회복시킵니다.",
+    "ManaCost": 35,
+    "Duration": 0,
+    "Cooldown": 2,
+    "TargetType": "SINGLE_ALLY",
+    "HitCount": 1,
+    "Effects": [
+      { "Tag": "Resource_RecoveryHeal", "Value": 100 }
+    ]
+  },
+  {
+    "Idx": 110,
+    "Name": "마나 보호막",
+    "Description": "마나로 이루어진 보호막을 생성해 자신의 방어력을 크게 증가시킵니다.",
+    "ManaCost": 30,
+    "Duration": 3,
+    "Cooldown": 5,
+    "TargetType": "SELF",
+    "HitCount": 1,
+    "Effects": [
+      { "Tag": "Modifier_Buff_Defense", "Value": 50 }
+    ]
+  },
+  {
+    "Idx": 111,
+    "Name": "화염 지대",
+    "Description": "지정된 구역을 불태워 적 전체에게 지속적인 화상 피해를 입힙니다.",
+    "ManaCost": 45,
+    "Duration": 3,
+    "Cooldown": 5,
+    "TargetType": "ALL_ENEMIES",
+    "HitCount": 1,
+    "Effects": [
+      { "Tag": "OverTime_Debuff_Burn", "Value": 2500 }
+    ]
+  },
+  {
+    "Idx": 112,
+    "Name": "약점 노출",
+    "Description": "적의 약점을 찔러 피해를 주고 방어력을 감소시킵니다.",
+    "ManaCost": 20,
+    "Duration": 3,
+    "Cooldown": 3,
+    "TargetType": "SINGLE_ENEMY",
+    "HitCount": 1,
+    "Effects": [
+      { "Tag": "Damage", "Value": 7000 },
+      { "Tag": "Modifier_Debuff_Weakness", "Value": 30 }
+    ]
+  },
+  {
+    "Idx": 113,
+    "Name": "그림자 숨기",
+    "Description": "그림자 속에 숨어 자신의 행동 속도와 회피율(방어적 이점)을 증가시킵니다.",
+    "ManaCost": 25,
+    "Duration": 2,
+    "Cooldown": 4,
+    "TargetType": "SELF",
+    "HitCount": 1,
+    "Effects": [
+      { "Tag": "Modifier_Buff_ActionSpeed", "Value": 40 }
+    ]
+  },
+  {
+    "Idx": 114,
+    "Name": "난도질",
+    "Description": "눈에 보이지 않는 속도로 적을 4번 연속 공격합니다.",
+    "ManaCost": 35,
+    "Duration": 0,
+    "Cooldown": 3,
+    "TargetType": "SINGLE_ENEMY",
+    "HitCount": 4,
+    "Effects": [
+      { "Tag": "Damage", "Value": 4000 }
+    ]
+  },
+  {
+    "Idx": 115,
+    "Name": "마비 독",
+    "Description": "신경을 마비시키는 독을 발라 적의 행동 속도를 늦추고 피해를 줍니다.",
+    "ManaCost": 25,
+    "Duration": 2,
+    "Cooldown": 4,
+    "TargetType": "SINGLE_ENEMY",
+    "HitCount": 1,
+    "Effects": [
+      { "Tag": "Damage", "Value": 6000 },
+      { "Tag": "Modifier_Debuff_Slow", "Value": 50 }
+    ]
+  },  
+  {
+    "Idx": 200,
+    "Name": "흉포한 일격",
+    "Description": "몬스터가 강력한 공격을 가합니다",
+    "ManaCost": 0,
+    "Duration": 0,
+    "Cooldown": 0,
+    "TargetType": "SINGLE_ENEMY",
+    "HitCount": 1,
+    "Effects": [
+      { "Tag": "Damage", "Value": 18000 }
     ]
   }
 ]
