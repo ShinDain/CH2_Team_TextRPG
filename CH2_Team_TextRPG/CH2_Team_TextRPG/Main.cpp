@@ -5,6 +5,8 @@
 
 int main()
 {
+	srand(time(NULL));
+
 	ConsoleRenderer::WaitForConsoleReady();
 
 	GameInstance& Instance = GameInstance::GetInstance();

@@ -6,6 +6,7 @@
 #include "Data/DataLoader.h"
 #include "Character/Player/Player.h"
 
+#include "Character/Player/Player.h"
 
 using namespace std;
 
@@ -30,8 +31,10 @@ GameInstance& GameInstance::GetInstance()
 bool GameInstance::Initialize()
 {
 	bool Result = true;
-	Result = InitializeManager();
 	Result = InitializeDataTable();
+	Result = InitializeManager();
+
+	MainPlayer = CreateObject<Player>();
 
 	IsRunning = true;
 	return Result;

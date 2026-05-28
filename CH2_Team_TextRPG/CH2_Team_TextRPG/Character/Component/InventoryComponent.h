@@ -11,7 +11,7 @@ struct FInventoryEntry
 	int Amount;
 	Item* ItemInstance;
 
-	bool operator==(const FInventoryEntry& rhs)
+	bool operator==(const FInventoryEntry& rhs) const
 	{
 		return (this->Id == rhs.Id);
 	}
@@ -33,6 +33,7 @@ public:
 	void AcquireItem(int ItemId, int InAmount = 1);
 
 	bool RemoveItem(int ItemId, int InAmount = 1);
+	void ClearItemList();
 
 	void Equip(int ItemId);
 	void Equip(const std::string& ItemName);

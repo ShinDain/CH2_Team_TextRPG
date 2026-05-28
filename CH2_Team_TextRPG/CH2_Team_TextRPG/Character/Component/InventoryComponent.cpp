@@ -99,6 +99,10 @@ bool InventoryComponent::RemoveItem(int ItemId, int InAmount)
 
 	return true;
 }
+void InventoryComponent::ClearItemList()
+{
+	ItemList.clear();
+}
 
 void InventoryComponent::Equip(int ItemId)
 {
@@ -131,7 +135,6 @@ void InventoryComponent::Unequip(EEquipmentType EquipmentType)
 	if (EquipComp)
 	{
 		const ItemData* unequipedItemData = EquipComp->OnUnequip(EquipmentType);
-		AcquireItem(unequipedItemData->Id, 1);
 	}
 }
 
@@ -211,11 +214,14 @@ void InventoryComponent::RemoveEntry(int ItemId)
 {
 	for (FInventoryEntry& entry : ItemList)
 	{
-		auto it = std::find(ItemList.begin(), ItemList.end(), entry);
-
-		if (it != ItemList.end())
+		if (entry.Id == ItemId)
 		{
-			ItemList.erase(it);
+			auto it = std::find(ItemList.begin(), ItemList.end(), entry);
+
+			if (it != ItemList.end())
+			{
+				ItemList.erase(it);
+			}
 		}
 	}
 }

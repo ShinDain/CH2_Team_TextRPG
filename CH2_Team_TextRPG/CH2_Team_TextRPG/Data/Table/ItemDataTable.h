@@ -31,6 +31,7 @@ public:
 
 	virtual bool Load(const std::string& FilePath) override;
 
+	const std::vector<const ItemData*> GetItemDatas() const { return ItemDatas; }
 protected:
 	virtual void ParseData(const json& InData) override;
 

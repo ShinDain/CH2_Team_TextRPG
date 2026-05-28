@@ -31,6 +31,7 @@ public:
     
     InputManager* GetInputManager() const { return GameInputManager; }
 
+	class Player* GetMainPlayer() const { return MainPlayer; }
 private:
 	bool InitializeManager();
 	bool InitializeDataTable();
@@ -42,4 +43,11 @@ protected:
     LogManager Log;
     
     InputManager* GameInputManager;  
+
+	class Player* MainPlayer;
 };
+
+inline class Player* GetMainPlayer()
+{
+	return GameInstance::GetInstance().GetMainPlayer();
+}
