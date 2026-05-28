@@ -12,9 +12,9 @@
 
 #define COMPONENT_CHECK(x) assert((x) && #x "Component 생성되지 않음")
 
-Player::Player(const std::string& InName)
+Player::Player()
 {
-	Name = InName;
+	Name = "Player";
 	CharacterType = ECharacterType::Player;
 	
 	Stat = AddComponent<StatComponent>(this);
@@ -193,4 +193,14 @@ std::shared_ptr<InventoryComponent> Player::GetInventory()
 std::shared_ptr<InventoryComponent> Player::GetInventory() const
 {
 	return Inventory;
+}
+
+std::string Player::GetDisplayName() const
+{
+	return DisplayName;
+}
+
+void Player::SetDisplayName(const std::string& InName)
+{
+	DisplayName = InName;
 }

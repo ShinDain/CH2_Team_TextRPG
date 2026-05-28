@@ -9,7 +9,7 @@
 class Player : public Character, public IDamageable, public IUnitStat, public IResource, public ILevelable, public ITrade
 {
 public:
-	Player(const std::string& InName = "Unknown");
+	Player();
 	~Player() override;
 
 	bool Initialize() override;
@@ -44,7 +44,9 @@ public:
 
 	virtual std::shared_ptr<class InventoryComponent> GetInventory() override;
 	std::shared_ptr<class InventoryComponent> GetInventory() const;
-	
+	std::string GetDisplayName() const;
+	void SetDisplayName(const std::string& InName);
+
 private:
 	std::shared_ptr<class StatComponent> Stat;
 	std::shared_ptr<class ResourceComponent> Resource;

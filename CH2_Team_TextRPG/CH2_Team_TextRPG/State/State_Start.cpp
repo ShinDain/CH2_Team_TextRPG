@@ -84,7 +84,7 @@ void State_Start::NewPlayer()
 		break;
 	}
 	
-	Player* NewPlayer = ObjectManager::GetInstance().CreateObject<Player>(Data.UserName);
+	Player* NewPlayer = ObjectManager::GetInstance().CreateObject<Player>();
 	if (!NewPlayer)
 	{
 		GLog.AddLog("플레이어 생성에 실패했습니다.");
