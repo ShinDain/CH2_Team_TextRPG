@@ -227,6 +227,8 @@ if exist "$(SolutionDir)Resources" xcopy /E /I /Y "$(SolutionDir)Resources" "$(O
     <ClCompile Include="UI\ConsoleRenderer.cpp" />
     <ClCompile Include="UI\ConsoleUtil.cpp" />
     <ClCompile Include="UI\GameScreen.cpp" />
+    <ClCompile Include="UI\JobSelectUIFlow.cpp" />
+    <ClCompile Include="UI\JobSelectUIScreen.cpp" />
     <ClCompile Include="UI\StartMenuScreen.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -317,6 +319,8 @@ if exist "$(SolutionDir)Resources" xcopy /E /I /Y "$(SolutionDir)Resources" "$(O
     <ClInclude Include="UI\ConsoleRenderer.h" />
     <ClInclude Include="UI\ConsoleUtil.h" />
     <ClInclude Include="UI\GameScreen.h" />
+    <ClInclude Include="UI\JobSelectUIFlow.h" />
+    <ClInclude Include="UI\JobSelectUIScreen.h" />
     <ClInclude Include="UI\StartMenuScreen.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
