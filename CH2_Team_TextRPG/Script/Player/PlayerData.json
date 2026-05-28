@@ -10,7 +10,10 @@
       "Defense": 8,
       "ActionSpeed": 8
     },
-    "InitialSkills": [],
+    "InitialSkills": [
+      1,
+      102
+    ],
     "InitialItems": []
   },
   {
@@ -24,7 +27,10 @@
       "Defense": 3,
       "ActionSpeed": 7
     },
-    "InitialSkills": [],
+    "InitialSkills": [
+      3,
+      101
+    ],
     "InitialItems": []
   },
   {
@@ -38,7 +44,10 @@
       "Defense": 5,
       "ActionSpeed": 14
     },
-    "InitialSkills": [],
+    "InitialSkills": [
+      2,
+      103
+    ],
     "InitialItems": []
   }
 ]
