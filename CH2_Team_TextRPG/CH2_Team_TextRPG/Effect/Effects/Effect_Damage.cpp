@@ -2,6 +2,7 @@
 #include "Effect_Damage.h"
 #include "Character/Component/ResourceComponent.h"
 #include "Character/Interface/UnitStat.h"
+#include "Character/Interface/Resource.h"
 #include "Data/Character/Stat.h"
 #include "Manager/InputManager.h"
 
@@ -18,7 +19,7 @@ void Effect_Damage::Apply(Object* Instigator, std::vector<class Object*> Targets
 	for (Object* Target : Targets)
 	{
 		IUnitStat* TargetStat = dynamic_cast<IUnitStat*>(Target);
-		auto TargetHP = Target->FindComponent<ResourceComponent>("Resource");
+		auto* TargetHP = dynamic_cast<IResource*>(Target);
 		if (!TargetStat || !TargetHP) continue;
 		int targetDef = std::max(1, TargetStat->GetStat(EStatType::Defense));
 

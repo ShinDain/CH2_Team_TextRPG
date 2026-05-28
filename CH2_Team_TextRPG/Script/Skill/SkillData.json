@@ -9,7 +9,7 @@
     "TargetType": "SINGLE_ENEMY",
     "HitCount": 1,
     "Effects": [
-      { "Tag": "Damage", "Value": 100 }
+      { "Tag": "Damage", "Value": 10000 }
     ]
   },
   {
@@ -22,7 +22,7 @@
     "TargetType": "SINGLE_ENEMY",
     "HitCount": 2,
     "Effects": [
-      { "Tag": "Damage", "Value": 60 }
+      { "Tag": "Damage", "Value": 6000 }
     ]
   },
   {
@@ -35,7 +35,7 @@
     "TargetType": "SINGLE_ENEMY",
     "HitCount": 1,
     "Effects": [
-      { "Tag": "Damage", "Value": 120 }
+      { "Tag": "Damage", "Value": 12000 }
     ]
   },
   {
@@ -48,7 +48,7 @@
     "TargetType": "SINGLE_ENEMY",
     "HitCount": 1,
     "Effects": [
-      { "Tag": "Damage", "Value": 150 }
+      { "Tag": "Damage", "Value": 15000 }
     ]
   },
   {
@@ -61,7 +61,7 @@
     "TargetType": "ALL_ENEMIES",
     "HitCount": 1,
     "Effects": [
-      { "Tag": "Damage", "Value": 80 }
+      { "Tag": "Damage", "Value": 8000 }
     ]
   }
   ,
@@ -75,8 +75,8 @@
     "TargetType": "SINGLE_ENEMY",
     "HitCount": 1,
     "Effects": [
-      { "Tag": "Damage", "Value": 80 },
-      { "Tag": "Poison", "Value": 10 }
+      { "Tag": "Damage", "Value": 8000 },
+      { "Tag": "OverTime_Debuff_Poison", "Value": 10 }
     ]
   }
 ]
