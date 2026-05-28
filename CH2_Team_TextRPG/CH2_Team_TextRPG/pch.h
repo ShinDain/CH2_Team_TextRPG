@@ -14,7 +14,7 @@
 #include "Core/GameInstance.h"
 #include "Common/Deletor.h"
 
-#define DEBUG_CODE 1
+#define DEBUG_CODE 0
 
 #define GInput (*GameInstance::GetInstance().GetInputManager())
 #define GLog (GameInstance::GetInstance().GetLogManager())

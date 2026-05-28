@@ -14,8 +14,7 @@
 
 Player::Player(const std::string& InName)
 {
-	Name = "Player";
-	DisplayName = InName.empty() ? "Player" : InName;
+	Name = InName;
 	CharacterType = ECharacterType::Player;
 	
 	Stat = AddComponent<StatComponent>(this);
@@ -35,15 +34,6 @@ Player::~Player()
 bool Player::Initialize()
 {
 	Stat->Initialize();
-
-#if DEBUG_CODE
-	Stat->SetStat(EStatType::Health, 200);
-	Stat->SetStat(EStatType::Attack, 30);
-	Stat->SetStat(EStatType::Defense, 0);
-	Stat->SetStat(EStatType::Mana, 100);
-	Stat->SetStat(EStatType::ActionSpeed, 10);
-#endif
-
 	Resource->Initialize();
 	Equip->Initialize();
 	Inventory->Initialize();
@@ -98,16 +88,6 @@ bool Player::IsDead() const
 {
 	COMPONENT_CHECK(Resource);
 	return Resource->GetCurrent(EResourceType::Health) <= 0;
-}
-
-const std::string& Player::GetDisplayName() const
-{
-	return DisplayName;
-}
-
-void Player::SetDisplayName(const std::string& InName)
-{
-	DisplayName = InName.empty() ? "Player" : InName;
 }
 
 bool Player::IsMaxLevel() const
