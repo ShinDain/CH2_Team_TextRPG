@@ -2,7 +2,9 @@
 #include "State_Start.h"
 #include "Core/GameInstance.h"
 #include "Manager/InputManager.h"
-#include "UI/JobSelectUIFlow.h"
+#include "Manager/StateManager.h"
+#include "Start/Condition/LoadGameCondition.h"
+#include "Start/Condition/NewGameCondition.h"
 #include "UI/StartMenuScreen.h"
 
 State_Start::State_Start()
@@ -12,31 +14,13 @@ State_Start::State_Start()
 
 void State_Start::Enter()
 {
-	CurrentMode = EStartScreenMode::StartMenu;
-	GameInstance::GetInstance().GetLogManager().AddLog("시작 메뉴에 진입했습니다.");
+	GLog.AddLog("시작 메뉴에 진입했습니다.");
+	
+	AddTransition<NewGameCondition>(EState::Map);
+	AddTransition<LoadGameCondition>(EState::Map);
 }
 
 void State_Start::Process()
-{
-	switch (CurrentMode)
-	{
-	case EStartScreenMode::StartMenu:
-		ProcessStartMenu();
-		break;
-	case EStartScreenMode::JobSelect:
-		ProcessJobSelect();
-		break;
-	default:
-		CurrentMode = EStartScreenMode::StartMenu;
-		break;
-	}
-}
-
-void State_Start::Exit()
-{
-}
-
-void State_Start::ProcessStartMenu()
 {
 	GameInstance& Instance = GameInstance::GetInstance();
 
@@ -47,17 +31,16 @@ void State_Start::ProcessStartMenu()
 
 	if (!InputResult)
 	{
-		Instance.GetLogManager().AddLog("메뉴 번호를 다시 선택해주세요.");
+		GLog.AddLog("메뉴 번호를 다시 선택해주세요.");
 		return;
 	}
 
 	switch (Input)
 	{
 	case 1:
-		CurrentMode = EStartScreenMode::JobSelect;
 		break;
 	case 2:
-		Instance.GetLogManager().AddLog("불러오기 로직은 아직 연결되지 않았습니다.");
+		Instance.GetLogManager().AddLog("저장 데이터 로드는 아직 구현되지 않았습니다.");
 		break;
 	case 0:
 		Instance.Quit();
@@ -68,11 +51,6 @@ void State_Start::ProcessStartMenu()
 	}
 }
 
-void State_Start::ProcessJobSelect()
+void State_Start::Exit()
 {
-	const EJobSelectUIResult Result = JobSelectUIFlow::Process();
-	if (Result == EJobSelectUIResult::BackToStart)
-	{
-		CurrentMode = EStartScreenMode::StartMenu;
-	}
 }

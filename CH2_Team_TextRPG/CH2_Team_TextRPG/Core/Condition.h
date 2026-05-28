@@ -2,6 +2,7 @@
 class ICondition
 {
 public:
+	virtual ~ICondition() = default;
 	virtual void Init() = 0;
 	virtual void OnNotify() = 0;
 	virtual bool Check() = 0;
