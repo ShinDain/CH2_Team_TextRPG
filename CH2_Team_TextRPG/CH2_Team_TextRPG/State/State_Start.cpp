@@ -2,7 +2,6 @@
 #include "State_Start.h"
 #include "Core/GameInstance.h"
 #include "Manager/InputManager.h"
-#include "Manager/StateManager.h"
 #include "UI/StartMenuScreen.h"
 
 State_Start::State_Start()
@@ -33,7 +32,7 @@ void State_Start::Process()
 	switch (Input)
 	{
 	case 1:
-		StateManager::GetInstance().ChangeState(EState::CharacterCreate);
+		Instance.GetLogManager().AddLog("캐릭터 생성 로직은 아직 연결되지 않았습니다.");
 		break;
 	case 2:
 		Instance.GetLogManager().AddLog("저장 데이터 로드는 아직 구현되지 않았습니다.");

@@ -4,7 +4,6 @@ enum class EState
 {
 	Entry = 0,
 	Start,
-	CharacterCreate,
 	MainMenu,
 	Map,
 	Combat,
