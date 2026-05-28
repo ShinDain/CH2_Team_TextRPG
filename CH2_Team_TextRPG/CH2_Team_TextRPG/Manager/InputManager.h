@@ -24,6 +24,9 @@ public:
 	InputManager();
 	~InputManager() = default;
 	bool IsFailed() const;
+	void SetInputLocked(bool bLocked);
+	bool IsInputLocked() const;
+	void ClearInputBuffer();
 
 	template <typename Ty>
 	InputSession operator>>(Ty& RHS)
@@ -47,11 +50,33 @@ private:
 
 private:
 	bool bFailed;
+	bool bInputLocked;
+};
+
+class InputLockGuard
+{
+public:
+	explicit InputLockGuard(InputManager& InInputManager);
+	~InputLockGuard();
+
+	InputLockGuard(const InputLockGuard&) = delete;
+	InputLockGuard& operator=(const InputLockGuard&) = delete;
+
+private:
+	InputManager& InputSystem;
+	bool bPreviousLockState;
 };
 
 template <typename Ty>
 InputSession& InputSession::operator>>(Ty& RHS)
 {
+	if (InputSystem->IsInputLocked())
+	{
+		InputSystem->ApplyFail();
+		InputSystem->ClearInputBuffer();
+		return *this;
+	}
+
 	if (InputSystem->IsFailed())
 	{
 		return *this;
