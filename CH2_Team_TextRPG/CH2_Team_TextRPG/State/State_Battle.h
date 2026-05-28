@@ -21,6 +21,4 @@ private:
 	// 플레이어/몬스터 행동 처리
 	void HandlePlayerTurn(Player* PlayerCharacter);
 	void HandleMonsterTurn(Monster* MonsterCharacter);
-
-	void BattleEnd();
 };

@@ -89,6 +89,9 @@ void Monster::ApplyStat(EStatType Type, int Delta)
 
 	if (IsResourceType(Type))
 	{
+		COMPONENT_CHECK(Stat);
+		Stat->AddStat(Type, Delta);
+
 		COMPONENT_CHECK(Resource);
 		const EResourceType ResourceType = ToResourceType(Type);
 		if (Delta > 0)

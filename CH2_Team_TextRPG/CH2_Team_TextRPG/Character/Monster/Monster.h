@@ -114,7 +114,6 @@ public:
 protected:
     MonsterSetData MonsterData;
     MonsterSetData OriginalData;
-private:
     std::shared_ptr<class StatComponent> Stat;
     std::shared_ptr<class ResourceComponent> Resource;
     std::shared_ptr<class EffectComponent> Effect;
