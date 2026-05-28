@@ -24,6 +24,7 @@ public:
 	std::vector<Monster*> GetAllMonsters() const { return Monsters; };
 	std::vector<Monster*> GetAliveMonsters() const;
 	bool IsBattleEnd() const;
+	bool IsVictory() const;
 
 	void ExecuteSkill(Object* Caster, const std::vector<Object*>& Targets, Skill* InSkill);
 	void ExecuteItem(Object* Caster, const std::vector<Object*>& Targets, int ItemId);

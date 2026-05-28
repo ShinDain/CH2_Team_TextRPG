@@ -347,13 +347,13 @@ void State_Map::Process()
 		}
 
 		Instance.SetBattleStartData(BattleData);
-		AddTransition<AlwaysTrueCondition>(EState::Combat);
+		StateManager::GetInstance().ChangeState(EState::Combat);
 		return;
 	}
 
 	if (CurrentNode->Type == ENodeType::Shop)
 	{
-		AddTransition<AlwaysTrueCondition>(EState::Shop);
+		StateManager::GetInstance().ChangeState(EState::Shop);
 	}
 }
 
