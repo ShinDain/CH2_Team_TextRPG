@@ -14,6 +14,7 @@
 #include <windows.h>
 
 #include "Manager/ObjectManager.h"
+#include "Manager/UserSaveManager.h"
 
 namespace
 {
@@ -300,6 +301,8 @@ State_Map::State_Map()
 void State_Map::Enter()
 {
 	ConsoleUtil::HideCursor();
+	
+	GSharedSaveMgr->SaveSnapShot();
 }
 
 void State_Map::Process()
