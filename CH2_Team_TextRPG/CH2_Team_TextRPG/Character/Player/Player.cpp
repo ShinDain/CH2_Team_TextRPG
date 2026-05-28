@@ -15,6 +15,7 @@
 Player::Player(const std::string& InName)
 {
 	Name = "Player";
+	DisplayName = InName.empty() ? "Player" : InName;
 	CharacterType = ECharacterType::Player;
 	
 	Stat = AddComponent<StatComponent>(this);
@@ -97,6 +98,16 @@ bool Player::IsDead() const
 {
 	COMPONENT_CHECK(Resource);
 	return Resource->GetCurrent(EResourceType::Health) <= 0;
+}
+
+const std::string& Player::GetDisplayName() const
+{
+	return DisplayName;
+}
+
+void Player::SetDisplayName(const std::string& InName)
+{
+	DisplayName = InName.empty() ? "Player" : InName;
 }
 
 bool Player::IsMaxLevel() const

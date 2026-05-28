@@ -77,6 +77,48 @@ void DrawMapPath(int FromX, int FromY, int ToX, int ToY, ConsoleColor Color, boo
 		ConsoleUtil::WriteColored(bHighlighted ? "*" : ".", Color);
 	}
 }
+
+int ClampResourceValue(int current, int max)
+{
+	if (max <= 0 || current <= 0)
+	{
+		return 0;
+	}
+
+	return current > max ? max : current;
+}
+
+std::string MakeStatusBar(int current, int max, int barWidth)
+{
+	if (barWidth <= 0)
+	{
+		return "[]";
+	}
+
+	const int ClampedCurrent = ClampResourceValue(current, max);
+	const int FilledWidth = max > 0
+		? (ClampedCurrent * barWidth + max / 2) / max
+		: 0;
+	const int ClampedFilledWidth = FilledWidth > barWidth ? barWidth : FilledWidth;
+
+	return "[" +
+		std::string(ClampedFilledWidth, '#') +
+		std::string(barWidth - ClampedFilledWidth, '-') +
+		"]";
+}
+
+std::string MakeResourceLine(const std::string& Label, int current, int max, int barWidth)
+{
+	const int SafeMax = max > 0 ? max : 0;
+	const int ClampedCurrent = ClampResourceValue(current, SafeMax);
+
+	return Label +
+		MakeStatusBar(ClampedCurrent, SafeMax, barWidth) +
+		" " +
+		std::to_string(ClampedCurrent) +
+		" / " +
+		std::to_string(SafeMax);
+}
 }
 
 void GameScreen::DrawMainScreen(const MapManager& Map, const LogManager& Log, const Player* MainPlayer)
@@ -95,7 +137,7 @@ void GameScreen::DrawCharacterPanel(const Player* MainPlayer)
 {
 	ConsoleRenderer::DrawBox(0, 0, 30, 11);
 	ConsoleRenderer::SetCursorPosition(2, 1);
-	ConsoleUtil::WriteColored("Character", ConsoleColor::Cyan);
+	ConsoleUtil::WriteColored("[캐릭터 정보]", ConsoleColor::Cyan);
 
 	if (MainPlayer == nullptr)
 	{
@@ -105,35 +147,39 @@ void GameScreen::DrawCharacterPanel(const Player* MainPlayer)
 	}
 
 	ConsoleRenderer::SetCursorPosition(2, 3);
-	ConsoleUtil::WriteColored("Name : " + MainPlayer->GetName(), ConsoleColor::Gray);
+	ConsoleUtil::WriteColored("이름 : " + MainPlayer->GetDisplayName(), ConsoleColor::Gray);
 
 	ConsoleRenderer::SetCursorPosition(2, 4);
-	ConsoleUtil::WriteColored("HP   ", ConsoleColor::Gray);
-	ConsoleUtil::WriteGauge(
-		MainPlayer->GetCurrentResource(EResourceType::Health),
-		MainPlayer->GetMaxResource(EResourceType::Health),
-		18,
+	ConsoleUtil::WriteColored("LV   : " + std::to_string(MainPlayer->GetLevel()), ConsoleColor::Gray);
+
+	ConsoleRenderer::SetCursorPosition(2, 5);
+	ConsoleUtil::WriteColored(
+		MakeResourceLine(
+			"HP   : ",
+			MainPlayer->GetCurrentResource(EResourceType::Health),
+			MainPlayer->GetMaxResource(EResourceType::Health),
+			8
+		),
 		ConsoleColor::Red
 	);
 
-	ConsoleRenderer::SetCursorPosition(2, 5);
-	ConsoleUtil::WriteColored("Mana ", ConsoleColor::Blue);
-	ConsoleUtil::WriteGauge(
-		MainPlayer->GetCurrentResource(EResourceType::Mana),
-		MainPlayer->GetMaxResource(EResourceType::Mana),
-		18,
-		ConsoleColor::Blue,
-		ConsoleColor::DarkBlue
+	ConsoleRenderer::SetCursorPosition(2, 6);
+	ConsoleUtil::WriteColored(
+		MakeResourceLine(
+			"MP   : ",
+			MainPlayer->GetCurrentResource(EResourceType::Mana),
+			MainPlayer->GetMaxResource(EResourceType::Mana),
+			8
+		),
+		ConsoleColor::Blue
 	);
 
 	ConsoleRenderer::SetCursorPosition(2, 7);
-	ConsoleUtil::WriteColored("Atk : " + std::to_string(MainPlayer->GetStat(EStatType::Attack)), ConsoleColor::Gray);
-	ConsoleRenderer::SetCursorPosition(13, 7);
-	ConsoleUtil::WriteColored("Def : " + std::to_string(MainPlayer->GetStat(EStatType::Defense)), ConsoleColor::Gray);
+	ConsoleUtil::WriteColored("ATK  : " + std::to_string(MainPlayer->GetStat(EStatType::Attack)), ConsoleColor::Gray);
 	ConsoleRenderer::SetCursorPosition(2, 8);
-	ConsoleUtil::WriteColored("Spd : " + std::to_string(MainPlayer->GetStat(EStatType::ActionSpeed)), ConsoleColor::Gray);
-	ConsoleRenderer::SetCursorPosition(13, 8);
-	ConsoleUtil::WriteColored("Lv : " + std::to_string(MainPlayer->GetLevel()), ConsoleColor::Gray);
+	ConsoleUtil::WriteColored("DEF  : " + std::to_string(MainPlayer->GetStat(EStatType::Defense)), ConsoleColor::Gray);
+	ConsoleRenderer::SetCursorPosition(2, 9);
+	ConsoleUtil::WriteColored("SPD  : " + std::to_string(MainPlayer->GetStat(EStatType::ActionSpeed)), ConsoleColor::Gray);
 }
 
 void GameScreen::DrawBattleCommandPanel(const std::string& PanelTitle, const std::vector<FCommandOption>& Options)

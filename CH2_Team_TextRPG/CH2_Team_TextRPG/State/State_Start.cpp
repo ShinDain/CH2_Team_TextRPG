@@ -147,6 +147,7 @@ void State_Start::LoadPlayer()
 		GLog.AddLog("플레이어 생성에 실패했습니다.");
 		return;
 	}
+	LoadedPlayer->SetDisplayName(Loaded.UserName);
 
 	const PlayerBaseData* PlayerInfo = PlayerDataTable::GetInstance().FindById(Loaded.ClassIndex);
 	if (PlayerInfo)
