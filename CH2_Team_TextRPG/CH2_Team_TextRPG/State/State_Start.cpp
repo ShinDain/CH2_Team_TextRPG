@@ -72,15 +72,7 @@ void State_Start::Exit()
 
 void State_Start::NewPlayer()
 {
-	Player* NewPlayer = ObjectManager::GetInstance().CreateObject<Player>();
-	if (!NewPlayer)
-	{
-		GLog.AddLog("플레이어 생성에 실패했습니다.");
-		return;
-	}
-
 	UserData Data;
-	
 	while (1)
 	{
 		PlayerSetupScreen::DrawPlayerNameInput();
@@ -90,6 +82,13 @@ void State_Start::NewPlayer()
 			continue;
 		}
 		break;
+	}
+	
+	Player* NewPlayer = ObjectManager::GetInstance().CreateObject<Player>(Data.UserName);
+	if (!NewPlayer)
+	{
+		GLog.AddLog("플레이어 생성에 실패했습니다.");
+		return;
 	}
 
 	PlayerSetupScreen::DrawPlayerJobSelect();
