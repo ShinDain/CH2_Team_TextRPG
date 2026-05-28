@@ -216,6 +216,8 @@ if exist "$(SolutionDir)Resources" xcopy /E /I /Y "$(SolutionDir)Resources" "$(O
     <ClCompile Include="Data\Table\SkillDataTable.cpp" />
     <ClCompile Include="State\State_Battle.cpp" />
     <ClCompile Include="Shop\ShopCondition.cpp" />
+    <ClCompile Include="Shop\ShopItemDescriptionBuilder.cpp" />
+    <ClCompile Include="Shop\ShopItemProvider.cpp" />
     <ClCompile Include="Skill\Skill.cpp" />
     <ClCompile Include="Start\Condition\LoadGameCondition.cpp" />
     <ClCompile Include="Start\Condition\NewGameCondition.cpp" />
@@ -231,6 +233,7 @@ if exist "$(SolutionDir)Resources" xcopy /E /I /Y "$(SolutionDir)Resources" "$(O
     <ClCompile Include="UI\ConsoleUtil.cpp" />
     <ClCompile Include="UI\GameScreen.cpp" />
     <ClCompile Include="UI\JobSelectUIScreen.cpp" />
+    <ClCompile Include="UI\ShopScreen.cpp" />
     <ClCompile Include="UI\StartMenuScreen.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -316,6 +319,8 @@ if exist "$(SolutionDir)Resources" xcopy /E /I /Y "$(SolutionDir)Resources" "$(O
     <ClInclude Include="State\State_Result.h" />
     <ClInclude Include="State\State_Map.h" />
     <ClInclude Include="State\State_Start.h" />
+    <ClInclude Include="Shop\ShopItemDescriptionBuilder.h" />
+    <ClInclude Include="Shop\ShopItemProvider.h" />
     <ClInclude Include="Shop\State_Shop.h" />
     <ClInclude Include="Character\Interface\Trade.h" />
     <ClInclude Include="UI\AnimationFrameData.h" />
@@ -325,6 +330,7 @@ if exist "$(SolutionDir)Resources" xcopy /E /I /Y "$(SolutionDir)Resources" "$(O
     <ClInclude Include="UI\ConsoleUtil.h" />
     <ClInclude Include="UI\GameScreen.h" />
     <ClInclude Include="UI\JobSelectUIScreen.h" />
+    <ClInclude Include="UI\ShopScreen.h" />
     <ClInclude Include="UI\StartMenuScreen.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

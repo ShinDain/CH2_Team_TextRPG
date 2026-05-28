@@ -65,6 +65,9 @@
     <ClCompile Include="UI\JobSelectUIFlow.cpp" />
     <ClCompile Include="UI\JobSelectUIScreen.cpp" />
     <ClCompile Include="UI\StartMenuScreen.cpp" />
+    <ClCompile Include="Shop\ShopItemDescriptionBuilder.cpp" />
+    <ClCompile Include="Shop\ShopItemProvider.cpp" />
+    <ClCompile Include="UI\ShopScreen.cpp" />
     <ClCompile Include="Skill\Skill.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -143,6 +146,9 @@
     <ClInclude Include="UI\JobSelectUIFlow.h" />
     <ClInclude Include="UI\JobSelectUIScreen.h" />
     <ClInclude Include="UI\StartMenuScreen.h" />
+    <ClInclude Include="Shop\ShopItemDescriptionBuilder.h" />
+    <ClInclude Include="Shop\ShopItemProvider.h" />
+    <ClInclude Include="UI\ShopScreen.h" />
     <ClInclude Include="Data\Character\Equipment.h" />
     <ClInclude Include="Skill\Skill.h" />
   </ItemGroup>
