@@ -8,6 +8,8 @@ struct BattleMonsterView
     std::string MonsterName;
     int DrawX;
     int DrawY;
+    int CurrentHP;
+    int MaxHP;
 };
 
 class BattleRenderer
@@ -17,8 +19,10 @@ public:
 
     void SetMonsterName(const std::string& monsterName);
     void ClearMonsters();
-    void AddMonster(const std::string& monsterName, int drawX, int drawY);
+    void AddMonster(const std::string& monsterName, int drawX, int drawY, int currentHP, int maxHP);
     void DrawAllMonsterIdle();
+    void SetMonsterHP(int monsterIndex, int currentHP);
+    void DecreaseMonsterHP(int monsterIndex, int amount);
 
     void DrawBattleScreen();
     void DrawMonsterIdle();
@@ -49,11 +53,12 @@ private:
     void ClearMonsterArea();
     void DrawMonsterFrame(const std::vector<std::string>& frame);
     void DrawMonsterFrameAt(
-        const std::string& monsterName,
+        const BattleMonsterView& monsterView,
         const std::string& state,
-        int drawX,
-        int drawY
+        int offsetX = 0,
+        int offsetY = 0
     );
+    void DrawMonsterStatusAt(const BattleMonsterView& monsterView, int x, int y);
     void DrawFrameAt(int x, int y, const std::vector<std::string>& frame);
     void DrawBattleTitle();
 

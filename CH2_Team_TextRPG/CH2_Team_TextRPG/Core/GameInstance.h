@@ -4,6 +4,8 @@
 #include "Manager/LogManager.h"
 
 class InputManager;
+class Player;
+
 class GameInstance
 {
 private:
@@ -25,6 +27,7 @@ public:
 
     MapManager& GetMapManager();
     LogManager& GetLogManager();
+    Player* GetMainPlayer() const;
     
     InputManager* GetInputManager() const { return GameInputManager; }
 

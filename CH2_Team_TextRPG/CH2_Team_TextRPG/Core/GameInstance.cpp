@@ -4,6 +4,7 @@
 #include "Manager/InputManager.h"
 #include "Manager/StateManager.h"
 #include "Data/DataLoader.h"
+#include "Character/Player/Player.h"
 
 
 using namespace std;
@@ -64,11 +65,21 @@ LogManager& GameInstance::GetLogManager()
 	return Log;
 }
 
+Player* GameInstance::GetMainPlayer() const
+{
+	return ObjectManager::GetInstance().FindObject<Player>("Player");
+}
+
 bool GameInstance::InitializeManager()
 {
 	if (GameInputManager == nullptr)
 	{
 		GameInputManager = new InputManager();
+	}
+
+	if (GetMainPlayer() == nullptr)
+	{
+		ObjectManager::GetInstance().CreateObject<Player>();
 	}
 
 	Map.GenerateFixedMap();

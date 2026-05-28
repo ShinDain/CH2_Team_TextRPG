@@ -26,6 +26,7 @@ struct MonsterLookupResult
 {
 	std::string Name;
 	std::string Type;
+	int HP = 0;
 };
 
 bool IsBattleNode(ENodeType Type)
@@ -180,6 +181,7 @@ bool TryFindMonsterById(uint32_t MonsterId, MonsterLookupResult& OutMonster)
 	{
 		OutMonster.Name = Monster->Name;
 		OutMonster.Type = Monster->Type;
+		OutMonster.HP = static_cast<int>(Monster->HP);
 		return true;
 	}
 
@@ -197,7 +199,8 @@ bool TryFindMonsterById(uint32_t MonsterId, MonsterLookupResult& OutMonster)
 	{
 		if (!MonsterDataJson.contains("Id") ||
 			!MonsterDataJson.contains("Name") ||
-			!MonsterDataJson.contains("Type"))
+			!MonsterDataJson.contains("Type") ||
+			!MonsterDataJson.contains("HP"))
 		{
 			continue;
 		}
@@ -206,6 +209,7 @@ bool TryFindMonsterById(uint32_t MonsterId, MonsterLookupResult& OutMonster)
 		{
 			OutMonster.Name = MonsterDataJson["Name"].get<std::string>();
 			OutMonster.Type = MonsterDataJson["Type"].get<std::string>();
+			OutMonster.HP = MonsterDataJson["HP"].get<int>();
 			return true;
 		}
 	}
@@ -274,10 +278,14 @@ std::vector<std::pair<int, int>> MakeMonsterPositions(int MonsterCount)
 
 bool PlayBossBattle()
 {
+	MonsterLookupResult Monster;
+	const int MonsterHP = TryFindMonsterById(7, Monster) ? Monster.HP : 250;
+	const std::string MonsterName = Monster.Name.empty() ? "dragon" : ToLowerCopy(Monster.Name);
+
 	BattleRenderer BattleRenderer;
 	BattleRenderer.ClearMonsters();
-	BattleRenderer.SetMonsterName("dragon");
-	BattleRenderer.AddMonster("dragon", 105, 6);
+	BattleRenderer.SetMonsterName(MonsterName);
+	BattleRenderer.AddMonster(MonsterName, 105, 6, MonsterHP, MonsterHP);
 	BattleRenderer.PlayNormalBattleAnimation();
 	return true;
 }
@@ -322,7 +330,7 @@ bool PlayCurrentNodeBattle(GameInstance& Instance)
 
 	for (int i = 0; i < MonsterCount; i++)
 	{
-		BattleRenderer.AddMonster(MonsterName, Positions[i].first, Positions[i].second);
+		BattleRenderer.AddMonster(MonsterName, Positions[i].first, Positions[i].second, Monster.HP, Monster.HP);
 	}
 
 	BattleRenderer.PlayNormalBattleAnimation();
@@ -351,7 +359,8 @@ void ProcessCurrentNodeBattleAndBossEnd(GameInstance& Instance)
 	{
 		GameScreen::DrawMainScreen(
 			Instance.GetMapManager(),
-			Instance.GetLogManager()
+			Instance.GetLogManager(),
+			Instance.GetMainPlayer()
 		);
 	}
 }
@@ -374,7 +383,8 @@ void State_Start::Process()
 
 	GameScreen::DrawMainScreen(
 		Instance.GetMapManager(),
-		Instance.GetLogManager()
+		Instance.GetLogManager(),
+		Instance.GetMainPlayer()
 	);
 
 	if (Instance.GetMapManager().IsBossNode())

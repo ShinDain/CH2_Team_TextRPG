@@ -32,4 +32,11 @@ public:
     static void SetTextColor(ConsoleColor color);
     static void ResetTextColor();
     static void WriteColored(const std::string& text, ConsoleColor color);
+    static void WriteGauge(
+        int current,
+        int max,
+        int width,
+        ConsoleColor fillColor,
+        ConsoleColor emptyColor = ConsoleColor::DarkGray
+    );
 };

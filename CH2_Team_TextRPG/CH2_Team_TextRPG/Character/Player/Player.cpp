@@ -13,6 +13,7 @@
 
 Player::Player()
 {
+	Name = "Player";
 	CharacterType = ECharacterType::Player;
 	
 	Stat = AddComponent<StatComponent>(this);
@@ -30,16 +31,19 @@ Player::~Player()
 bool Player::Initialize()
 {
 	Stat->Initialize();
-	Resource->Initialize();
-	Equip->Initialize();
 
 #if DEBUG_CODE
 	Stat->SetStat(EStatType::Health, 200);
 	Stat->SetStat(EStatType::Attack, 30);
 	Stat->SetStat(EStatType::Defense, 0);
-	Stat->SetStat(EStatType::Mana, 0);
+	Stat->SetStat(EStatType::Mana, 100);
 	Stat->SetStat(EStatType::ActionSpeed, 10);
 #endif
+
+	Resource->Initialize();
+	Equip->Initialize();
+	Inventory->Initialize();
+	Level->Initialize();
 
 	return true;
 }
@@ -114,6 +118,18 @@ int Player::GetExp() const
 {
 	COMPONENT_CHECK(Level);
 	return Level->GetExp();
+}
+
+int Player::GetCurrentResource(EResourceType Type) const
+{
+	COMPONENT_CHECK(Resource);
+	return Resource->GetCurrent(Type);
+}
+
+int Player::GetMaxResource(EResourceType Type) const
+{
+	COMPONENT_CHECK(Resource);
+	return Resource->GetMax(Type);
 }
 
 void Player::ApplyStat(EStatType Type, int Delta)

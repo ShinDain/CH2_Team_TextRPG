@@ -54,3 +54,41 @@ void ConsoleUtil::WriteColored(const std::string& text, ConsoleColor color)
     GInput << text;
     ResetTextColor();
 }
+
+void ConsoleUtil::WriteGauge(
+    int current,
+    int max,
+    int width,
+    ConsoleColor fillColor,
+    ConsoleColor emptyColor
+)
+{
+    if (width <= 0)
+    {
+        return;
+    }
+
+    current = current < 0 ? 0 : current;
+    max = max < 0 ? 0 : max;
+
+    const int ClampedCurrent = max > 0
+        ? (current > max ? max : current)
+        : 0;
+    const int FilledWidth = max > 0
+        ? (ClampedCurrent * width + max / 2) / max
+        : 0;
+
+    SetTextColor(fillColor);
+    for (int i = 0; i < FilledWidth; i++)
+    {
+        GInput << "■";
+    }
+
+    SetTextColor(emptyColor);
+    for (int i = FilledWidth; i < width; i++)
+    {
+        GInput << "□";
+    }
+
+    ResetTextColor();
+}

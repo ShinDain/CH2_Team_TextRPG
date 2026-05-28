@@ -22,9 +22,14 @@ void BattleRenderer::ClearMonsters()
 	MonsterViews.clear();
 }
 
-void BattleRenderer::AddMonster(const std::string& monsterName, int drawX, int drawY)
+void BattleRenderer::AddMonster(const std::string& monsterName, int drawX, int drawY, int currentHP, int maxHP)
 {
-	MonsterViews.push_back({ monsterName, drawX, drawY });
+	const int SafeMaxHP = maxHP < 0 ? 0 : maxHP;
+	const int SafeCurrentHP = SafeMaxHP > 0
+		? (currentHP < 0 ? 0 : (currentHP > SafeMaxHP ? SafeMaxHP : currentHP))
+		: (currentHP < 0 ? 0 : currentHP);
+
+	MonsterViews.push_back({ monsterName, drawX, drawY, SafeCurrentHP, SafeMaxHP });
 }
 
 void BattleRenderer::DrawAllMonsterIdle()
@@ -34,8 +39,33 @@ void BattleRenderer::DrawAllMonsterIdle()
 
 	for (const BattleMonsterView& MonsterView : MonsterViews)
 	{
-		DrawMonsterFrameAt(MonsterView.MonsterName, "idle", MonsterView.DrawX, MonsterView.DrawY);
+		DrawMonsterFrameAt(MonsterView, "idle");
 	}
+}
+
+void BattleRenderer::SetMonsterHP(int monsterIndex, int currentHP)
+{
+	if (monsterIndex < 0 || monsterIndex >= static_cast<int>(MonsterViews.size()))
+	{
+		return;
+	}
+
+	BattleMonsterView& MonsterView = MonsterViews[monsterIndex];
+	MonsterView.CurrentHP = MonsterView.MaxHP > 0
+		? (currentHP < 0 ? 0 : (currentHP > MonsterView.MaxHP ? MonsterView.MaxHP : currentHP))
+		: (currentHP < 0 ? 0 : currentHP);
+
+	DrawAllMonsterIdle();
+}
+
+void BattleRenderer::DecreaseMonsterHP(int monsterIndex, int amount)
+{
+	if (monsterIndex < 0 || monsterIndex >= static_cast<int>(MonsterViews.size()) || amount <= 0)
+	{
+		return;
+	}
+
+	SetMonsterHP(monsterIndex, MonsterViews[monsterIndex].CurrentHP - amount);
 }
 
 void BattleRenderer::DrawBattleScreen()
@@ -55,7 +85,7 @@ void BattleRenderer::DrawBattleScreen()
 	{
 		for (const BattleMonsterView& MonsterView : MonsterViews)
 		{
-			DrawMonsterFrameAt(MonsterView.MonsterName, "idle", MonsterView.DrawX, MonsterView.DrawY);
+			DrawMonsterFrameAt(MonsterView, "idle");
 		}
 	}
 }
@@ -106,7 +136,7 @@ void BattleRenderer::PlayMonsterAttackAnimation(int monsterIndex)
 	{
 		const BattleMonsterView& MonsterView = MonsterViews[i];
 		const std::string State = (i == monsterIndex) ? "attack" : "idle";
-		DrawMonsterFrameAt(MonsterView.MonsterName, State, MonsterView.DrawX, MonsterView.DrawY);
+		DrawMonsterFrameAt(MonsterView, State);
 	}
 
 	Sleep(120);
@@ -146,7 +176,7 @@ void BattleRenderer::PlayMonsterHitAnimation(int monsterIndex)
 	{
 		const BattleMonsterView& MonsterView = MonsterViews[i];
 		const std::string State = (i == monsterIndex) ? "hit" : "idle";
-		DrawMonsterFrameAt(MonsterView.MonsterName, State, MonsterView.DrawX, MonsterView.DrawY);
+		DrawMonsterFrameAt(MonsterView, State);
 	}
 
 	Sleep(300);
@@ -168,7 +198,7 @@ void BattleRenderer::PlayMonsterDeathAnimation()
 		{
 			const BattleMonsterView& MonsterView = MonsterViews[i];
 			const std::string State = (i == 0) ? "hit" : "idle";
-			DrawMonsterFrameAt(MonsterView.MonsterName, State, MonsterView.DrawX, MonsterView.DrawY);
+			DrawMonsterFrameAt(MonsterView, State);
 		}
 	}
 
@@ -226,17 +256,35 @@ void BattleRenderer::DrawMonsterFrame(const std::vector<std::string>& frame)
 }
 
 void BattleRenderer::DrawMonsterFrameAt(
-	const std::string& monsterName,
+	const BattleMonsterView& monsterView,
 	const std::string& state,
-	int drawX,
-	int drawY
+	int offsetX,
+	int offsetY
 )
 {
+	const int DrawX = monsterView.DrawX + offsetX;
+	const int DrawY = monsterView.DrawY + offsetY;
+
+	DrawMonsterStatusAt(monsterView, DrawX, DrawY - 3);
 	DrawFrameAt(
-		drawX,
-		drawY,
-		AsciiArtLoader::LoadFrame(monsterName, state)
+		DrawX,
+		DrawY,
+		AsciiArtLoader::LoadFrame(monsterView.MonsterName, state)
 	);
+}
+
+void BattleRenderer::DrawMonsterStatusAt(const BattleMonsterView& monsterView, int x, int y)
+{
+	if (y < BattleAreaY + 1)
+	{
+		return;
+	}
+
+	ConsoleUtil::SetCursorPosition(x, y);
+	ConsoleUtil::WriteColored(monsterView.MonsterName, ConsoleColor::White);
+
+	ConsoleUtil::SetCursorPosition(x, y + 1);
+	ConsoleUtil::WriteGauge(monsterView.CurrentHP, monsterView.MaxHP, 18, ConsoleColor::Red);
 }
 
 void BattleRenderer::DrawFrameAt(int x, int y, const std::vector<std::string>& frame)
@@ -290,11 +338,6 @@ void BattleRenderer::DrawBattleTitle()
 	ConsoleUtil::SetCursorPosition(BattleAreaX + 5, BattleAreaY + 1);
 	ConsoleUtil::SetTextColor(ConsoleColor::Red);
 	GInput << "[ 전투 화면 ]";
-	ConsoleUtil::ResetTextColor();
-
-	ConsoleUtil::SetCursorPosition(BattleAreaX + 5, BattleAreaY + 3);
-	ConsoleUtil::SetTextColor(ConsoleColor::Yellow);
-	GInput << "몬스터: " << CurrentMonsterName;
 	ConsoleUtil::ResetTextColor();
 }
 
