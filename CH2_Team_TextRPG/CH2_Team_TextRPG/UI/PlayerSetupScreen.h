@@ -5,6 +5,7 @@ class PlayerSetupScreen
 public:
 	static void DrawPlayerNameInput();
 	static void DrawPlayerNameError();
+	static void DrawSelectJobNumber();
 	static void DrawPlayerJobSelect();
 	
 };

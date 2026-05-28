@@ -83,53 +83,67 @@ void State_Start::NewPlayer()
 		}
 		break;
 	}
-	
+
 	Player* NewPlayer = ObjectManager::GetInstance().CreateObject<Player>();
 	NewPlayer->SetDisplayName(Data.UserName);
 	if (!NewPlayer)
 	{
 		GLog.AddLog("플레이어 생성에 실패했습니다.");
+		GLog.PrintAllLogs();
 		return;
 	}
 
 	PlayerSetupScreen::DrawPlayerJobSelect();
 
-	int Input = -1;
-	InputSession InputResult = GInput >> Input;
-
-	if (!InputResult)
+	while (1)
 	{
-		GLog.AddLog("잘못된 입력입니다.");
-		return;
-	}
-
-	if (Input == 0)
-	{
-		AddTransition<AlwaysTrueCondition>(EState::Start);
-		return;
-	}
-
-	if (Input >= 1 && Input <= 3)
-	{
-		const PlayerBaseData* PlayerInfo = PlayerDataTable::GetInstance().FindById(Input);
-		if (PlayerInfo)
+		int Input = 0;
+		PlayerSetupScreen::DrawSelectJobNumber();
+		if (!(GInput >> Input))
 		{
-			for (auto& It : PlayerInfo->InitialStats)
-			{
-				NewPlayer->SetBaseStat(StringToEStatType(It.first), It.second);
-			}
-			Data.ClassIndex = Input;
-			GSharedSaveMgr->Save(Data);
-			GSharedSaveMgr->SaveSnapShot();
-			
-			GLog.AddLog("새 게임을 시작합니다: " + Data.UserName);
+			continue;
+		}
+		if (Input == 0)
+		{
+			AddTransition<AlwaysTrueCondition>(EState::Start);
 			return;
 		}
-		GLog.AddLog("직업 데이터를 찾을 수 없습니다.");
+		if (Input < 1 || Input > 3)
+		{
+			continue;
+		}
+		const PlayerBaseData* PlayerInfo = PlayerDataTable::GetInstance().FindById(Input);
+		if (!PlayerInfo)
+		{
+			GLog.PrintLogOnce("직업 데이터를 찾을 수 없습니다.");
+			continue;
+		}
+
+		for (auto& It : PlayerInfo->InitialStats)
+		{
+			NewPlayer->SetBaseStat(StringToEStatType(It.first), It.second);
+		}
+
+		if (std::shared_ptr<SkillComponent> SkillComp = NewPlayer->FindComponent<SkillComponent>("Skill"))
+		{
+			for (int SkillId : PlayerInfo->InitialSkills)
+			{
+				SkillComp->AddSkill(static_cast<uint16_t>(SkillId));
+			}
+		}
+		for (int ItemId : PlayerInfo->InitialItems)
+		{
+			NewPlayer->AcquireItem(ItemId, 1);
+		}
+
+		Data.ClassIndex = Input;
+		GSharedSaveMgr->Save(Data);
+		GSharedSaveMgr->SaveSnapShot();
+
+		GLog.AddLog("새 게임을 시작합니다: " + Data.UserName);
+		GLog.PrintAllLogs();
 		return;
 	}
-	
-	GLog.AddLog("직업 번호를 다시 선택해주세요.");
 }
 
 void State_Start::LoadPlayer()
@@ -155,11 +169,10 @@ void State_Start::LoadPlayer()
 	{
 		for (auto& It : PlayerInfo->InitialStats)
 		{
-			LoadedPlayer->SetBaseStat(StringToEStatType(It.first) , It.second);
+			LoadedPlayer->SetBaseStat(StringToEStatType(It.first), It.second);
 		}
 
-		if (std::shared_ptr<LevelComponent> LevelComp =
-			LoadedPlayer->FindComponent<LevelComponent>("Level"))
+		if (std::shared_ptr<LevelComponent> LevelComp = LoadedPlayer->FindComponent<LevelComponent>("Level"))
 		{
 			LevelComp->ReviveLevel(Loaded.Level);
 		}
@@ -197,13 +210,13 @@ void State_Start::LoadPlayer()
 			SkillComp->AddSkill(SkillId);
 		}
 	}
-	
+
 	if (std::shared_ptr<LevelComponent> LevelComp = LoadedPlayer->FindComponent<LevelComponent>("Level"))
 	{
 		LevelComp->SetExp(Loaded.Exp);
 	}
-	
+
 	GameInstance::GetInstance().GetMapManager().SetCurrentNodeId(Loaded.MapIndex);
-	
+
 	GLog.AddLog("저장된 게임을 불러왔습니다: " + Loaded.UserName);
 }

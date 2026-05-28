@@ -56,6 +56,12 @@ void PlayerSetupScreen::DrawPlayerNameError()
 	ConsoleUtil::WriteColored("잘못 입력하였습니다!", ConsoleColor::Red);
 }
 
+void PlayerSetupScreen::DrawSelectJobNumber()
+{
+	ConsoleRenderer::SetCursorPosition(52, 37);
+	ConsoleUtil::WriteColored("직업 번호 입력 >> ", ConsoleColor::White);
+}
+
 void PlayerSetupScreen::DrawPlayerJobSelect()
 {
 	ConsoleUtil::HideCursor();
@@ -84,6 +90,4 @@ void PlayerSetupScreen::DrawPlayerJobSelect()
 
 	ConsoleRenderer::SetCursorPosition(52, 35);
 	ConsoleUtil::WriteColored("0. 시작 메뉴로 돌아가기", ConsoleColor::DarkGray);
-	ConsoleRenderer::SetCursorPosition(52, 37);
-	ConsoleUtil::WriteColored("직업 번호 입력 >> ", ConsoleColor::White);
 }
