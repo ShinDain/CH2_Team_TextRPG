@@ -236,3 +236,16 @@ void InventoryComponent::RemoveEntry(int ItemId)
 		}
 	}
 }
+
+const std::vector<FInventoryEntry> InventoryComponent::GetItemList(EItemCategory Category) const
+{
+	std::vector<FInventoryEntry> FilteredItems;
+	for (const FInventoryEntry& entry : ItemList)
+	{
+		if (entry.ItemInstance && entry.ItemInstance->GetItemData()->Category == Category)
+		{
+			FilteredItems.push_back(entry);
+		}
+	}
+	return FilteredItems;
+}

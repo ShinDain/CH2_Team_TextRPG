@@ -2,6 +2,7 @@
 #include "Core/Object.h"
 #include "Skill/Skill.h"
 #include "Character/Monster/Monster.h"
+#include "Character/Component/InventoryComponent.h"
 
 enum class EActionType
 {
@@ -23,7 +24,8 @@ public:
 	// 행동 메뉴 출력 및 선택 반환
 	static EActionType ShowActionMenu();
 	// 스킬 메뉴 출력 및 선택 반환 
-	static Skill* ShowSkillMenu(std::shared_ptr<class SkillComponent> SkillComp);
+	static Skill* ShowSkillMenu(std::shared_ptr<SkillComponent> SkillComp);
+	static int ShowItemMenu(std::shared_ptr<InventoryComponent> InventoryComp);
 	// 타겟 메뉴 출력 및 선택 반환
-	static std::vector<Object*> ShowTargetMenu(const std::vector<Monster*>& AliveMonsters, int TargetCount);
+	static std::vector<Object*> ShowTargetMenu(const std::vector<Object*>& SelectableTargets, int TargetCount);
 };

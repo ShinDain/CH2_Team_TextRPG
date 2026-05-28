@@ -9,6 +9,8 @@
 #include "Character/Component/ResourceComponent.h"
 #include "Character/Component/EffectComponent.h"
 #include "ObjectManager.h"
+#include "Character/Component/InventoryComponent.h"
+#include "Data/Table/ItemDataTable.h"
 #include "Data/Table/SkillDataTable.h"
 
 CombatManager& CombatManager::GetInstance()
@@ -27,16 +29,22 @@ CombatManager::~CombatManager()
 	delete TurnManagerInst;
 }
 
-void CombatManager::Initialize(Player* InPlayer, const std::vector<Monster*>& InMonsters)
+void CombatManager::Initialize(Player* InPlayer)
 {
 	PlayerCharacter = InPlayer;
-	Monsters = InMonsters;
-
 	if (PlayerCharacter)
 		TurnManagerInst->AddCharacterToTimeline(PlayerCharacter);
-
+}
+void CombatManager::Initialize(const std::vector<Monster*>& InMonsters)
+{
+	Monsters = InMonsters;
 	for (Monster* monster : Monsters)
 		TurnManagerInst->AddCharacterToTimeline(monster);
+}
+void CombatManager::Initialize(Player* InPlayer, const std::vector<Monster*>& InMonsters)
+{
+	Initialize(InPlayer);
+	Initialize(InMonsters);
 }
 
 void CombatManager::Clear()
@@ -85,6 +93,44 @@ void CombatManager::ExecuteSkill(Object* Caster, const std::vector<Object*>& Tar
 		skillComp->ConsumeCost(InSkill);
 		skillComp->ApplyCooldown(InSkill);
 	}
-	GLog.AddLog("[시스템] " + Caster->GetName() + "이(가) " + InSkill->GetSkillData()->Name + "을(를) 사용했습니다!");
+
+	std::string CasterName = "Unknown";
+	if (Monster* M = dynamic_cast<Monster*>(Caster))
+	{
+		CasterName = M->GetName();
+	}
+	else if (Player* P = dynamic_cast<Player*>(Caster))
+	{
+		CasterName = P->GetName();
+	}
+
+	GLog.AddLog("[시스템] " + CasterName + "이(가) " + InSkill->GetSkillData()->Name + "을(를) 사용했습니다!");
 	InSkill->Active(Caster, Targets);
+}
+
+void CombatManager::ExecuteItem(Object* Caster, const std::vector<Object*>& Targets, int ItemId)
+{
+	if (!Caster || Targets.empty()) return;
+
+	auto inventoryComp = Caster->FindComponent<InventoryComponent>("Inventory");
+	if (inventoryComp)
+	{
+		const ItemData* itemData = ItemDataTable::GetInstance().FindItemDataByIndex(ItemId);
+		if (itemData)
+		{
+			std::string CasterName = "Unknown";
+			if (Monster* M = dynamic_cast<Monster*>(Caster))
+			{
+				CasterName = M->GetName();
+			}
+			else if (Player* P = dynamic_cast<Player*>(Caster))
+			{
+				CasterName = P->GetName();
+			}
+
+			GLog.AddLog("[시스템] " + CasterName + "이(가) " + itemData->Name + "을(를) 사용했습니다!");
+		}
+		
+		inventoryComp->UseItem(ItemId, Targets);
+	}
 }

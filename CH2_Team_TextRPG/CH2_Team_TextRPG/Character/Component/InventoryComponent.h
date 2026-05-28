@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include "Core/Component.h"
+#include "Enum/EItemType.h"
 
-enum class EEquipmentType;
 struct ItemData;
 class Item;
 
@@ -57,6 +57,7 @@ private:
 
 public: 
 	const std::vector<FInventoryEntry> GetItemList() const { return ItemList; }
+	const std::vector<FInventoryEntry> GetItemList(EItemCategory Category) const;
 	int GetOwnedGold() const { return OwnedGold; }
 
 private:

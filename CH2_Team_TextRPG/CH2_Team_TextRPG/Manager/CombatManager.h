@@ -15,6 +15,8 @@ private:
 public:
 	static CombatManager& GetInstance();
 
+	void Initialize(Player* InPlayer);
+	void Initialize(const std::vector<Monster*>& InMonsters);
 	void Initialize(Player* InPlayer, const std::vector<Monster*>& InMonsters);
 	void Clear();
 
@@ -24,7 +26,7 @@ public:
 	bool IsBattleEnd() const;
 
 	void ExecuteSkill(Object* Caster, const std::vector<Object*>& Targets, Skill* InSkill);
-
+	void ExecuteItem(Object* Caster, const std::vector<Object*>& Targets, int ItemId);
 private:
 	Player* PlayerCharacter = nullptr;
 	std::vector<Monster*> Monsters;

@@ -32,7 +32,7 @@
     "Duration": 3,
     "ConsumableTime" : "InCombat",
     "EffectDatas": [
-      { "Tag": "Buff_Attack", "Value": 15 }
+      { "Tag": "Modifier_Buff_Attack", "Value": 15 }
     ]
   },
   {
@@ -41,7 +41,7 @@
     "Duration": 3,
     "ConsumableTime" : "InCombat",
     "EffectDatas": [
-      { "Tag": "Buff_Defense", "Value": 25 }
+      { "Tag": "Modifier_Buff_Defense", "Value": 25 }
     ]
   },
   {
@@ -50,7 +50,7 @@
     "Duration": 2,
     "ConsumableTime" : "InCombat",
     "EffectDatas": [
-      { "Tag": "Buff_ActionSpeed", "Value": 30 }
+      { "Tag": "Modifier_Buff_ActionSpeed", "Value": 30 }
     ]
   },
   {
@@ -59,7 +59,7 @@
     "Duration": 0,
     "ConsumableTime" : "InCombat",
     "EffectDatas": [
-      { "Tag": "Damage", "Value": 50 }
+      { "Tag": "Fixed_Damage", "Value": 50 }
     ]
   },
   {
@@ -68,7 +68,7 @@
     "Duration": 1,
     "ConsumableTime" : "InCombat",
     "EffectDatas": [
-      { "Tag": "CC_Stun", "Value": 1 }
+      { "Tag": "State_Stun", "Value": 1 }
     ]
   },
   {
@@ -77,8 +77,8 @@
     "Duration": 1,
     "ConsumableTime" : "InCombat",
     "EffectDatas": [
-      { "Tag": "Damage", "Value": 120 },
-      { "Tag": "CC_Stun", "Value": 1 }
+      { "Tag": "Fixed_Damage", "Value": 120 },
+      { "Tag": "State_Stun", "Value": 1 }
     ]
   },
   {
@@ -87,7 +87,7 @@
     "Duration": 1,
     "ConsumableTime" : "InCombat",
     "EffectDatas": [
-      { "Tag": "Buff_Invincible", "Value": 1 }
+      { "Tag": "State_Invincible", "Value": 1 }
     ]
   },
   {
@@ -96,7 +96,7 @@
     "Duration": 2,
     "ConsumableTime" : "InCombat",
     "EffectDatas": [
-      { "Tag": "Buff_Attack", "Value": 35 }
+      { "Tag": "Modifier_Buff_Attack", "Value": 35 }
     ]
   }
 ]

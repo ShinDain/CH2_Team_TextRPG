@@ -39,6 +39,10 @@ namespace Game
 			const std::string Invincible = "State_Invincible";
 		}
 
-		const std::string EFFECT_TAG_DAMAGE = "Damage";
+		namespace Damage
+		{
+			const std::string Damage = "Damage";
+			const std::string FixedDamage = "Fixed_Damage";
+		}
 	}	
 }

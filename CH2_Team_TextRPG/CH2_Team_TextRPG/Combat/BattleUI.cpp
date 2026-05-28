@@ -2,18 +2,19 @@
 #include "BattleUI.h"
 #include "Manager/InputManager.h"
 #include "Character/Component/SkillComponent.h"
-#include "Data/Table/SkillDataTable.h"
+#include "Character/Component/InventoryComponent.h"
 #include "Character/Monster/Monster.h"
 #include "Character/Player/Player.h"
 #include "Character/Interface/Resource.h"
 #include "Data/Character/Stat.h"
+#include "Data/Table/SkillDataTable.h"
+#include "Item/Item.h"
 #include "UI/BattleRenderer.h"
 #include "UI/GameScreen.h"
 #include "UI/ConsoleUtil.h"
-#include <windows.h>
-#include <map>
-
 #include "Manager/ObjectManager.h"
+#include <windows.h>
+
 
 namespace
 {
@@ -75,8 +76,8 @@ void BattleUI::DrawBattleView(const std::vector<Monster*>& AliveMonsters)
 	if (Player* LoadPlayer = ObjectManager::GetInstance().FindObject<Player>("Player"))
 	{
 		GameScreen::DrawCharacterPanel(LoadPlayer);
+		GameScreen::DrawInventoryPanel(LoadPlayer);
 	}
-	
 	Renderer.DrawBattleScreen();
 	GameScreen::DrawLogPanel(GameInstance::GetInstance().GetLogManager());
 }
@@ -190,22 +191,88 @@ Skill* BattleUI::ShowSkillMenu(std::shared_ptr<SkillComponent> SkillComp)
 	}
 }
 
-std::vector<Object*> BattleUI::ShowTargetMenu(const std::vector<Monster*>& AliveMonsters, int TargetCount)
+int BattleUI::ShowItemMenu(std::shared_ptr<InventoryComponent> InventoryComp)
+{
+	if (!InventoryComp)
+	{
+		ShowErrorMessage("인벤토리가 없습니다.");
+		return 0;
+	}
+
+	std::vector<FInventoryEntry> ConsumableItems;
+	const std::vector<FInventoryEntry> AllItems = InventoryComp->GetItemList(EItemCategory::Consumable);
+	for (const FInventoryEntry& entry : AllItems)
+	{
+		ConsumableItems.push_back(entry);
+	}
+
+	if (ConsumableItems.empty())
+	{
+		ShowErrorMessage("사용 가능한 아이템이 없습니다.");
+		return 0;
+	}
+
+	while (true)
+	{
+		std::vector<FCommandOption> Options;
+		for (size_t i = 0; i < ConsumableItems.size(); ++i)
+		{
+			const FInventoryEntry& item = ConsumableItems[i];
+
+			std::string Text = std::to_string(i + 1) + ". " + item.ItemInstance->GetName();
+			Text += " x " + std::to_string(item.Amount);
+
+			Options.push_back({ Text, true });
+		}
+		GameScreen::DrawBattleCommandPanel("아이템 선택", Options);
+		ShowPromptMessage("아이템을 선택하세요. (0: 취소) >> ");
+
+		int choice = -1;
+		GInput >> choice;
+
+		if (choice == 0)
+		{
+			ClearInputLine();
+			return 0;
+		}
+
+		if (GInput.IsFailed() || choice < 1 || choice > ConsumableItems.size())
+		{
+			ShowErrorMessage("유효하지 않은 입력입니다.");
+			continue;
+		}
+
+		ClearInputLine();
+		return ConsumableItems[choice - 1].Id;
+	}
+}
+
+std::vector<Object*> BattleUI::ShowTargetMenu(const std::vector<Object*>& SelectableTargets, int TargetCount)
 {
 	std::vector<Object*> TargetList;
-	if (TargetCount >= AliveMonsters.size())
+	if (TargetCount >= SelectableTargets.size())
 	{
-		for (Monster* m : AliveMonsters) TargetList.push_back(m);
+		for (Object* t : SelectableTargets) TargetList.push_back(t);
 		return TargetList;
 	}
 
-	std::vector<Monster*> SelectableMonsters = AliveMonsters;
-	while (TargetList.size() < TargetCount && !SelectableMonsters.empty())
+	std::vector<Object*> CurrentSelectable = SelectableTargets;
+	while (TargetList.size() < TargetCount && !CurrentSelectable.empty())
 	{
 		std::vector<FCommandOption> Options;
-		for (size_t i = 0; i < SelectableMonsters.size(); ++i)
+		for (size_t i = 0; i < CurrentSelectable.size(); ++i)
 		{
-			Options.push_back({ std::to_string(i + 1) + ". " + SelectableMonsters[i]->GetName(), true });
+			std::string TargetName = "Unknown";
+			if (Monster* M = dynamic_cast<Monster*>(CurrentSelectable[i]))
+			{
+				TargetName = M->GetName();
+			}
+			else if (Player* P = dynamic_cast<Player*>(CurrentSelectable[i]))
+			{
+				TargetName = P->GetName();
+			}
+
+			Options.push_back({ std::to_string(i + 1) + ". " + TargetName, true });
 		}
 		GameScreen::DrawBattleCommandPanel("대상 선택", Options);
 
@@ -221,14 +288,14 @@ std::vector<Object*> BattleUI::ShowTargetMenu(const std::vector<Monster*>& Alive
 			return std::vector<Object*>();
 		}
 
-		if (GInput.IsFailed() || choice < 1 || choice > SelectableMonsters.size())
+		if (GInput.IsFailed() || choice < 1 || choice > CurrentSelectable.size())
 		{
 			ShowErrorMessage("유효하지 않은 입력입니다. 다시 선택해주세요.");
 			continue;
 		}
 
-		TargetList.push_back(SelectableMonsters[choice - 1]);
-		SelectableMonsters.erase(SelectableMonsters.begin() + (choice - 1));
+		TargetList.push_back(CurrentSelectable[choice - 1]);
+		CurrentSelectable.erase(CurrentSelectable.begin() + (choice - 1));
 	}
 
 	ClearInputLine();
