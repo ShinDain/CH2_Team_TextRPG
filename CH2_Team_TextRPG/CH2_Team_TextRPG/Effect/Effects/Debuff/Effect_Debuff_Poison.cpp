@@ -1,16 +1,16 @@
 ﻿#include "pch.h"
-#include "Effect_Poison.h"
+#include "Effect_Debuff_Poison.h"
 #include "Character/Component/EffectComponent.h"
 #include "Character/Component/ResourceComponent.h"
 #include "Character/Interface/Damageable.h"
 #include "Data/Character/Stat.h"
 #include "Manager/InputManager.h"
 
-Effect_Poison::Effect_Poison(int InValue) : Effect(Game::EffectTag::Debuff::Poison, InValue)
+Effect_Debuff_Poison::Effect_Debuff_Poison(int InValue) : Effect(Game::EffectTag::Debuff::Poison, InValue)
 {
 }
 
-void Effect_Poison::Apply(Object* Instigator, std::vector<Object*> Targets)
+void Effect_Debuff_Poison::Apply(Object* Instigator, std::vector<Object*> Targets)
 {
 	for (Object* Target : Targets)
 	{
@@ -23,7 +23,7 @@ void Effect_Poison::Apply(Object* Instigator, std::vector<Object*> Targets)
 	}
 }
 
-void Effect_Poison::Remove(Object* Instigator, std::vector<Object*> Targets)
+void Effect_Debuff_Poison::Remove(Object* Instigator, std::vector<Object*> Targets)
 {
 	for (Object* Target : Targets)
 	{
