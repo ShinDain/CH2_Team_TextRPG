@@ -5,7 +5,7 @@
 #include "State/State_Map.h"
 #include "State/State_Battle.h"
 #include "Shop/State_Shop.h"
-#include "State/State_Ending.h"
+#include "State/State_Result.h"
 
 StateManager& StateManager::GetInstance()
 {
@@ -75,7 +75,7 @@ bool StateManager::InitializeStates()
 	AddState<State_Map>(EState::Map);
 	AddState<State_Battle>(EState::Combat);
 	AddState<State_Shop>(EState::Shop);
-	AddState<State_Ending>(EState::Ending);
+	AddState<State_Result>(EState::Result);
 
 	return true;
 }
