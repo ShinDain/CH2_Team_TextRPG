@@ -125,7 +125,6 @@ protected:
     std::shared_ptr<class ResourceComponent> Resource;
     std::shared_ptr<class EffectComponent> Effect;
     std::shared_ptr<class SkillComponent> Skill;
-
 };
 
 
