@@ -31,7 +31,7 @@ void State_Battle::Enter()
 	Player* PlayerCharacter = GameInstance::GetInstance().GetMainPlayer();
 
 	const BattleStartData* StartData = GameInstance::GetInstance().GetBattleStartData();
-
+	
 	vector<Monster*> Monsters;
 	for (const BattleMonsterStartData& data : StartData->Monsters)
 	{
@@ -87,6 +87,8 @@ void State_Battle::Process()
 
 void State_Battle::Exit()
 {
+	BattleEnd(); // 전투 종료 보상 처리 및 로그 출력
+
 	// TODO : 전투 종료 시 효과 제거 (버프/디버프 등)
 	GameInstance::GetInstance().GetMainPlayer()->FindComponent<EffectComponent>("Effect");
 	CombatManager::GetInstance().Clear();
@@ -152,4 +154,40 @@ void State_Battle::HandleMonsterTurn(Monster* MonsterCharacter)
 			CombatManager::GetInstance().ExecuteSkill(MonsterCharacter, Targets, BasicAttack);
 		}
 	}
+}
+
+void State_Battle::BattleEnd()
+{
+	// 전투 종료 후 보상 획득, 경험치 획득 등 처리
+
+	Player* PlayerCharacter = GameInstance::GetInstance().GetMainPlayer();
+	const BattleStartData* StartData = GameInstance::GetInstance().GetBattleStartData();
+
+	if (!PlayerCharacter || !StartData) {
+		return;
+	}
+	// 승리 조건 검사: 살아있는 몬스터가 없고 플레이어가 생존해 있는가?
+	std::vector<Monster*> AliveMonsters = CombatManager::GetInstance().GetAliveMonsters();
+	if (AliveMonsters.empty() && !PlayerCharacter->IsDead())
+	{
+		int TotalExp = 0;
+		int TotalGold = 0;
+
+		// 이번 전투에 참여했던 몬스터 데이터 스캔
+		for (const BattleMonsterStartData& data : StartData->Monsters)
+		{
+			// 💡 [참고] 프로젝트의 BattleMonsterStartData 구조체 안에 정의된 
+			// 경험치(Exp)와 골드(Gold) 변수명으로 매칭해 주세요!
+			TotalExp += 100;//data.Exp;
+			TotalGold += 100;//data.Gold;
+		}
+
+		PlayerCharacter->AddExp(TotalExp);
+		PlayerCharacter->ModifyGold(TotalGold);
+	
+		GLog.AddLog("[전투 승리] 모든 적을 쓰러뜨렸습니다!");
+		GLog.AddLog("[보상] 획득 경험치: " + to_string(TotalExp) + " EXP");
+		GLog.AddLog("[보상] 획득 골드: " + to_string(TotalGold) + " GOLD");
+	}
+	
 }
