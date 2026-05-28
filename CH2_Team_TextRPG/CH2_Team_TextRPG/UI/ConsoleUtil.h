@@ -25,6 +25,7 @@ class ConsoleUtil
 public:
     static void SetCursorPosition(int x, int y);
     static void HideCursor();
+    static void ShowCursor();
     static void ClearArea(int x, int y, int width, int height);
     static void SetTextColor(ConsoleColor color);
     static void ResetTextColor();
