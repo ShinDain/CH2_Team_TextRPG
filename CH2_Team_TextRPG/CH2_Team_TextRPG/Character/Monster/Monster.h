@@ -18,6 +18,7 @@ struct MonsterSetData
     int ActionSpeed;
 	int DropGold;
     int Exp;
+    std::vector<int> Skills;
 
     MonsterSetData() : 
         Name(""),
@@ -27,13 +28,14 @@ struct MonsterSetData
         Defense(0), 
         ActionSpeed(0), 
         DropGold(0), 
-        Exp(0) 
+        Exp(0),
+        Skills()
     {
     }
 
     MonsterSetData(const std::string& Name, int DropItemId, 
         int HP, int Attack, int Defense, 
-        int ActionSpeed, int DropGold, int Exp) :
+        int ActionSpeed, int DropGold, int Exp, const std::vector<int>& Skills) :
         Name(Name), 
         DropItemId(DropItemId), 
         HP(HP), 
@@ -41,7 +43,8 @@ struct MonsterSetData
         Defense(Defense), 
         ActionSpeed(ActionSpeed), 
         DropGold(DropGold), 
-        Exp(Exp) 
+        Exp(Exp),
+        Skills(Skills)
     {
     }
 
@@ -53,7 +56,8 @@ struct MonsterSetData
         Defense(Other.Defense),
         ActionSpeed(Other.ActionSpeed),
         DropGold(Other.DropGold),
-        Exp(Other.Exp)
+        Exp(Other.Exp),
+		Skills(Other.Skills)
     {
     }
 
@@ -65,7 +69,8 @@ struct MonsterSetData
         Defense(Other.Defense),
         ActionSpeed(Other.ActionSpeed),
         DropGold(Other.DropGold),
-        Exp(Other.Exp)
+        Exp(Other.Exp),
+		Skills(std::move(Other.Skills))
     {
     }
 
@@ -79,6 +84,7 @@ struct MonsterSetData
 		ActionSpeed = Other.ActionSpeed;
         DropGold = Other.DropGold;
         Exp = Other.Exp;
+		Skills = Other.Skills;
         return *this;
     }
 };

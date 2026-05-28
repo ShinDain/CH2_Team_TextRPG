@@ -43,6 +43,10 @@ bool Monster::Initialize()
 	Resource->Initialize();
 	Effect->Initialize();
 	Skill->Initialize();
+	for (int SkillId : MonsterData.Skills)
+	{
+		Skill->AddSkill(static_cast<uint16_t>(SkillId));
+	}
 
 	return true;
 }

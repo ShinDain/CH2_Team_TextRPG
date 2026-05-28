@@ -9,7 +9,8 @@
     "Exp": 10,
     "ActionSpeed": 4,
     "DropItemId": 1001,
-    "DropGold": 15
+    "DropGold": 15,
+    "Skills": []
   },
   {
     "Name": "goblin",
@@ -21,7 +22,8 @@
     "Exp": 25,
     "ActionSpeed": 4,
     "DropItemId": 1007,
-    "DropGold": 35
+    "DropGold": 35,
+    "Skills": []
   },
   {
     "Name": "orc",
@@ -33,7 +35,8 @@
     "Exp": 60,
     "ActionSpeed": 4,
     "DropItemId": 2006,
-    "DropGold": 70
+    "DropGold": 70,
+    "Skills": []
   },
   {
     "Name": "Skeleton",
@@ -45,7 +48,8 @@
     "Exp": 90,
     "ActionSpeed": 4,
     "DropItemId": 2002,
-    "DropGold": 100
+    "DropGold": 100,
+    "Skills": []
   },
   {
     "Name": "Werewolf",
@@ -57,7 +61,8 @@
     "Exp": 80,
     "ActionSpeed": 4,
     "DropItemId": 1004,
-    "DropGold": 110
+    "DropGold": 110,
+    "Skills": []
   },
   {
     "Name": "Witch",
@@ -69,7 +74,8 @@
     "Exp": 110,
     "ActionSpeed": 6,
     "DropItemId": 1005,
-    "DropGold": 200
+    "DropGold": 200,
+    "Skills": []
   },
   {
     "Name": "Dragon",
@@ -81,7 +87,8 @@
     "Exp": 450,
     "ActionSpeed": 6,
     "DropItemId": 1010,
-    "DropGold": 1200
+    "DropGold": 1200,
+    "Skills": []
   },
   {
     "Name": "Troll",
@@ -93,7 +100,8 @@
     "Exp": 75,
     "ActionSpeed": 6,
     "DropItemId": 2001,
-    "DropGold": 180
+    "DropGold": 180,
+    "Skills": []
   },
   {
     "Name": "Vampire",
@@ -105,7 +113,8 @@
     "Exp": 130,
     "ActionSpeed": 6,
     "DropItemId": 2005,
-    "DropGold": 350
+    "DropGold": 350,
+    "Skills": []
   },
   {
     "Name": "DragonWhelp",
@@ -117,6 +126,7 @@
     "Exp": 300,
     "ActionSpeed": 6,
     "DropItemId": 2004,
-    "DropGold": 500
+    "DropGold": 500,
+    "Skills": []
   }
 ]
