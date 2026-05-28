@@ -32,9 +32,6 @@ public:
 	bool IsDead() const override;
 
 public:
-	const std::string& GetDisplayName() const;
-	void SetDisplayName(const std::string& InName);
-
 	int GetStat(EStatType Type) const override;
 	int GetLevel() const override;
 	int GetExp() const override;

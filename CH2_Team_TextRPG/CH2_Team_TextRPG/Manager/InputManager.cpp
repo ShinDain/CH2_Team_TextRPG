@@ -49,5 +49,5 @@ void InputManager::Reset()
 void InputManager::ClearBuffer()
 {
 	std::cin.clear();
-	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	std::cin.sync();
 }
