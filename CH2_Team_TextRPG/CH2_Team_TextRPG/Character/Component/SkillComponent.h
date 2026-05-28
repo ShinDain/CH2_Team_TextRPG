@@ -7,7 +7,6 @@
 class SkillComponent : public Component
 {
 public:
-	SkillComponent() = delete;
 	SkillComponent(Object* InOwner);
 	virtual ~SkillComponent();
 
