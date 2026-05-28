@@ -1,8 +1,6 @@
 #include "pch.h"
 #include "InputManager.h"
 
-#include <windows.h>
-
 InputSession::InputSession(InputManager* InSystem) 
 	: InputSystem(InSystem)
 {
@@ -28,8 +26,7 @@ InputSession::operator bool() const
 }
 
 InputManager::InputManager() 
-	: bFailed(false),
-	bInputLocked(false)
+	: bFailed(false)
 {
 	
 }
@@ -37,22 +34,6 @@ InputManager::InputManager()
 bool InputManager::IsFailed() const
 {
 	return bFailed;
-}
-
-void InputManager::SetInputLocked(bool bLocked)
-{
-	bInputLocked = bLocked;
-}
-
-bool InputManager::IsInputLocked() const
-{
-	return bInputLocked;
-}
-
-void InputManager::ClearInputBuffer()
-{
-	ClearBuffer();
-	FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE));
 }
 
 void InputManager::ApplyFail()
@@ -68,18 +49,5 @@ void InputManager::Reset()
 void InputManager::ClearBuffer()
 {
 	std::cin.clear();
-	std::cin.sync();
-}
-
-InputLockGuard::InputLockGuard(InputManager& InInputManager)
-	: InputSystem(InInputManager),
-	bPreviousLockState(InInputManager.IsInputLocked())
-{
-	InputSystem.SetInputLocked(true);
-}
-
-InputLockGuard::~InputLockGuard()
-{
-	InputSystem.ClearInputBuffer();
-	InputSystem.SetInputLocked(bPreviousLockState);
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }

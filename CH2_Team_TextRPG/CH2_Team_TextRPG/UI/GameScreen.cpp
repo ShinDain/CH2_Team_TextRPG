@@ -155,11 +155,9 @@ void GameScreen::DrawCharacterPanel(const Player* MainPlayer)
 	}
 
 	ConsoleRenderer::SetCursorPosition(2, 3);
-	std::string Name = MainPlayer->GetDisplayName();
 	ConsoleUtil::WriteColored("이름 : " + MainPlayer->GetDisplayName(), ConsoleColor::Gray);
 
 	ConsoleRenderer::SetCursorPosition(2, 4);
-	int Lv = MainPlayer->GetLevel();
 	ConsoleUtil::WriteColored("LV   : " + std::to_string(MainPlayer->GetLevel()), ConsoleColor::Gray);
 
 	ConsoleRenderer::SetCursorPosition(2, 5);

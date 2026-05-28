@@ -20,9 +20,10 @@ struct MonsterData
 	int DropItemId;
 	int DropGold;
     std::string Type; 
+    std::vector<int> Skills;
 };
 NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(MonsterData,
-    Name, Id, HP, Attack, Defense, Exp, ActionSpeed, DropItemId, DropGold, Type);
+    Name, Id, HP, Attack, Defense, Exp, ActionSpeed, DropItemId, DropGold, Type, Skills);
 
 class MonsterDataTable final : public BaseDataTable
 {

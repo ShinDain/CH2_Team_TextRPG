@@ -115,7 +115,7 @@ void State_Start::NewPlayer()
 		const PlayerBaseData* PlayerInfo = PlayerDataTable::GetInstance().FindById(Input);
 		if (!PlayerInfo)
 		{
-			GLog.PrintLogOnce("직업 데이터를 찾을 수 없습니다.");
+			PlayerSetupScreen::DrawSelectJobError("직업 데이터를 찾을 수 없습니다.");
 			continue;
 		}
 

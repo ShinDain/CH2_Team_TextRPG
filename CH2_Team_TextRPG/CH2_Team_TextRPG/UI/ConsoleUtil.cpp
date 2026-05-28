@@ -24,6 +24,17 @@ void ConsoleUtil::HideCursor()
     SetConsoleCursorInfo(consoleHandle, &cursorInfo);
 }
 
+void ConsoleUtil::ShowCursor()
+{
+    HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+
+    CONSOLE_CURSOR_INFO cursorInfo;
+    GetConsoleCursorInfo(consoleHandle, &cursorInfo);
+
+    cursorInfo.bVisible = true;
+    SetConsoleCursorInfo(consoleHandle, &cursorInfo);
+}
+
 void ConsoleUtil::ClearArea(int x, int y, int width, int height)
 {
     std::string blank(width, ' ');
