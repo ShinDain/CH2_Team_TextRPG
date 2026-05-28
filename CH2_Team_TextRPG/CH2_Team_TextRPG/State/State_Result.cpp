@@ -6,6 +6,8 @@
 #include "UI/ConsoleRenderer.h"
 #include "UI/ConsoleUtil.h"
 #include "Manager/RecordManager.h"
+#include "Map/MapManager.h"
+
 
 namespace
 {
@@ -56,9 +58,23 @@ void State_Result::Process()
 	//RecordManager 기록 보여주기
 	RecordManager& Record = RecordManager::GetInstance();
 
-	ConsoleRenderer::SetCursorPosition(94, 17);
+	ConsoleRenderer::SetCursorPosition(94, 16);
 	ConsoleUtil::WriteColored("[ 전적 통계 ]", ConsoleColor::Cyan);
 
+	if (ResultType == EResultType::GameOver)
+	{
+		const MapNode* CurrentNode = Instance.GetMapManager().GetCurrentNode();
+		int DeadFloor = (CurrentNode != nullptr) ? CurrentNode->Floor : 0;
+
+		ConsoleRenderer::SetCursorPosition(82, 18);
+		ConsoleUtil::WriteColored("최종 도달 : ", ConsoleColor::Red);
+		GInput << DeadFloor << " 층에서 장렬히 전사";
+	}
+	else
+	{
+		ConsoleRenderer::SetCursorPosition(82, 18);
+		ConsoleUtil::WriteColored("축하합니다! 던전의 모든 위협을 뚫고 살아남았습니다.", ConsoleColor::Green);
+	}
 	ConsoleRenderer::SetCursorPosition(82, 18);
 	GInput << "- 일반몹 처치 : " << Record.GetMonsterKills() << " 마리";
 
@@ -68,7 +84,6 @@ void State_Result::Process()
 	ConsoleRenderer::SetCursorPosition(82, 20);
 	GInput << "- 총 방문 노드 : " << Record.GetTotalNodeVisits() << " 개";
 
-	// 종류별 노드 방문 횟수를 한 줄로 깔끔하게 배치
 	ConsoleRenderer::SetCursorPosition(85, 21);
 	GInput << "전투(M): " << Record.GetNodeVisitCount(ENodeType::Monster) << "회";
 
@@ -99,6 +114,7 @@ void State_Result::Process()
 	}
 	else if (Input == 1)
 	{
+		RecordManager::GetInstance().Initialize();
 		StateManager::GetInstance().ChangeState(EState::Start);
 	}
 }
