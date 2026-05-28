@@ -13,6 +13,8 @@
 #include "Manager/CombatManager.h"
 #include "State_Battle.h"
 
+#include "Data/Table/MonsterDataTable.h"
+
 using namespace std;
 
 State_Battle::State_Battle()
@@ -33,9 +35,16 @@ void State_Battle::Enter()
 	assert(LoadPlayer && "LoadPlayer is null");
 	const BattleStartData* StartData = GameInstance::GetInstance().GetBattleStartData();
 	std::vector<Monster*> Monsters;
+	
 	for (const BattleMonsterStartData& data : StartData->Monsters)
 	{
+		const MonsterData* MonsData = MonsterDataTable::GetInstance().FindMonsterDataById(data.MonsterId);
 		Monster* NewMonster = MonsterFactory::CreateForPlayer(data.Name, LoadPlayer);
+		auto MonsterSkillComp = NewMonster->FindComponent<SkillComponent>("Skill");
+		for (auto SkillId : MonsData->Skills)
+		{
+			MonsterSkillComp->AddSkill(SkillId);	
+		}
 		if (NewMonster)
 		{
 			Monsters.emplace_back(NewMonster);
