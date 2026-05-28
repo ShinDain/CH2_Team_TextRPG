@@ -2,10 +2,10 @@
 #include "Effect/Effect.h"
 #include "Effect/Factory/EffectFactory.h"
 
-class Effect_Poison : public Effect
+class Effect_Debuff_Poison : public Effect
 {
 public:
-	Effect_Poison(int InValue);
+	Effect_Debuff_Poison(int InValue);
 
 	virtual void Apply(Object* Instigator, std::vector<Object*> Targets) override;
 	virtual void Remove(Object* Instigator, std::vector<Object*> Targets) override;
@@ -13,7 +13,7 @@ public:
 
 inline Effect* CreateDebuff_PoisonEffectInstance(int Value)
 {
-	return new Effect_Poison(Value);
+	return new Effect_Debuff_Poison(Value);
 }
 
 inline bool bDebuff_PoisonEffectRegister = EffectFactory::RegisterEffect(Game::EffectTag::Debuff::Poison, CreateDebuff_PoisonEffectInstance);

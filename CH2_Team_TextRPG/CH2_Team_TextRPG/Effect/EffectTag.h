@@ -22,15 +22,15 @@ namespace Game
 
 		namespace Buff
 		{
-			const std::string Attack = "Buff_Attack";
-			const std::string Defense = "Buff_Defense";
-			const std::string ActionSpeed = "Buff_ActionSpeed";
+			const std::string Attack = "Modifier_Buff_Attack";
+			const std::string Defense = "Modifier_Buff_Defense";
+			const std::string ActionSpeed = "Modifier_Buff_ActionSpeed";
 		}
 		namespace Debuff
 		{
-			const std::string Poison = "Debuff_Poison";
-			const std::string Burn = "Debuff_Burn";
-			const std::string Freeze = "Debuff_Freeze";
+			const std::string Poison = "OverTime_Debuff_Poison";
+			const std::string Burn = "OverTime_Debuff_Burn";
+			const std::string Freeze = "Modifier_Debuff_Freeze";
 		}
 
 		namespace State
