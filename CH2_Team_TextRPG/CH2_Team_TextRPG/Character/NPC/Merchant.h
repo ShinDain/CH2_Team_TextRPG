@@ -3,7 +3,7 @@
 #include "Character/Interface/Trade.h"
 
 struct FInventoryEntry;
-class ItemData;
+struct ItemData;
 
 class Merchant : public NPC , public ITrade
 {

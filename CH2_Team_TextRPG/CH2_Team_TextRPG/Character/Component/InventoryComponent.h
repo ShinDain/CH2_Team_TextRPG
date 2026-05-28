@@ -45,6 +45,8 @@ public:
 	bool HaveItem(int ItemId);
 
 	void ModifyGold(int Value);
+	void SetGold(int Value);
+	void ResetInventory();
 
 private:
 	bool UseItem_Implement(Item* ItemInstance, std::vector<Object*> Targets);

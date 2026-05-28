@@ -176,7 +176,7 @@ bool Player::CanAfford(int Price)
 	std::shared_ptr<InventoryComponent> inventoryComp = GetInventory();
 	if (inventoryComp)
 	{
-		return inventoryComp->GetOwnedGold() > Price;
+		return inventoryComp->GetOwnedGold() >= Price;
 	}
 
 	return false;
@@ -192,6 +192,11 @@ void Player::ModifyGold(int Value)
 }
 
 std::shared_ptr<InventoryComponent> Player::GetInventory()
+{
+	return Inventory;
+}
+
+std::shared_ptr<InventoryComponent> Player::GetInventory() const
 {
 	return Inventory;
 }

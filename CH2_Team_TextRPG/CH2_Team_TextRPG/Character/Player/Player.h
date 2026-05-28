@@ -42,6 +42,7 @@ public:
 	virtual void ModifyGold(int Value) override;
 
 	virtual std::shared_ptr<class InventoryComponent> GetInventory() override;
+	std::shared_ptr<class InventoryComponent> GetInventory() const;
 	
 private:
 	std::shared_ptr<class StatComponent> Stat;

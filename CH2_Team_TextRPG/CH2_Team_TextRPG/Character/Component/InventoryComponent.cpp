@@ -178,6 +178,17 @@ void InventoryComponent::ModifyGold(int Value)
 	}
 }
 
+void InventoryComponent::SetGold(int Value)
+{
+	OwnedGold = std::max(0, Value);
+}
+
+void InventoryComponent::ResetInventory()
+{
+	ClearItemList();
+	OwnedGold = 0;
+}
+
 bool InventoryComponent::UseItem_Implement(Item* ItemInstance, std::vector<Object*> Targets)
 {
 	if (ItemInstance == nullptr)

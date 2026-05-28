@@ -15,7 +15,7 @@ public:
     static void DrawLogPanel(const LogManager& Log);
 
 private:
-    static void DrawInventoryPanel();
+    static void DrawInventoryPanel(const Player* MainPlayer);
     static void DrawMapPanel(const MapManager& Map);
     static void DrawNavigationPanel(const MapManager& Map);
     static void DrawInputPanel();

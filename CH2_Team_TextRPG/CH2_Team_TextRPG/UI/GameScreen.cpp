@@ -1,9 +1,11 @@
 #include "pch.h"
 #include "GameScreen.h"
+#include "Character/Component/InventoryComponent.h"
 #include "Character/Player/Player.h"
 #include "ConsoleRenderer.h"
 #include "ConsoleUtil.h"
 #include "Data/Character/Stat.h"
+#include "Data/Table/ItemDataTable.h"
 
 namespace
 {
@@ -82,7 +84,7 @@ void GameScreen::DrawMainScreen(const MapManager& Map, const LogManager& Log, co
 	ConsoleRenderer::ClearScreen();
 
 	DrawCharacterPanel(MainPlayer);
-	DrawInventoryPanel();
+	DrawInventoryPanel(MainPlayer);
 	DrawMapPanel(Map);
 	DrawNavigationPanel(Map);
 	DrawLogPanel(Log);
@@ -158,17 +160,44 @@ void GameScreen::DrawBattleCommandPanel(const std::vector<BattleSkillOption>& Sk
 
 }
 
-void GameScreen::DrawInventoryPanel()
+void GameScreen::DrawInventoryPanel(const Player* MainPlayer)
 {
 	ConsoleRenderer::DrawBox(0, 11, 30, 23);
 	ConsoleRenderer::SetCursorPosition(2, 12);
 	ConsoleUtil::WriteColored("인벤토리", ConsoleColor::Yellow);
+
+	if (MainPlayer == nullptr || MainPlayer->GetInventory() == nullptr)
+	{
+		ConsoleRenderer::SetCursorPosition(2, 14);
+		ConsoleUtil::WriteColored("골드 : 0G", ConsoleColor::White);
+		ConsoleRenderer::SetCursorPosition(2, 16);
+		ConsoleUtil::WriteColored("아이템 없음", ConsoleColor::DarkGray);
+		return;
+	}
+
+	std::shared_ptr<InventoryComponent> Inventory = MainPlayer->GetInventory();
+
 	ConsoleRenderer::SetCursorPosition(2, 14);
-	ConsoleUtil::WriteColored("포션 x2", ConsoleColor::White);
-	ConsoleRenderer::SetCursorPosition(2, 15);
-	ConsoleUtil::WriteColored("철검", ConsoleColor::White);
-	ConsoleRenderer::SetCursorPosition(2, 16);
-	ConsoleUtil::WriteColored("가죽 갑옷", ConsoleColor::White);
+	ConsoleUtil::WriteColored("골드 : " + std::to_string(Inventory->GetOwnedGold()) + "G", ConsoleColor::White);
+
+	const std::vector<FInventoryEntry> ItemList = Inventory->GetItemList();
+	if (ItemList.empty())
+	{
+		ConsoleRenderer::SetCursorPosition(2, 16);
+		ConsoleUtil::WriteColored("아이템 없음", ConsoleColor::DarkGray);
+		return;
+	}
+
+	const int MaxVisibleItemCount = 15;
+	for (int i = 0; i < static_cast<int>(ItemList.size()) && i < MaxVisibleItemCount; i++)
+	{
+		const FInventoryEntry& Entry = ItemList[i];
+		const ItemData* Data = ItemDataTable::GetInstance().FindItemDataByIndex(Entry.Id);
+		const std::string ItemName = Data != nullptr ? Data->Name : "알 수 없는 아이템";
+
+		ConsoleRenderer::SetCursorPosition(2, 16 + i);
+		ConsoleUtil::WriteColored(ItemName + " x" + std::to_string(Entry.Amount), ConsoleColor::White);
+	}
 }
 
 void GameScreen::DrawMapPanel(const MapManager& Map)
