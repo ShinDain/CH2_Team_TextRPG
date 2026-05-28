@@ -24,6 +24,7 @@ public:
 
 public:
 	void TakeDamage(int Damage) override;
+	void Decrease(EResourceType Type, int Amount) override;
 	void Recovery(EResourceType Type, int Amount) override;
 	void Restore(EResourceType Type) override;
 	void RestoreAll() override;
@@ -50,4 +51,7 @@ private:
 	std::shared_ptr<class EquipmentComponent> Equip;
 	std::shared_ptr<class InventoryComponent> Inventory;
 	std::shared_ptr<class LevelComponent> Level;
+	std::shared_ptr<class EffectComponent> Effect;
+	std::shared_ptr<class SkillComponent> Skill;
+	
 };
