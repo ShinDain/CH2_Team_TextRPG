@@ -20,10 +20,10 @@ public:
     static void DrawMainScreen(const MapManager& Map, const LogManager& Log, const Player* MainPlayer);
     static void DrawBattleCommandPanel(const std::string& PanelTitle, const std::vector<FCommandOption>& Options);
     static void DrawCharacterPanel(const Player* MainPlayer);
+    static void DrawInventoryPanel(const Player* MainPlayer);
     static void DrawLogPanel(const LogManager& Log);
 
 private:
-    static void DrawInventoryPanel(const Player* MainPlayer);
     static void DrawMapPanel(const MapManager& Map);
     static void DrawNavigationPanel(const MapManager& Map);
     static void DrawInputPanel();

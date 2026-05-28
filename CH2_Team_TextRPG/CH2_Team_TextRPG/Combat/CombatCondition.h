@@ -7,14 +7,13 @@
 class CombatVictoryCondition : public ICondition {
 public:
     virtual void Init() override {
-		// TODO : 몬스터 사망 시 알림 등록 로직
     }
     virtual void OnNotify() override {
-        // TODO : 몬스터 사망 시 알림 처리 로직
+        GLog.AddLog("몬스터가 전멸했습니다.");
 	}
     virtual bool Check() override {
         Player* player = ObjectManager::GetInstance().FindObject<Player>("Player");
-        return CombatManager::GetInstance().GetAliveMonsters().empty() && player && !player->IsDead();
+        return CombatManager::GetInstance().GetAliveMonsters().empty();
     }
 };
 

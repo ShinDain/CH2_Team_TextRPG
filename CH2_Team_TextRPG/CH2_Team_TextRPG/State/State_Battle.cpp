@@ -3,6 +3,7 @@
 #include "Combat/CombatCondition.h"
 #include "Character/Component/EffectComponent.h"
 #include "Character/Component/SkillComponent.h"
+#include "Character/Component/InventoryComponent.h"
 #include "Character/Player/Player.h"
 #include "Character/Monster/Monster.h"
 #include "Character/Monster/MonsterFactory.h"
@@ -30,10 +31,8 @@ void State_Battle::Enter()
 {
 	Player* LoadPlayer = ObjectManager::GetInstance().FindObject<Player>("Player");
 	assert(LoadPlayer && "LoadPlayer is null");
-
 	const BattleStartData* StartData = GameInstance::GetInstance().GetBattleStartData();
-	
-	vector<Monster*> Monsters;
+	std::vector<Monster*> Monsters;
 	for (const BattleMonsterStartData& data : StartData->Monsters)
 	{
 		Monster* NewMonster = MonsterFactory::CreateForPlayer(data.Name, LoadPlayer);
@@ -42,16 +41,11 @@ void State_Battle::Enter()
 			Monsters.emplace_back(NewMonster);
 		}
 	}
-	CombatManager::GetInstance().Initialize(LoadPlayer, Monsters);
+	CombatManager::GetInstance().Initialize(LoadPlayer);
 }
 
 void State_Battle::Process()
 {
-	if (CombatManager::GetInstance().IsBattleEnd())
-	{
-		return;
-	}
-
 	Object* CurTurnCharacter = CombatManager::GetInstance().GetNextTurnCharacter();
 	if (!CurTurnCharacter) return;
 	
@@ -106,9 +100,11 @@ void State_Battle::HandlePlayerTurn(Player* PlayerCharacter)
 		BattleUI::DrawBattleView(AliveMonsters);
 
 		EActionType Action = BattleUI::ShowActionMenu();
-		auto SkillComp = PlayerCharacter->FindComponent<SkillComponent>("Skill");
 
+		auto SkillComp = PlayerCharacter->FindComponent<SkillComponent>("Skill");
+		auto InventoryComp = PlayerCharacter->FindComponent<InventoryComponent>("Inventory");
 		Skill* SelectedSkill = nullptr;
+		int SelectedItemId = -1;
 
 		if (Action == EActionType::ATTACK)
 		{
@@ -123,21 +119,59 @@ void State_Battle::HandlePlayerTurn(Player* PlayerCharacter)
 		}
 		else if (Action == EActionType::ITEM)
 		{
-			GInput << "아이템 기능은 아직 구현되지 않았습니다.\n";
+			SelectedItemId = BattleUI::ShowItemMenu(InventoryComp);
 		}
 
+		ETargetType TargetType = ETargetType::SINGLE_ENEMY;
 		if (SelectedSkill)
 		{
-			int TargetCount = (SelectedSkill->GetSkillData()->TargetType == ETargetType::ALL_ENEMIES) ? AliveMonsters.size() : 1;
-			vector<Object*> Targets = BattleUI::ShowTargetMenu(AliveMonsters, TargetCount);
-			
-			if (!Targets.empty())
+			TargetType = SelectedSkill->GetSkillData()->TargetType;
+		}
+		else if (SelectedItemId > 0)
+		{
+			const FConsumableItemData* ConsumableData = ConsumableDataTable::GetInstance().FindConsumableDataByIndex(SelectedItemId);
+			if (ConsumableData)
+			{
+				TargetType = ConsumableData->TargetType;
+			}
+		}
+		else
+		{
+			continue;
+		}
+
+		vector<Object*> Targets;
+		vector<Object*> SelectableTargets;
+		int TargetCount = 1;
+
+		if (TargetType == ETargetType::SELF || TargetType == ETargetType::SINGLE_ALLY || TargetType == ETargetType::ALL_ALLIES)
+		{
+			SelectableTargets.push_back(PlayerCharacter);
+			TargetCount = (TargetType == ETargetType::ALL_ALLIES) ? SelectableTargets.size() : 1;
+		}
+		else
+		{
+			for (Monster* m : AliveMonsters)
+			{
+				SelectableTargets.push_back(m);
+			}
+			TargetCount = (TargetType == ETargetType::ALL_ENEMIES) ? AliveMonsters.size() : 1;
+		}
+		Targets = BattleUI::ShowTargetMenu(SelectableTargets, TargetCount);
+		
+		if (!Targets.empty())
+		{
+			if (SelectedSkill)
 			{
 				CombatManager::GetInstance().ExecuteSkill(PlayerCharacter, Targets, SelectedSkill);
-				BattleUI::PlayHitAnimation(Targets);
-				BattleUI::DrawBattleView(AliveMonsters);
-				bTurnEnded = true;
 			}
+			else if (SelectedItemId > 0 && InventoryComp)
+			{
+				CombatManager::GetInstance().ExecuteItem(PlayerCharacter, Targets, SelectedItemId);
+			}
+			BattleUI::PlayHitAnimation(Targets);
+			BattleUI::DrawBattleView(AliveMonsters);
+			bTurnEnded = true;
 		}
 	}
 }
