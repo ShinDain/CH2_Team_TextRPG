@@ -58,8 +58,20 @@ void PlayerSetupScreen::DrawPlayerNameError()
 
 void PlayerSetupScreen::DrawSelectJobNumber()
 {
+	// 입력 영역(이전 잘못된 숫자 잔존 가능) 부분 클리어
+	ConsoleUtil::ClearArea(52, 37, 60, 1);
+
 	ConsoleRenderer::SetCursorPosition(52, 37);
 	ConsoleUtil::WriteColored("직업 번호 입력 >> ", ConsoleColor::White);
+	ConsoleUtil::ShowCursor();
+}
+
+void PlayerSetupScreen::DrawSelectJobError(const std::string& Message)
+{
+	// 에러 메시지 영역 부분 클리어 후 빨간 글씨로 표시
+	ConsoleUtil::ClearArea(52, 39, 110, 1);
+	ConsoleRenderer::SetCursorPosition(52, 39);
+	ConsoleUtil::WriteColored(Message, ConsoleColor::Red);
 }
 
 void PlayerSetupScreen::DrawPlayerJobSelect()

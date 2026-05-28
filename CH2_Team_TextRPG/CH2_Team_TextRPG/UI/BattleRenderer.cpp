@@ -207,8 +207,6 @@ void BattleRenderer::PlayMonsterDeathAnimation()
 
 void BattleRenderer::PlayNormalBattleAnimation()
 {
-	InputLockGuard InputGuard(GInput);
-
 	DrawBattleScreen();
 	Sleep(500);
 

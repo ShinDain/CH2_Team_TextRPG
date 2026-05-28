@@ -84,8 +84,6 @@ void BattleUI::DrawBattleView(const std::vector<Monster*>& AliveMonsters)
 
 void BattleUI::PlayHitAnimation(const std::vector<Object*>& Targets)
 {
-	InputLockGuard InputGuard(GInput);
-
 	for (Object* target : Targets)
 	{
 		if (RenderedMonsterIndices.find(target) != RenderedMonsterIndices.end())
@@ -97,8 +95,6 @@ void BattleUI::PlayHitAnimation(const std::vector<Object*>& Targets)
 
 void BattleUI::PlayAttackAnimation(Object* Attacker)
 {
-	InputLockGuard InputGuard(GInput);
-
 	if (RenderedMonsterIndices.find(Attacker) != RenderedMonsterIndices.end())
 	{
 		Renderer.PlayMonsterAttackAnimation(RenderedMonsterIndices[Attacker]);
