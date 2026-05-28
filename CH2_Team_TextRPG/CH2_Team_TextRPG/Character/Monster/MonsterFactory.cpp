@@ -4,6 +4,7 @@
 #include "Character/Monster/Monsters/BossMonster.h"
 #include "Character/Monster/Monsters/EliteMonster.h"
 #include "Data/Table/MonsterDataTable.h"
+#include "Manager/ObjectManager.h"
 
 Monster* MonsterFactory::CreateForPlayer(const std::string& Name, Player* player)
 {
@@ -32,5 +33,8 @@ Monster* MonsterFactory::CreateForPlayer(const std::string& Name, Player* player
         newMonster = new Monster(std::move(data));
 
     newMonster->Initialize();
+
+    ObjectManager::GetInstance().AddObject(newMonster);
+
     return newMonster;
 }

@@ -15,6 +15,12 @@ public:
 	template<typename T>
 	T* FindObject(const std::string& Name);
 
+	template<typename T>
+	void AddObject(T* InObject);
+
+	template<typename T>
+	void RemoveObject(T* InObject);
+
 private:
 	std::unordered_map<std::string, Object*> Objects;
 };
@@ -47,6 +53,33 @@ inline T* ObjectManager::FindObject(const std::string& Name)
 	return result;
 }
 
+template<typename T>
+inline void ObjectManager::AddObject(T* InObject)
+{
+	if (InObject == nullptr)
+		return;
+
+	Objects.emplace(InObject->GetName(), InObject);
+}
+
+template<typename T>
+inline void ObjectManager::RemoveObject(T* InObject)
+{
+	if (InObject == nullptr)
+		return;
+
+	for (auto it = Objects.begin(); it != Objects.end(); ++it)
+	{
+		if (it->second == InObject)
+		{
+			Objects.erase(it);
+			break;
+		}
+	}
+
+	delete InObject;
+}
+
 template<typename T, typename... Args>
 inline T* CreateObject(Args&&... args)
 {
@@ -57,4 +90,16 @@ template<typename T>
 inline T* FindObject(const std::string& Name)
 {
 	return ObjectManager::GetInstance().FindObject<T>(Name);
+}
+
+template<typename T>
+inline void AddObject(T* InObject)
+{
+	ObjectManager::GetInstance().AddObject<T>(InObject);
+}
+
+template<typename T>
+inline void RemoveObject(T* InObject)
+{
+	ObjectManager::GetInstance().RemoveObject<T>(InObject);
 }

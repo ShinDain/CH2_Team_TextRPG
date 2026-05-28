@@ -43,7 +43,7 @@ void CombatManager::Clear()
 	
 	for (Monster* monster : Monsters)
 	{
-		delete monster;
+		ObjectManager::GetInstance().RemoveObject(monster);
 	}
 	Monsters.clear();
 
