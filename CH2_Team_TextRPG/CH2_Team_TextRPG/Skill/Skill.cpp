@@ -32,6 +32,16 @@ void Skill::Active(Object* Instigator, std::vector<Object*> Targets)
 					effectComp->AddActiveEffect(effect, Instigator, Data->Duration);
 				}
 			}
+			
+			int applyCount = Data->HitCount > 0 ? Data->HitCount : 1;
+			for (int i = 0; i < applyCount; ++i)
+			{
+				// TODO : 각 Effect의 명중 처리
+				bool bIsHit = true;
+
+				if (bIsHit)
+					effect->Apply(Instigator, { target });
+			}
 		}
 	}
 }
