@@ -94,11 +94,8 @@ void State_Battle::Process()
 
 void State_Battle::Exit()
 {
-
 	// TODO : 전투 종료 시 효과 제거 (버프/디버프 등)
-	GameInstance::GetInstance().Ge4tMainPlayer()->FindComponent<EffectComponent>("Effect");
 }
-
 
 void State_Battle::HandlePlayerTurn(Player* PlayerCharacter)
 {
