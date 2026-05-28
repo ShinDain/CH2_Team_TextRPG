@@ -89,6 +89,16 @@ void GameInstance::ClearBattleStartData()
 	bHasBattleStartData = false;
 }
 
+void GameInstance::SetEndingType(EEndingType Type)
+{
+	EndingType = Type;
+}
+
+EEndingType GameInstance::GetEndingType() const
+{
+	return EndingType;
+}
+
 bool GameInstance::InitializeManager()
 {
 	if (GameInputManager == nullptr)

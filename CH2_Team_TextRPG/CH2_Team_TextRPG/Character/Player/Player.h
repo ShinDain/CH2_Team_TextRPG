@@ -16,6 +16,7 @@ public:
 	bool IsMaxLevel() const override;
 	
 	void ApplyStat(EStatType Type, int Delta) override;
+	void SetBaseStat(EStatType Type, int Value);
 	void AddExp(int Amount) override;
 
 	void AcquireItem(int ItemId, int InAmount = 1);

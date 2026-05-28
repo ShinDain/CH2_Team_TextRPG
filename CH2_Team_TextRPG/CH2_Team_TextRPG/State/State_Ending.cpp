@@ -1,9 +1,23 @@
 #include "pch.h"
 #include "State_Ending.h"
+#include "Core/GameInstance.h"
 #include "Manager/InputManager.h"
 #include "Manager/StateManager.h"
 #include "UI/ConsoleRenderer.h"
 #include "UI/ConsoleUtil.h"
+
+namespace
+{
+std::string GetEndingTitle(EEndingType EndingType)
+{
+	return EndingType == EEndingType::Clear ? "게임 클리어" : "게임 오버";
+}
+
+ConsoleColor GetEndingTitleColor(EEndingType EndingType)
+{
+	return EndingType == EEndingType::Clear ? ConsoleColor::Yellow : ConsoleColor::Red;
+}
+}
 
 State_Ending::State_Ending()
 {
@@ -12,19 +26,32 @@ State_Ending::State_Ending()
 
 void State_Ending::Enter()
 {
-	GLog.AddLog("게임을 클리어했습니다.");
+	GameInstance& Instance = GameInstance::GetInstance();
+
+	if (Instance.GetEndingType() == EEndingType::Clear)
+	{
+		Instance.GetLogManager().AddLog("게임을 클리어했습니다.");
+	}
+	else
+	{
+		Instance.GetLogManager().AddLog("플레이어가 쓰러졌습니다.");
+		Instance.GetLogManager().AddLog("게임 오버입니다.");
+	}
 }
 
 void State_Ending::Process()
 {
+	GameInstance& Instance = GameInstance::GetInstance();
+	const EEndingType EndingType = Instance.GetEndingType();
+
 	ConsoleRenderer::ClearScreen();
 	ConsoleUtil::HideCursor();
 
 	ConsoleRenderer::DrawBox(55, 10, 100, 24);
 	ConsoleRenderer::SetCursorPosition(94, 13);
-	GInput << "게임 클리어";
+	ConsoleUtil::WriteColored(GetEndingTitle(EndingType), GetEndingTitleColor(EndingType));
 
-	std::vector<std::string> RecentLogs = GLog.GetRecentLogs(5);
+	std::vector<std::string> RecentLogs = Instance.GetLogManager().GetRecentLogs(5);
 	for (int i = 0; i < static_cast<int>(RecentLogs.size()); i++)
 	{
 		ConsoleRenderer::SetCursorPosition(62, 17 + i);
@@ -48,7 +75,7 @@ void State_Ending::Process()
 
 	if (Input == 0)
 	{
-		GameInstance::GetInstance().Quit();
+		Instance.Quit();
 	}
 	else if (Input == 1)
 	{

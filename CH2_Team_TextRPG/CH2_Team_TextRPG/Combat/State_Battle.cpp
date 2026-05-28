@@ -131,6 +131,7 @@ void State_Battle::Process()
 	{
 		if (BattleSystemInst.IsBossBattle())
 		{
+			Instance.SetEndingType(EEndingType::Clear);
 			StateManager::GetInstance().ChangeState(EState::Ending);
 		}
 		else
@@ -143,6 +144,7 @@ void State_Battle::Process()
 
 	if (TurnResult.bDefeat)
 	{
+		Instance.SetEndingType(EEndingType::GameOver);
 		StateManager::GetInstance().ChangeState(EState::Ending);
 	}
 }

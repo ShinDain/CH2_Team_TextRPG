@@ -159,6 +159,12 @@ void Player::ApplyStat(EStatType Type, int Delta)
 	}
 }
 
+void Player::SetBaseStat(EStatType Type, int Value)
+{
+	COMPONENT_CHECK(Stat);
+	Stat->SetStat(Type, Value);
+}
+
 void Player::AddExp(int Amount)
 {
 	COMPONENT_CHECK(Level);
