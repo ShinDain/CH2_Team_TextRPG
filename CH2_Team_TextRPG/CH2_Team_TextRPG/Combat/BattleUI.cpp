@@ -8,6 +8,8 @@
 #include "Data/Character/Stat.h"
 #include "UI/BattleRenderer.h"
 #include "UI/GameScreen.h"
+#include "UI/ConsoleUtil.h"
+#include <windows.h>
 #include <map>
 
 namespace
@@ -29,6 +31,26 @@ namespace
 			Positions.push_back({ StartX + (i * Gap), 8 });
 		}
 		return Positions;
+	}
+
+	void ClearInputLine()
+	{
+		ConsoleUtil::ClearArea(2, 48, 205, 1);
+	}
+
+	void ShowPromptMessage(const std::string& Message)
+	{
+		ClearInputLine();
+		ConsoleUtil::SetCursorPosition(2, 48);
+		ConsoleUtil::WriteColored(Message, ConsoleColor::White);
+	}
+
+	void ShowErrorMessage(const std::string& Message)
+	{
+		ClearInputLine();
+		ConsoleUtil::SetCursorPosition(2, 48);
+		ConsoleUtil::WriteColored(Message, ConsoleColor::Red);
+		Sleep(1000);
 	}
 }
 
@@ -76,14 +98,23 @@ EActionType BattleUI::ShowActionMenu()
 	int InputChoice = -1;
 	while (true)
 	{
-		GInput << "\n어떤 행동을 하시겠습니까?\n1. 공격\n2. 스킬\n3. 아이템\n";
+		std::vector<FCommandOption> Options = {
+			{ "1. 공격", true },
+			{ "2. 스킬", true },
+			{ "3. 아이템", true }
+		};
+		GameScreen::DrawBattleCommandPanel("행동 선택", Options);
+
+		ShowPromptMessage("어떤 행동을 하시겠습니까? >> ");
+
 		GInput >> InputChoice;
 
 		if (GInput.IsFailed() || InputChoice < 1 || InputChoice > 3)
 		{
-			GInput << "유효하지 않은 입력입니다. 다시 입력해주세요.\n";
+			ShowErrorMessage("유효하지 않은 입력입니다. 다시 입력해주세요.");
 			continue;
 		}
+		ClearInputLine();
 		return static_cast<EActionType>(InputChoice - 1);
 	}
 }
@@ -92,37 +123,44 @@ Skill* BattleUI::ShowSkillMenu(std::shared_ptr<SkillComponent> SkillComp)
 {
 	if (!SkillComp || SkillComp->GetLearnedSkills().size() <= 1)
 	{
-		GInput << "사용 가능한 스킬이 없습니다.\n";
+		ShowErrorMessage("사용 가능한 스킬이 없습니다.");
 		return nullptr;
 	}
 
 	const auto& LearnedSkills = SkillComp->GetLearnedSkills();
 	while (true)
 	{
-		GInput << "\n스킬을 선택하세요. (0: 취소)\n";
-		int idx = 1;
-		// 0번 인덱스(기본 공격)를 제외하고 1번부터 출력합니다.
+		std::vector<FCommandOption> Options;
 		for (size_t i = 1; i < LearnedSkills.size(); ++i)
 		{
 			Skill* skill = LearnedSkills[i];
 			uint16_t skillId = skill->GetSkillData()->Idx;
-			GInput << idx++ << ". " << skill->GetSkillData()->Name 
-				   << " [MP:" << skill->GetSkillData()->ManaCost << "] "
-				   << " [쿨타임:" << (int)skill->GetCurrentCooldown() << "] ";
+			bool bIsReady = SkillComp->IsSkillReady(skillId);
+			bool bCanCost = SkillComp->CheckCost(skillId);
 			
-			if (!SkillComp->IsSkillReady(skillId) || !SkillComp->CheckCost(skillId))
-				GInput << "- [X]\n";
-			else
-				GInput << "- [O]\n";
+			std::string Text = std::to_string(i) + ". " + skill->GetSkillData()->Name;
+			Text += " [MP " + std::to_string(skill->GetSkillData()->ManaCost) + "]";
+			if (!bIsReady) Text += " (쿨타임:" + std::to_string(skill->GetCurrentCooldown()) + ")";
+			if (!bCanCost) Text += " (마나부족)";
+			
+			Options.push_back({ Text, bIsReady && bCanCost });
 		}
+		GameScreen::DrawBattleCommandPanel("스킬 선택", Options);
+
+		ShowPromptMessage("스킬을 선택하세요. (0: 취소) >> ");
 
 		int choice = -1;
 		GInput >> choice;
 
-		if (choice == 0) return nullptr;
+		if (choice == 0)
+		{
+			ClearInputLine();
+			return nullptr;
+		}
+
 		if (GInput.IsFailed() || choice < 1 || choice >= LearnedSkills.size())
 		{
-			GInput << "유효하지 않은 입력입니다.\n";
+			ShowErrorMessage("유효하지 않은 입력입니다.");
 			continue;
 		}
 
@@ -131,15 +169,16 @@ Skill* BattleUI::ShowSkillMenu(std::shared_ptr<SkillComponent> SkillComp)
 
 		if (!SkillComp->IsSkillReady(selectedSkillId))
 		{
-			GInput << "현재 쿨타임 중이라 사용할 수 없습니다.\n";
+			ShowErrorMessage("현재 쿨타임 중이라 사용할 수 없습니다.");
 			continue;
 		}
 		if (!SkillComp->CheckCost(selectedSkillId))
 		{
-			GInput << "마나가 부족하여 사용할 수 없습니다.\n";
+			ShowErrorMessage("마나가 부족하여 사용할 수 없습니다.");
 			continue;
 		}
 
+		ClearInputLine();
 		return selectedSkill;
 	}
 }
@@ -156,20 +195,28 @@ std::vector<Object*> BattleUI::ShowTargetMenu(const std::vector<Monster*>& Alive
 	std::vector<Monster*> SelectableMonsters = AliveMonsters;
 	while (TargetList.size() < TargetCount && !SelectableMonsters.empty())
 	{
-		GInput << "\n대상을 선택하세요. [ 남은 선택 횟수: " << (TargetCount - TargetList.size()) << " ] (0: 취소)\n";
+		std::vector<FCommandOption> Options;
 		for (size_t i = 0; i < SelectableMonsters.size(); ++i)
 		{
-			GInput << i + 1 << ". " << SelectableMonsters[i]->GetName() << "\n";
+			Options.push_back({ std::to_string(i + 1) + ". " + SelectableMonsters[i]->GetName(), true });
 		}
+		GameScreen::DrawBattleCommandPanel("대상 선택", Options);
+
+		std::string prompt = "대상을 선택하세요. [ 남은 선택 횟수: " + std::to_string(TargetCount - TargetList.size()) + " ] (0: 취소) >> ";
+		ShowPromptMessage(prompt);
 
 		int choice = -1;
 		GInput >> choice;
 
-		if (choice == 0) return std::vector<Object*>();
+		if (choice == 0)
+		{
+			ClearInputLine();
+			return std::vector<Object*>();
+		}
 
 		if (GInput.IsFailed() || choice < 1 || choice > SelectableMonsters.size())
 		{
-			GInput << "유효하지 않은 입력입니다. 다시 선택해주세요.\n";
+			ShowErrorMessage("유효하지 않은 입력입니다. 다시 선택해주세요.");
 			continue;
 		}
 
@@ -177,5 +224,6 @@ std::vector<Object*> BattleUI::ShowTargetMenu(const std::vector<Monster*>& Alive
 		SelectableMonsters.erase(SelectableMonsters.begin() + (choice - 1));
 	}
 
+	ClearInputLine();
 	return TargetList;
 }
