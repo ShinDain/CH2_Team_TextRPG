@@ -89,14 +89,14 @@ void GameInstance::ClearBattleStartData()
 	bHasBattleStartData = false;
 }
 
-void GameInstance::SetEndingType(EEndingType Type)
+void GameInstance::SetResultType(EResultType Type)
 {
-	EndingType = Type;
+	ResultType = Type;
 }
 
-EEndingType GameInstance::GetEndingType() const
+EResultType GameInstance::GetResultType() const
 {
-	return EndingType;
+	return ResultType;
 }
 
 bool GameInstance::InitializeManager()
