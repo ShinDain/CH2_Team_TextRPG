@@ -136,8 +136,6 @@ void Player::ApplyStat(EStatType Type, int Delta)
 {
 	if (Delta == 0)
 	{
-		GLog.AddLog("ApplyStat() -> Delta == 0");
-		GLog.PrintAllLogs();
 		return;
 	}
 	

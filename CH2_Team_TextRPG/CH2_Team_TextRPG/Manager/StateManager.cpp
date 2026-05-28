@@ -1,7 +1,11 @@
 ﻿#include "pch.h"
 #include "StateManager.h"
+#include "State/State_Entry.h"
 #include "State/State_Start.h"
+#include "State/State_Map.h"
+#include "Combat/State_Battle.h"
 #include "Shop/State_Shop.h"
+#include "State/State_Ending.h"
 
 StateManager& StateManager::GetInstance()
 {
@@ -25,7 +29,7 @@ bool StateManager::Initialize()
 	if (!InitializeStates())
 		return false;
 
-	ChangeState(EState::Start);
+	ChangeState(EState::Entry);
 
 	return true;
 }
@@ -53,9 +57,12 @@ bool StateManager::ChangeState(EState InNextState)
 	}
 	else
 	{
-		CurrentState->Exit();
-		CurrentState->InitTransitions();
-		CurrentState->Enter();
+		if (CurrentState)
+		{
+			CurrentState->Exit();
+			CurrentState->InitTransitions();
+			CurrentState->Enter();
+		}
 	}
 	
 	return false;
@@ -63,9 +70,12 @@ bool StateManager::ChangeState(EState InNextState)
 
 bool StateManager::InitializeStates()
 {
+	AddState<State_Entry>(EState::Entry);
 	AddState<State_Start>(EState::Start);
-
+	AddState<State_Map>(EState::Map);
+	AddState<State_Battle>(EState::Combat);
 	AddState<State_Shop>(EState::Shop);
+	AddState<State_Ending>(EState::Ending);
 
 	return true;
 }

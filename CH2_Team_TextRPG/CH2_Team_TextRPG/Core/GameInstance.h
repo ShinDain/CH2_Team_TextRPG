@@ -2,6 +2,7 @@
 
 #include "Map/MapManager.h"
 #include "Manager/LogManager.h"
+#include "Combat/BattleStartData.h"
 
 class InputManager;
 class Player;
@@ -28,6 +29,10 @@ public:
     MapManager& GetMapManager();
     LogManager& GetLogManager();
     Player* GetMainPlayer() const;
+
+	void SetBattleStartData(const BattleStartData& InBattleStartData);
+	const BattleStartData* GetBattleStartData() const;
+	void ClearBattleStartData();
     
     InputManager* GetInputManager() const { return GameInputManager; }
 
@@ -40,6 +45,8 @@ protected:
 
     MapManager Map;
     LogManager Log;
+	BattleStartData CurrentBattleStartData;
+	bool bHasBattleStartData = false;
     
     InputManager* GameInputManager;  
 

@@ -60,7 +60,6 @@ InputSession& InputSession::operator>>(Ty& RHS)
 	std::cin >> RHS;
 	if (std::cin.fail())
 	{
-		std::cout << "잘못된 입력" << "\n"; // 현재 잘못된 입력처리에 대한 텍스트 내용이 없어 임시 텍스트 출력
 		InputSystem->ApplyFail();
 	}
 	return *this;

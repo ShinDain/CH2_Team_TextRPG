@@ -29,7 +29,7 @@ void Effect_Damage::Apply(Object* Instigator, std::vector<class Object*> Targets
 		actualDamage = std::max(0, actualDamage);
 
 		TargetHP->Decrease(EResourceType::Health , actualDamage);
-		GInput << "[" << Instigator->GetName() << "]의 타격! [" << Target->GetName() << "]에게 " << actualDamage << "의 대미지!\n";
+		GLog.AddLog("[" + Instigator->GetName() + "]의 타격! [" + Target->GetName() + "]에게 " + std::to_string(actualDamage) + "의 대미지!");
 	}
 }
 

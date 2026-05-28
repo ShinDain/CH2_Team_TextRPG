@@ -72,6 +72,23 @@ Player* GameInstance::GetMainPlayer() const
 	return MainPlayer;
 }
 
+void GameInstance::SetBattleStartData(const BattleStartData& InBattleStartData)
+{
+	CurrentBattleStartData = InBattleStartData;
+	bHasBattleStartData = true;
+}
+
+const BattleStartData* GameInstance::GetBattleStartData() const
+{
+	return bHasBattleStartData ? &CurrentBattleStartData : nullptr;
+}
+
+void GameInstance::ClearBattleStartData()
+{
+	CurrentBattleStartData = {};
+	bHasBattleStartData = false;
+}
+
 bool GameInstance::InitializeManager()
 {
 	if (GameInputManager == nullptr)

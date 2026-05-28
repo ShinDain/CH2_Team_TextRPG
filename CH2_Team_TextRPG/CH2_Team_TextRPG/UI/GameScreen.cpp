@@ -134,6 +134,30 @@ void GameScreen::DrawCharacterPanel(const Player* MainPlayer)
 	ConsoleUtil::WriteColored("Lv : " + std::to_string(MainPlayer->GetLevel()), ConsoleColor::Gray);
 }
 
+void GameScreen::DrawBattleCommandPanel(const std::vector<BattleSkillOption>& SkillOptions)
+{
+	ConsoleUtil::ClearArea(0, 34, 210, 6);
+	ConsoleRenderer::DrawBox(0, 34, 210, 6);
+	ConsoleRenderer::SetCursorPosition(2, 35);
+	ConsoleUtil::WriteColored("스킬 선택", ConsoleColor::Cyan);
+
+	for (int i = 0; i < static_cast<int>(SkillOptions.size()) && i < 4; i++)
+	{
+		const BattleSkillOption& Option = SkillOptions[i];
+		std::string Text = std::to_string(i + 1) + ". " + Option.Name +
+			" [MP " + std::to_string(Option.ManaCost) + "]";
+
+		if (!Option.bUsable)
+		{
+			Text += " [X]";
+		}
+
+		ConsoleRenderer::SetCursorPosition(4 + (i * 48), 37);
+		ConsoleUtil::WriteColored(Text, Option.bUsable ? ConsoleColor::White : ConsoleColor::DarkGray);
+	}
+
+}
+
 void GameScreen::DrawInventoryPanel()
 {
 	ConsoleRenderer::DrawBox(0, 11, 30, 23);
@@ -338,6 +362,7 @@ void GameScreen::DrawNavigationPanel(const MapManager& Map)
 
 void GameScreen::DrawLogPanel(const LogManager& Log)
 {
+	ConsoleUtil::ClearArea(0, 40, 210, 10);
 	ConsoleRenderer::DrawBox(0, 40, 210, 10);
 	ConsoleRenderer::SetCursorPosition(2, 41);
 	ConsoleUtil::WriteColored("로그", ConsoleColor::Cyan);

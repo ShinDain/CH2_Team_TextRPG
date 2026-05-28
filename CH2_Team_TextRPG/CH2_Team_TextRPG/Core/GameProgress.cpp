@@ -1,18 +1,22 @@
 ﻿#include "pch.h"
 #include "GameProgress.h"
 
+#include "Character/Player/Player.h"
+#include "Data/Character/Stat.h"
+#include "Core/GameInstance.h"
 #include "Manager/InputManager.h"
 
 #include "UI/ConsoleRenderer.h"
+#include "UI/GameScreen.h"
 
-void GameProgress::HandleNodeSelection(MapManager& Map, LogManager& Log)
+bool GameProgress::HandleNodeSelection(MapManager& Map, LogManager& Log)
 {
 	std::vector<int> MovableNodeIds = Map.GetMovableNodeIds();
 
 	if (MovableNodeIds.empty())
 	{
 		Log.AddLog("이동 가능한 노드가 없습니다.");
-		return;
+		return false;
 	}
 
 	int Input = 0;
@@ -22,7 +26,7 @@ void GameProgress::HandleNodeSelection(MapManager& Map, LogManager& Log)
 	if (Input < 1 || Input > static_cast<int>(MovableNodeIds.size()))
 	{
 		Log.AddLog("잘못된 노드를 선택했습니다.");
-		return;
+		return false;
 	}
 
 	int SelectedNodeId = MovableNodeIds[Input - 1];
@@ -32,7 +36,7 @@ void GameProgress::HandleNodeSelection(MapManager& Map, LogManager& Log)
 	if (SelectedNode == nullptr)
 	{
 		Log.AddLog("선택한 노드가 존재하지 않습니다.");
-		return;
+		return false;
 	}
 
 	bool IsMoveSuccess = Map.MoveToNode(SelectedNodeId);
@@ -46,6 +50,8 @@ void GameProgress::HandleNodeSelection(MapManager& Map, LogManager& Log)
 	{
 		Log.AddLog("선택한 노드로 이동할 수 없습니다.");
 	}
+
+	return IsMoveSuccess;
 }
 
 void GameProgress::HandleCurrentNodeEvent(const MapManager& Map, LogManager& Log)
@@ -85,8 +91,20 @@ void GameProgress::HandleCurrentNodeEvent(const MapManager& Map, LogManager& Log
 		break;
 
 	case ENodeType::Rest:
-		Log.AddLog("휴식 지점에 도착했습니다. 체력을 회복합니다.");
+	{
+		Player* MainPlayer = GameInstance::GetInstance().GetMainPlayer();
+		Log.AddLog("휴식 지점에 도착했습니다.");
+
+		if (MainPlayer != nullptr)
+		{
+			const int MaxHP = MainPlayer->GetMaxResource(EResourceType::Health);
+			const int HealAmount = std::max(1, static_cast<int>(MaxHP * 0.4f));
+			MainPlayer->Recovery(EResourceType::Health, HealAmount);
+			Log.AddLog("최대 체력의 40%를 회복했습니다.");
+			GameScreen::DrawCharacterPanel(MainPlayer);
+		}
 		break;
+	}
 
 	case ENodeType::Boss:
 		Log.AddLog("보스가 나타났습니다.");

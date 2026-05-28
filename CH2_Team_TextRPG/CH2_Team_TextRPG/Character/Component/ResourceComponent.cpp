@@ -20,7 +20,6 @@ bool ResourceComponent::Initialize()
 	if (!UnitStat)
 	{
 		GLog.AddLog("Failed: UnitStat Is Null");
-		GLog.PrintAllLogs();
 		return false;
 	}
 

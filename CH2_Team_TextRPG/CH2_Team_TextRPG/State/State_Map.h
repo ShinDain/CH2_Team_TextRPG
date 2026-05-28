@@ -2,10 +2,10 @@
 
 #include "Core/State.h"
 
-class State_Shop : public BaseState
+class State_Map : public BaseState
 {
 public:
-	State_Shop();
+	State_Map();
 
 protected:
 	virtual void Enter() override;

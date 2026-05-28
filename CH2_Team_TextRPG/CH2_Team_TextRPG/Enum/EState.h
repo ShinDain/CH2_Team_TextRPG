@@ -2,7 +2,8 @@
 
 enum class EState
 {
-	Start = 0,
+	Entry = 0,
+	Start,
 	MainMenu,
 	Map,
 	Combat,
@@ -10,5 +11,6 @@ enum class EState
 	Shop,
 	RandomEvent,
 	Result,
+	Ending,
 	End,
 };

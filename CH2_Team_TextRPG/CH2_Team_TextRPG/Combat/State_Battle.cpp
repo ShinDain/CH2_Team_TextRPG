@@ -1,24 +1,35 @@
-﻿#include "pch.h"
+#include "pch.h"
 #include "State_Battle.h"
-#include "Character/Component/SkillComponent.h"
-#include "Manager/ObjectManager.h"
-#include "Manager/CombatManager.h"
 #include "Character/Player/Player.h"
-#include "Character/Monster/Monster.h"
-#include "Data/Table/SkillDataTable.h"
-#include "Data/Table/ItemDataTable.h"
-#include "CombatCondition.h"
-#include "BattleUI.h"
-#include <set>
+#include "Core/GameInstance.h"
+#include "Data/Character/Stat.h"
+#include "Manager/InputManager.h"
+#include "Manager/StateManager.h"
+#include "UI/ConsoleUtil.h"
+#include "UI/GameScreen.h"
 
-using namespace std;
+namespace
+{
+std::vector<std::pair<int, int>> MakeMonsterPositions(int MonsterCount)
+{
+	std::vector<std::pair<int, int>> Positions;
+	const int ClampedCount = MonsterCount < 1 ? 1 : MonsterCount;
+	const int Gap = 50;
+	const int CenterX = 105;
+	const int StartX = CenterX - ((ClampedCount - 1) * Gap / 2);
+
+	for (int i = 0; i < ClampedCount; i++)
+	{
+		Positions.push_back({ StartX + (i * Gap), 8 });
+	}
+
+	return Positions;
+}
+}
 
 State_Battle::State_Battle()
 {
 	Name = "Battle";
-
-	AddTransition<CombatVictoryCondition>(EState::CombatEnd);
-	AddTransition<CombatDefeatCondition>(EState::Result);
 }
 
 State_Battle::~State_Battle()
@@ -27,109 +38,221 @@ State_Battle::~State_Battle()
 
 void State_Battle::Enter()
 {
-	Player* PlayerCharacter = ObjectManager::GetInstance().FindObject<Player>("Player");
-	
-	// TODO : 몬스터 데이터 추가필요
-	std::vector<Monster*> Monsters;
-	
-	CombatManager::GetInstance().Initialize(PlayerCharacter, Monsters);
+	GameInstance& Instance = GameInstance::GetInstance();
+	const BattleStartData* StartData = Instance.GetBattleStartData();
+
+	bInitialized = StartData != nullptr &&
+		BattleSystemInst.Initialize(Instance.GetMainPlayer(), *StartData);
+
+	if (!bInitialized)
+	{
+		Instance.GetLogManager().AddLog("전투 시작 데이터를 찾을 수 없습니다.");
+		return;
+	}
+
+	SetupRendererFromBattleSystem();
+	Instance.GetLogManager().AddLog("전투를 시작합니다.");
 }
 
 void State_Battle::Process()
 {
-	if (CombatManager::GetInstance().IsBattleEnd())
+	GameInstance& Instance = GameInstance::GetInstance();
+
+	if (!bInitialized)
 	{
-		return; 
+		StateManager::GetInstance().ChangeState(EState::Map);
+		return;
 	}
 
-	Object* CurTurnCharacter = CombatManager::GetInstance().GetNextTurnCharacter();
-	if (!CurTurnCharacter) return;
-	
-	// TODO : 상태이상 컴포넌트 처리
-	// 턴 시작 시 캐릭터의 상태이상 효과(독, 화상 등)를 적용합니다.
-	// CurTurnCharacter->FindComponent<EffectComponent>("Effect")->UpdateEffects();
+	DrawBattleView();
 
-	// 상태이상 데미지로 캐릭터가 사망했는지 확인합니다.
-	//if (CurTurnCharacter->IsDead())
-	//{
-		//return;
-	//}
+	const std::vector<BattleSkillOption> Skills = BattleSystemInst.GetSkillOptions();
+	DrawSkillInputPrompt();
 
-	if (Player* PlayerChar = dynamic_cast<Player*>(CurTurnCharacter))
+	int Input = 0;
+	InputSession InputResult = GInput >> Input;
+
+	if (!InputResult)
 	{
-		HandlePlayerTurn(PlayerChar);
+		Instance.GetLogManager().AddLog("잘못된 스킬 번호입니다.");
+		GameScreen::DrawLogPanel(Instance.GetLogManager());
+		return;
 	}
-	else if (Monster* MonsterChar = dynamic_cast<Monster*>(CurTurnCharacter))
+
+	const int SelectedIndex = Input - 1;
+
+	if (SelectedIndex < 0 || SelectedIndex >= static_cast<int>(Skills.size()))
 	{
-		HandleMonsterTurn(MonsterChar);
+		Instance.GetLogManager().AddLog("잘못된 스킬 번호입니다.");
+		GameScreen::DrawLogPanel(Instance.GetLogManager());
+		return;
+	}
+
+	const BattleSkillOption& SelectedSkill = Skills[SelectedIndex];
+	BattleTurnResult TurnResult = BattleSystemInst.UseSkill(SelectedSkill.SkillId);
+
+	if (!TurnResult.bSkillUsed)
+	{
+		if (!TurnResult.Message.empty())
+		{
+			Instance.GetLogManager().AddLog(TurnResult.Message);
+		}
+
+		GameScreen::DrawCharacterPanel(Instance.GetMainPlayer());
+		GameScreen::DrawBattleCommandPanel(BattleSystemInst.GetSkillOptions());
+		ClearBattlePanelInputLine();
+		GameScreen::DrawLogPanel(Instance.GetLogManager());
+		return;
+	}
+
+	AddTurnLogs(TurnResult);
+
+	if (TurnResult.bVictory)
+	{
+		LogManager& Log = Instance.GetLogManager();
+		Player* MainPlayer = Instance.GetMainPlayer();
+
+		if (MainPlayer != nullptr)
+		{
+			MainPlayer->Restore(EResourceType::Mana);
+		}
+
+		Log.AddLog("전투에서 승리했습니다.");
+		Log.AddLog("마나를 모두 회복했습니다.");
+	}
+
+	PlayTurnResult(TurnResult);
+	GameScreen::DrawCharacterPanel(Instance.GetMainPlayer());
+	GameScreen::DrawBattleCommandPanel(BattleSystemInst.GetSkillOptions());
+	ClearBattlePanelInputLine();
+	GameScreen::DrawLogPanel(Instance.GetLogManager());
+
+	if (TurnResult.bVictory)
+	{
+		if (BattleSystemInst.IsBossBattle())
+		{
+			StateManager::GetInstance().ChangeState(EState::Ending);
+		}
+		else
+		{
+			StateManager::GetInstance().ChangeState(EState::Map);
+		}
+
+		return;
+	}
+
+	if (TurnResult.bDefeat)
+	{
+		StateManager::GetInstance().ChangeState(EState::Ending);
 	}
 }
 
 void State_Battle::Exit()
 {
-	// TODO: 전투 중에만 적용되는 버프/디버프를 플레이어의 EffectComponent에서 제거합니다.
-	
-	CombatManager::GetInstance().Clear();
+	GameInstance::GetInstance().ClearBattleStartData();
+	BattleSystemInst.Clear();
+	Renderer.ClearMonsters();
+	bInitialized = false;
 }
 
-
-void State_Battle::HandlePlayerTurn(Player* PlayerCharacter)
+void State_Battle::SetupRendererFromBattleSystem()
 {
-	bool bTurnEnded = false;
-	while (!bTurnEnded)
-	{
-		EActionType Action = BattleUI::ShowActionMenu();
-		auto SkillComp = PlayerCharacter->FindComponent<SkillComponent>("Skill");
-		std::vector<Monster*> AliveMonsters = CombatManager::GetInstance().GetAliveMonsters();
+	Renderer.ClearMonsters();
 
-		if (Action == EActionType::ATTACK)
-		{
-			if (SkillComp && !SkillComp->GetLearnedSkills().empty())
-			{
-				Skill* BasicAttack = SkillComp->GetLearnedSkills()[0];
-				auto Targets = BattleUI::ShowTargetMenu(AliveMonsters, 1);
-				
-				if (!Targets.empty())
-				{
-					CombatManager::GetInstance().ExecuteSkill(PlayerCharacter, Targets, BasicAttack);
-					bTurnEnded = true;
-				}
-			}
-		}
-		else if (Action == EActionType::SKILL)
-		{
-			Skill* SelectedSkill = BattleUI::ShowSkillMenu(SkillComp);
-			if (SelectedSkill)
-			{
-				int TargetCount = (SelectedSkill->GetSkillData()->TargetType == ETargetType::ALL_ENEMIES) ? AliveMonsters.size() : 1;
-				auto Targets = BattleUI::ShowTargetMenu(AliveMonsters, TargetCount);
-				
-				if (!Targets.empty())
-				{
-					CombatManager::GetInstance().ExecuteSkill(PlayerCharacter, Targets, SelectedSkill);
-					bTurnEnded = true;
-				}
-			}
-		}
-		else if (Action == EActionType::ITEM)
-		{
-			GInput << "아이템 기능은 아직 구현되지 않았습니다.\n";
-		}
+	const std::vector<BattleMonsterViewData> MonsterViews = BattleSystemInst.GetMonsterViews();
+	const std::vector<std::pair<int, int>> Positions = MakeMonsterPositions(static_cast<int>(MonsterViews.size()));
+
+	for (int i = 0; i < static_cast<int>(MonsterViews.size()); i++)
+	{
+		const BattleMonsterViewData& Monster = MonsterViews[i];
+		Renderer.AddMonster(
+			Monster.Name,
+			Positions[i].first,
+			Positions[i].second,
+			Monster.CurrentHP,
+			Monster.MaxHP
+		);
 	}
 }
 
-void State_Battle::HandleMonsterTurn(Monster* MonsterCharacter)
+void State_Battle::DrawBattleView()
 {
-	auto SkillComp = MonsterCharacter->FindComponent<SkillComponent>("Skill");
-	if (SkillComp && !SkillComp->GetLearnedSkills().empty())
+	GameInstance& Instance = GameInstance::GetInstance();
+
+	GameScreen::DrawCharacterPanel(Instance.GetMainPlayer());
+	Renderer.DrawBattleScreen();
+	GameScreen::DrawBattleCommandPanel(BattleSystemInst.GetSkillOptions());
+	ClearBattlePanelInputLine();
+	GameScreen::DrawLogPanel(Instance.GetLogManager());
+}
+
+void State_Battle::DrawSkillInputPrompt()
+{
+	ConsoleUtil::ClearArea(2, 48, 205, 1);
+	ConsoleUtil::SetCursorPosition(2, 48);
+	ConsoleUtil::WriteColored("사용할 스킬 번호 입력 >> ", ConsoleColor::White);
+}
+
+void State_Battle::ClearBattlePanelInputLine()
+{
+	ConsoleUtil::ClearArea(2, 38, 205, 1);
+}
+
+void State_Battle::AddTurnLogs(const BattleTurnResult& Result)
+{
+	LogManager& Log = GameInstance::GetInstance().GetLogManager();
+
+	if (Result.SkillId == 1)
 	{
-		Skill* BasicAttack = SkillComp->GetLearnedSkills()[0];
-		Player* PlayerCharacter = ObjectManager::GetInstance().FindObject<Player>("Player");
-		
-		if (PlayerCharacter && !PlayerCharacter->IsDead())
+		Log.AddLog("기본 공격을 했다.");
+	}
+	else
+	{
+		Log.AddLog(Result.SkillName + "을 사용했다.");
+	}
+
+	for (const BattleMonsterActionResult& MonsterHit : Result.MonsterHits)
+	{
+		Log.AddLog(MonsterHit.MonsterName + "에게 " + std::to_string(MonsterHit.Damage) + " 데미지를 입혔다.");
+
+		if (MonsterHit.bKilled)
 		{
-			std::vector<Object*> Targets = { PlayerCharacter };
-			CombatManager::GetInstance().ExecuteSkill(MonsterCharacter, Targets, BasicAttack);
+			Log.AddLog(MonsterHit.MonsterName + "을 처치했다.");
 		}
+	}
+
+	for (const BattlePlayerDamageResult& PlayerHit : Result.PlayerHits)
+	{
+		Log.AddLog(PlayerHit.MonsterName + "의 공격!");
+		Log.AddLog("플레이어가 " + std::to_string(PlayerHit.Damage) + " 데미지를 받았다.");
+	}
+
+	if (!Result.Message.empty())
+	{
+		Log.AddLog(Result.Message);
+	}
+}
+
+void State_Battle::PlayTurnResult(const BattleTurnResult& Result)
+{
+	for (const BattleMonsterActionResult& MonsterHit : Result.MonsterHits)
+	{
+		if (MonsterHit.MonsterIndex < 0)
+		{
+			continue;
+		}
+
+		Renderer.SetMonsterHP(MonsterHit.MonsterIndex, MonsterHit.CurrentHP);
+		Renderer.PlayMonsterHitAnimation(MonsterHit.MonsterIndex);
+	}
+
+	for (const BattlePlayerDamageResult& PlayerHit : Result.PlayerHits)
+	{
+		if (PlayerHit.MonsterIndex < 0)
+		{
+			continue;
+		}
+
+		Renderer.PlayMonsterAttackAnimation(PlayerHit.MonsterIndex);
 	}
 }

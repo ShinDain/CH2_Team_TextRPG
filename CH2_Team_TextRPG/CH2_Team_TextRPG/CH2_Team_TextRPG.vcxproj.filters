@@ -43,6 +43,10 @@
     <ClCompile Include="Character\Monster\Slime.cpp" />
     <ClCompile Include="Data\Table\SkillDataTable.cpp" />
     <ClCompile Include="Combat\State_Battle.cpp" />
+    <ClCompile Include="Combat\BattleSystem.cpp" />
+    <ClCompile Include="State\State_Entry.cpp" />
+    <ClCompile Include="State\State_Ending.cpp" />
+    <ClCompile Include="State\State_Map.cpp" />
     <ClCompile Include="State\State_Start.cpp" />
     <ClCompile Include="UI\AnimationFrameData.cpp" />
     <ClCompile Include="UI\BattleRenderer.cpp" />
@@ -111,6 +115,11 @@
     <ClInclude Include="Character\Monster\Slime.h" />
     <ClInclude Include="Data\Table\SkillDataTable.h" />
     <ClInclude Include="Combat\State_Battle.h" />
+    <ClInclude Include="Combat\BattleStartData.h" />
+    <ClInclude Include="Combat\BattleSystem.h" />
+    <ClInclude Include="State\State_Entry.h" />
+    <ClInclude Include="State\State_Ending.h" />
+    <ClInclude Include="State\State_Map.h" />
     <ClInclude Include="State\State_Start.h" />
     <ClInclude Include="UI\AnimationFrameData.h" />
     <ClInclude Include="UI\BattleRenderer.h" />

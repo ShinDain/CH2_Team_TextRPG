@@ -81,7 +81,7 @@ void CombatManager::ExecuteSkill(Object* Caster, const std::vector<Object*>& Tar
 		skillComp->ConsumeCost(InSkill);
 		skillComp->ApplyCooldown(InSkill);
 	}
-	GInput << "[시스템] " << Caster->GetName() << "이(가) " << InSkill->GetSkillData()->Name << "을(를) 사용했습니다!\n";
+	GLog.AddLog("[시스템] " + Caster->GetName() + "이(가) " + InSkill->GetSkillData()->Name + "을(를) 사용했습니다!");
 
 	for (int i = 0; i < InSkill->GetSkillData()->HitCount; ++i)
 	{
