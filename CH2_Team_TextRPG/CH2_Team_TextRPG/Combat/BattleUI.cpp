@@ -1,8 +1,7 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "BattleUI.h"
 #include "Manager/InputManager.h"
 #include "Character/Component/SkillComponent.h"
-#include <memory> // For std::shared_ptr
 
 EActionType BattleUI::ShowActionMenu()
 {
@@ -86,13 +85,27 @@ std::vector<Object*> BattleUI::ShowTargetMenu(const std::vector<Monster*>& Alive
 	}
 
 	std::vector<Monster*> SelectableMonsters = AliveMonsters;
-	while (TargetList.size() < TargetCount)
+	while (TargetList.size() < TargetCount && !SelectableMonsters.empty())
 	{
-		// TODO: 이전 답변에서 구현했던 "남은 대상 선택 / 0번 취소" 로직 적용
-		// 간소화를 위해 임시로 첫 번째 몬스터를 타겟으로 지정합니다.
-		// (실제 코드에는 GInput을 통해 번호를 입력받는 루프를 이 안에 넣으시면 됩니다.)
-		TargetList.push_back(SelectableMonsters[0]);
-		break; 
+		GInput << "\n대상을 선택하세요. [ 남은 선택 횟수: " << (TargetCount - TargetList.size()) << " ] (0: 취소)\n";
+		for (size_t i = 0; i < SelectableMonsters.size(); ++i)
+		{
+			GInput << i + 1 << ". " << SelectableMonsters[i]->GetName() << "\n";
+		}
+
+		int choice = -1;
+		GInput >> choice;
+
+		if (choice == 0) return std::vector<Object*>();
+
+		if (GInput.IsFailed() || choice < 1 || choice > SelectableMonsters.size())
+		{
+			GInput << "유효하지 않은 입력입니다. 다시 선택해주세요.\n";
+			continue;
+		}
+
+		TargetList.push_back(SelectableMonsters[choice - 1]);
+		SelectableMonsters.erase(SelectableMonsters.begin() + (choice - 1));
 	}
 
 	return TargetList;

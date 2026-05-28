@@ -3,7 +3,7 @@
 #include "Core/Object.h"
 #include "Skill/Skill.h"
 #include "Character/Monster/Monster.h"
-#include <memory> // For std::shared_ptr
+#include <memory>
 
 enum class EActionType
 {
