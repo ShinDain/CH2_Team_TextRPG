@@ -9,6 +9,11 @@ void LogManager::AddLog(const std::string& Message)
     Logs.push_back(Message);
 }
 
+void LogManager::PrintLogOnce(const std::string& Message)
+{
+    GInput << Message << "\n";
+}
+
 void LogManager::PrintRecentLogs(int Count) const
 {
     GInput << "\n=== 최근 로그 ===\n";
