@@ -30,7 +30,7 @@ public:
 	~EffectComponent() override;
 
 	
-	void AddActiveEffect(Effect* InEffect, Object* InCaster, int InDuration = 0);
+	void AddActiveEffect(Effect* InEffect, Object* InCaster, int InDuration);
 	
 	bool HasActiveEffect(Effect* InEffect) const;
 	bool HasEffectByTag(const std::string& InTag) const;

@@ -1,4 +1,4 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "BattleSystem.h"
 #include "Character/Player/Player.h"
 #include "Data/Character/Damage.h"
@@ -464,7 +464,7 @@ void BattleSystem::RunMonsterTurn(BattleTurnResult& Result)
 		Context.Attack = Monster.StartData.Attack;
 		Context.AttackCount = 1;
 		Context.SkillMultiplier = 1.0f;
-		PlayerCharacter->TakeDamage(Context);
+		PlayerCharacter->TakeDamage(Monster.StartData.Attack);
 		const int AfterHP = PlayerCharacter->GetCurrentResource(EResourceType::Health);
 
 		Result.PlayerHits.push_back({ i, Monster.StartData.Name, BeforeHP - AfterHP });

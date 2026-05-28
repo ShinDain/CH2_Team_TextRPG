@@ -16,4 +16,4 @@ inline Effect* CreateBuff_InvincibleEffectInstance(int Value)
 	return new Effect_Buff_Invincible(Value);
 }
 
-inline bool bBuff_InvincibleEffectRegister = EffectFactory::RegisterEffect(Game::EffectTag::Buff::Invincible, CreateBuff_InvincibleEffectInstance);
+inline bool bBuff_InvincibleEffectRegister = EffectFactory::RegisterEffect(Game::EffectTag::State::Invincible, CreateBuff_InvincibleEffectInstance);

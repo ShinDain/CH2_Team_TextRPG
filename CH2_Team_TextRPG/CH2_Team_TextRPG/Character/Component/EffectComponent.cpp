@@ -30,7 +30,7 @@ EActiveEffectType EffectComponent::DetermineEffectType(const std::string& InTag)
 	return EActiveEffectType::Periodic;
 }
 
-void EffectComponent::AddActiveEffect(Effect* InEffect, Object* InCaster, int InDuration = 0)
+void EffectComponent::AddActiveEffect(Effect* InEffect, Object* InCaster, int InDuration)
 {
 	if (InEffect && InDuration > 0)
 	{

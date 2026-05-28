@@ -2,7 +2,7 @@
 #include "Effect_Buff_Invincible.h"
 
 Effect_Buff_Invincible::Effect_Buff_Invincible(int InValue)
-	:Effect(Game::EffectTag::Buff::Invincible, InValue)
+	:Effect(Game::EffectTag::State::Invincible, InValue)
 {
 }
 
