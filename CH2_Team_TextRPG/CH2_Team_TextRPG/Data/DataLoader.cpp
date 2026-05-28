@@ -2,6 +2,7 @@
 #include "DataLoader.h"
 #include "Data/Table/ItemDataTable.h"
 #include "Data/Table/MonsterDataTable.h"
+#include "Data/Table/SkillDataTable.h"
 #include "Data/Table/ScriptPathTable.h"
 
 bool DataLoader::LoadInitialGameData()
@@ -17,6 +18,11 @@ bool DataLoader::LoadInitialGameData()
 	for (const std::string& path : ScriptPathTable::GetInstance().GetFilePaths(DATA_CATEGORY_MONSTER))
 	{
 		MonsterDataTable::GetInstance().Load(path);
+	}
+
+	for (const std::string& path : ScriptPathTable::GetInstance().GetFilePaths(DATA_CATEGORY_SKILL))
+	{
+		SkillDataTable::GetInstance().Load(path);
 	}
 
 	/*for (const std::string& path : ScriptPathTable::GetInstance().GetFilePaths(DATA_CATEGORY_MAP))

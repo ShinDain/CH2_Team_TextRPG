@@ -3,14 +3,22 @@
 #include "Map/MapManager.h"
 #include "Manager/LogManager.h"
 #include "Combat/BattleSystem.h"
+#include <string>
+#include <vector>
 
 class Player;
+
+struct FCommandOption
+{
+    std::string Text;
+    bool bIsUsable = true;
+};
 
 class GameScreen
 {
 public:
     static void DrawMainScreen(const MapManager& Map, const LogManager& Log, const Player* MainPlayer);
-    static void DrawBattleCommandPanel(const std::vector<BattleSkillOption>& SkillOptions);
+    static void DrawBattleCommandPanel(const std::string& PanelTitle, const std::vector<FCommandOption>& Options);
     static void DrawCharacterPanel(const Player* MainPlayer);
     static void DrawLogPanel(const LogManager& Log);
 

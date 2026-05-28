@@ -100,42 +100,42 @@ void State_Battle::HandlePlayerTurn(Player* PlayerCharacter)
 	bool bTurnEnded = false;
 	while (!bTurnEnded)
 	{
+		std::vector<Monster*> AliveMonsters = CombatManager::GetInstance().GetAliveMonsters();
+		BattleUI::DrawBattleView(AliveMonsters);
+
 		EActionType Action = BattleUI::ShowActionMenu();
 		auto SkillComp = PlayerCharacter->FindComponent<SkillComponent>("Skill");
-		std::vector<Monster*> AliveMonsters = CombatManager::GetInstance().GetAliveMonsters();
+
+		Skill* SelectedSkill = nullptr;
 
 		if (Action == EActionType::ATTACK)
 		{
 			if (SkillComp && !SkillComp->GetLearnedSkills().empty())
 			{
-				Skill* BasicAttack = SkillComp->GetLearnedSkills()[0];
-				auto Targets = BattleUI::ShowTargetMenu(AliveMonsters, 1);
-				
-				if (!Targets.empty())
-				{
-					CombatManager::GetInstance().ExecuteSkill(PlayerCharacter, Targets, BasicAttack);
-					bTurnEnded = true;
-				}
+				SelectedSkill = SkillComp->GetLearnedSkills()[0];
 			}
 		}
 		else if (Action == EActionType::SKILL)
 		{
-			Skill* SelectedSkill = BattleUI::ShowSkillMenu(SkillComp);
-			if (SelectedSkill)
-			{
-				int TargetCount = (SelectedSkill->GetSkillData()->TargetType == ETargetType::ALL_ENEMIES) ? AliveMonsters.size() : 1;
-				vector<Object*> Targets = BattleUI::ShowTargetMenu(AliveMonsters, TargetCount);
-				
-				if (!Targets.empty())
-				{
-					CombatManager::GetInstance().ExecuteSkill(PlayerCharacter, Targets, SelectedSkill);
-					bTurnEnded = true;
-				}
-			}
+			SelectedSkill = BattleUI::ShowSkillMenu(SkillComp);
 		}
 		else if (Action == EActionType::ITEM)
 		{
 			GInput << "아이템 기능은 아직 구현되지 않았습니다.\n";
+		}
+
+		if (SelectedSkill)
+		{
+			int TargetCount = (SelectedSkill->GetSkillData()->TargetType == ETargetType::ALL_ENEMIES) ? AliveMonsters.size() : 1;
+			vector<Object*> Targets = BattleUI::ShowTargetMenu(AliveMonsters, TargetCount);
+			
+			if (!Targets.empty())
+			{
+				CombatManager::GetInstance().ExecuteSkill(PlayerCharacter, Targets, SelectedSkill);
+				BattleUI::PlayHitAnimation(Targets);
+				BattleUI::DrawBattleView(AliveMonsters);
+				bTurnEnded = true;
+			}
 		}
 	}
 }
@@ -151,7 +151,12 @@ void State_Battle::HandleMonsterTurn(Monster* MonsterCharacter)
 		if (PlayerCharacter && !PlayerCharacter->IsDead())
 		{
 			std::vector<Object*> Targets = { PlayerCharacter };
+			
+			// 몬스터 공격 애니메이션 재생
+			BattleUI::PlayAttackAnimation(MonsterCharacter);
 			CombatManager::GetInstance().ExecuteSkill(MonsterCharacter, Targets, BasicAttack);
+			
+			BattleUI::DrawBattleView(CombatManager::GetInstance().GetAliveMonsters());
 		}
 	}
 }

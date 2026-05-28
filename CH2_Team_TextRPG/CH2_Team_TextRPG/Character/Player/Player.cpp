@@ -7,6 +7,8 @@
 #include "Character/Component/EquipmentComponent.h"
 #include "Character/Component/InventoryComponent.h"
 #include "Character/Component/LevelComponent.h"
+#include "Character/Component/EffectComponent.h"
+#include "Character/Component/SkillComponent.h"
 #include "Data/Table/ItemDataTable.h"
 
 #define COMPONENT_CHECK(x) assert((x) && #x "Component 생성되지 않음")
@@ -21,6 +23,8 @@ Player::Player()
 	Resource = AddComponent<ResourceComponent>(this);
 	Inventory = AddComponent<InventoryComponent>(this);
 	Level = AddComponent<LevelComponent>(this);
+	Effect = AddComponent<EffectComponent>(this);
+	Skill = AddComponent<SkillComponent>(this);
 }
 
 Player::~Player()
@@ -44,6 +48,8 @@ bool Player::Initialize()
 	Equip->Initialize();
 	Inventory->Initialize();
 	Level->Initialize();
+	Effect->Initialize();
+	Skill->Initialize();
 
 	return true;
 }
@@ -62,6 +68,12 @@ void Player::AcquireItem(const std::string ItemName, int InAmount)
 void Player::TakeDamage(int Damage)
 {
 	Resource->Decrease(EResourceType::Health, Damage);
+}
+
+void Player::Decrease(EResourceType Type, int Amount)
+{
+	COMPONENT_CHECK(Resource);
+	Resource->Decrease(Type, Amount);
 }
 
 void Player::Recovery(EResourceType Type, int Amount)

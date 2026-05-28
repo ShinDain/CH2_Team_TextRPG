@@ -25,7 +25,6 @@ struct FActiveEffect
 class EffectComponent : public Component
 {
 public:
-	EffectComponent() = delete;
 	EffectComponent(Object* InOwner);
 	~EffectComponent() override;
 

@@ -136,28 +136,22 @@ void GameScreen::DrawCharacterPanel(const Player* MainPlayer)
 	ConsoleUtil::WriteColored("Lv : " + std::to_string(MainPlayer->GetLevel()), ConsoleColor::Gray);
 }
 
-void GameScreen::DrawBattleCommandPanel(const std::vector<BattleSkillOption>& SkillOptions)
+void GameScreen::DrawBattleCommandPanel(const std::string& PanelTitle, const std::vector<FCommandOption>& Options)
 {
 	ConsoleUtil::ClearArea(0, 34, 210, 6);
 	ConsoleRenderer::DrawBox(0, 34, 210, 6);
 	ConsoleRenderer::SetCursorPosition(2, 35);
-	ConsoleUtil::WriteColored("스킬 선택", ConsoleColor::Cyan);
+	ConsoleUtil::WriteColored(PanelTitle, ConsoleColor::Cyan);
 
-	for (int i = 0; i < static_cast<int>(SkillOptions.size()) && i < 4; i++)
+	for (int i = 0; i < static_cast<int>(Options.size()); i++)
 	{
-		const BattleSkillOption& Option = SkillOptions[i];
-		std::string Text = std::to_string(i + 1) + ". " + Option.Name +
-			" [MP " + std::to_string(Option.ManaCost) + "]";
+		int col = i % 4;
+		int row = i / 4;
+		if (row > 1) break;
 
-		if (!Option.bUsable)
-		{
-			Text += " [X]";
-		}
-
-		ConsoleRenderer::SetCursorPosition(4 + (i * 48), 37);
-		ConsoleUtil::WriteColored(Text, Option.bUsable ? ConsoleColor::White : ConsoleColor::DarkGray);
+		ConsoleRenderer::SetCursorPosition(4 + (col * 48), 37 + row);
+		ConsoleUtil::WriteColored(Options[i].Text, Options[i].bIsUsable ? ConsoleColor::White : ConsoleColor::DarkGray);
 	}
-
 }
 
 void GameScreen::DrawInventoryPanel(const Player* MainPlayer)
