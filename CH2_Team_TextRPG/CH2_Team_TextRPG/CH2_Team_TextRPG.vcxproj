@@ -181,14 +181,14 @@ if exist "$(SolutionDir)Resources" xcopy /E /I /Y "$(SolutionDir)Resources" "$(O
     <ClCompile Include="Effect\Effect.cpp" />
     <ClCompile Include="Character\Component\InventoryComponent.cpp" />
     <ClCompile Include="Effect\Effects\Effect_Heal.cpp" />
+    <ClCompile Include="Effect\Effects\Buff\Effect_Buff_Invincible.cpp" />
+    <ClCompile Include="Effect\Effects\Debuff\Effect_Debuff_Stun.cpp" />
     <ClCompile Include="Effect\Factory\EffectFactory.cpp" />
     <ClCompile Include="Effect\Effects\Effect_Stat.cpp" />
     <ClCompile Include="Effect\Effects\Effect_Damage.cpp" />
-    <ClCompile Include="Effect\Effects\Effect_Poison.cpp" />
+    <ClCompile Include="Effect\Effects\Debuff\Effect_Debuff_Poison.cpp" />
     <ClCompile Include="Effect\Effects\Buff\Effect_Buff_Stat.cpp" />
-    <ClCompile Include="Effect\Effects\CC\Effect_CC_Stun.cpp" />
     <ClCompile Include="Effect\Effects\Effect_ManaRegen.cpp" />
-    <ClCompile Include="Effect\Effects\Buff\Effect_Buff_Invincible.cpp" />
     <ClCompile Include="Item\Item_Consumable.cpp" />
     <ClCompile Include="Item\Item_Equipment.cpp" />
     <ClCompile Include="Item\Item_Ingredient.cpp" />
@@ -228,6 +228,8 @@ if exist "$(SolutionDir)Resources" xcopy /E /I /Y "$(SolutionDir)Resources" "$(O
     <ClCompile Include="UI\ConsoleRenderer.cpp" />
     <ClCompile Include="UI\ConsoleUtil.cpp" />
     <ClCompile Include="UI\GameScreen.cpp" />
+    <ClCompile Include="UI\JobSelectUIFlow.cpp" />
+    <ClCompile Include="UI\JobSelectUIScreen.cpp" />
     <ClCompile Include="UI\StartMenuScreen.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -262,15 +264,15 @@ if exist "$(SolutionDir)Resources" xcopy /E /I /Y "$(SolutionDir)Resources" "$(O
     <ClInclude Include="Character\Component\InventoryComponent.h" />
     <ClInclude Include="Effect\EffectData.h" />
     <ClInclude Include="Effect\Effects\Effect_Heal.h" />
+    <ClInclude Include="Effect\Effects\Buff\Effect_Buff_Invincible.h" />
+    <ClInclude Include="Effect\Effects\Debuff\Effect_Debuff_Stun.h" />
     <ClInclude Include="Effect\EffectTag.h" />
     <ClInclude Include="Effect\Factory\EffectFactory.h" />
     <ClInclude Include="Effect\Effects\Effect_Stat.h" />
     <ClInclude Include="Effect\Effects\Effect_Damage.h" />
-    <ClInclude Include="Effect\Effects\Effect_Poison.h" />
+    <ClInclude Include="Effect\Effects\Debuff\Effect_Debuff_Poison.h" />
     <ClInclude Include="Effect\Effects\Buff\Effect_Buff_Stat.h" />
-    <ClInclude Include="Effect\Effects\CC\Effect_CC_Stun.h" />
     <ClInclude Include="Effect\Effects\Effect_ManaRegen.h" />
-    <ClInclude Include="Effect\Effects\Buff\Effect_Buff_Invincible.h" />
     <ClInclude Include="Enum\EItemType.h" />
     <ClInclude Include="Item\ItemData.h" />
     <ClInclude Include="Item\Item_Consumable.h" />
@@ -319,6 +321,8 @@ if exist "$(SolutionDir)Resources" xcopy /E /I /Y "$(SolutionDir)Resources" "$(O
     <ClInclude Include="UI\ConsoleRenderer.h" />
     <ClInclude Include="UI\ConsoleUtil.h" />
     <ClInclude Include="UI\GameScreen.h" />
+    <ClInclude Include="UI\JobSelectUIFlow.h" />
+    <ClInclude Include="UI\JobSelectUIScreen.h" />
     <ClInclude Include="UI\StartMenuScreen.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

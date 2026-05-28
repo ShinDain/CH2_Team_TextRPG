@@ -2,6 +2,7 @@
 #include "State_Start.h"
 #include "Core/GameInstance.h"
 #include "Manager/InputManager.h"
+#include "UI/JobSelectUIFlow.h"
 #include "UI/StartMenuScreen.h"
 
 State_Start::State_Start()
@@ -11,10 +12,31 @@ State_Start::State_Start()
 
 void State_Start::Enter()
 {
+	CurrentMode = EStartScreenMode::StartMenu;
 	GameInstance::GetInstance().GetLogManager().AddLog("시작 메뉴에 진입했습니다.");
 }
 
 void State_Start::Process()
+{
+	switch (CurrentMode)
+	{
+	case EStartScreenMode::StartMenu:
+		ProcessStartMenu();
+		break;
+	case EStartScreenMode::JobSelect:
+		ProcessJobSelect();
+		break;
+	default:
+		CurrentMode = EStartScreenMode::StartMenu;
+		break;
+	}
+}
+
+void State_Start::Exit()
+{
+}
+
+void State_Start::ProcessStartMenu()
 {
 	GameInstance& Instance = GameInstance::GetInstance();
 
@@ -32,10 +54,10 @@ void State_Start::Process()
 	switch (Input)
 	{
 	case 1:
-		Instance.GetLogManager().AddLog("캐릭터 생성 로직은 아직 연결되지 않았습니다.");
+		CurrentMode = EStartScreenMode::JobSelect;
 		break;
 	case 2:
-		Instance.GetLogManager().AddLog("저장 데이터 로드는 아직 구현되지 않았습니다.");
+		Instance.GetLogManager().AddLog("불러오기 로직은 아직 연결되지 않았습니다.");
 		break;
 	case 0:
 		Instance.Quit();
@@ -46,6 +68,11 @@ void State_Start::Process()
 	}
 }
 
-void State_Start::Exit()
+void State_Start::ProcessJobSelect()
 {
+	const EJobSelectUIResult Result = JobSelectUIFlow::Process();
+	if (Result == EJobSelectUIResult::BackToStart)
+	{
+		CurrentMode = EStartScreenMode::StartMenu;
+	}
 }
