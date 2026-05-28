@@ -8,6 +8,7 @@
 #include "Effect/Effect.h"
 #include "Character/Component/ResourceComponent.h"
 #include "Character/Component/EffectComponent.h"
+#include "ObjectManager.h"
 
 CombatManager& CombatManager::GetInstance()
 {
