@@ -47,7 +47,6 @@ private:
 			return it->second(Value);
 		}
 
-		GLog.AddLog("[Effect Factory] Invalid Tag " + Tag);
 		GLog.AddLog("[Effect Factory] Invalid Tag" + Tag);
 
 		return nullptr;

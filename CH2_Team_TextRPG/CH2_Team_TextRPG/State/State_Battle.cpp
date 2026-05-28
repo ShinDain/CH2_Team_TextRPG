@@ -63,6 +63,12 @@ void State_Battle::Process()
 		EffectComp->RemoveExpiredEffects();
 	}
 
+	auto SkillComp = CurTurnCharacter->FindComponent<SkillComponent>("Skill");
+	if (SkillComp)
+	{
+		SkillComp->UpdateCooldowns();
+	}
+
 	if (Player* PlayerChar = dynamic_cast<Player*>(CurTurnCharacter))
 	{
 		if (PlayerChar->IsDead()) return;
