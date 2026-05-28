@@ -13,6 +13,7 @@ namespace Game
 		const std::string Player = "Player";
 		const std::string Map = "Map";
 		const std::string Skill = "Skill";
+		const std::string Level = "Level";
 	}
 	
 }

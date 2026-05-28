@@ -9,6 +9,12 @@
             ]
         },
 		{
+            "Category" : "Level",
+            "Name" : [
+                "Level.json"
+            ]
+        },
+		{
             "Category" : "User",
             "Name" : [
                 "UserSave.json"

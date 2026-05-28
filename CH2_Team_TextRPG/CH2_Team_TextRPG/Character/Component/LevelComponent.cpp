@@ -94,10 +94,11 @@ void LevelComponent::ApplyLevelupEvent(int Level)
 	{
 		if (std::shared_ptr<StatComponent> StatComp = Owner->FindComponent<StatComponent>("Stat"))
 		{
-			for (const StatValue& Stat : Data->Stats)
+			for (auto Stat : Data->Stats)
 			{
-				if (Stat.Type == EStatType::Max) continue;
-				StatComp->AddStat(Stat.Type, Stat.Value);
+				EStatType Type = StringToEStatType(Stat.first);
+				if (Type == EStatType::Max) continue;
+				StatComp->AddStat(Type, Stat.second);
 			}
 		}
 		if (auto* Resource = dynamic_cast<IResource*>(Owner))
