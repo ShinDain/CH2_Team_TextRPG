@@ -3,7 +3,7 @@
 #include "State/State_Entry.h"
 #include "State/State_Start.h"
 #include "State/State_Map.h"
-#include "Combat/State_Battle.h"
+#include "State/State_Battle.h"
 #include "Shop/State_Shop.h"
 #include "State/State_Ending.h"
 
