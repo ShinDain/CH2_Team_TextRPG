@@ -1,6 +1,7 @@
 ﻿#include "pch.h"
 #include "Skill.h"
 #include "Effect/Effect.h"
+#include "Character/Component/EffectComponent.h"
 
 
 Skill::Skill(const FSkillData* InData) : Data(InData), CurrentCooldown(0)
@@ -13,13 +14,25 @@ Skill::~Skill()
 
 void Skill::Active(Object* Instigator, std::vector<Object*> Targets)
 {
-	if (Instigator == nullptr)
+	if (Instigator == nullptr || Targets.empty())
 		return;
-	for (Effect* effect : Effects)
+
+	for (Object* target : Targets)
 	{
-		if (effect == nullptr)
-			continue;
-		effect->Apply(Instigator, Targets);
+		for (Effect* effect : Effects)
+		{
+			if (effect == nullptr)
+				continue;
+
+			if (Data->Duration > 0)
+			{
+				auto effectComp = target->FindComponent<EffectComponent>("Effect");
+				if (effectComp)
+				{
+					effectComp->AddActiveEffect(effect, Instigator, Data->Duration);
+				}
+			}
+		}
 	}
 }
 

@@ -12,11 +12,30 @@ EffectComponent::~EffectComponent()
 {
 }
 
-void EffectComponent::AddActiveEffect(Effect* InEffect, Object* InCaster, int InDuration)
+EActiveEffectType EffectComponent::DetermineEffectType(const std::string& InTag) const
+{
+	// 기절, 무적
+	if (InTag.rfind("CC", 0) == 0 || InTag.find("Invincible") != std::string::npos)
+	{
+		return EActiveEffectType::State;
+	}
+	
+	// 버프, 디버프
+	if (InTag.rfind("Stat.", 0) == 0 || InTag.rfind("Buff_", 0) == 0 || InTag.rfind("Debuff_Stat", 0) == 0)
+	{
+		return EActiveEffectType::Duration;
+	}
+
+	// 화상, 독
+	return EActiveEffectType::Periodic;
+}
+
+void EffectComponent::AddActiveEffect(Effect* InEffect, Object* InCaster, int InDuration = 0)
 {
 	if (InEffect && InDuration > 0)
 	{
-		ActiveEffects.push_back({ InEffect, InCaster, InDuration });
+		EActiveEffectType EffectType = DetermineEffectType(InEffect->GetTag());
+		ActiveEffects.push_back({ InEffect, InCaster, InDuration, EffectType });
 	}
 }
 
@@ -30,15 +49,27 @@ bool EffectComponent::HasActiveEffect(Effect* InEffect) const
 	return false;
 }
 
+bool EffectComponent::HasEffectByTag(const std::string& InTag) const
+{
+	for (const FActiveEffect& activeEffect : ActiveEffects)
+	{
+		if (activeEffect.EffectPtr && activeEffect.EffectPtr->GetTag() == InTag)
+			return true;
+	}
+	return false;
+}
+
 void EffectComponent::UpdateEffects()
 {
-	// TODO : 버프/디버프일시 턴수만 감소하게 수정필요
 	for (FActiveEffect& activeEffect : ActiveEffects)
 	{
 		if (activeEffect.RemainingDuration > 0)
 		{
-			std::vector<Object*> target = { Owner };
-			activeEffect.EffectPtr->Apply(activeEffect.Caster, target);
+			if (activeEffect.Type == EActiveEffectType::Periodic)
+			{
+				std::vector<Object*> target = { Owner };
+				activeEffect.EffectPtr->Apply(activeEffect.Caster, target);
+			}
 			activeEffect.RemainingDuration--;
 		}
 	}

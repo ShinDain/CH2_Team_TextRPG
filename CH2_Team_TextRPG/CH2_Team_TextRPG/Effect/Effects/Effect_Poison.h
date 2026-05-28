@@ -9,9 +9,6 @@ public:
 
 	virtual void Apply(Object* Instigator, std::vector<Object*> Targets) override;
 	virtual void Remove(Object* Instigator, std::vector<Object*> Targets) override;
-
-private:
-	int Duration; 
 };
 
 inline Effect* CreateDebuff_PoisonEffectInstance(int Value)

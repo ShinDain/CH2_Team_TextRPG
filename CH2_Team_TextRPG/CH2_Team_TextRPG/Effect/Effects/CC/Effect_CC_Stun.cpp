@@ -2,7 +2,7 @@
 #include "Effect_CC_Stun.h"
 
 Effect_CC_Stun::Effect_CC_Stun(int InValue)
-	:Effect(Game::EffectTag::CC::Stun, InValue)
+	:Effect(Game::EffectTag::State::Stun, InValue)
 {
 }
 

@@ -6,6 +6,8 @@
 #include "Data/Character/Stat.h"
 #include "Manager/InputManager.h"
 #include "Effect/Effect.h"
+#include "Character/Component/ResourceComponent.h"
+#include "Character/Component/EffectComponent.h"
 
 CombatManager& CombatManager::GetInstance()
 {
@@ -82,16 +84,5 @@ void CombatManager::ExecuteSkill(Object* Caster, const std::vector<Object*>& Tar
 		skillComp->ApplyCooldown(InSkill);
 	}
 	GLog.AddLog("[시스템] " + Caster->GetName() + "이(가) " + InSkill->GetSkillData()->Name + "을(를) 사용했습니다!");
-
-	for (int i = 0; i < InSkill->GetSkillData()->HitCount; ++i)
-	{
-		// TODO : 명중률 + 회피율 처리
-		for (Effect* effect : InSkill->GetEffects())
-		{
-			if (effect)
-			{
-				effect->Apply(Caster, Targets);
-			}
-		}
-	}
+	InSkill->Active(Caster, Targets);
 }

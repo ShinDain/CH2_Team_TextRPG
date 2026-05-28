@@ -14,11 +14,11 @@ struct FSkillData
 	ETargetType TargetType;				// 타겟 유형
 	uint8_t Cooldown;					// 쿨타임
 	uint8_t HitCount;					// 타격 횟수
-	// std::unordered_map<std::string, int> Options; // 스킬 규칙 (명중률)
+	uint8_t Duration;					// 스킬 버프/디버프 지속 턴수 (없으면 0)
 	std::vector<EffectData> Effects;	// 스킬 효과 목록
 };
 
-NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(FSkillData, Name, Description, Idx, ManaCost, TargetType, Cooldown, HitCount, Effects);
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(FSkillData, Name, Description, Idx, ManaCost, TargetType, Cooldown, HitCount, Duration, Effects);
 
 class SkillDataTable final : public BaseDataTable
 {

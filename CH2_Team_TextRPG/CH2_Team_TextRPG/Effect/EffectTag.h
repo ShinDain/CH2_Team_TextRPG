@@ -25,8 +25,6 @@ namespace Game
 			const std::string Attack = "Buff_Attack";
 			const std::string Defense = "Buff_Defense";
 			const std::string ActionSpeed = "Buff_ActionSpeed";
-
-			const std::string Invincible = "Buff_Invincible";
 		}
 		namespace Debuff
 		{
@@ -35,9 +33,10 @@ namespace Game
 			const std::string Freeze = "Debuff_Freeze";
 		}
 
-		namespace CC
+		namespace State
 		{
-			const std::string Stun = "CC_Stun";
+			const std::string Stun = "State_Stun";
+			const std::string Invincible = "State_Invincible";
 		}
 
 		const std::string EFFECT_TAG_DAMAGE = "Damage";

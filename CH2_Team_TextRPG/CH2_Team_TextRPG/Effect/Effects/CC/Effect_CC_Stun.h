@@ -16,4 +16,4 @@ inline Effect* CreateCC_StunEffectInstance(int Value)
 	return new Effect_CC_Stun(Value);
 }
 
-inline bool bCC_StunEffectRegister = EffectFactory::RegisterEffect(Game::EffectTag::CC::Stun, CreateCC_StunEffectInstance);
+inline bool bCC_StunEffectRegister = EffectFactory::RegisterEffect(Game::EffectTag::State::Stun, CreateCC_StunEffectInstance);
