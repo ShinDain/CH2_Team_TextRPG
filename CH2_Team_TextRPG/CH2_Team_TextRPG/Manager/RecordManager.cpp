@@ -44,7 +44,7 @@ int RecordManager::GetNodeVisitCount(ENodeType Type) const
 	{
 		return iter->second;
 	}
-	return 0; // 방문한 적이 없다면 0 반환
+	return 0; 
 }
 
 int RecordManager::GetTotalNodeVisits() const

@@ -1,5 +1,6 @@
 ﻿#include "pch.h"
 #include "MapManager.h"
+#include "Manager/RecordManager.h"
 
 void MapManager::GenerateFixedMap()
 {
@@ -125,6 +126,7 @@ bool MapManager::MoveToNode(int NodeId)
         if (Node.Id == CurrentNodeId)
         {
             Node.bIsVisited = true;
+            RecordManager::GetInstance().AddNodeVisitCount(Node.Type);
             break;
         }
     }

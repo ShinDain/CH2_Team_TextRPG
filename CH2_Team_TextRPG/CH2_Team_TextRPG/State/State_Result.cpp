@@ -6,6 +6,8 @@
 #include "UI/ConsoleRenderer.h"
 #include "UI/ConsoleUtil.h"
 #include "Manager/RecordManager.h"
+#include "Map/MapManager.h"
+
 
 namespace
 {
@@ -49,40 +51,53 @@ void State_Result::Process()
 	ConsoleUtil::HideCursor();
 
 	ConsoleRenderer::DrawBox(55, 10, 100, 24);
-	ConsoleRenderer::SetCursorPosition(94, 13);
+	ConsoleRenderer::SetCursorPosition(100, 13);
 	ConsoleUtil::WriteColored(GetResultTitle(ResultType), GetResultTitleColor(ResultType));
 
 	
 	//RecordManager 기록 보여주기
 	RecordManager& Record = RecordManager::GetInstance();
 
-	ConsoleRenderer::SetCursorPosition(94, 17);
+	ConsoleRenderer::SetCursorPosition(98, 16);
 	ConsoleUtil::WriteColored("[ 전적 통계 ]", ConsoleColor::Cyan);
 
-	ConsoleRenderer::SetCursorPosition(82, 18);
+	if (ResultType == EResultType::GameOver)
+	{
+		const MapNode* CurrentNode = Instance.GetMapManager().GetCurrentNode();
+		int DeadFloor = (CurrentNode != nullptr) ? CurrentNode->Floor : 0;
+
+		ConsoleRenderer::SetCursorPosition(88, 18);
+		ConsoleUtil::WriteColored("최종 도달 : ", ConsoleColor::Red);
+		GInput << DeadFloor << " 층에서 장렬히 전사";
+	}
+	else
+	{
+		ConsoleRenderer::SetCursorPosition(82, 18);
+		ConsoleUtil::WriteColored("축하합니다! 던전의 모든 위협을 뚫고 살아남았습니다.", ConsoleColor::Green);
+	}
+	ConsoleRenderer::SetCursorPosition(91, 19);
 	GInput << "- 일반몹 처치 : " << Record.GetMonsterKills() << " 마리";
 
-	ConsoleRenderer::SetCursorPosition(82, 19);
+	ConsoleRenderer::SetCursorPosition(91, 20);
 	GInput << "- 엘리트 처치 : " << Record.GetEliteKills() << " 마리";
 
-	ConsoleRenderer::SetCursorPosition(82, 20);
+	ConsoleRenderer::SetCursorPosition(91, 21);
 	GInput << "- 총 방문 노드 : " << Record.GetTotalNodeVisits() << " 개";
 
-	// 종류별 노드 방문 횟수를 한 줄로 깔끔하게 배치
-	ConsoleRenderer::SetCursorPosition(85, 21);
+	ConsoleRenderer::SetCursorPosition(96, 22);
 	GInput << "전투(M): " << Record.GetNodeVisitCount(ENodeType::Monster) << "회";
 
-	ConsoleRenderer::SetCursorPosition(85, 22);
+	ConsoleRenderer::SetCursorPosition(96, 23);
 	GInput << "엘리트(E): " << Record.GetNodeVisitCount(ENodeType::Elite) << "회";
 
-	ConsoleRenderer::SetCursorPosition(85, 23);
+	ConsoleRenderer::SetCursorPosition(96, 24);
 	GInput << "상점($): " << Record.GetNodeVisitCount(ENodeType::Shop) << "회";
 
-	ConsoleRenderer::SetCursorPosition(78, 28);
+	ConsoleRenderer::SetCursorPosition(95, 28);
 	GInput << "1. 시작 메뉴로";
-	ConsoleRenderer::SetCursorPosition(78, 30);
+	ConsoleRenderer::SetCursorPosition(95, 30);
 	GInput << "0. 종료";
-	ConsoleRenderer::SetCursorPosition(78, 32);
+	ConsoleRenderer::SetCursorPosition(90, 32);
 	GInput << "입력 >> ";
 
 	int Input = -1;
@@ -99,6 +114,7 @@ void State_Result::Process()
 	}
 	else if (Input == 1)
 	{
+		RecordManager::GetInstance().Initialize();
 		StateManager::GetInstance().ChangeState(EState::Start);
 	}
 }
