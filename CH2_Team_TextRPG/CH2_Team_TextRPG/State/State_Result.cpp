@@ -115,7 +115,7 @@ void State_Result::Process()
 	else if (Input == 1)
 	{
 		RecordManager::GetInstance().Initialize();
-		StateManager::GetInstance().ChangeState(EState::Start);
+		AddTransition<AlwaysTrueCondition>(EState::Start);
 	}
 }
 

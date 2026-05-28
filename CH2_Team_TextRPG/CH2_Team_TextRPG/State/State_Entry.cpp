@@ -14,7 +14,7 @@ void State_Entry::Enter()
 	ConsoleUtil::HideCursor();
 	GLog.AddLog("초기화가 완료되었습니다.");
 	
-	StateManager::GetInstance().ChangeState(EState::Start);
+	AddTransition<AlwaysTrueCondition>(EState::Start);
 }
 
 void State_Entry::Process()
