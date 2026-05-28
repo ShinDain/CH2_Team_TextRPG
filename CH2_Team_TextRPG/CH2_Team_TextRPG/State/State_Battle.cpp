@@ -41,7 +41,7 @@ void State_Battle::Enter()
 			Monsters.emplace_back(NewMonster);
 		}
 	}
-	CombatManager::GetInstance().Initialize(LoadPlayer);
+	CombatManager::GetInstance().Initialize(LoadPlayer, Monsters);
 }
 
 void State_Battle::Process()
