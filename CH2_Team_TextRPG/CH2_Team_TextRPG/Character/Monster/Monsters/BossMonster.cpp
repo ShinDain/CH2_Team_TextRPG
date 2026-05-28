@@ -1,6 +1,7 @@
 ﻿#include "pch.h"
 #include "BossMonster.h"
 #include "Character/Player/Player.h"
+#include "Data/Character/Damage.h"
 
 BossMonster::BossMonster(MonsterSetData&& Desc)
     : Monster(std::move(Desc)),

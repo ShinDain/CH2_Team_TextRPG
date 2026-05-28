@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <nlohmann/json.hpp>
 
 #define RESOURCE_TYPE(X)	\
@@ -55,13 +55,32 @@ constexpr EStatType ToStatType(EResourceType Type)
 #undef STAT_TYPE_CONV
 }
 
-#define RESOURCE_TYPE_ENUM(Name) { EStatType::Name, #Name },
-NLOHMANN_JSON_SERIALIZE_ENUM(EStatType, {
-	{EStatType::Attack, "Attack"},
-	{EStatType::Defense, "Defense"},
-	RESOURCE_TYPE(RESOURCE_TYPE_ENUM)
-	{EStatType::ActionSpeed, "ActionSpeed"},
-})
-#undef RESOURCE_TYPE_ENUM
+#define RESOURCE_ENUM_TO_STRING(Name) { case EStatType::Name: return #Name; }
+inline std::string EStatTypeToString(EStatType Type)
+{
+	switch (Type) 
+	{
+		case EStatType::Attack: return "Attack";
+		case EStatType::Defense: return "Defense";
+		case EStatType::ActionSpeed: return "ActionSpeed";
+		RESOURCE_TYPE(RESOURCE_ENUM_TO_STRING)
+		default: assert(0);
+	}
+	return {}; 	
+}
+#undef RESOURCE_ENUM_TO_STRING
+
+#define RESOURCE_STRING_TO_ENUM(Name) if (Str == #Name) return EStatType::Name;
+
+inline EStatType StringToEStatType(const std::string& Str)
+{
+	if (Str == "Attack") return EStatType::Attack;
+	if (Str == "Defense") return EStatType::Defense;
+	if (Str == "ActionSpeed") return EStatType::ActionSpeed;
+	RESOURCE_TYPE(RESOURCE_STRING_TO_ENUM)
+	assert(0);
+	return EStatType::Max;
+}
+#undef RESOURCE_STRING_TO_ENUM
 
 #undef RESOURCE_TYPE

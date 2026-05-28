@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include "Core/Component.h"
-#include "Enum/EItemType.h"
 
+enum class EEquipmentType;
 struct ItemData;
 class Item;
 

@@ -1,44 +1,44 @@
-[
+﻿[
   {
-    "Id": 1,
-    "JobName": "전사",
+    "Index": 1,
+    "ClassName": "전사",
     "Description": "높은 체력과 방어력을 가진 근접 직업입니다.",
-    "Stats": {
+    "InitialStats": {
       "Health": 220,
       "Mana": 80,
       "Attack": 35,
       "Defense": 8,
       "ActionSpeed": 8
     },
-    "StartSkillIds": [],
-    "StartItems": []
+    "InitialSkills": [],
+    "InitialItems": []
   },
   {
-    "Id": 2,
-    "JobName": "마법사",
+    "Index": 2,
+    "ClassName": "마법사",
     "Description": "높은 마나와 강력한 마법 공격을 사용하는 직업입니다.",
-    "Stats": {
+    "InitialStats": {
       "Health": 150,
       "Mana": 180,
       "Attack": 25,
       "Defense": 3,
       "ActionSpeed": 7
     },
-    "StartSkillIds": [],
-    "StartItems": []
+    "InitialSkills": [],
+    "InitialItems": []
   },
   {
-    "Id": 3,
-    "JobName": "도적",
+    "Index": 3,
+    "ClassName": "도적",
     "Description": "빠른 속도와 연속 공격에 특화된 직업입니다.",
-    "Stats": {
+    "InitialStats": {
       "Health": 170,
       "Mana": 110,
       "Attack": 30,
       "Defense": 5,
       "ActionSpeed": 14
     },
-    "StartSkillIds": [],
-    "StartItems": []
+    "InitialSkills": [],
+    "InitialItems": []
   }
 ]

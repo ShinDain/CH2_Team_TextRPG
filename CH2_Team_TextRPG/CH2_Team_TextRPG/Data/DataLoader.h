@@ -1,14 +1,20 @@
 ﻿#pragma once
 
-const std::string INIT_FILE_PATH = "../Script/ScriptList.json";
-
-const std::string DATA_CATEGORY_ITEM = "Item";
-const std::string DATA_CATEGORY_ITEM_CONSUMABLE = "Consumable";
-const std::string DATA_CATEGORY_ITEM_EQUIPMENT = "Equipment";
-
-const std::string DATA_CATEGORY_MONSTER = "Monster";
-
-const std::string DATA_CATEGORY_MAP = "Map";
+namespace Game
+{
+	namespace DataPaths
+	{
+		const std::string ScriptList = "../Script/ScriptList.json";
+		const std::string User = "User";
+		const std::string Item = "Item";
+		const std::string Consumable = "Consumable";
+		const std::string Equipment = "Equipment";
+		const std::string Monster = "Monster";
+		const std::string Player = "Player";
+		const std::string Map = "Map";
+	}
+	
+}
 
 class DataLoader
 {

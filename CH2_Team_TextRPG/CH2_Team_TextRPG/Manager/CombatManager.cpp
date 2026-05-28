@@ -9,6 +9,7 @@
 #include "Character/Component/ResourceComponent.h"
 #include "Character/Component/EffectComponent.h"
 #include "ObjectManager.h"
+#include "Data/Table/SkillDataTable.h"
 
 CombatManager& CombatManager::GetInstance()
 {

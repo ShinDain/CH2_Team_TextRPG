@@ -1,9 +1,7 @@
 ﻿#pragma once
 #include "Core/Component.h"
-#include "Skill/Skill.h"
-#include <vector>
-#include <map>
 
+class Skill;
 class SkillComponent : public Component
 {
 public:

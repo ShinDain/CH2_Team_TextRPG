@@ -5,6 +5,7 @@
 #include "Manager/StateManager.h"
 #include "Data/DataLoader.h"
 #include "Character/Player/Player.h"
+#include "Manager/UserSaveManager.h"
 
 using namespace std;
 
@@ -19,6 +20,8 @@ GameInstance::~GameInstance()
 {
 	delete GameInputManager;
 	GameInputManager = nullptr;
+	
+	UserSaveManagerPtr.reset();
 }
 
 GameInstance& GameInstance::GetInstance()
@@ -105,6 +108,8 @@ bool GameInstance::InitializeManager()
 	{
 		GameInputManager = new InputManager();
 	}
+	
+	UserSaveManagerPtr = make_shared<UserSaveManager>();
 
 	Map.GenerateFixedMap();
 

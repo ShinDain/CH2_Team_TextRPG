@@ -1,12 +1,8 @@
 ﻿#pragma once
 #include "Core/Component.h"
-#include "Enum/EEffect.h"
-#include <vector>
 
 class Effect;
 class Object;
-
-
 enum class EActiveEffectType
 {
 	OverTime, // 1. 매 턴마다 효과가 발동하는 류 (독, 화상 등 도트 대미지/힐)

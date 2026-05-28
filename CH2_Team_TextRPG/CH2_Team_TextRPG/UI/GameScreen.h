@@ -1,9 +1,9 @@
 ﻿#pragma once
 
 #include "Map/MapManager.h"
-#include "Manager/LogManager.h"
 #include "Combat/BattleSystem.h"
 
+class LogManager;
 class Player;
 
 class GameScreen

@@ -2,6 +2,7 @@
 #include "BattleUI.h"
 #include "Manager/InputManager.h"
 #include "Character/Component/SkillComponent.h"
+#include "Data/Table/SkillDataTable.h"
 
 EActionType BattleUI::ShowActionMenu()
 {

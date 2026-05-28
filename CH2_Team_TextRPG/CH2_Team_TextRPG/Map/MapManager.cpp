@@ -65,6 +65,7 @@ void MapManager::GenerateFixedMap()
 
     AddNode(31, ENodeType::Boss, 11, {});
 
+    MaxNodeId = Nodes[Nodes.size() - 1].Id;
     CurrentNodeId = 0;
 }
 
@@ -130,6 +131,11 @@ bool MapManager::MoveToNode(int NodeId)
     }
 
     return true;
+}
+
+void MapManager::SetCurrentNodeId(const int NewId)
+{
+    CurrentNodeId = std::min(NewId, MaxNodeId);
 }
 
 void MapManager::PrintCurrentNode() const

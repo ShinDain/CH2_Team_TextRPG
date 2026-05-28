@@ -1,7 +1,6 @@
 ﻿#pragma once
 
 #include "Character/Monster/Monster.h"
-#include "Character/Player/Player.h"
 
 class MonsterFactory
 {

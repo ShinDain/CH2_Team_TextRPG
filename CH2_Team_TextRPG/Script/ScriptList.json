@@ -8,6 +8,12 @@
                 "Equipment/EquipmentData.json"
             ]
         },
+		{
+            "Category" : "User",
+            "Name" : [
+                "UserSave.json"
+            ]
+        },
         {
             "Category" : "Monster",
             "Name" : [
@@ -24,6 +30,12 @@
             "Category" : "Map",
             "Name" : [
                 "MapData_1.json"
+            ]
+        },
+		{
+            "Category" : "Player",
+            "Name" : [
+                "PlayerData.json"
             ]
         }
     ]

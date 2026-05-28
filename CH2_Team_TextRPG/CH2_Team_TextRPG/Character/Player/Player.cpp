@@ -7,6 +7,7 @@
 #include "Character/Component/EquipmentComponent.h"
 #include "Character/Component/InventoryComponent.h"
 #include "Character/Component/LevelComponent.h"
+#include "Character/Component/SkillComponent.h"
 #include "Data/Table/ItemDataTable.h"
 
 #define COMPONENT_CHECK(x) assert((x) && #x "Component 생성되지 않음")
@@ -21,6 +22,7 @@ Player::Player()
 	Resource = AddComponent<ResourceComponent>(this);
 	Inventory = AddComponent<InventoryComponent>(this);
 	Level = AddComponent<LevelComponent>(this);
+	Skill = AddComponent<SkillComponent>(this);
 }
 
 Player::~Player()
@@ -44,6 +46,7 @@ bool Player::Initialize()
 	Equip->Initialize();
 	Inventory->Initialize();
 	Level->Initialize();
+	Skill->Initialize();
 
 	return true;
 }

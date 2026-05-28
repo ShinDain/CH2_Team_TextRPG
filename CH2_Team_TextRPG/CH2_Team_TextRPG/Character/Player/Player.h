@@ -50,4 +50,5 @@ private:
 	std::shared_ptr<class EquipmentComponent> Equip;
 	std::shared_ptr<class InventoryComponent> Inventory;
 	std::shared_ptr<class LevelComponent> Level;
+	std::shared_ptr<class SkillComponent> Skill;
 };

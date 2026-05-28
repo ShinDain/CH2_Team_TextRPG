@@ -18,5 +18,6 @@
 
 #define GInput (*GameInstance::GetInstance().GetInputManager())
 #define GLog (GameInstance::GetInstance().GetLogManager())
+#define GSharedSaveMgr (GameInstance::GetInstance().GetUserSaveManager())
 
 #endif //PCH_H

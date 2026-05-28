@@ -35,6 +35,7 @@ public:
     MapManager& GetMapManager();
     LogManager& GetLogManager();
     Player* GetMainPlayer() const;
+	
 
 	void SetBattleStartData(const BattleStartData& InBattleStartData);
 	const BattleStartData* GetBattleStartData() const;
@@ -43,7 +44,7 @@ public:
     EResultType GetResultType() const;
     
     InputManager* GetInputManager() const { return GameInputManager; }
-
+	std::shared_ptr<class UserSaveManager> GetUserSaveManager() { return UserSaveManagerPtr; }
 private:
 	bool InitializeManager();
 	bool InitializeDataTable();
@@ -57,7 +58,8 @@ protected:
 	bool bHasBattleStartData = false;
     EResultType ResultType = EResultType::GameOver;
     
-    InputManager* GameInputManager;  
+    InputManager* GameInputManager;
+	std::shared_ptr<class UserSaveManager> UserSaveManagerPtr;
 
 	class Player* MainPlayer;
 };

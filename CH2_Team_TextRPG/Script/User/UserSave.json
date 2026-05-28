@@ -1,0 +1,19 @@
+{
+    "UserName": "TestRogue",
+    "MapIndex": 23,
+    "ClassIndex": 2,
+    "Level": 8,
+    "Exp": 55,
+    "Gold": 4200,
+    "Skills": [2],
+    "OwnedItems": {
+        "1003": 2,
+        "1004": 1,
+        "2004": 1,
+        "2005": 1
+    },
+    "EquippedItems": [
+        ["Shoes", 2004],
+        ["Ring", 2005]
+    ]
+}

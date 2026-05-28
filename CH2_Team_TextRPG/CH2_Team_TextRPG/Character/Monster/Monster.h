@@ -2,8 +2,8 @@
 #include "pch.h"
 #include "Character/Character.h"
 #include "Character/Interface/Damageable.h"
-#include "Data/Character/Damage.h"
 
+struct DamageContext;
 class Player;
 struct MonsterSetData
 {

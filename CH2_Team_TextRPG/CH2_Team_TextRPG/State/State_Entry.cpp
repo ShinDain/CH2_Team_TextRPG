@@ -13,11 +13,13 @@ void State_Entry::Enter()
 	ConsoleRenderer::SetupLargeConsole();
 	ConsoleUtil::HideCursor();
 	GLog.AddLog("초기화가 완료되었습니다.");
+	
+	StateManager::GetInstance().ChangeState(EState::Start);
 }
 
 void State_Entry::Process()
 {
-	StateManager::GetInstance().ChangeState(EState::Start);
+	
 }
 
 void State_Entry::Exit()

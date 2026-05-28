@@ -1,9 +1,7 @@
 #pragma once
-#include <vector>
 #include "Core/Object.h"
 #include "Skill/Skill.h"
 #include "Character/Monster/Monster.h"
-#include <memory>
 
 enum class EActionType
 {

@@ -1,10 +1,9 @@
 ﻿#pragma once
 #include "Core/Component.h"
-#include "Enum/EItemType.h"
-#include "Data/Character/Stat.h"
 
 class Item;
 enum class EEquipmentType;
+enum class EStatType;
 struct ItemData;
 
 class Item_Equipment;
