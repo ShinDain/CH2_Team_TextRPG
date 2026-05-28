@@ -23,7 +23,7 @@ public:
 	void AcquireItem(const std::string ItemName, int InAmount = 1);
 
 public:
-	void TakeDamage(const DamageContext& Context) override;
+	void TakeDamage(int Damage) override;
 	void Recovery(EResourceType Type, int Amount) override;
 	void Restore(EResourceType Type) override;
 	void RestoreAll() override;

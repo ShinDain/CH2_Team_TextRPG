@@ -59,17 +59,9 @@ void Player::AcquireItem(const std::string ItemName, int InAmount)
 	AcquireItem(data->Id, InAmount);
 }
 
-void Player::TakeDamage(const DamageContext& Context)
+void Player::TakeDamage(int Damage)
 {
-	COMPONENT_CHECK(Resource);
-	COMPONENT_CHECK(Stat);
-
-	const int Defense = std::max(1, Stat->GetStat(EStatType::Defense));
-	const float ScaledAttack = static_cast<float>(Context.Attack) * Context.SkillMultiplier;
-	const float DamagePerHit = ScaledAttack / static_cast<float>(Defense);
-	const int FinalDamage = static_cast<int>(DamagePerHit) * Context.AttackCount;
-
-	Resource->Decrease(EResourceType::Health, FinalDamage);
+	Resource->Decrease(EResourceType::Health, Damage);
 }
 
 void Player::Recovery(EResourceType Type, int Amount)

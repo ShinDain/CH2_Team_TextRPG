@@ -81,7 +81,7 @@ public:
 
     virtual void Attack(Player* player);
     // IDamageable
-    void TakeDamage(const struct DamageContext& Context) override;
+    void TakeDamage(int Damage) override;
     bool IsDead() const override;
 
     void Reset();

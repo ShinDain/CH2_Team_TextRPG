@@ -26,16 +26,11 @@ void Monster::Attack(Player* player)
 	{
 		return;
 	}
-	// 몬스터 공격을 DamageContext로 포장하여 전달
-	DamageContext mtp;
-	mtp.Attack = MonsterData.Attack;
-
-	player->TakeDamage(mtp);
+	player->TakeDamage(MonsterData.Attack);
 }
-void Monster::TakeDamage(const DamageContext& Context)
+void Monster::TakeDamage(int Damage)
 {
-	int damage = std::max(0, Context.Attack - MonsterData.Defence);
-	MonsterData.HP -= damage;
+	MonsterData.HP -= Damage;
 	if (MonsterData.HP < 0)
 	{
 		MonsterData.HP = 0;
