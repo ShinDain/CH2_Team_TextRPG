@@ -31,7 +31,6 @@ public:
     
     InputManager* GetInputManager() const { return GameInputManager; }
 
-	class Player* GetMainPlayer() const { return MainPlayer; }
 private:
 	bool InitializeManager();
 	bool InitializeDataTable();

@@ -6,12 +6,11 @@
 #include "Data/DataLoader.h"
 #include "Character/Player/Player.h"
 
-#include "Character/Player/Player.h"
-
 using namespace std;
 
 GameInstance::GameInstance() :
-	GameInputManager(nullptr)
+	GameInputManager(nullptr),
+	MainPlayer(nullptr)
 {
 	IsRunning = false;
 }
@@ -70,7 +69,7 @@ LogManager& GameInstance::GetLogManager()
 
 Player* GameInstance::GetMainPlayer() const
 {
-	return ObjectManager::GetInstance().FindObject<Player>("Player");
+	return MainPlayer;
 }
 
 bool GameInstance::InitializeManager()
@@ -78,11 +77,6 @@ bool GameInstance::InitializeManager()
 	if (GameInputManager == nullptr)
 	{
 		GameInputManager = new InputManager();
-	}
-
-	if (GetMainPlayer() == nullptr)
-	{
-		ObjectManager::GetInstance().CreateObject<Player>();
 	}
 
 	Map.GenerateFixedMap();
