@@ -104,8 +104,8 @@
     "Name": "몸통 박치기",
     "Description": "적에게 몸통으로 강하게 박치기하여 피해를 입힙니다.",
     "ManaCost": 0,
-    "Duration": 3,
-    "Cooldown": 2,
+    "Duration": 0,
+    "Cooldown": 0,
     "TargetType": "SINGLE_ENEMY",
     "HitCount": 1,
     "Effects": [
