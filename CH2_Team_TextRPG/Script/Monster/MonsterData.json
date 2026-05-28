@@ -5,7 +5,7 @@
     "Id": 1,
     "HP": 60,
     "Attack": 20,
-    "Defence": 2,
+    "Defense": 2,
     "Exp": 10,
     "DropItemId": 1001,
     "DropGold": 15
@@ -16,7 +16,7 @@
     "Id": 2,
     "HP": 70,
     "Attack": 25,
-    "Defence": 5,
+    "Defense": 5,
     "Exp": 25,
     "DropItemId": 1007,
     "DropGold": 35
@@ -27,7 +27,7 @@
     "Id": 3,
     "HP": 100,
     "Attack": 30,
-    "Defence": 12,
+    "Defense": 12,
     "Exp": 60,
     "DropItemId": 2006,
     "DropGold": 70
@@ -38,7 +38,7 @@
     "Id": 4,
     "HP": 90,
     "Attack": 25,
-    "Defence": 25,
+    "Defense": 25,
     "Exp": 90,
     "DropItemId": 2002,
     "DropGold": 100
@@ -49,7 +49,7 @@
     "Id": 5,
     "HP": 70,
     "Attack": 40,
-    "Defence": 6,
+    "Defense": 6,
     "Exp": 80,
     "DropItemId": 1004,
     "DropGold": 110
@@ -60,7 +60,7 @@
     "Id": 6,
     "HP": 80,
     "Attack": 60,
-    "Defence": 8,
+    "Defense": 8,
     "Exp": 110,
     "DropItemId": 1005,
     "DropGold": 200
@@ -71,7 +71,7 @@
     "Id": 7,
     "HP": 250,
     "Attack": 80,
-    "Defence": 15,
+    "Defense": 15,
     "Exp": 450,
     "DropItemId": 1010,
     "DropGold": 1200
@@ -82,7 +82,7 @@
     "Id": 8,
     "HP": 150,
     "Attack": 30,
-    "Defence": 8,
+    "Defense": 8,
     "Exp": 75,
     "DropItemId": 2001,
     "DropGold": 180
@@ -93,7 +93,7 @@
     "Id": 9,
     "HP": 120,
     "Attack": 45,
-    "Defence": 18,
+    "Defense": 18,
     "Exp": 130,
     "DropItemId": 2005,
     "DropGold": 350
@@ -104,7 +104,7 @@
     "Id": 10,
     "HP": 200,
     "Attack": 70,
-    "Defence": 30,
+    "Defense": 30,
     "Exp": 300,
     "DropItemId": 2004,
     "DropGold": 500

@@ -18,7 +18,7 @@ Monster* MonsterFactory::CreateForPlayer(const std::string& Name, Player* player
     data.Name = monsterData->Name;
     data.HP = monsterData->HP + (rand() % (Level * 10 + 1)) + Level * 20;
     data.Attack = monsterData->Attack + (rand() % (Level * 5 + 1)) + Level * 5;
-    data.Defence = monsterData->Defence + (Level * 2);
+    data.Defense = monsterData->Defense + (Level * 2);
     data.DropItemId = monsterData->DropItemId;
     data.DropGold = monsterData->DropGold;
     data.Exp = monsterData->Exp;

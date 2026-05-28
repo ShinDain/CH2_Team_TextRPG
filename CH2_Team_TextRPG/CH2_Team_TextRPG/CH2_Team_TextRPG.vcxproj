@@ -221,6 +221,7 @@ if exist "$(SolutionDir)Resources" xcopy /E /I /Y "$(SolutionDir)Resources" "$(O
     <ClCompile Include="Skill\Skill.cpp" />
     <ClCompile Include="Start\Condition\LoadGameCondition.cpp" />
     <ClCompile Include="Start\Condition\NewGameCondition.cpp" />
+    <ClCompile Include="State\State_BattleEnd.cpp" />
     <ClCompile Include="State\State_Entry.cpp" />
     <ClCompile Include="State\State_Result.cpp" />
     <ClCompile Include="State\State_Map.cpp" />
@@ -315,6 +316,7 @@ if exist "$(SolutionDir)Resources" xcopy /E /I /Y "$(SolutionDir)Resources" "$(O
     <ClInclude Include="Skill\Skill.h" />
     <ClInclude Include="Start\Condition\LoadGameCondition.h" />
     <ClInclude Include="Start\Condition\NewGameCondition.h" />
+    <ClInclude Include="State\State_BattleEnd.h" />
     <ClInclude Include="State\State_Entry.h" />
     <ClInclude Include="State\State_Result.h" />
     <ClInclude Include="State\State_Map.h" />
