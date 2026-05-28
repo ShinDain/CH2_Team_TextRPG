@@ -40,11 +40,7 @@ void State_Battle::Enter()
 	{
 		const MonsterData* MonsData = MonsterDataTable::GetInstance().FindMonsterDataById(data.MonsterId);
 		Monster* NewMonster = MonsterFactory::CreateForPlayer(data.Name, LoadPlayer);
-		auto MonsterSkillComp = NewMonster->FindComponent<SkillComponent>("Skill");
-		for (auto SkillId : MonsData->Skills)
-		{
-			MonsterSkillComp->AddSkill(SkillId);	
-		}
+		
 		if (NewMonster)
 		{
 			Monsters.emplace_back(NewMonster);

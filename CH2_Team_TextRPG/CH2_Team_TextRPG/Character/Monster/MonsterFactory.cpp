@@ -26,7 +26,7 @@ Monster* MonsterFactory::CreateForPlayer(const std::string& Name, Player* player
     data.DropItemId = monsterData->DropItemId;
     data.DropGold = monsterData->DropGold;
     data.Exp = monsterData->Exp;
-
+    data.Skills = monsterData->Skills;
     Monster* newMonster = nullptr;
 
     if (monsterData->Type == "Boss")

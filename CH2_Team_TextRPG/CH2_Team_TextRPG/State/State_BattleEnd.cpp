@@ -25,8 +25,8 @@ void State_BattleEnd::Enter()
 	{
 		return;
 	}
-	std::vector<Monster*> AliveMonsters = CombatManager::GetInstance().GetAliveMonsters();
-	if (AliveMonsters.empty() && !LoadPlayer->IsDead())
+
+	if (CombatManager::GetInstance().IsVictory())
 	{
 		int TotalExp = 0;
 		int TotalGold = 0;
@@ -48,7 +48,7 @@ void State_BattleEnd::Enter()
 		GLog.AddLog("[보상] 획득 경험치: " + std::to_string(TotalExp) + " EXP");
 		GLog.AddLog("[보상] 획득 골드: " + std::to_string(TotalGold) + " GOLD");
 	}
-	else if (LoadPlayer->IsDead())
+	else
 	{
 		GLog.AddLog("[전투 패배] 플레이어가 사망했습니다...");
 	}
