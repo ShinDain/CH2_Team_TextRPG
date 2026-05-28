@@ -101,10 +101,18 @@ std::string MakeStatusBar(int current, int max, int barWidth)
 		: 0;
 	const int ClampedFilledWidth = FilledWidth > barWidth ? barWidth : FilledWidth;
 
-	return "[" +
-		std::string(ClampedFilledWidth, '#') +
-		std::string(barWidth - ClampedFilledWidth, '-') +
-		"]";
+	std::string Bar = "[";
+	for (int i = 0; i < ClampedFilledWidth; i++)
+	{
+		Bar += "■";
+	}
+	for (int i = ClampedFilledWidth; i < barWidth; i++)
+	{
+		Bar += "□";
+	}
+	Bar += "]";
+
+	return Bar;
 }
 
 std::string MakeResourceLine(const std::string& Label, int current, int max, int barWidth)
