@@ -21,5 +21,5 @@ void EliteMonster::Attack(Player* player)
     etp.Attack = MonsterData.Attack;
 	etp.SkillMultiplier = (AttackCount == 0) ? 2.f : 1.f; // 3회마다 2배 공격
     etp.AttackCount = 1;
-    player->TakeDamage(etp);
+    player->TakeDamage(MonsterData.Attack);
 }

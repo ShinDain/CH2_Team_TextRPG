@@ -22,7 +22,7 @@ void BossMonster::Attack(Player* player)
     btp.Attack = MonsterData.Attack;
     btp.SkillMultiplier = (Phase == 2) ? 1.5f : 1.f; // 2페이즈면 1.5배
     btp.AttackCount = (Phase == 2) ? 2 : 1;       // 2페이즈면 2회 공격
-    player->TakeDamage(btp);
+    player->TakeDamage(MonsterData.Attack);
 }
 
 void BossMonster::UpdatePhase()
