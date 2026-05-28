@@ -7,6 +7,7 @@
     "Attack": 20,
     "Defense": 2,
     "Exp": 10,
+    "ActionSpeed": 4,
     "DropItemId": 1001,
     "DropGold": 15
   },
@@ -18,6 +19,7 @@
     "Attack": 25,
     "Defense": 5,
     "Exp": 25,
+    "ActionSpeed": 4,
     "DropItemId": 1007,
     "DropGold": 35
   },
@@ -29,6 +31,7 @@
     "Attack": 30,
     "Defense": 12,
     "Exp": 60,
+    "ActionSpeed": 4,
     "DropItemId": 2006,
     "DropGold": 70
   },
@@ -40,6 +43,7 @@
     "Attack": 25,
     "Defense": 25,
     "Exp": 90,
+    "ActionSpeed": 4,
     "DropItemId": 2002,
     "DropGold": 100
   },
@@ -51,6 +55,7 @@
     "Attack": 40,
     "Defense": 6,
     "Exp": 80,
+    "ActionSpeed": 4,
     "DropItemId": 1004,
     "DropGold": 110
   },
@@ -62,6 +67,7 @@
     "Attack": 60,
     "Defense": 8,
     "Exp": 110,
+    "ActionSpeed": 6,
     "DropItemId": 1005,
     "DropGold": 200
   },
@@ -73,6 +79,7 @@
     "Attack": 80,
     "Defense": 15,
     "Exp": 450,
+    "ActionSpeed": 6,
     "DropItemId": 1010,
     "DropGold": 1200
   },
@@ -84,6 +91,7 @@
     "Attack": 30,
     "Defense": 8,
     "Exp": 75,
+    "ActionSpeed": 6,
     "DropItemId": 2001,
     "DropGold": 180
   },
@@ -95,6 +103,7 @@
     "Attack": 45,
     "Defense": 18,
     "Exp": 130,
+    "ActionSpeed": 6,
     "DropItemId": 2005,
     "DropGold": 350
   },
@@ -106,6 +115,7 @@
     "Attack": 70,
     "Defense": 30,
     "Exp": 300,
+    "ActionSpeed": 6,
     "DropItemId": 2004,
     "DropGold": 500
   }
