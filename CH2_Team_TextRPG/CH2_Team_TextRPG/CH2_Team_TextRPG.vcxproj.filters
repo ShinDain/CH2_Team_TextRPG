@@ -62,10 +62,8 @@
     <ClCompile Include="Character\Monster\MonsterFactory.cpp" />
     <ClCompile Include="Character\Monster\Monsters\BossMonster.cpp" />
     <ClCompile Include="Character\Monster\Monsters\EliteMonster.cpp" />
-    <ClCompile Include="Character\Player\CharacterCreator.cpp" />
-    <ClCompile Include="Data\Character\CharacterJobRepository.cpp" />
-    <ClCompile Include="State\State_CharacterCreate.cpp" />
-    <ClCompile Include="UI\CharacterCreateScreen.cpp" />
+    <ClCompile Include="UI\JobSelectUIFlow.cpp" />
+    <ClCompile Include="UI\JobSelectUIScreen.cpp" />
     <ClCompile Include="UI\StartMenuScreen.cpp" />
     <ClCompile Include="Skill\Skill.cpp" />
   </ItemGroup>
@@ -142,11 +140,8 @@
     <ClInclude Include="Character\Monster\MonsterFactory.h" />
     <ClInclude Include="Character\Monster\Monsters\BossMonster.h" />
     <ClInclude Include="Character\Monster\Monsters\EliteMonster.h" />
-    <ClInclude Include="Character\Player\CharacterCreator.h" />
-    <ClInclude Include="Data\Character\CharacterJobData.h" />
-    <ClInclude Include="Data\Character\CharacterJobRepository.h" />
-    <ClInclude Include="State\State_CharacterCreate.h" />
-    <ClInclude Include="UI\CharacterCreateScreen.h" />
+    <ClInclude Include="UI\JobSelectUIFlow.h" />
+    <ClInclude Include="UI\JobSelectUIScreen.h" />
     <ClInclude Include="UI\StartMenuScreen.h" />
     <ClInclude Include="Data\Character\Equipment.h" />
     <ClInclude Include="Skill\Skill.h" />

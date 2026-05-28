@@ -15,19 +15,19 @@ EffectComponent::~EffectComponent()
 EActiveEffectType EffectComponent::DetermineEffectType(const std::string& InTag) const
 {
 	// 기절, 무적
-	if (InTag.rfind("CC", 0) == 0 || InTag.find("Invincible") != std::string::npos)
+	if (InTag.rfind("State", 0) == 0)
 	{
 		return EActiveEffectType::State;
 	}
 	
 	// 버프, 디버프
-	if (InTag.rfind("Stat.", 0) == 0 || InTag.rfind("Buff_", 0) == 0 || InTag.rfind("Debuff_Stat", 0) == 0)
+	if (InTag.rfind("Modifier", 0) == 0)
 	{
-		return EActiveEffectType::Duration;
+		return EActiveEffectType::Modifier;
 	}
 
 	// 화상, 독
-	return EActiveEffectType::Periodic;
+	return EActiveEffectType::OverTime;
 }
 
 void EffectComponent::AddActiveEffect(Effect* InEffect, Object* InCaster, int InDuration)
@@ -65,7 +65,7 @@ void EffectComponent::UpdateEffects()
 	{
 		if (activeEffect.RemainingDuration > 0)
 		{
-			if (activeEffect.Type == EActiveEffectType::Periodic)
+			if (activeEffect.Type == EActiveEffectType::OverTime)
 			{
 				std::vector<Object*> target = { Owner };
 				activeEffect.EffectPtr->Apply(activeEffect.Caster, target);

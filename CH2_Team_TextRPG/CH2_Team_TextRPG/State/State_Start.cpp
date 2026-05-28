@@ -1,7 +1,5 @@
 #include "pch.h"
 #include "State_Start.h"
-
-#include "Character/Player/Player.h"
 #include "Core/GameInstance.h"
 #include "Manager/InputManager.h"
 #include "Manager/StateManager.h"
@@ -39,20 +37,17 @@ void State_Start::Process()
 
 	switch (Input)
 	{
-		case 1:
-		{
-			// StateManager::GetInstance().ChangeState(EState::CharacterCreate);
-			break;
-		}
-
-
-		case 2: GLog.AddLog("저장 데이터 로드는 아직 구현되지 않았습니다.");
-			break;
-		case 0:
-			Instance.Quit();
-			break;
-		default: GLog.AddLog("메뉴 번호를 다시 선택해주세요.");
-			break;
+	case 1:
+		break;
+	case 2:
+		Instance.GetLogManager().AddLog("저장 데이터 로드는 아직 구현되지 않았습니다.");
+		break;
+	case 0:
+		Instance.Quit();
+		break;
+	default:
+		Instance.GetLogManager().AddLog("메뉴 번호를 다시 선택해주세요.");
+		break;
 	}
 }
 

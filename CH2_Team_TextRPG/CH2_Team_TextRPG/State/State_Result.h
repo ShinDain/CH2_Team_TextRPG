@@ -1,11 +1,11 @@
-#pragma once
+﻿#pragma once
 
 #include "Core/State.h"
 
-class State_Ending : public BaseState
+class State_Result : public BaseState
 {
 public:
-	State_Ending();
+	State_Result();
 
 protected:
 	virtual void Enter() override;
