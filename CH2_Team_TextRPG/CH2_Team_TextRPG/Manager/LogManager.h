@@ -10,6 +10,7 @@ private:
 
 public:
     void AddLog(const std::string& Message);
+    void PrintLogOnce(const std::string& Message);
 
     void PrintRecentLogs(int Count) const;
     void PrintAllLogs() const;

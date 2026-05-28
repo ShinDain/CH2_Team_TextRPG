@@ -74,6 +74,7 @@ bool StateManager::InitializeStates()
 	AddState<State_Start>(EState::Start);
 	AddState<State_Map>(EState::Map);
 	AddState<State_Battle>(EState::Combat);
+	//AddState<State_BattleEnd>(EState::CombatEnd);
 	AddState<State_Shop>(EState::Shop);
 	AddState<State_Result>(EState::Result);
 

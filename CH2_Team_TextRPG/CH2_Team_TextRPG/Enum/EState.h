@@ -9,7 +9,6 @@ enum class EState
 	Combat,
 	CombatEnd,
 	Shop,
-	RandomEvent,
 	Result,
 	End,
 };
