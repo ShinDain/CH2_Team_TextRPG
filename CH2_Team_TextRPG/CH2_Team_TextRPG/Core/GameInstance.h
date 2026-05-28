@@ -7,7 +7,7 @@
 class InputManager;
 class Player;
 
-enum class EEndingType
+enum class EResultType
 {
 	Clear,
 	GameOver
@@ -39,8 +39,8 @@ public:
 	void SetBattleStartData(const BattleStartData& InBattleStartData);
 	const BattleStartData* GetBattleStartData() const;
 	void ClearBattleStartData();
-	void SetEndingType(EEndingType Type);
-	EEndingType GetEndingType() const;
+	void SetResultType(EResultType Type);
+    EResultType GetResultType() const;
     
     InputManager* GetInputManager() const { return GameInputManager; }
 
@@ -55,7 +55,7 @@ protected:
     LogManager Log;
 	BattleStartData CurrentBattleStartData;
 	bool bHasBattleStartData = false;
-	EEndingType EndingType = EEndingType::GameOver;
+    EResultType ResultType = EResultType::GameOver;
     
     InputManager* GameInputManager;  
 
