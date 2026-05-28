@@ -1,8 +1,9 @@
 ﻿#pragma once
 
-#include "Combat/BattleSystem.h"
 #include "Core/State.h"
-#include "UI/BattleRenderer.h"
+
+class Player;
+class Monster;
 
 class State_Battle : public BaseState
 {
@@ -16,15 +17,8 @@ protected:
 	virtual void Exit() override;
 
 private:
-	void SetupRendererFromBattleSystem();
-	void DrawBattleView();
-	void DrawSkillInputPrompt();
-	void ClearBattlePanelInputLine();
-	void AddTurnLogs(const BattleTurnResult& Result);
-	void PlayTurnResult(const BattleTurnResult& Result);
 
-private:
-	BattleSystem BattleSystemInst;
-	BattleRenderer Renderer;
-	bool bInitialized = false;
+	// 플레이어/몬스터 행동 처리
+	void HandlePlayerTurn(Player* PlayerCharacter);
+	void HandleMonsterTurn(Monster* MonsterCharacter);
 };
