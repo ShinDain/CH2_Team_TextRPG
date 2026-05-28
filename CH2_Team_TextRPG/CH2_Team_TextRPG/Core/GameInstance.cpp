@@ -10,8 +10,7 @@
 using namespace std;
 
 GameInstance::GameInstance() :
-	GameInputManager(nullptr),
-	MainPlayer(nullptr)
+	GameInputManager(nullptr)
 {
 	IsRunning = false;
 }
@@ -35,8 +34,6 @@ bool GameInstance::Initialize()
 	bool Result = true;
 	Result = InitializeDataTable();
 	Result = InitializeManager();
-
-	MainPlayer = CreateObject<Player>();
 
 	IsRunning = true;
 	return Result;
@@ -68,11 +65,6 @@ MapManager& GameInstance::GetMapManager()
 LogManager& GameInstance::GetLogManager()
 {
 	return Log;
-}
-
-Player* GameInstance::GetMainPlayer() const
-{
-	return MainPlayer;
 }
 
 void GameInstance::SetBattleStartData(const BattleStartData& InBattleStartData)

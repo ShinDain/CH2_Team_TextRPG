@@ -1,6 +1,7 @@
 ﻿#include "pch.h"
 #include "SkillComponent.h"
 #include "Character/Component/ResourceComponent.h"
+#include "Character/Interface/Resource.h"
 #include "Data/Character/Stat.h"
 #include "Data/Table/SkillDataTable.h"
 #include "Effect/Factory/EffectFactory.h"
@@ -87,10 +88,12 @@ bool SkillComponent::CheckCost(uint16_t SkillId)
 		const FSkillData* skillData = skill->GetSkillData();
 		if (skillData)
 		{
-			auto manaComponent = this->FindComponent<ResourceComponent>("Resource");
-			if(manaComponent && manaComponent->GetCurrent(EResourceType::Mana) >= skillData->ManaCost)
+			if (auto* Resource = dynamic_cast<IResource*>(Owner))
 			{
-				return true;
+				if (Resource->GetCurrentResource(EResourceType::Mana) >= skillData->ManaCost)
+				{
+					return true;
+				}
 			}
 		}
 	}
@@ -105,11 +108,13 @@ bool SkillComponent::ConsumeCost(uint16_t SkillId)
 		const FSkillData* skillData = skill->GetSkillData();
 		if (skillData)
 		{
-			auto manaComponent = this->FindComponent<ResourceComponent>("Mana");
-			if (manaComponent)
+			if (auto* Resource = dynamic_cast<IResource*>(Owner))
 			{
-				manaComponent->Decrease(EResourceType::Mana, skillData->ManaCost);
-				return true;
+				if (Resource->GetCurrentResource(EResourceType::Mana) >= skillData->ManaCost)
+				{
+					Resource->Decrease(EResourceType::Mana, skillData->ManaCost);
+					return true;
+				}
 			}
 		}
 	}

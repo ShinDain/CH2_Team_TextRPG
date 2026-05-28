@@ -12,7 +12,7 @@
 #include "Manager/ObjectManager.h"
 #include "Manager/StateManager.h"
 #include "Manager/UserSaveManager.h"
-#include "UI/JobSelectUIScreen.h"
+#include "UI/PlayerSetupScreen.h"
 #include "UI/StartMenuScreen.h"
 
 
@@ -30,7 +30,7 @@ void State_Start::Process()
 {
 	GameInstance& Instance = GameInstance::GetInstance();
 
-	StartMenuScreen::Draw();
+	StartMenuScreen::DrawStartMenu();
 
 	int Input = -1;
 	InputSession InputResult = GInput >> Input;
@@ -83,16 +83,16 @@ void State_Start::NewPlayer()
 	
 	while (1)
 	{
-		GInput << "이름을 입력하세요: ";
+		PlayerSetupScreen::DrawPlayerNameInput();
 		if (!(GInput >> Data.UserName))
 		{
-			GInput << "잘못 입력 하였습니다. \n";
+			PlayerSetupScreen::DrawPlayerNameError();
 			continue;
 		}
 		break;
 	}
 
-	JobSelectUIScreen::Draw();
+	PlayerSetupScreen::DrawPlayerJobSelect();
 
 	int Input = -1;
 	InputSession InputResult = GInput >> Input;

@@ -7,10 +7,13 @@
 #include "Manager/StateManager.h"
 #include "UI/ConsoleUtil.h"
 #include "UI/GameScreen.h"
+#include "Character/Player/Player.h" 
 
 #include <filesystem>
 #include <random>
 #include <windows.h>
+
+#include "Manager/ObjectManager.h"
 
 namespace
 {
@@ -305,10 +308,13 @@ void State_Map::Process()
 	MapManager& Map = Instance.GetMapManager();
 	LogManager& Log = Instance.GetLogManager();
 
+	Player* LoadPlayer = ObjectManager::GetInstance().FindObject<Player>("Player");
+	assert(LoadPlayer && "LoadPlayer is null");
+	
 	GameScreen::DrawMainScreen(
 		Map,
 		Log,
-		Instance.GetMainPlayer()
+		LoadPlayer
 	);
 
 	if (!GameProgress::HandleNodeSelection(Map, Log))

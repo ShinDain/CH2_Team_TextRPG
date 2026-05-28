@@ -5,6 +5,7 @@
 #include "Data/Character/Stat.h"
 #include "Core/GameInstance.h"
 #include "Manager/InputManager.h"
+#include "Manager/ObjectManager.h"
 
 #include "UI/ConsoleRenderer.h"
 #include "UI/GameScreen.h"
@@ -92,16 +93,16 @@ void GameProgress::HandleCurrentNodeEvent(const MapManager& Map, LogManager& Log
 
 	case ENodeType::Rest:
 	{
-		Player* MainPlayer = GameInstance::GetInstance().GetMainPlayer();
+		Player* LoadPlayer = ObjectManager::GetInstance().FindObject<Player>("Player");
 		Log.AddLog("휴식 지점에 도착했습니다.");
 
-		if (MainPlayer != nullptr)
+		if (LoadPlayer != nullptr)
 		{
-			const int MaxHP = MainPlayer->GetMaxResource(EResourceType::Health);
+			const int MaxHP = LoadPlayer->GetMaxResource(EResourceType::Health);
 			const int HealAmount = std::max(1, static_cast<int>(MaxHP * 0.4f));
-			MainPlayer->Recovery(EResourceType::Health, HealAmount);
+			LoadPlayer->Recovery(EResourceType::Health, HealAmount);
 			Log.AddLog("최대 체력의 40%를 회복했습니다.");
-			GameScreen::DrawCharacterPanel(MainPlayer);
+			GameScreen::DrawCharacterPanel(LoadPlayer);
 		}
 		break;
 	}

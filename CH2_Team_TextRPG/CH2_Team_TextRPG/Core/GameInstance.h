@@ -34,10 +34,9 @@ public:
 
     MapManager& GetMapManager();
     LogManager& GetLogManager();
-    Player* GetMainPlayer() const;
-	
 
-	void SetBattleStartData(const BattleStartData& InBattleStartData);
+
+    void SetBattleStartData(const BattleStartData& InBattleStartData);
 	const BattleStartData* GetBattleStartData() const;
 	void ClearBattleStartData();
 	void SetResultType(EResultType Type);
@@ -60,11 +59,4 @@ protected:
     
     InputManager* GameInputManager;
 	std::shared_ptr<class UserSaveManager> UserSaveManagerPtr;
-
-	class Player* MainPlayer;
 };
-
-inline class Player* GetMainPlayer()
-{
-	return GameInstance::GetInstance().GetMainPlayer();
-}

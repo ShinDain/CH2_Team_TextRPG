@@ -4,11 +4,12 @@
     "Name": "전사 기본 공격",
     "Description": "전사의 기본적인 근접 공격입니다.",
     "ManaCost": 0,
+    "Duration": 0,
     "Cooldown": 0,
     "TargetType": "SINGLE_ENEMY",
     "HitCount": 1,
     "Effects": [
-      { "Tag": "Damage", "Value": 100 }
+      { "Tag": "Damage", "Value": 10000 }
     ]
   },
   {
@@ -16,11 +17,12 @@
     "Name": "도적 기본 공격",
     "Description": "빠르게 두 번 베어 적을 공격합니다.",
     "ManaCost": 0,
+    "Duration": 0,
     "Cooldown": 0,
     "TargetType": "SINGLE_ENEMY",
     "HitCount": 2,
     "Effects": [
-      { "Tag": "Damage", "Value": 60 }
+      { "Tag": "Damage", "Value": 6000 }
     ]
   },
   {
@@ -28,11 +30,12 @@
     "Name": "마법사 기본 공격",
     "Description": "마법 에너지를 응축하여 적을 공격합니다.",
     "ManaCost": 0,
+    "Duration": 0,
     "Cooldown": 0,
     "TargetType": "SINGLE_ENEMY",
     "HitCount": 1,
     "Effects": [
-      { "Tag": "Damage", "Value": 120 }
+      { "Tag": "Damage", "Value": 12000 }
     ]
   },
   {
@@ -40,12 +43,12 @@
     "Name": "파이어볼",
     "Description": "화염구를 던져 적에게 강력한 마법 피해를 입힙니다.",
     "ManaCost": 30,
+    "Duration": 0,
     "Cooldown": 3,
     "TargetType": "SINGLE_ENEMY",
     "HitCount": 1,
     "Effects": [
-      { "Tag": "Damage_Fire", "Value": 150 },
-      { "Tag": "Burn", "Value": 20 }
+      { "Tag": "Damage", "Value": 15000 }
     ]
   },
   {
@@ -53,11 +56,12 @@
     "Name": "광역 베기",
     "Description": "주변의 모든 적을 베어 피해를 입힙니다.",
     "ManaCost": 40,
+    "Duration": 0,
     "Cooldown": 4,
     "TargetType": "ALL_ENEMIES",
     "HitCount": 1,
     "Effects": [
-      { "Tag": "Damage", "Value": 80 }
+      { "Tag": "Damage", "Value": 8000 }
     ]
   }
   ,
@@ -66,12 +70,13 @@
     "Name": "독단검",
     "Description": "독이 묻은 단검으로 적을 공격하여 피해를 입히고 중독시킵니다.",
     "ManaCost": 15,
+    "Duration": 3,
     "Cooldown": 2,
     "TargetType": "SINGLE_ENEMY",
     "HitCount": 1,
     "Effects": [
-      { "Tag": "Damage", "Value": 80 },
-      { "Tag": "Poison", "Value": 10 }
+      { "Tag": "Damage", "Value": 8000 },
+      { "Tag": "OverTime_Debuff_Poison", "Value": 10 }
     ]
   }
 ]
