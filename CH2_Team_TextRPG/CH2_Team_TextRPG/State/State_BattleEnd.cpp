@@ -64,13 +64,15 @@ void State_BattleEnd::Process()
 		Player* LoadPlayer = ObjectManager::GetInstance().FindObject<Player>("Player");
 		assert(LoadPlayer && "LoadPlayer is null");
 		
-		if (LoadPlayer->IsDead())
+
+		const BattleStartData* StartData = GameInstance::GetInstance().GetBattleStartData();
+		if (StartData && StartData->bIsBoss)
 		{
-			AddTransition<AlwaysTrueCondition>(EState::Result);
+			StateManager::GetInstance().ChangeState(EState::Result);
 		}
 		else
 		{
-			AddTransition<AlwaysTrueCondition>(EState::Map);
+			StateManager::GetInstance().ChangeState(EState::Map);
 		}
 	}
 }
