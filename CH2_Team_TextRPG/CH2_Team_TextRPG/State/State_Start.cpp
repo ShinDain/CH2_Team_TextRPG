@@ -16,6 +16,7 @@
 #include "UI/PlayerSetupScreen.h"
 #include "UI/StartMenuScreen.h"
 
+
 State_Start::State_Start()
 {
 	Name = "Start";
@@ -88,8 +89,7 @@ void State_Start::NewPlayer()
 	NewPlayer->SetDisplayName(Data.UserName);
 	if (!NewPlayer)
 	{
-		GLog.AddLog("플레이어 생성에 실패했습니다.");
-		GLog.PrintAllLogs();
+		PlayerSetupScreen::DrawStatusMessage("플레이어 생성에 실패했습니다.", ConsoleColor::Red);
 		return;
 	}
 
@@ -140,17 +140,18 @@ void State_Start::NewPlayer()
 		GSharedSaveMgr->Save(Data);
 		GSharedSaveMgr->SaveSnapShot();
 
-		GLog.AddLog("새 게임을 시작합니다: " + Data.UserName);
-		GLog.PrintAllLogs();
+		PlayerSetupScreen::DrawStatusMessage("새 게임을 시작합니다: " + Data.UserName, ConsoleColor::Green);
 		return;
 	}
 }
 
 void State_Start::LoadPlayer()
 {
+	PlayerSetupScreen::DrawLoadScreen();
+
 	if (!GSharedSaveMgr->Load())
 	{
-		GLog.AddLog("저장된 데이터가 없거나 손상되었습니다.");
+		PlayerSetupScreen::DrawStatusMessage("저장된 데이터가 없거나 손상되었습니다.", ConsoleColor::Red);
 		return;
 	}
 
@@ -159,7 +160,7 @@ void State_Start::LoadPlayer()
 	Player* LoadedPlayer = ObjectManager::GetInstance().CreateObject<Player>();
 	if (!LoadedPlayer)
 	{
-		GLog.AddLog("플레이어 생성에 실패했습니다.");
+		PlayerSetupScreen::DrawStatusMessage("플레이어 생성에 실패했습니다.", ConsoleColor::Red);
 		return;
 	}
 	LoadedPlayer->SetDisplayName(Loaded.UserName);
@@ -179,6 +180,7 @@ void State_Start::LoadPlayer()
 	}
 	else
 	{
+		// 중간 경고 — 게임 로그 패널에 남기고 진행 (블로킹 안 함)
 		GLog.AddLog("저장된 직업 정보를 찾을 수 없습니다.");
 	}
 
@@ -218,5 +220,5 @@ void State_Start::LoadPlayer()
 
 	GameInstance::GetInstance().GetMapManager().SetCurrentNodeId(Loaded.MapIndex);
 
-	GLog.AddLog("저장된 게임을 불러왔습니다: " + Loaded.UserName);
+	PlayerSetupScreen::DrawStatusMessage("저장된 게임을 불러왔습니다: " + Loaded.UserName, ConsoleColor::Green);
 }
