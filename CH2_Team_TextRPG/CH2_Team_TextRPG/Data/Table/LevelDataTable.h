@@ -15,7 +15,7 @@ struct LevelData
 
 	int Level = 0;
 	int Exp = 0;
-	std::vector<StatValue> Stats;
+	std::map<std::string, int> Stats;
 };
 NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(LevelData, Level, Exp, Stats);
 

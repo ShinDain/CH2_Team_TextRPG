@@ -2,6 +2,7 @@
 #include "State_Map.h"
 #include "Combat/BattleStartData.h"
 #include "Core/GameProgress.h"
+#include "Data/Character/Stat.h"
 #include "Data/JsonDataParser.h"
 #include "Data/Table/MonsterDataTable.h"
 #include "Manager/StateManager.h"
@@ -337,6 +338,14 @@ void State_Map::Process()
 
 	GameProgress::HandleCurrentNodeEvent(Map, Log);
 
+	if (CurrentNode->Type == ENodeType::Event)
+	{
+		HandleEventNode(LoadPlayer, Log);
+		GameScreen::DrawCharacterPanel(LoadPlayer);
+		GameScreen::DrawLogPanel(Log);
+		return;
+	}
+
 	if (IsBattleNode(CurrentNode->Type))
 	{
 		BattleStartData BattleData;
@@ -359,4 +368,29 @@ void State_Map::Process()
 
 void State_Map::Exit()
 {
+}
+
+void State_Map::HandleEventNode(Player* MainPlayer, LogManager& Log)
+{
+	if (MainPlayer == nullptr)
+	{
+		Log.AddLog("? 이벤트를 처리할 플레이어를 찾을 수 없습니다.");
+		return;
+	}
+
+	static std::mt19937 Generator{ std::random_device{}() };
+	std::uniform_int_distribution<int> Distribution(0, 1);
+
+	const int EventType = Distribution(Generator);
+	constexpr int EventHpAmount = 20;
+
+	if (EventType == 0)
+	{
+		MainPlayer->Recovery(EResourceType::Health, EventHpAmount);
+		Log.AddLog("? 이벤트 발생! 신비한 샘을 발견했습니다. 체력을 20 회복했습니다.");
+		return;
+	}
+
+	MainPlayer->TakeDamage(EventHpAmount);
+	Log.AddLog("? 이벤트 발생! 숨겨진 함정이 발동했습니다. 체력을 20 잃었습니다.");
 }

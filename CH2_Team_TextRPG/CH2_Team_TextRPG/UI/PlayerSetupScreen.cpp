@@ -4,6 +4,9 @@
 #include "UI/ConsoleRenderer.h"
 #include "UI/ConsoleUtil.h"
 
+#include <windows.h>
+#include <conio.h>
+
 namespace
 {
 struct JobSelectViewData
@@ -15,23 +18,12 @@ struct JobSelectViewData
 
 const JobSelectViewData JobViews[] =
 {
-	{
-		"전사",
-		"높은 체력과 방어력을 가진 근접 직업입니다.",
-		"HP 220 / MP 80 / ATK 35 / DEF 8 / SPD 8"
-	},
-	{
-		"마법사",
-		"높은 마나와 강력한 마법 공격을 사용하는 직업입니다.",
-		"HP 150 / MP 180 / ATK 25 / DEF 3 / SPD 7"
-	},
-	{
-		"도적",
-		"빠른 속도와 연속 공격에 특화된 직업입니다.",
-		"HP 170 / MP 110 / ATK 30 / DEF 5 / SPD 14"
-	}
+	{ "전사",   "높은 체력과 방어력을 가진 근접 직업입니다.",         "HP 220 / MP 80 / ATK 35 / DEF 8 / SPD 8" },
+	{ "마법사", "높은 마나와 강력한 마법 공격을 사용하는 직업입니다.", "HP 150 / MP 180 / ATK 25 / DEF 3 / SPD 7" },
+	{ "도적",   "빠른 속도와 연속 공격에 특화된 직업입니다.",         "HP 170 / MP 110 / ATK 30 / DEF 5 / SPD 14" }
 };
 }
+
 
 void PlayerSetupScreen::DrawPlayerNameInput()
 {
@@ -72,6 +64,32 @@ void PlayerSetupScreen::DrawSelectJobError(const std::string& Message)
 	ConsoleUtil::ClearArea(52, 39, 110, 1);
 	ConsoleRenderer::SetCursorPosition(52, 39);
 	ConsoleUtil::WriteColored(Message, ConsoleColor::Red);
+}
+
+void PlayerSetupScreen::DrawLoadScreen()
+{
+	ConsoleUtil::HideCursor();
+	ConsoleRenderer::ClearScreen();
+	ConsoleRenderer::DrawBox(45, 5, 120, 40);
+
+	ConsoleRenderer::SetCursorPosition(94, 8);
+	ConsoleUtil::WriteColored("저장된 게임 불러오기", ConsoleColor::Cyan);
+}
+
+void PlayerSetupScreen::DrawStatusMessage(const std::string& Msg, ConsoleColor Color)
+{
+	ConsoleUtil::ClearArea(46, 10, 118, 33);
+
+	ConsoleRenderer::SetCursorPosition(75, 24);
+	ConsoleUtil::WriteColored(Msg, Color);
+
+	ConsoleRenderer::SetCursorPosition(82, 27);
+	ConsoleUtil::WriteColored("계속하려면 아무 키나 누르세요...", ConsoleColor::DarkGray);
+
+	ConsoleUtil::HideCursor();
+
+	FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE));
+	_getch();
 }
 
 void PlayerSetupScreen::DrawPlayerJobSelect()
