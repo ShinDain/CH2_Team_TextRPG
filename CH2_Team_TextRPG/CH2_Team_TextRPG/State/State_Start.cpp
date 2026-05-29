@@ -13,6 +13,7 @@
 #include "Manager/ObjectManager.h"
 #include "Manager/StateManager.h"
 #include "Manager/UserSaveManager.h"
+#include "Start/Condition/StartNextCondition.h"
 #include "UI/PlayerSetupScreen.h"
 #include "UI/StartMenuScreen.h"
 
@@ -47,13 +48,13 @@ void State_Start::Process()
 		case 1:
 		{
 			NewPlayer();
-			AddTransition<AlwaysTrueCondition>(EState::Map);
+			AddTransition<StartNextCondition>(EState::Map);
 			break;
 		}
 		case 2:
 		{
 			LoadPlayer();
-			AddTransition<AlwaysTrueCondition>(EState::Map);
+			AddTransition<StartNextCondition>(EState::Map);
 			break;
 		}
 		case 0:

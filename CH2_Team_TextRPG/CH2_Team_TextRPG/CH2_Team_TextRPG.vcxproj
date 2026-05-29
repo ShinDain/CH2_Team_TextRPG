@@ -216,6 +216,7 @@ if exist "$(SolutionDir)Resources" xcopy /E /I /Y "$(SolutionDir)Resources" "$(O
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Data\Table\SkillDataTable.cpp" />
+    <ClCompile Include="Start\Condition\StartNextCondition.cpp" />
     <ClCompile Include="State\State_Battle.cpp" />
     <ClCompile Include="Shop\ShopCondition.cpp" />
     <ClCompile Include="Shop\ShopItemDescriptionBuilder.cpp" />
@@ -313,6 +314,7 @@ if exist "$(SolutionDir)Resources" xcopy /E /I /Y "$(SolutionDir)Resources" "$(O
     <ClInclude Include="Character\NPC\NPC.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Data\Table\SkillDataTable.h" />
+    <ClInclude Include="Start\Condition\StartNextCondition.h" />
     <ClInclude Include="State\State_Battle.h" />
     <ClInclude Include="Shop\ShopCondition.h" />
     <ClInclude Include="Skill\Skill.h" />
