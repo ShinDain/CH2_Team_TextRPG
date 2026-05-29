@@ -25,8 +25,10 @@ private:
 	void ApplyLevelupEvent(int Level);
 
 private:
-	std::function<void(int)> OnLevelUp;
 	int CurrentLevel;
 	int MaxLevel;
 	int CurrentExp;
+	
+public:
+	std::function<void(int)> OnLevelUp;
 };

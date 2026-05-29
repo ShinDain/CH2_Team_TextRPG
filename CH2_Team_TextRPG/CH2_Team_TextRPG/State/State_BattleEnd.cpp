@@ -1,5 +1,7 @@
 ﻿#include "pch.h"
 #include "State_BattleEnd.h"
+
+#include "Character/Component/LevelComponent.h"
 #include "Character/Player/Player.h"
 #include "Character/Monster/Monster.h"
 #include "Manager/CombatManager.h"
@@ -21,10 +23,10 @@ void State_BattleEnd::Enter()
 {
 	Player* LoadPlayer = ObjectManager::GetInstance().FindObject<Player>("Player");
 	assert(LoadPlayer && "LoadPlayer is null");
-	if (!LoadPlayer) 
-	{
-		return;
-	}
+
+
+	std::shared_ptr<LevelComponent> LevelComp = LoadPlayer->FindComponent<LevelComponent>("Level");
+	// std::bind()
 
 	if (CombatManager::GetInstance().IsVictory())
 	{
