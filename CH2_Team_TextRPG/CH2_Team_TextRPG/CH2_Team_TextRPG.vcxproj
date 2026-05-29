@@ -181,6 +181,9 @@ if exist "$(SolutionDir)Resources" xcopy /E /I /Y "$(SolutionDir)Resources" "$(O
     <ClCompile Include="Character\Component\EffectComponent.cpp" />
     <ClCompile Include="Effect\Effect.cpp" />
     <ClCompile Include="Character\Component\InventoryComponent.cpp" />
+    <ClCompile Include="Effect\Effects\Debuff\Effect_Debuff_Burn.cpp" />
+    <ClCompile Include="Effect\Effects\Debuff\Effect_Debuff_Slow.cpp" />
+    <ClCompile Include="Effect\Effects\Debuff\Effect_Debuff_Weakness.cpp" />
     <ClCompile Include="Effect\Effects\Effect_Heal.cpp" />
     <ClCompile Include="Effect\Effects\Buff\Effect_Buff_Invincible.cpp" />
     <ClCompile Include="Effect\Effects\Debuff\Effect_Debuff_Stun.cpp" />
@@ -270,6 +273,9 @@ if exist "$(SolutionDir)Resources" xcopy /E /I /Y "$(SolutionDir)Resources" "$(O
     <ClInclude Include="Effect\Effect.h" />
     <ClInclude Include="Character\Component\InventoryComponent.h" />
     <ClInclude Include="Effect\EffectData.h" />
+    <ClInclude Include="Effect\Effects\Debuff\Effect_Debuff_Burn.h" />
+    <ClInclude Include="Effect\Effects\Debuff\Effect_Debuff_Slow.h" />
+    <ClInclude Include="Effect\Effects\Debuff\Effect_Debuff_Weakness.h" />
     <ClInclude Include="Effect\Effects\Effect_Heal.h" />
     <ClInclude Include="Effect\Effects\Buff\Effect_Buff_Invincible.h" />
     <ClInclude Include="Effect\Effects\Debuff\Effect_Debuff_Stun.h" />

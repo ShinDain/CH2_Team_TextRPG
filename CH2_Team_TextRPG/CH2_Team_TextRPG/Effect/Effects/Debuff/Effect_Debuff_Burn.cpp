@@ -1,4 +1,5 @@
-#include "pch.h"
+﻿#include "pch.h"
+#include "Core/Object.h"
 #include "Effect_Debuff_Burn.h"
 #include "Effect/EffectTag.h"
 #include "Character/Interface/Damageable.h"

@@ -1,6 +1,7 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "Effect_Debuff_Slow.h"
 #include "Effect/EffectTag.h"
+#include "Core/Object.h"
 #include "Character/Interface/UnitStat.h"
 #include "Data/Character/Stat.h"
 
