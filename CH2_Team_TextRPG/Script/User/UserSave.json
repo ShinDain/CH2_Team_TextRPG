@@ -2,10 +2,12 @@
     "ClassIndex": 1,
     "EquippedItems": [],
     "Exp": 20,
-    "Gold": 130,
-    "Level": 1,
-    "MapIndex": 1,
-    "OwnedItems": {},
+    "Gold": 150,
+    "Level": 2,
+    "MapIndex": 10,
+    "OwnedItems": {
+        "1002": 1
+    },
     "Skills": [
         1,
         102

@@ -14,6 +14,11 @@ LevelComponent::LevelComponent(Object* InOwner) :
 {
 }
 
+LevelComponent::~LevelComponent()
+{
+	OnLevelUp = nullptr;
+}
+
 bool LevelComponent::Initialize()
 {
 	CurrentLevel = 1;
@@ -44,6 +49,16 @@ int LevelComponent::GetExpToNextLevel() const
 	const LevelData* Next = LevelDataTable::GetInstance().FindByLevel(CurrentLevel + 1);
 	if (!Next) return 0;
 	return std::max(0, Next->Exp - CurrentExp);
+}
+
+void LevelComponent::BindOnLevelUp(const OnLevelUpCallback& Subscriber)
+{
+	OnLevelUp = Subscriber;
+}
+
+void LevelComponent::UnbindOnLevelup()
+{
+	OnLevelUp = nullptr;
 }
 
 void LevelComponent::AddExp(int Amount)

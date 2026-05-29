@@ -4,8 +4,11 @@
 class LevelComponent : public Component
 {
 public:
+	using OnLevelUpCallback = std::function<void(int NewLevel)>;
+	
+public:
 	LevelComponent(Object* InOwner);
-	~LevelComponent() override = default;
+	~LevelComponent() override;
 
 	bool Initialize() override;
 
@@ -18,6 +21,9 @@ public:
 	int GetLevel() const { return CurrentLevel; }
 	int GetExp() const { return CurrentExp; }
 	int GetExpToNextLevel() const;
+	
+	void BindOnLevelUp(const OnLevelUpCallback& Subscriber);
+	void UnbindOnLevelup();
 
 private:
 	void CheckLevelUp();
@@ -25,10 +31,9 @@ private:
 	void ApplyLevelupEvent(int Level);
 
 private:
+	OnLevelUpCallback OnLevelUp;
 	int CurrentLevel;
 	int MaxLevel;
 	int CurrentExp;
 	
-public:
-	std::function<void(int)> OnLevelUp;
 };

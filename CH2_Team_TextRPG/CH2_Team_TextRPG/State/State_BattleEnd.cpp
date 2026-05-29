@@ -21,12 +21,9 @@ State_BattleEnd::~State_BattleEnd()
 
 void State_BattleEnd::Enter()
 {
+	
 	Player* LoadPlayer = ObjectManager::GetInstance().FindObject<Player>("Player");
 	assert(LoadPlayer && "LoadPlayer is null");
-
-
-	std::shared_ptr<LevelComponent> LevelComp = LoadPlayer->FindComponent<LevelComponent>("Level");
-	// std::bind()
 
 	if (CombatManager::GetInstance().IsVictory())
 	{
@@ -43,8 +40,14 @@ void State_BattleEnd::Enter()
 			}
 		}
 
+		std::shared_ptr<LevelComponent> LevelComp = LoadPlayer->FindComponent<LevelComponent>("Level");
+		LevelComp->BindOnLevelUp([](int NewLevel){
+			GLog.AddLog("[레벨업] 현재레벨 :" + std::to_string(NewLevel));
+		});
+		
 		LoadPlayer->AddExp(TotalExp);
 		LoadPlayer->ModifyGold(TotalGold);
+		LevelComp->UnbindOnLevelup();
 
 		GLog.AddLog("[전투 승리] 모든 적을 쓰러뜨렸습니다!");
 		GLog.AddLog("[보상] 획득 경험치: " + std::to_string(TotalExp) + " EXP");
@@ -54,7 +57,6 @@ void State_BattleEnd::Enter()
 	{
 		GLog.AddLog("[전투 패배] 플레이어가 사망했습니다...");
 	}
-
 }
 
 void State_BattleEnd::Process()
