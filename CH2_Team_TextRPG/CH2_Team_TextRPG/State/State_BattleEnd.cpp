@@ -72,6 +72,7 @@ void State_BattleEnd::Process()
 		if (StartData && StartData->bIsBoss)
 		{
 			StateManager::GetInstance().ChangeState(EState::Result);
+			GameInstance::GetInstance().SetResultType(EResultType::Clear);
 		}
 		else
 		{
