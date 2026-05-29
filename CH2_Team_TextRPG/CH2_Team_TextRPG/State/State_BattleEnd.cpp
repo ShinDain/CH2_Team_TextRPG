@@ -55,7 +55,6 @@ void State_BattleEnd::Enter()
 		GLog.AddLog("[전투 패배] 플레이어가 사망했습니다...");
 	}
 
-	GLog.AddLog("아무 키나 누르면 다음 화면으로 이동합니다...");
 }
 
 void State_BattleEnd::Process()
@@ -66,13 +65,15 @@ void State_BattleEnd::Process()
 		Player* LoadPlayer = ObjectManager::GetInstance().FindObject<Player>("Player");
 		assert(LoadPlayer && "LoadPlayer is null");
 		
-		if (LoadPlayer->IsDead())
+
+		const BattleStartData* StartData = GameInstance::GetInstance().GetBattleStartData();
+		if (StartData && StartData->bIsBoss)
 		{
-			AddTransition<AlwaysTrueCondition>(EState::Result);
+			StateManager::GetInstance().ChangeState(EState::Result);
 		}
 		else
 		{
-			AddTransition<AlwaysTrueCondition>(EState::Map);
+			StateManager::GetInstance().ChangeState(EState::Map);
 		}
 	}
 }
