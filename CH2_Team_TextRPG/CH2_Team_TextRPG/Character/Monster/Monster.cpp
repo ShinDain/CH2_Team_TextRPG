@@ -6,6 +6,7 @@
 #include "Character/Component/ResourceComponent.h"
 #include "Character/Component/EffectComponent.h"
 #include "Character/Component/SkillComponent.h"
+#include <Manager/RecordManager.h>
 
 #define COMPONENT_CHECK(x) assert((x) && #x "Component 생성되지 않음")
 
@@ -67,6 +68,10 @@ void Monster::Decrease(EResourceType Type, int Amount)
 {
 	COMPONENT_CHECK(Resource);
 	Resource->Decrease(Type, Amount);
+	if (Resource->GetCurrent(EResourceType::Health) <= 0)
+	{
+		RecordManager::GetInstance().IncrementMonsterKills();
+	}
 }
 
 void Monster::Recovery(EResourceType Type, int Amount)
