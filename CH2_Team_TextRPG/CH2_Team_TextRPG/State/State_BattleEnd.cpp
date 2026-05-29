@@ -53,7 +53,6 @@ void State_BattleEnd::Enter()
 		GLog.AddLog("[전투 패배] 플레이어가 사망했습니다...");
 	}
 
-	GLog.AddLog("아무 키나 누르면 다음 화면으로 이동합니다...");
 }
 
 void State_BattleEnd::Process()
